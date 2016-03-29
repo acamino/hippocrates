@@ -4,7 +4,7 @@ Given(/^Reed and Sue are patients$/) do
 end
 
 When(/^I am on the patients page$/) do
-  visit root_path
+  visit patients_path
 end
 
 Then(/^I see Reed and Sue$/) do
