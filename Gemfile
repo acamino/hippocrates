@@ -22,6 +22,8 @@ end
 
 group :test do
   gem 'rspec-rails'
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'shoulda-matchers', require: false
   gem 'coveralls', require: false
