@@ -1,9 +1,10 @@
-Given(/^Reed and Sue are patients$/) do
-  create(:patient, first_name: 'Reed')
-  create(:patient, first_name: 'Sue')
+Given(/^the following patients exist:$/) do |table|
+  table.hashes.each do |patient|
+    create(:patient, first_name: patient[:first_name])
+  end
 end
 
-When(/^I am on the patients page$/) do
+When(/^I go to the patients page$/) do
   visit patients_path
 end
 

@@ -1,6 +1,9 @@
 Feature: User can see a list of patients
 
   Scenario: Listing patients
-    Given Reed and Sue are patients
-    When I am on the patients page
+    Given the following patients exist:
+      | first_name | last_name |
+      | Reed       | Richards  |
+      | Sue        | Storm     |
+    When I go to the patients page
     Then I see Reed and Sue
