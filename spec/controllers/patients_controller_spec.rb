@@ -13,13 +13,9 @@ describe PatientsController do
       expect(assigns(:patients)).to eq(patients)
     end
 
-    it 'renders the :index template' do
-      expect(response).to render_template(:index)
-    end
+    it { is_expected.to render_template :index }
 
-    it 'responds with ok' do
-      expect(response).to be_ok
-    end
+    it { is_expected.to respond_with :ok }
   end
 
   describe '#new' do
@@ -34,12 +30,8 @@ describe PatientsController do
       expect(assigns(:patient)).to eq(patient)
     end
 
-    it 'renders the :new template' do
-      expect(response).to render_template(:new)
-    end
+    it { is_expected.to render_template :new }
 
-    it 'responds with ok' do
-      expect(response).to be_ok
-    end
+    it { is_expected.to respond_with :ok }
   end
 end
