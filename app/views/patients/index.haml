@@ -1,11 +1,13 @@
+.row.pull-right
+  = link_to "Nuevo Paciente", new_patient_path, class: "btn btn-success"
 %table.table.table-striped
   %thead
     %tr
-      %th # Historia
+      %th Historia
       %th Apellidos
       %th Nombres
       %th Sexo
-      %th F. de Nacimiento
+      %th Fecha Nacimiento
   %tbody
   - @patients.each do |patient|
     %tr
@@ -13,4 +15,4 @@
       %td= patient.last_name
       %td= patient.first_name
       %td= patient.gender
-      %td= patient.birthdate
+      %td= patient.birthdate.strftime("%Y/%m/%d")

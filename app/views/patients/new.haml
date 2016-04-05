@@ -1,0 +1,34 @@
+= form_for @patient, html: { class: "form" } do |f|
+  .panel.panel-default
+    .panel-heading
+      %b Datos de Filiación
+    .panel-body
+      .row-fluid
+        .form-group.col-md-3
+          %input.form-control.input-sm{ disabled: 'disabled' }
+        .form-group.col-md-3
+          = f.text_field :birthdate, class: "form-control input-sm", placeholder: 'Fecha Nacimiento'
+        .form-group.col-md-3
+          = f.text_field :identity_card_number, class: "form-control input-sm", placeholder: '# Cédula'
+        .form-group.col-md-3
+          = f.text_field :medical_history, class: "form-control input-sm", placeholder: 'Historia'
+
+      .row-fluid
+        .form-group.col-md-6
+          = f.text_field :last_name, class: "form-control input-sm", placeholder: 'Apellidos'
+        .form-group.col-md-6
+          = f.text_field :first_name, class: "form-control input-sm", placeholder: 'Nombres'
+
+      .row-fluid
+        .form-group.col-md-2
+          = f.text_field :gender, class: "form-control input-sm", placeholder: 'Sexo'
+        .form-group.col-md-2
+          %input{ type:"text", class:"form-control input-sm", placeholder:"Edad" }
+        .form-group.col-md-4
+          = f.text_field :civil_status, class: "form-control input-sm", placeholder: 'Estado Civil'
+        .form-group.col-md-4
+          = f.text_field :profession, class: "form-control input-sm", placeholder: 'Ocupación'
+
+  .row-fluid
+    = link_to "Cancelar", patients_path, class: "btn btn-default"
+    = f.submit "Guardar", class: "btn btn-success"

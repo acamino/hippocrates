@@ -19,14 +19,20 @@ Given(/^Reed is not a registered patient$/) do
 end
 
 When(/^I go to the new patient page$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  visit new_patient_path
 end
 
 When(/^I input Reeds information$/) do
-  fill_in :first_name, 'Reed'
-  click 'Guardar'
+  fill_in :patient_birthdate, with: '1990/02/10'
+  fill_in :patient_identity_card_number, with: '0502231248'
+  fill_in :patient_medical_history, with: '20073'
+  fill_in :patient_last_name, with: 'Reed'
+  fill_in :patient_first_name, with: 'Richards'
+  fill_in :patient_profession, with: 'Developer'
+  click_on 'Guardar'
 end
 
+# XXX: Update this step.
 Then(/^I see a creation message$/) do
-  expect(page).to have_content('Patient created successfully')
+  expect(page).to have_content('Reed')
 end

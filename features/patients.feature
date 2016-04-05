@@ -8,7 +8,6 @@ Feature: User can manage the patients
     When I go to the patients page
     Then I see Reed and Sue
 
-  @wip
   Scenario: Creating a patient
     Given Reed is not a registered patient
     When I go to the new patient page
