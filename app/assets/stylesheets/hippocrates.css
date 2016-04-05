@@ -1,3 +1,15 @@
 body {
   padding-top: 90px;
 }
+
+.align-right {
+  margin-right: 0;
+}
+
+.panel > .panel-body > .row-fluid:last-child > .form-group{
+  padding-bottom: 8px;
+}
+
+.colored {
+  color: black;
+}

@@ -1,5 +1,8 @@
-.row.pull-right
-  = link_to "Nuevo Paciente", new_patient_path, class: "btn btn-success"
+/ XXX: Pull out the labels from a config file.
+.row.pull-right.align-right
+  = link_to new_patient_path, class: "btn btn-success" do
+    <i class="fa fa-male"></i> Nuevo paciente
+
 %table.table.table-striped
   %thead
     %tr
@@ -15,4 +18,4 @@
       %td= patient.last_name
       %td= patient.first_name
       %td= patient.gender
-      %td= patient.birthdate.strftime("%Y/%m/%d")
+      %td= patient.birthdate.strftime("%Y-%m-%d")

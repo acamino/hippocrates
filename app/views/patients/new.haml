@@ -5,29 +5,54 @@
     .panel-body
       .row-fluid
         .form-group.col-md-3
-          %input.form-control.input-sm{ disabled: 'disabled' }
+          .input-group
+            %span.input-group-addon.input-sm Fecha
+            %input.form-control.input-sm.colored{ disabled: 'disabled', value: Date.today }
         .form-group.col-md-3
-          = f.text_field :birthdate, class: "form-control input-sm", placeholder: 'Fecha Nacimiento'
+          .input-group
+            %span.input-group-addon.input-sm Fecha Nacimiento
+            = f.text_field :birthdate, { :'class' => "form-control input-sm",
+                                         :'data-provide' => 'datepicker',
+                                         :'data-date-format' => 'yyyy-mm-dd',
+                                         :'data-date-language' => 'es' }
         .form-group.col-md-3
-          = f.text_field :identity_card_number, class: "form-control input-sm", placeholder: '# Cédula'
+          .input-group
+            %span.input-group-addon.input-sm # Cédula
+            = f.text_field :identity_card_number, class: "form-control input-sm"
         .form-group.col-md-3
-          = f.text_field :medical_history, class: "form-control input-sm", placeholder: 'Historia'
+          .input-group
+            %span.input-group-addon.input-sm Historia
+            = f.text_field :medical_history, class: "form-control input-sm"
 
       .row-fluid
         .form-group.col-md-6
-          = f.text_field :last_name, class: "form-control input-sm", placeholder: 'Apellidos'
+          .input-group
+            %span.input-group-addon.input-sm Apellidos
+            = f.text_field :last_name, class: "form-control input-sm"
         .form-group.col-md-6
-          = f.text_field :first_name, class: "form-control input-sm", placeholder: 'Nombres'
+          .input-group
+            %span.input-group-addon.input-sm Nombres
+            = f.text_field :first_name, class: "form-control input-sm"
 
       .row-fluid
         .form-group.col-md-2
-          = f.text_field :gender, class: "form-control input-sm", placeholder: 'Sexo'
+          .input-group
+            %span.input-group-addon.input-sm Sexo
+            / XXX: Keep in sync the model with the UI.
+            = f.select :gender, options_for_select([['Masculino', 'male'], ['Femenino', 'female']]), {}, class: "form-control input-sm"
         .form-group.col-md-2
-          %input{ type:"text", class:"form-control input-sm", placeholder:"Edad" }
+          .input-group
+            %span.input-group-addon.input-sm Edad
+            %input{ type:"text", class:"form-control input-sm" }
         .form-group.col-md-4
-          = f.text_field :civil_status, class: "form-control input-sm", placeholder: 'Estado Civil'
+          .input-group
+            %span.input-group-addon.input-sm Estado Civil
+            / XXX: Keep in sync the model with the UI.
+            = f.select :civil_status, options_for_select([['Soltero', 'single'], ['Casado', 'married'], ['Union Libre', 'civil_union'], ['Divorciado', 'divorced'], ['Viudo', 'widowed']]), {}, class: "form-control input-sm"
         .form-group.col-md-4
-          = f.text_field :profession, class: "form-control input-sm", placeholder: 'Ocupación'
+          .input-group
+            %span.input-group-addon.input-sm Ocupación
+            = f.text_field :profession, class: "form-control input-sm"
 
   .row-fluid
     = link_to "Cancelar", patients_path, class: "btn btn-default"
