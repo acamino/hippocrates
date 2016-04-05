@@ -6,8 +6,8 @@ FactoryGirl.define do
     first_name     'Reed'
     last_name      'Richards'
     birthdate      30.years.ago
-    gender         Patient.genders.fetch(:male)
-    civil_status   Patient.civil_statuses.fetch(:married)
-    source         Patient.sources.fetch(:patient_reference)
+    gender         'male'
+    civil_status   'married'
+    source         'patient_reference'
   end
 end
