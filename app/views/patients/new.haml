@@ -11,10 +11,7 @@
         .form-group.col-md-3
           .input-group
             %span.input-group-addon.input-sm Fecha Nacimiento
-            = f.text_field :birthdate, { :'class' => "form-control input-sm",
-                                         :'data-provide' => 'datepicker',
-                                         :'data-date-format' => 'yyyy-mm-dd',
-                                         :'data-date-language' => 'es' }
+            = f.text_field :birthdate, class: "form-control input-sm"
         .form-group.col-md-3
           .input-group
             %span.input-group-addon.input-sm # Cédula
@@ -43,7 +40,7 @@
         .form-group.col-md-2
           .input-group
             %span.input-group-addon.input-sm Edad
-            %input{ type:"text", class:"form-control input-sm" }
+            %input.form-control.input-sm.colored.patient-age{ disabled: 'disabled'}
         .form-group.col-md-4
           .input-group
             %span.input-group-addon.input-sm Estado Civil
