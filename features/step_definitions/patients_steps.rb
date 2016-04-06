@@ -32,7 +32,6 @@ When(/^I input Reeds information$/) do
   click_on 'Guardar'
 end
 
-# XXX: Update this step.
 Then(/^I see a creation message$/) do
-  expect(page).to have_content('Reed')
+  expect(page).to have_content('Paciente creado correctamente')
 end

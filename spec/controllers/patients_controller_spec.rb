@@ -53,7 +53,7 @@ describe PatientsController do
       it { is_expected.to respond_with :redirect }
     end
 
-    context 'when the information is uncomplete' do
+    context 'when the information is incomplete' do
       let(:attributes_for_patient) do
         attributes_for(:patient).except(:first_name)
       end

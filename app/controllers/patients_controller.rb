@@ -23,7 +23,8 @@ class PatientsController < ApplicationController
   def create
     @patient = Patient.new(patient_attributes)
     if @patient.save
-      redirect_to patients_path
+      # XXX: Pull out the messages form a locale file.
+      redirect_to patients_path, notice: 'Paciente creado correctamente'
     else
       render :new
     end

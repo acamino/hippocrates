@@ -28,6 +28,7 @@
               %a(href='#') Salir
 
     .container
+      = render 'layouts/flash_messages'
       = yield
 
     = javascript_include_tag '//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'
