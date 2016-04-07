@@ -12,6 +12,7 @@ class Patient < ActiveRecord::Base
             :civil_status,
             :source, presence: true
 
-  validates :identity_card_number, uniqueness: true
+  validates :medical_history,
+            :identity_card_number, uniqueness: true
   validates :email, uniqueness: true, allow_nil: true, allow_blank: true
 end

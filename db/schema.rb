@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160325031902) do
+ActiveRecord::Schema.define(version: 20160407115842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,8 +36,9 @@ ActiveRecord::Schema.define(version: 20160325031902) do
   add_index "patients", ["civil_status"], name: "index_patients_on_civil_status", using: :btree
   add_index "patients", ["first_name"], name: "index_patients_on_first_name", using: :btree
   add_index "patients", ["gender"], name: "index_patients_on_gender", using: :btree
-  add_index "patients", ["identity_card_number"], name: "index_patients_on_identity_card_number", using: :btree
+  add_index "patients", ["identity_card_number"], name: "index_patients_on_identity_card_number", unique: true, using: :btree
   add_index "patients", ["last_name"], name: "index_patients_on_last_name", using: :btree
+  add_index "patients", ["medical_history"], name: "index_patients_on_medical_history", unique: true, using: :btree
   add_index "patients", ["source"], name: "index_patients_on_source", using: :btree
 
 end
