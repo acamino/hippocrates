@@ -7,7 +7,8 @@ class PatientsController < ApplicationController
     :birthdate,
     :gender,
     :civil_status,
-    :source
+    :source,
+    :profession
   ]
 
   def index
@@ -21,7 +22,7 @@ class PatientsController < ApplicationController
   end
 
   def create
-    @patient = Patient.new(patient_attributes)
+    @patient = Patient.new(patient_params)
     if @patient.save
       # XXX: Pull out the messages form a locale file.
       redirect_to patients_path, notice: 'Paciente creado correctamente'
@@ -36,7 +37,7 @@ class PatientsController < ApplicationController
 
   def update
     @patient = Patient.find(params[:id])
-    if @patient.update_attributes(patient_attributes)
+    if @patient.update_attributes(patient_params)
       redirect_to edit_patient_path(@patient), notice: 'Paciente actualizado correctamente'
     else
       render :edit
@@ -45,7 +46,7 @@ class PatientsController < ApplicationController
 
   private
 
-  def patient_attributes
+  def patient_params
     params.require(:patient).permit(*ATTRIBUTE_WHITELIST)
   end
 end
