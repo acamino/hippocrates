@@ -8,8 +8,8 @@
       %th Historia
       %th Apellidos
       %th Nombres
-      %th Sexo
       %th Fecha Nacimiento
+      %th Sexo
       %th
   %tbody
   - @patients.each do |patient|
@@ -17,6 +17,10 @@
       %td= patient.medical_history
       %td= patient.last_name
       %td= patient.first_name
-      %td= patient.gender
       %td= patient.birthdate.strftime("%Y-%m-%d")
+      %td
+        - if patient.male?
+          %span.label.label-primary Masculino
+        - else
+          %span.label.label-info Femenino
       %td= link_to "Editar", edit_patient_path(patient)
