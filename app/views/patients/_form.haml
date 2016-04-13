@@ -41,7 +41,7 @@
           .input-group
             %span.input-group-addon.input-sm Sexo
             / XXX: Keep in sync the model with the UI.
-            = f.select :gender, options_for_select([['Masculino', 'male'], ['Femenino', 'female']]), {}, class: "form-control input-sm"
+            = f.select :gender, options_for_select([['Masculino', 'male'], ['Femenino', 'female']], @patient.gender), {}, class: "form-control input-sm"
         .form-group.col-md-2
           .input-group
             %span.input-group-addon.input-sm Edad
@@ -50,7 +50,7 @@
           .input-group
             %span.input-group-addon.input-sm Estado Civil
             / XXX: Keep in sync the model with the UI.
-            = f.select :civil_status, options_for_select([['Soltero', 'single'], ['Casado', 'married'], ['Union Libre', 'civil_union'], ['Divorciado', 'divorced'], ['Viudo', 'widowed']]), {}, class: "form-control input-sm"
+            = f.select :civil_status, options_for_select([['Soltero', 'single'], ['Casado', 'married'], ['Union Libre', 'civil_union'], ['Divorciado', 'divorced'], ['Viudo', 'widowed']], @patient.civil_status), {}, class: "form-control input-sm"
         .form-group.col-md-4
           .input-group
             %span.input-group-addon.input-sm Ocupación
