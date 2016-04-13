@@ -38,7 +38,7 @@ class PatientsController < ApplicationController
   def update
     @patient = Patient.find(params[:id])
     if @patient.update_attributes(patient_params)
-      redirect_to edit_patient_path(@patient), notice: 'Paciente actualizado correctamente'
+      redirect_to patients_path, notice: 'Paciente actualizado correctamente'
     else
       render :edit
     end

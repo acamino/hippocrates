@@ -96,7 +96,7 @@ describe PatientsController do
         expect(patient.first_name).to eq('Chad')
       end
 
-      it { is_expected.to redirect_to edit_patient_path(patient) }
+      it { is_expected.to redirect_to patients_path }
       it { is_expected.to respond_with :redirect }
     end
 
