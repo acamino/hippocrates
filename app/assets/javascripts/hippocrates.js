@@ -18,4 +18,14 @@ $(document).ready(function() {
 
         return Math.abs(millisecondsFromEpoc.getUTCFullYear() - 1970);
     }
+
+    // XXX: Move this presentation logic to a presenter.
+    var patientBirthdate = $('#patient_birthdate').val();
+    if (patientBirthdate) {
+        var birthday = new Date(patientBirthdate)
+        var today = Date.now();
+        var patientAge = calculateAge(birthday, today);
+
+        $('.patient-age').val(patientAge);
+    }
 });
