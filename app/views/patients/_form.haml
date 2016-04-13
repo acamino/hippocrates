@@ -12,7 +12,11 @@
         .form-group.col-md-3
           .input-group
             %span.input-group-addon.input-sm Fecha Nacimiento
-            = f.text_field :birthdate, class: "form-control input-sm"
+            / XXX: Introduce a presenter to rid of this presentation logic.
+            - if @patient.new_record?
+              = f.text_field :birthdate, class: "form-control input-sm"
+            - else
+              = f.text_field :birthdate, value: @patient.birthdate.strftime("%Y-%m-%d"), class: "form-control input-sm"
         .form-group.col-md-3
           .input-group
             %span.input-group-addon.input-sm # Cédula
