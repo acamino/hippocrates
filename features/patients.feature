@@ -13,3 +13,9 @@ Feature: User can manage the patients
     When I go to the new patient page
     And I input Reeds information
     Then I see a creation message
+
+  Scenario: Updating a patient
+    Given Reed is a registered patient
+    When I go to the edit patient page
+    And I update Reed's informaton
+    Then I see an update message

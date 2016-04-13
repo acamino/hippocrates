@@ -10,6 +10,7 @@
       %th Nombres
       %th Sexo
       %th Fecha Nacimiento
+      %th
   %tbody
   - @patients.each do |patient|
     %tr
@@ -18,3 +19,4 @@
       %td= patient.first_name
       %td= patient.gender
       %td= patient.birthdate.strftime("%Y-%m-%d")
+      %td= link_to "Editar", edit_patient_path(patient)

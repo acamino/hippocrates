@@ -35,3 +35,20 @@ end
 Then(/^I see a creation message$/) do
   expect(page).to have_content('Paciente creado correctamente')
 end
+
+Given(/^Reed is a registered patient$/) do
+  @reed = create(:patient, first_name: 'Reed')
+end
+
+When(/^I go to the edit patient page$/) do
+  visit edit_patient_path(@reed)
+end
+
+When(/^I update Reed's informaton$/) do
+  fill_in :patient_last_name, with: 'Doom'
+  click_on 'Guardar'
+end
+
+Then(/^I see an update message$/) do
+  expect(page).to have_content('Paciente actualizado correctamente')
+end

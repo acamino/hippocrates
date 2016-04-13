@@ -1,0 +1,57 @@
+= error_messages_for @patient
+= form_for @patient, html: { class: "form" } do |f|
+  .panel.panel-default
+    .panel-heading
+      %b Datos de Filiación
+    .panel-body
+      .row-fluid
+        .form-group.col-md-3
+          .input-group
+            %span.input-group-addon.input-sm Fecha
+            %input.form-control.input-sm.colored{ disabled: 'disabled', value: Date.today }
+        .form-group.col-md-3
+          .input-group
+            %span.input-group-addon.input-sm Fecha Nacimiento
+            = f.text_field :birthdate, class: "form-control input-sm"
+        .form-group.col-md-3
+          .input-group
+            %span.input-group-addon.input-sm # Cédula
+            = f.text_field :identity_card_number, class: "form-control input-sm"
+        .form-group.col-md-3
+          .input-group
+            %span.input-group-addon.input-sm Historia
+            = f.text_field :medical_history, class: "form-control input-sm"
+
+      .row-fluid
+        .form-group.col-md-6
+          .input-group
+            %span.input-group-addon.input-sm Apellidos
+            = f.text_field :last_name, class: "form-control input-sm"
+        .form-group.col-md-6
+          .input-group
+            %span.input-group-addon.input-sm Nombres
+            = f.text_field :first_name, class: "form-control input-sm"
+
+      .row-fluid
+        .form-group.col-md-2
+          .input-group
+            %span.input-group-addon.input-sm Sexo
+            / XXX: Keep in sync the model with the UI.
+            = f.select :gender, options_for_select([['Masculino', 'male'], ['Femenino', 'female']]), {}, class: "form-control input-sm"
+        .form-group.col-md-2
+          .input-group
+            %span.input-group-addon.input-sm Edad
+            %input.form-control.input-sm.colored.patient-age{ disabled: 'disabled'}
+        .form-group.col-md-4
+          .input-group
+            %span.input-group-addon.input-sm Estado Civil
+            / XXX: Keep in sync the model with the UI.
+            = f.select :civil_status, options_for_select([['Soltero', 'single'], ['Casado', 'married'], ['Union Libre', 'civil_union'], ['Divorciado', 'divorced'], ['Viudo', 'widowed']]), {}, class: "form-control input-sm"
+        .form-group.col-md-4
+          .input-group
+            %span.input-group-addon.input-sm Ocupación
+            = f.text_field :profession, class: "form-control input-sm"
+
+  .row-fluid
+    = link_to "Cancelar", patients_path, class: "btn btn-default"
+    = f.submit "Guardar", class: "btn btn-success"

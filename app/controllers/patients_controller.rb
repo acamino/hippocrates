@@ -30,6 +30,19 @@ class PatientsController < ApplicationController
     end
   end
 
+  def edit
+    @patient = Patient.find(params[:id])
+  end
+
+  def update
+    @patient = Patient.find(params[:id])
+    if @patient.update_attributes(patient_attributes)
+      redirect_to edit_patient_path(@patient), notice: 'Paciente actualizado correctamente'
+    else
+      render :edit
+    end
+  end
+
   private
 
   def patient_attributes

@@ -68,4 +68,48 @@ describe PatientsController do
       it { is_expected.to respond_with :ok }
     end
   end
+
+  describe '#edit' do
+    let(:patient) { double(:patient) }
+
+    before do
+      allow(Patient).to receive(:find).with('1') { patient }
+      get :edit, id: '1'
+    end
+
+    it 'assings @patient' do
+      expect(assigns(:patient)).to eq(patient)
+    end
+
+    it { is_expected.to render_template :edit }
+    it { is_expected.to respond_with :ok }
+  end
+
+  describe '#update' do
+    let(:patient) { create(:patient, first_name: 'Bob') }
+
+    context 'when the information is valid' do
+      before { put :update, id: patient.id, patient: { first_name: 'Chad' } }
+
+      it 'updates the patient' do
+        patient.reload
+        expect(patient.first_name).to eq('Chad')
+      end
+
+      it { is_expected.to redirect_to edit_patient_path(patient) }
+      it { is_expected.to respond_with :redirect }
+    end
+
+    context 'when the information is invalid' do
+      before { put :update, id: patient.id, patient: { first_name: '' } }
+
+      it 'do not update the patient' do
+        patient.reload
+        expect(patient.first_name).to eq('Bob')
+      end
+
+      it { is_expected.to render_template :edit }
+      it { is_expected.to respond_with :ok }
+    end
+  end
 end
