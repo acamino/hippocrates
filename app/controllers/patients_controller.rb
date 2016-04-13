@@ -12,9 +12,9 @@ class PatientsController < ApplicationController
   ]
 
   def index
-    # XXX: Sort the patients alphabetically
     # XXX: Add pagination
-    @patients = Patient.all
+    # XXX: Move all.sort to the model. This controller knows so much :)
+    @patients = Patient.all.order(:last_name, :first_name)
   end
 
   def new

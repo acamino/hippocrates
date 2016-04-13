@@ -5,7 +5,7 @@ describe PatientsController do
     let(:patients) { [double(:patient)] }
 
     before do
-      allow(Patient).to receive(:all) { patients }
+      allow(Patient).to receive_message_chain(:all, :order) { patients }
       get :index
     end
 
