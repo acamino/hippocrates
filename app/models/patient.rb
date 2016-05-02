@@ -15,4 +15,12 @@ class Patient < ActiveRecord::Base
   validates :medical_history,
             :identity_card_number, uniqueness: true
   validates :email, uniqueness: true, allow_nil: true, allow_blank: true
+
+  def self.search(query)
+    if query
+      where('lower(last_name) LIKE ?', "%#{query.downcase}%").order(:last_name, :first_name)
+    else
+      all.order(:last_name, :first_name)
+    end
+  end
 end

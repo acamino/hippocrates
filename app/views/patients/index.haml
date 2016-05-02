@@ -1,3 +1,9 @@
+.row
+  = form_tag(patients_path, method: 'GET', class: 'form-inline') do
+    .form-group
+      = text_field_tag :search, params[:search], placeholder: 'Buscar', class: 'form-control'
+    %button.btn.btn-default{ type: "submit" } Buscar
+
 / XXX: Pull out the labels from a config file.
 .row.pull-right.align-right
   = link_to "Nuevo paciente", new_patient_path, class: "btn btn-success"

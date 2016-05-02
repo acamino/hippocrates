@@ -19,3 +19,13 @@ Feature: User can manage the patients
     When I go to the edit patient page
     And I update Reed's informaton
     Then I see an update message
+
+  Scenario: Searching a patient
+    Given the following patients exist:
+      | first_name | last_name |
+      | Reed       | Richards  |
+      | Sue        | Storm     |
+    When I go to the patients page
+    And I search for Storm
+    Then I see Sue
+    And I don't see Reed

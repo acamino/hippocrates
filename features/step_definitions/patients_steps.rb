@@ -1,6 +1,7 @@
 Given(/^the following patients exist:$/) do |table|
   table.hashes.each do |patient|
-    create(:patient, first_name: patient[:first_name])
+    create(:patient,
+           first_name: patient[:first_name], last_name: patient[:last_name])
   end
 end
 
@@ -51,4 +52,17 @@ end
 
 Then(/^I see an update message$/) do
   expect(page).to have_content('Paciente actualizado correctamente')
+end
+
+When(/^I search for Storm$/) do
+  fill_in :search, with: 'Storm'
+  click_on 'Buscar'
+end
+
+Then(/^I see Sue$/) do
+  expect(page).to have_content('Sue')
+end
+
+Then(/^I don't see Reed$/) do
+  expect(page).to have_no_content('Reed')
 end
