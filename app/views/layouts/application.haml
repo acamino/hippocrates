@@ -23,6 +23,12 @@
           %ul.nav.navbar-nav
             %li.active
               = link_to 'Pacientes', patients_path
+
+          = form_tag(patients_path, method: 'GET', class: 'navbar-form navbar-left') do
+            .form-group
+              = text_field_tag :search, params[:search], placeholder: 'Apellidos del paciente', class: 'form-control'
+            %button.btn.btn-default{ type: "submit" } Buscar
+
           %ul.nav.navbar-nav.navbar-right
             %li
               %a(href='#') Salir
