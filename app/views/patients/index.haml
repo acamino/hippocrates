@@ -5,12 +5,12 @@
 %table.table.table-striped
   %thead
     %tr
-      %th Historia
-      %th Apellidos
-      %th Nombres
-      %th Fecha Nacimiento
-      %th Sexo
-      %th
+      %th.col-md-1 Historia
+      %th.col-md-3 Apellidos
+      %th.col-md-3 Nombres
+      %th.col-md-2 Fecha Nacimiento
+      %th.col-md-1 Sexo
+      %th.col-md-2
   %tbody
   - @patients.each do |patient|
     %tr
@@ -23,4 +23,9 @@
           %span.label.label-primary Masculino
         - else
           %span.label.label-info Femenino
-      %td= link_to "Editar", edit_patient_path(patient)
+      %td.text-right
+        Consulta
+        |
+        = link_to "Anamnesis", new_patient_anamnesis_path(patient)
+        |
+        = link_to "Editar", edit_patient_path(patient)
