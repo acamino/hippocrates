@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160407115842) do
+ActiveRecord::Schema.define(version: 20160504020359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "anamneses", force: :cascade do |t|
+    t.integer  "patient_id"
+    t.string   "personal_history"
+    t.string   "surgical_history"
+    t.string   "allergies"
+    t.string   "observations"
+    t.string   "habits"
+    t.string   "family_history"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
 
   create_table "patients", force: :cascade do |t|
     t.integer  "medical_history",                  null: false
@@ -41,4 +53,5 @@ ActiveRecord::Schema.define(version: 20160407115842) do
   add_index "patients", ["medical_history"], name: "index_patients_on_medical_history", unique: true, using: :btree
   add_index "patients", ["source"], name: "index_patients_on_source", using: :btree
 
+  add_foreign_key "anamneses", "patients"
 end
