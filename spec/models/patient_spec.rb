@@ -20,4 +20,26 @@ describe Patient do
   describe 'associations' do
     it { is_expected.to have_one(:anamnesis) }
   end
+
+  describe '#age' do
+    context 'when a patient has a birthdate' do
+      subject { build(:patient, birthdate: Date.new(2011, 12, 8)) }
+
+      it "calculates patient's age" do
+        Timecop.freeze(Date.new(2015, 10, 21)) do
+          expect(subject.age).to eq(3)
+        end
+      end
+    end
+
+    context "when a patient doesn't have a birthdate" do
+      subject { Patient.new }
+
+      it 'returns 0' do
+        Timecop.freeze(Date.new(2015, 10, 21)) do
+          expect(subject.age).to eq(0)
+        end
+      end
+    end
+  end
 end

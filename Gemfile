@@ -28,4 +28,5 @@ group :test do
   gem 'factory_girl_rails'
   gem 'shoulda-matchers', require: false
   gem 'coveralls', require: false
+  gem 'timecop'
 end
