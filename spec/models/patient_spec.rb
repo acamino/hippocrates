@@ -16,4 +16,8 @@ describe Patient do
     it { is_expected.to validate_uniqueness_of :identity_card_number }
     it { is_expected.to validate_uniqueness_of :medical_history }
   end
+
+  describe 'associations' do
+    it { is_expected.to have_one(:anamnesis) }
+  end
 end
