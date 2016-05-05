@@ -1,7 +1,7 @@
 class Patient < ActiveRecord::Base
-  enum gender: { male: 0, female: 1 }
-  enum civil_status: { single: 0, married: 1, civil_union: 2, divorced: 3, widowed: 4 }
-  enum source: { television: 0, radio: 1, newspaper: 2, patient_reference: 3 }
+  enum gender: [:male, :female]
+  enum civil_status: [:single, :married, :civil_union, :divorced, :widowed]
+  enum source: [:television, :radio, :newspaper, :patient_reference]
 
   has_one :anamnesis
 
@@ -20,7 +20,8 @@ class Patient < ActiveRecord::Base
 
   def self.search(query)
     if query
-      where('lower(last_name) LIKE ?', "%#{query.downcase}%").order(:last_name, :first_name)
+      where('lower(last_name) LIKE ?', "%#{query.downcase}%")
+        .order(:last_name, :first_name)
     else
       all.order(:last_name, :first_name)
     end
@@ -28,10 +29,14 @@ class Patient < ActiveRecord::Base
 
   def age
     if birthdate
-      now = Time.now.utc.to_date
-      now.year - birthdate.year - ((now.month > birthdate.month || (now.month == birthdate.month && now.day >= birthdate.day)) ? 0 : 1)
+      age = Date.today.year - birthdate.year
+      age - 1 if Date.today < birthdate + age.years
     else
       0
     end
+  end
+
+  def anamnesis?
+    anamnesis.present?
   end
 end

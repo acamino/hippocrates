@@ -42,4 +42,21 @@ describe Patient do
       end
     end
   end
+
+  describe '#anamnesis?' do
+    let(:patient) { build(:patient) }
+
+    context 'when anamnesis is present' do
+      it 'returns true' do
+        patient.anamnesis = Anamnesis.new
+        expect(patient.anamnesis?).to be_truthy
+      end
+    end
+
+    context 'when anamnesis is not present' do
+      it 'returns false' do
+        expect(patient.anamnesis?).to be_falsey
+      end
+    end
+  end
 end
