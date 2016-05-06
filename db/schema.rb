@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160504020359) do
+ActiveRecord::Schema.define(version: 20160506215923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,34 @@ ActiveRecord::Schema.define(version: 20160504020359) do
     t.string   "family_history"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+  end
+
+  create_table "consultations", force: :cascade do |t|
+    t.integer  "patient_id"
+    t.string   "reason",               default: ""
+    t.string   "ongoing_issue",        default: ""
+    t.string   "organs_examination",   default: ""
+    t.decimal  "temperature",          default: 0.0
+    t.integer  "heart_rate",           default: 0
+    t.decimal  "blood_pressure",       default: 0.0
+    t.integer  "respiratory_rate",     default: 0
+    t.decimal  "weight",               default: 0.0
+    t.decimal  "height",               default: 0.0
+    t.string   "physical_examination", default: ""
+    t.string   "right_ear",            default: ""
+    t.string   "left_ear",             default: ""
+    t.string   "right_nostril",        default: ""
+    t.string   "left_nostril",         default: ""
+    t.string   "nasopharynx",          default: ""
+    t.string   "nose_others",          default: ""
+    t.string   "oral_cavity",          default: ""
+    t.string   "oropharynx",           default: ""
+    t.string   "hypopharynx",          default: ""
+    t.string   "larynx",               default: ""
+    t.string   "neck",                 default: ""
+    t.string   "others",               default: ""
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   create_table "patients", force: :cascade do |t|
@@ -54,4 +82,5 @@ ActiveRecord::Schema.define(version: 20160504020359) do
   add_index "patients", ["source"], name: "index_patients_on_source", using: :btree
 
   add_foreign_key "anamneses", "patients"
+  add_foreign_key "consultations", "patients"
 end
