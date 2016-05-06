@@ -46,7 +46,7 @@ describe PatientsController do
       it 'creates a patient', :skip_on_before do
         expect do
           post :create, patient: attributes_for_patient
-        end.to change{ Patient.count }.by(1)
+        end.to change { Patient.count }.by(1)
       end
 
       it { is_expected.to redirect_to patients_path }
@@ -61,7 +61,7 @@ describe PatientsController do
       it 'does not create a patient', :skip_on_before do
         expect do
           post :create, patient: attributes_for_patient
-        end.to change{ Patient.count }.by(0)
+        end.to change { Patient.count }.by(0)
       end
 
       it { is_expected.to render_template :new }

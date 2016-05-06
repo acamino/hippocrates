@@ -9,7 +9,7 @@ class PatientsController < ApplicationController
     :civil_status,
     :source,
     :profession
-  ]
+  ].freeze
 
   def index
     # XXX: Add pagination
