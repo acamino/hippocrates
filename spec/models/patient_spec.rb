@@ -19,6 +19,7 @@ describe Patient do
 
   describe 'associations' do
     it { is_expected.to have_one(:anamnesis) }
+    it { is_expected.to have_many(:consultations) }
   end
 
   describe '#age' do

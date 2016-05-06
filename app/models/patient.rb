@@ -3,7 +3,8 @@ class Patient < ActiveRecord::Base
   enum civil_status: [:single, :married, :civil_union, :divorced, :widowed]
   enum source: [:television, :radio, :newspaper, :patient_reference]
 
-  has_one :anamnesis
+  has_one  :anamnesis
+  has_many :consultations
 
   validates :medical_history,
             :last_name,
