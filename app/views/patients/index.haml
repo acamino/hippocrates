@@ -24,7 +24,7 @@
         - else
           %span.label.label-info Femenino
       %td.text-right
-        Consulta
+        = link_to "Consulta", new_patient_consultation_path(patient)
         |
         / XXX: How to rid of this logic from the view.
         - if patient.anamnesis?
