@@ -6,7 +6,7 @@ class AnamnesesController < ApplicationController
     :observations,
     :habits,
     :family_history
-  ]
+  ].freeze
 
   def new
     @patient   = Patient.find(params[:patient_id])
@@ -24,6 +24,6 @@ class AnamnesesController < ApplicationController
 
   def anamnesis_params
     params.require(:anamnesis).permit(*ATTRIBUTE_WHITELIST).merge(
-      {patient_id: params[:patient_id]})
+      patient_id: params[:patient_id])
   end
 end

@@ -6,9 +6,9 @@ describe AnamnesesController do
     let(:anamnesis) { double(:anamnesis) }
 
     before do
-      allow(Patient).to receive(:find).with("1") { patient }
+      allow(Patient).to receive(:find).with('1') { patient }
       allow(Anamnesis).to receive(:new) { anamnesis }
-      get :new, patient_id: "1"
+      get :new, patient_id: '1'
     end
 
     it 'assings @patient' do
@@ -24,7 +24,7 @@ describe AnamnesesController do
   end
 
   describe '#create' do
-    let(:patient)    { create(:patient) }
+    let(:patient) { create(:patient) }
     let(:attributes_for_anamnesis) do
       {
         personal_history: 'personal history',
@@ -46,8 +46,8 @@ describe AnamnesesController do
     it 'creates a new anamnesis', :skip_on_before do
       expect do
         post :create, anamnesis: attributes_for_anamnesis,
-          patient_id: patient.id.to_s
-      end.to change{ Anamnesis.count }.by(1)
+                      patient_id: patient.id.to_s
+      end.to change { Anamnesis.count }.by(1)
     end
 
     it { is_expected.to redirect_to patients_path }
