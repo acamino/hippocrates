@@ -1,0 +1,37 @@
+= error_messages_for @anamnesis
+= form_for [@patient, @anamnesis], html: { class: "form" } do |f|
+  .panel.panel-default
+    .panel-heading
+      %b Antecedentes Personales
+    .panel-body
+      .row-fluid
+        .form-group.col-md-12
+          = f.text_area :personal_history, class: "form-control input-sm"
+        .form-group.col-md-12
+          .input-group
+            %span.input-group-addon.input-sm Antecedentes Quirúrgicos
+            = f.text_field :surgical_history, class: "form-control input-sm"
+        .form-group.col-md-4
+          .input-group
+            %span.input-group-addon.input-sm Alergias
+            = f.text_field :allergies, class: "form-control input-sm"
+        .form-group.col-md-4
+          .input-group
+            %span.input-group-addon.input-sm Observación
+            = f.text_field :observations, class: "form-control input-sm"
+        .form-group.col-md-4
+          .input-group
+            %span.input-group-addon.input-sm Hábitos
+            = f.text_field :habits, class: "form-control input-sm"
+
+  .panel.panel-default
+    .panel-heading
+      %b Antecedentes Familiares
+    .panel-body
+      .row-fluid
+        .form-group.col-md-12
+          = f.text_area :family_history, class: "form-control input-sm"
+
+  .row-fluid
+    = link_to "Cancelar", patients_path, class: "btn btn-default"
+    = f.submit "Guardar", class: "btn btn-success"
