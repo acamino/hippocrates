@@ -53,4 +53,44 @@ describe AnamnesesController do
     it { is_expected.to redirect_to patients_path }
     it { is_expected.to respond_with :redirect }
   end
+
+  describe '#edit' do
+    let(:patient) { double(:patient) }
+    let(:anamnesis) { double(:anamnesis) }
+
+    before do
+      allow(Patient).to receive(:find).with('1') { patient }
+      allow(Anamnesis).to receive(:find).with('1') { anamnesis }
+      get :edit, id: '1', patient_id: '1'
+    end
+
+    it 'assings @patient' do
+      expect(assigns(:patient)).to eq(patient)
+    end
+
+    it 'assings @anamnesis' do
+      expect(assigns(:anamnesis)).to eq(anamnesis)
+    end
+
+    it { is_expected.to render_template :edit }
+    it { is_expected.to respond_with :ok }
+  end
+
+  describe '#update' do
+    let(:patient) { create(:patient_with_anamnesis) }
+
+    before do
+      put :update, patient_id: patient.id,
+                   id: patient.anamnesis.id,
+                   anamnesis: { family_history: 'family history updated' }
+    end
+
+    it 'updates the patient' do
+      patient.reload
+      expect(patient.anamnesis.family_history).to eq('family history updated')
+    end
+
+    it { is_expected.to redirect_to patients_path }
+    it { is_expected.to respond_with :redirect }
+  end
 end

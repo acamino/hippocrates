@@ -26,6 +26,11 @@
       %td.text-right
         Consulta
         |
-        = link_to "Anamnesis", new_patient_anamnesis_path(patient)
+        / XXX: How to rid of this logic from the view.
+        - if patient.anamnesis?
+          = link_to "Anamnesis", edit_patient_anamnesis_path(patient, patient.anamnesis)
+        - else
+          %b
+            = link_to "Anamnesis", new_patient_anamnesis_path(patient)
         |
         = link_to "Editar", edit_patient_path(patient)

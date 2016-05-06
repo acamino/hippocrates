@@ -20,6 +20,17 @@ class AnamnesesController < ApplicationController
     redirect_to patients_path, notice: 'Anamnesis creada correctamente'
   end
 
+  def edit
+    @patient   = Patient.find(params[:patient_id])
+    @anamnesis = Anamnesis.find(params[:id])
+  end
+
+  def update
+    @anamnesis = Anamnesis.find(params[:id])
+    @anamnesis.update_attributes(anamnesis_params)
+    redirect_to patients_path, notice: 'Anamnesis actualizada correctamente'
+  end
+
   private
 
   def anamnesis_params
