@@ -10,4 +10,10 @@ FactoryGirl.define do
     civil_status   'married'
     source         'patient_reference'
   end
+
+  factory :patient_with_anamnesis, parent: :patient do
+    after :build do |patient|
+      patient.anamnesis = FactoryGirl.build(:anamnesis)
+    end
+  end
 end
