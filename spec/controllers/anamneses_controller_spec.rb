@@ -24,17 +24,8 @@ describe AnamnesesController do
   end
 
   describe '#create' do
-    let(:patient) { create(:patient) }
-    let(:attributes_for_anamnesis) do
-      {
-        personal_history: 'personal history',
-        surgical_history: 'surgical history',
-        allergies: 'allergies',
-        observations: 'observations',
-        habits: 'habits',
-        family_history: 'family history'
-      }
-    end
+    let(:patient)                  { create(:patient) }
+    let(:attributes_for_anamnesis) { attributes_for(:anamnesis) }
 
     before do |example|
       unless example.metadata[:skip_on_before]
