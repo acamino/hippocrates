@@ -1,0 +1,33 @@
+.form
+  .panel.panel-warning.personal-history
+    .panel-heading
+      %b Antecedentes Personales
+      %small.pull-right
+        %b #{@patient.anamnesis.allergies}
+    .panel-body
+      .row-fluid
+        .form-group.col-md-12
+          %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.anamnesis.personal_history }
+        .form-group.col-md-12
+          .input-group
+            %span.input-group-addon.input-sm Antecedentes Quirúrgicos
+            %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.anamnesis.surgical_history }
+        .form-group.col-md-4
+          .input-group
+            %span.input-group-addon.input-sm Alergias
+            %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.anamnesis.allergies }
+        .form-group.col-md-4
+          .input-group
+            %span.input-group-addon.input-sm Observación
+            %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.anamnesis.observations }
+        .form-group.col-md-4
+          .input-group
+            %span.input-group-addon.input-sm Hábitos
+            %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.anamnesis.habits }
+  .panel.panel-default
+    .panel-heading
+      %b Antecedentes Familiares
+    .panel-body
+      .row-fluid
+        .form-group.col-md-12
+          %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.anamnesis.family_history }
