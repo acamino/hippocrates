@@ -12,6 +12,11 @@ $(document).ready(function() {
         $('.patient-age').val(patientAge);
     });
 
+    $('.panel-heading').on('click', function(e) {
+        var panelBody = $(this).siblings();
+        panelBody.toggle('drop');
+    });
+
     var calculateAge = function(birthday, today) {
         var diffMilliseconds = today - birthday.getTime();
         var millisecondsFromEpoc = new Date(diffMilliseconds);

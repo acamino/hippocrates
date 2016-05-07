@@ -13,3 +13,7 @@ body {
 .colored {
   color: black;
 }
+
+.panel > .panel-heading {
+  cursor: pointer; cursor: hand;
+}
