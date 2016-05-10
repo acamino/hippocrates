@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160506215923) do
+ActiveRecord::Schema.define(version: 20160510120038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,20 +57,21 @@ ActiveRecord::Schema.define(version: 20160506215923) do
   end
 
   create_table "patients", force: :cascade do |t|
-    t.integer  "medical_history",                  null: false
-    t.string   "last_name",                        null: false
-    t.string   "first_name",                       null: false
-    t.string   "identity_card_number",             null: false
-    t.datetime "birthdate",                        null: false
-    t.integer  "gender",               default: 0, null: false
-    t.integer  "civil_status",         default: 0, null: false
+    t.integer  "medical_history",                      null: false
+    t.string   "last_name",                            null: false
+    t.string   "first_name",                           null: false
+    t.string   "identity_card_number",                 null: false
+    t.datetime "birthdate",                            null: false
+    t.integer  "gender",               default: 0,     null: false
+    t.integer  "civil_status",         default: 0,     null: false
     t.string   "address"
     t.string   "profession"
     t.string   "phone_number"
     t.string   "email"
-    t.integer  "source",               default: 0, null: false
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.integer  "source",               default: 0,     null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.boolean  "special",              default: false, null: false
   end
 
   add_index "patients", ["civil_status"], name: "index_patients_on_civil_status", using: :btree
@@ -80,6 +81,7 @@ ActiveRecord::Schema.define(version: 20160506215923) do
   add_index "patients", ["last_name"], name: "index_patients_on_last_name", using: :btree
   add_index "patients", ["medical_history"], name: "index_patients_on_medical_history", unique: true, using: :btree
   add_index "patients", ["source"], name: "index_patients_on_source", using: :btree
+  add_index "patients", ["special"], name: "index_patients_on_special", using: :btree
 
   add_foreign_key "anamneses", "patients"
   add_foreign_key "consultations", "patients"
