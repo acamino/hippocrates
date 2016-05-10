@@ -1,0 +1,119 @@
+= error_messages_for @consultation
+= form_for [@patient, @consultation], html: { class: "form" } do |f|
+  .panel.panel-default
+    .panel-heading
+      %b Motivo de Consulta
+    .panel-body
+      .row-fluid
+        .form-group.col-md-12
+          = f.text_area :reason, class: "form-control input-sm"
+  = render 'anamnesis'
+  .panel.panel-default
+    .panel-heading
+      %b Enfermedad o Problema Actual
+    .panel-body
+      .row-fluid
+        .form-group.col-md-12
+          = f.text_area :ongoing_issue, class: "form-control input-sm"
+  .panel.panel-default
+    .panel-heading
+      %b Revisión de Órganos y Sistemas
+    .panel-body
+      .row-fluid
+        .form-group.col-md-12
+          = f.text_area :organs_examination, class: "form-control input-sm"
+  .panel.panel-default
+    .panel-heading
+      %b Signos Vitales
+    .panel-body
+      .row-fluid
+        .form-group.col-md-4
+          .input-group
+            %span.input-group-addon.input-sm Temperatura
+            = f.text_field :temperature, class: "form-control input-sm"
+        .form-group.col-md-4
+          .input-group
+            %span.input-group-addon.input-sm Pulso
+            = f.text_field :heart_rate, class: "form-control input-sm"
+        .form-group.col-md-4
+          .input-group
+            %span.input-group-addon.input-sm T. Arterial
+            = f.text_field :blood_pressure, class: "form-control input-sm"
+      .row-fluid
+        .form-group.col-md-4
+          .input-group
+            %span.input-group-addon.input-sm Frec. Respiratoria
+            = f.text_field :respiratory_rate, class: "form-control input-sm"
+        .form-group.col-md-4
+          .input-group
+            %span.input-group-addon.input-sm Peso:
+            = f.text_field :weight, class: "form-control input-sm"
+        .form-group.col-md-4
+          .input-group
+            %span.input-group-addon.input-sm Talla
+            = f.text_field :height, class: "form-control input-sm"
+  .panel.panel-default
+    .panel-heading
+      %b Examen Físico
+    .panel-body
+      .row-fluid
+        .form-group.col-md-12
+          = f.text_field :physical_examination, class: "form-control input-sm"
+      .row-fluid
+        .form-group.col-md-6
+          .input-group
+            %span.input-group-addon.input-sm Oído Derecho
+            = f.text_field :right_ear, class: "form-control input-sm", placeholder: 'NORMAL'
+        .form-group.col-md-6
+          .input-group
+            %span.input-group-addon.input-sm Oído Izquierdo
+            = f.text_field :left_ear, class: "form-control input-sm", placeholder: 'NORMAL'
+      .row-fluid
+        .form-group.col-md-6
+          .input-group
+            %span.input-group-addon.input-sm FND
+            = f.text_field :right_nostril, class: "form-control input-sm", placeholder: 'NORMAL'
+        .form-group.col-md-6
+          .input-group
+            %span.input-group-addon.input-sm FNI
+            = f.text_field :left_nostril, class: "form-control input-sm", placeholder: 'NORMAL'
+      .row-fluid
+        .form-group.col-md-6
+          .input-group
+            %span.input-group-addon.input-sm Nasofaringe
+            = f.text_field :nasopharynx, class: "form-control input-sm", placeholder: 'NORMAL'
+        .form-group.col-md-6
+          .input-group
+            %span.input-group-addon.input-sm Otros
+            = f.text_field :nose_others, class: "form-control input-sm", placeholder: 'NORMAL'
+      .row-fluid
+        .form-group.col-md-12
+          .input-group
+            %span.input-group-addon.input-sm Cavidad Bucal
+            = f.text_field :oral_cavity, class: "form-control input-sm", placeholder: 'NORMAL'
+      .row-fluid
+        .form-group.col-md-6
+          .input-group
+            %span.input-group-addon.input-sm Orofaringe
+            = f.text_field :oropharynx, class: "form-control input-sm", placeholder: 'NORMAL'
+        .form-group.col-md-6
+          .input-group
+            %span.input-group-addon.input-sm Hipofaringe
+            = f.text_field :hypopharynx, class: "form-control input-sm", placeholder: 'NORMAL'
+      .row-fluid
+        .form-group.col-md-6
+          .input-group
+            %span.input-group-addon.input-sm Laringe
+            = f.text_field :larynx, class: "form-control input-sm", placeholder: 'NORMAL'
+        .form-group.col-md-6
+          .input-group
+            %span.input-group-addon.input-sm Cuello
+            = f.text_field :neck, class: "form-control input-sm", placeholder: 'NORMAL'
+      .row-fluid
+        .form-group.col-md-12
+          .input-group
+            %span.input-group-addon.input-sm Otros
+            = f.text_field :others, class: "form-control input-sm", placeholder: 'NORMAL'
+  .row-fluid
+    = link_to "Cancelar", patients_path, class: "btn btn-default"
+    = f.submit "Guardar", class: "btn btn-success"
