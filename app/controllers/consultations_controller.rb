@@ -21,12 +21,16 @@ class ConsultationsController < ApplicationController
     :hypopharynx,
     :larynx,
     :neck,
-    :others
+    :others,
+    diagnoses_attributes: [:disease_code, :description, :type]
   ].freeze
 
   def new
     @patient      = Patient.find(params[:patient_id])
     @consultation = Consultation.new
+    4.times do
+      @consultation.diagnoses.build
+    end
   end
 
   def create

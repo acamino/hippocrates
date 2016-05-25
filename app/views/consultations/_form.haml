@@ -114,6 +114,29 @@
           .input-group
             %span.input-group-addon.input-sm Otros
             = f.text_field :others, class: "form-control input-sm", placeholder: 'NORMAL'
+  .panel.panel-default
+    .panel-heading
+      %b Diagnóstico
+    .panel-body
+      %table.table.table-striped.table-hover
+        %thead
+          %tr
+            %th.col-md-9
+            %th.col-md-1 CIE
+            %th.col-md-1.text-center Presuntivo
+            %th.col-md-1.text-center Definitivo
+        %tbody
+          = f.fields_for :diagnoses do |ff|
+            %tr
+              %td
+                = ff.text_field :description, class: "form-control input-sm"
+              %td
+                = ff.text_field :disease_code, class: "form-control input-sm"
+              %td.text-center
+                = ff.radio_button :type, "presuntive", class: "input-sm"
+              %td.text-center
+                = ff.radio_button :type, "definitive", class: "input-sm"
+
   .row-fluid
     = link_to "Cancelar", patients_path, class: "btn btn-default"
     = f.submit "Guardar", class: "btn btn-success"

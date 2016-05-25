@@ -7,7 +7,6 @@ describe ConsultationsController do
 
     before do
       allow(Patient).to receive(:find).with('1') { patient }
-      allow(Consultation).to receive(:new) { consultation }
       get :new, patient_id: '1'
     end
 
@@ -16,7 +15,7 @@ describe ConsultationsController do
     end
 
     it 'assings @consultation' do
-      expect(assigns(:consultation)).to eq(consultation)
+      expect(assigns(:consultation)).to be_a_new(Consultation)
     end
 
     it { is_expected.to render_template :new }
