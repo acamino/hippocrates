@@ -17,6 +17,15 @@ $(document).ready(function() {
         panelBody.toggle('drop');
     });
 
+    $.get('/api/diseases').done(function(suggestions) {
+      $('.disease').autocomplete({
+        lookup: suggestions,
+        onSelect: function (suggestion) {
+          $(this).closest('tr').find('input.code').val(suggestion.data);
+        }
+      });
+    });
+
     var calculateAge = function(birthday, today) {
         var diffMilliseconds = today - birthday.getTime();
         var millisecondsFromEpoc = new Date(diffMilliseconds);
