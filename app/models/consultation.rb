@@ -8,6 +8,6 @@ class Consultation < ActiveRecord::Base
                                 allow_destroy: true
 
   accepts_nested_attributes_for :prescriptions,
-                                reject_if: -> (attributes) { attributes[:name].blank? },
+                                reject_if: -> (attributes) { attributes[:inscription].blank? },
                                 allow_destroy: true
 end

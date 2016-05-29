@@ -26,6 +26,15 @@ $(document).ready(function() {
       });
     });
 
+    $.get('/api/medicines').done(function(medicines) {
+      $('.inscription').autocomplete({
+        lookup: medicines,
+        onSelect: function (medicine) {
+          $(this).closest('tr').find('input.subscription').val(medicine.data);
+        }
+      });
+    });
+
     var calculateAge = function(birthday, today) {
         var diffMilliseconds = today - birthday.getTime();
         var millisecondsFromEpoc = new Date(diffMilliseconds);

@@ -40,6 +40,31 @@ describe ConsultationsController do
       end.to change { Consultation.count }.by(1)
     end
 
+    it 'creates new diagnoses', :skip_on_before do
+      pharyngitis = Disease.create(code: 'A001', name: 'Pharyngitis')
+      rhinitis    = Disease.create(code: 'A002', name: 'Rhinitis')
+
+      post :create, patient_id: patient.id.to_s,
+        consultation: attributes_for_consultation.merge(
+          diagnoses_attributes: {
+            '0': { disease_code: pharyngitis.code, description: pharyngitis.name, type: 'presuntive' },
+            '1': { disease_code: rhinitis.code, description: rhinitis.name, type: 'presuntive' },
+          })
+
+      expect(patient.consultations.last.diagnoses.count).to eq(2)
+    end
+
+    it 'creates new prescriptions', :skip_on_before do
+      post :create, patient_id: patient.id.to_s,
+        consultation: attributes_for_consultation.merge(
+          prescriptions_attributes: {
+            '0': { inscription: 'inscription-one', subscription: 'subscription' },
+            '1': { inscription: 'inscription-two', subscription: 'subscription' },
+          })
+
+      expect(patient.consultations.last.prescriptions.count).to eq(2)
+    end
+
     it { is_expected.to redirect_to patients_path }
     it { is_expected.to respond_with :redirect }
   end

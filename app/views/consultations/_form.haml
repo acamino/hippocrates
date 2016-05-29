@@ -136,6 +136,22 @@
                 = ff.radio_button :type, "presuntive", class: "input-sm"
               %td.text-center
                 = ff.radio_button :type, "definitive", class: "input-sm"
+  .panel.panel-default
+    .panel-heading
+      %b Receta
+    .panel-body
+      %table.table.table-striped.table-hover
+        %thead
+          %tr
+            %th.col-md-6 Inscripción
+            %th.col-md-6 Suscripción
+        %tbody
+          = f.fields_for :prescriptions do |ff|
+            %tr
+              %td
+                = ff.text_field :inscription, class: "form-control input-sm inscription", autocomplete: "off"
+              %td
+                = ff.text_field :subscription, class: "form-control input-sm subscription"
 
   .row-fluid
     = link_to "Cancelar", patients_path, class: "btn btn-default"

@@ -22,7 +22,8 @@ class ConsultationsController < ApplicationController
     :larynx,
     :neck,
     :others,
-    diagnoses_attributes: [:disease_code, :description, :type]
+    diagnoses_attributes: [:disease_code, :description, :type],
+    prescriptions_attributes: [:inscription, :subscription]
   ].freeze
 
   def new
@@ -30,6 +31,7 @@ class ConsultationsController < ApplicationController
     @consultation = Consultation.new
     4.times do
       @consultation.diagnoses.build
+      @consultation.prescriptions.build
     end
   end
 
