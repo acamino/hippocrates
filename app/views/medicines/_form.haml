@@ -1,0 +1,15 @@
+= error_messages_for @medicine
+= form_for @medicine, html: { class: "form-horizontal" } do |f|
+  .form-group
+    = f.label :name, "Nombre", class: "col-md-2 control-label"
+    .col-md-10
+      = f.text_field :name, class: "form-control input-sm"
+  .form-group
+    = f.label :instructions, "Instrucciones", class: "col-md-2 control-label"
+    .col-md-10
+      = f.text_field :instructions, class: "form-control input-sm"
+  .form-group
+    .col-md-10.col-md-offset-2
+      = link_to "Cancelar", medicines_path, class: "btn btn-default"
+      = f.submit "Guardar", class: "btn btn-success"
+

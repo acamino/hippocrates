@@ -1,0 +1,17 @@
+/ XXX: Pull out the labels from a config file.
+.row.pull-right.align-right
+  = link_to "Nueva medicina", new_medicine_path, class: "btn btn-success"
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th.col-md-5 Nombre
+      %th.col-md-5 Instrucciones
+      %th.col-md-2
+  %tbody
+  - @medicines.each do |medicine|
+    %tr
+      %td= medicine.name
+      %td= medicine.instructions
+      %td.text-right
+        = link_to "Editar", edit_medicine_path(medicine)
