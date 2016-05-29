@@ -17,4 +17,22 @@ describe ApplicationHelper do
       end
     end
   end
+
+  describe '#nav_to' do
+    before do
+      allow(helper).to receive(:params).and_return(controller: 'patients')
+    end
+
+    context 'when the nav_path includes the controller' do
+      it 'builds an active nav_to' do
+        expect(helper.nav_to('nav-text', '/patients')).to include('active')
+      end
+    end
+
+    context 'when the nav_path does not include the controller' do
+      it 'builds a nav_to without the active class' do
+        expect(helper.nav_to('nav-text', '/medicines')).to_not include('active')
+      end
+    end
+  end
 end

@@ -21,8 +21,8 @@
             %span.icon-bar
         .navbar-collapse.collapse#navbar-main
           %ul.nav.navbar-nav
-            %li.active
-              = link_to 'Pacientes', patients_path
+            = nav_to 'Pacientes', patients_path
+            = nav_to 'Medicines', medicines_path
 
           = form_tag(patients_path, method: 'GET', class: 'navbar-form navbar-left') do
             .form-group

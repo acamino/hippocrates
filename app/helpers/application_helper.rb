@@ -6,4 +6,12 @@ module ApplicationHelper
       content_tag(:div, "#{header} #{body}".html_safe, class: "text-danger")
     end
   end
+
+  def nav_to(nav_text, nav_path)
+    class_name = nav_path.include?(params[:controller]) ? 'active' : ''
+
+    content_tag(:li, class: class_name) do
+      link_to(nav_text, nav_path)
+    end
+  end
 end
