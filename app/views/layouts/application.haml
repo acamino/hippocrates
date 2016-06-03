@@ -22,7 +22,7 @@
         .navbar-collapse.collapse#navbar-main
           %ul.nav.navbar-nav
             = nav_to 'Pacientes', patients_path
-            = nav_to 'Medicines', medicines_path
+            = nav_to 'Medicinas', medicines_path
 
           = form_tag(patients_path, method: 'GET', class: 'navbar-form navbar-left') do
             .form-group
@@ -41,3 +41,4 @@
     = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.js'
     = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/locales/bootstrap-datepicker.es.min.js'
     = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.2.24/jquery.autocomplete.min.js'
+    = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js'
