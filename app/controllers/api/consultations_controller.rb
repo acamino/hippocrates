@@ -1,18 +1,18 @@
 module API
-  class ConsultationsController < ApplicationController
+  class ConsultationsController < BaseController
     def last
       consultation = patient.consultations.last
-      render json: consultation, include: [:diagnoses, :prescriptions]
+      render json: consultation
     end
 
     def previous
       consultation = Consultation.find(previous_consultation_id)
-      render json: consultation, include: [:diagnoses, :prescriptions]
+      render json: consultation
     end
 
     def next
       consultation = Consultation.find(next_consultation_id)
-      render json: consultation, include: [:diagnoses, :prescriptions]
+      render json: consultation
     end
 
     private
