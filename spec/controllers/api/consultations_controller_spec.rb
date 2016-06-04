@@ -14,10 +14,26 @@ describe API::ConsultationsController do
   end
 
   describe '#previous' do
-    it 'returns the previous consultation' do
-      post :previous, patient_id: bob.id, current_consultation: c2.id
-      consultation = ::JSON.parse(response.body)
-      expect(consultation['reason']).to eq(c1.reason)
+    context 'when there is a previous consultation' do
+      it 'returns the previous consultation' do
+        post :previous, patient_id: bob.id, current_consultation: c2.id
+        consultation = ::JSON.parse(response.body)
+        expect(consultation['reason']).to eq(c1.reason)
+      end
+    end
+
+    context 'when there is a previous consultation' do
+      before do
+        post :previous, patient_id: bob.id, current_consultation: c1.id
+      end
+
+      it 'responds with not found' do
+        expect(response).to be_not_found
+      end
+
+      it 'responds with json' do
+        expect(response).to be_json
+      end
     end
   end
 

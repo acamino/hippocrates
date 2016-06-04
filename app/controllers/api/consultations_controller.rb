@@ -22,7 +22,10 @@ module API
     end
 
     def next_consultation_id
-      patient_consultations[current_consultation_index.pred]
+      consultation_index = current_consultation_index.pred
+      return nil if consultation_index < 0
+
+      patient_consultations[consultation_index]
     end
 
     def current_consultation_index
