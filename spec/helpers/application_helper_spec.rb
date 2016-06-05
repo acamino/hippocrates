@@ -35,4 +35,22 @@ describe ApplicationHelper do
       end
     end
   end
+
+  describe '#consultations?' do
+    let(:nav_params) { { controller: 'consultations', action: 'new' } }
+    before  { allow(helper).to receive(:params) { nav_params } }
+    subject { helper.consultations? }
+
+    context 'when the controller is consultations' do
+      context 'and when the action is new' do
+        it { is_expected.to be_truthy }
+      end
+    end
+
+    context 'when the controller is not consultations' do
+      let(:nav_params) { { controller: 'patients', action: 'new' } }
+
+      it { is_expected.to be_falsey }
+    end
+  end
 end

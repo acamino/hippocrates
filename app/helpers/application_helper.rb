@@ -14,4 +14,8 @@ module ApplicationHelper
       link_to(nav_text, nav_path)
     end
   end
+
+  def consultations?
+    params[:controller] == "consultations" && params[:action] == "new"
+  end
 end
