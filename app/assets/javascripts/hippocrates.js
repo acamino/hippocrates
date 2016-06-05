@@ -1,9 +1,11 @@
 if(typeof Hippocrates === "undefined") {
   var Hippocrates = {};
+  Hippocrates.Autocomplete = {};
   Hippocrates.Consultations = {};
 }
 
 $(document).ready(function() {
+    Hippocrates.Autocomplete.init();
     Hippocrates.Consultations.init();
 
     $('#patient_birthdate').datepicker({
@@ -22,24 +24,6 @@ $(document).ready(function() {
     $('.panel-heading').on('click', function(e) {
         var panelBody = $(this).siblings();
         panelBody.toggle('drop');
-    });
-
-    $.get('/api/diseases').done(function(suggestions) {
-      $('.disease').autocomplete({
-        lookup: suggestions,
-        onSelect: function (suggestion) {
-          $(this).closest('tr').find('input.code').val(suggestion.data);
-        }
-      });
-    });
-
-    $.get('/api/medicines').done(function(medicines) {
-      $('.inscription').autocomplete({
-        lookup: medicines,
-        onSelect: function (medicine) {
-          $(this).closest('tr').find('input.subscription').val(medicine.data);
-        }
-      });
     });
 
     var calculateAge = function(birthday, today) {
