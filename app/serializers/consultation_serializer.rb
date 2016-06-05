@@ -1,5 +1,5 @@
 class ConsultationSerializer < ActiveModel::Serializer
-  attributes :id, :reason
+  attributes :id, :reason, :date
   attribute :has_diagnoses, key: :hasDiagnoses
   attribute :has_prescriptions, key: :hasPrescriptions
 
@@ -13,6 +13,10 @@ class ConsultationSerializer < ActiveModel::Serializer
 
   def has_prescriptions
     object.prescriptions.count > 0
+  end
+
+  def date
+    object.created_at.strftime("%Y-%m-%d")
   end
 
   class PatientSerializer < ActiveModel::Serializer

@@ -18,6 +18,19 @@ body {
   cursor: pointer; cursor: hand;
 }
 
+.modal-header {
+  padding: 15px 15px 0 15px;
+}
+
+.modal-body {
+  padding: 10px 15px 0 15px;
+}
+
+.consultation-date,
+.consultation-reason {
+  padding-left: 8px;
+}
+
 .autocomplete-suggestions {
   border: 1px solid #999;
   background: #FFF;

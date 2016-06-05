@@ -1,4 +1,11 @@
+if(typeof Hippocrates === "undefined") {
+  var Hippocrates = {};
+  Hippocrates.Consultations = {};
+}
+
 $(document).ready(function() {
+    Hippocrates.Consultations.init();
+
     $('#patient_birthdate').datepicker({
         format: "yyyy-mm-dd",
         language: "es",

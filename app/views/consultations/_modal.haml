@@ -1,0 +1,60 @@
+.modal.fade#consultation{ tabindex: "-1", role: "dialog" }
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{ type: "button",
+                       "data-dismiss": "modal",
+                       "aria-label": "Close" }
+          %span{ "aria-hidden": "true" } &times;
+        %h4.modal-title
+      .modal-body
+      .modal-footer
+        %button.btn.btn-default{ "data-dismiss": "modal" } Cerrar
+        %button.btn.btn-primary#prev{ "data-dismiss": "modal" }
+          %i.fa.fa-chevron-left{ "aria-hidden": "true" }
+          Anterior
+        %button.btn.btn-primary#next{ "data-dismiss": "modal" }
+          Siguiente
+          %i.fa.fa-chevron-right{ "aria-hidden": "true" }
+
+%script#consultation-header{ type: "x-tmpl-mustache" }
+  {{patient.name}}
+  %small {{patient.age}} años
+
+%script#consultation-body{ type: "x-tmpl-mustache" }
+  %input#current-consultation{ type: "hidden", value: "{{id}}" }
+  .row.consultation-date
+    .col-md-3
+      %strong Fecha:
+    .col-md-9
+      %big {{date}}
+  .row.consultation-reason
+    .col-md-3
+      %strong Motivo de consulta:
+    .col-md-9
+      {{reason}}
+  %br
+  {{#hasDiagnoses}}
+  %table.table.table-striped
+    %thead
+      %tr{ style: "background-color: #FF9800; color: #FFF" }
+        %th.col-md-12 Examen Diagnóstico
+    %tbody
+      {{#diagnoses}}
+      %tr
+        %td {{disease_code}} {{description}}
+      {{/diagnoses}}
+  {{/hasDiagnoses}}
+  {{#hasPrescriptions}}
+  %table.table.table-striped
+    %thead
+      %tr{ style: "background-color: #4CAF50; color: #FFF" }
+        %th.col-md-6 Receta
+        %th.col-md-6 &nbsp;
+    %tbody
+      {{#prescriptions}}
+      %tr
+        %td {{inscription}}
+        %td {{subscription}}
+      {{/prescriptions}}
+  {{/hasPrescriptions}}
