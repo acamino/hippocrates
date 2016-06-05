@@ -31,7 +31,8 @@ class Patient < ActiveRecord::Base
   def age
     if birthdate
       age = Date.today.year - birthdate.year
-      age - 1 if Date.today < birthdate + age.years
+      return age - 1 if Date.today < birthdate + age.years
+      age
     else
       0
     end
