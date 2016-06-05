@@ -9,9 +9,11 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: 'json' } do
     resources :patients, only: [] do
       resources :consultations, only: [:index] do
-        post 'previous', on: :collection
-        post 'next', on: :collection
-        post 'last', on: :collection
+        collection do
+          post 'previous'
+          post 'next'
+          post 'last'
+        end
       end
     end
 
