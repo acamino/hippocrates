@@ -44,6 +44,13 @@ describe Patient do
     end
   end
 
+  describe '#name' do
+    it "returns patient's full name" do
+      patient = build(:patient, first_name: 'Alice', last_name: 'Doe')
+      expect(patient.name).to eq('Doe Alice')
+    end
+  end
+
   describe '#anamnesis?' do
     let(:patient) { build(:patient) }
 
