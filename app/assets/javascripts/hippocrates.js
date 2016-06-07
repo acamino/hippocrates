@@ -23,7 +23,7 @@ $(document).ready(function() {
 
     $('.panel-heading').on('click', function(e) {
         var panelBody = $(this).siblings();
-        panelBody.toggle('drop');
+        panelBody.slideToggle('slow');
     });
 
     var calculateAge = function(birthday, today) {
