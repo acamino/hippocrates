@@ -5,6 +5,14 @@ if(typeof Hippocrates === "undefined") {
 }
 
 $(document).ready(function() {
+    $('.hint-icon, .hint-title').click(function (){
+      $(".hint-box").toggleClass("show");
+    });
+
+    $('.progress, .progress-hint').click(function (){
+      $(".progress-hint").slideToggle();
+    });
+
     Hippocrates.Autocomplete.init();
     Hippocrates.Consultations.init();
 

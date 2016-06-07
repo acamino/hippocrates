@@ -36,6 +36,7 @@
           %ul.nav.navbar-nav.navbar-right
             %li
               %a(href='#') Salir
+      = yield :alerts
 
     .container
       = render 'layouts/flash_messages'

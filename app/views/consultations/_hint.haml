@@ -1,0 +1,29 @@
+.hint
+  .hint-box
+    .hint-icon
+      %i.fa.fa-user-md
+    .hint-content
+      .hint-title= @patient.name
+      .hint-item
+        - if @patient.anamnesis.allergies?
+          .row
+            .col-xs-1
+              %span.text-danger
+                %i.fa.fa-circle
+            .col-xs-10
+              %span= @patient.anamnesis.allergies
+        - if @patient.anamnesis.observations?
+          .row
+          .row
+            .col-xs-1
+              %span.text-warning
+                %i.fa.fa-circle
+            .col-xs-10
+              %span= @patient.anamnesis.observations
+        - if @patient.anamnesis.personal_history?
+          .row
+            .col-xs-1
+              %span.text-info
+                %i.fa.fa-circle
+            .col-xs-10
+              %span= @patient.anamnesis.personal_history

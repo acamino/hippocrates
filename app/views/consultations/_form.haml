@@ -1,3 +1,6 @@
+= content_for :alerts do
+  = alerts_for(@patient.anamnesis)
+
 = error_messages_for @consultation
 = form_for [@patient, @consultation], html: { class: "form" } do |f|
   .panel.panel-default
@@ -158,3 +161,4 @@
     = f.submit "Guardar", class: "btn btn-success"
 
 = render 'modal'
+= render 'hint'
