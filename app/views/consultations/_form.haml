@@ -121,40 +121,64 @@
     .panel-heading
       %b Diagnóstico
     .panel-body
-      %table.table.table-striped.table-hover
-        %thead
-          %tr
-            %th.col-md-9
-            %th.col-md-1 CIE
-            %th.col-md-1.text-center Presuntivo
-            %th.col-md-1.text-center Definitivo
-        %tbody
-          = f.fields_for :diagnoses do |ff|
-            %tr
-              %td
-                = ff.text_field :description, class: "form-control input-sm disease", autocomplete: "off"
-              %td
-                = ff.text_field :disease_code, class: "form-control input-sm code", readonly: "true"
-              %td.text-center
-                = ff.radio_button :type, "presuntive", class: "input-sm"
-              %td.text-center
-                = ff.radio_button :type, "definitive", class: "input-sm"
+      .row-fluid
+        .form-group.col-md-12.diagnoses
+          %table.table.table-striped.table-hover
+            %thead
+              %tr
+                %th.col-md-9
+                %th.col-md-1 CIE
+                %th.col-md-1.text-center Presuntivo
+                %th.col-md-1.text-center Definitivo
+            %tbody
+              = f.fields_for :diagnoses do |ff|
+                %tr
+                  %td
+                    = ff.text_field :description, class: "form-control input-sm disease", autocomplete: "off"
+                  %td
+                    = ff.text_field :disease_code, class: "form-control input-sm code", readonly: "true"
+                  %td.text-center
+                    = ff.radio_button :type, "presuntive", class: "input-sm"
+                  %td.text-center
+                    = ff.radio_button :type, "definitive", class: "input-sm"
   .panel.panel-default
     .panel-heading
-      %b Receta
+      %b Planes
     .panel-body
-      %table.table.table-striped.table-hover
-        %thead
-          %tr
-            %th.col-md-6 Inscripción
-            %th.col-md-6 Suscripción
-        %tbody
-          = f.fields_for :prescriptions do |ff|
-            %tr
-              %td
-                = ff.text_field :inscription, class: "form-control input-sm inscription", autocomplete: "off"
-              %td
-                = ff.text_field :subscription, class: "form-control input-sm subscription"
+      .row-fluid
+        .form-group.col-md-12
+          .input-group
+            %span.input-group-addon.input-sm Diagnóstico
+            = f.text_field :diagnostic_plan, class: "form-control input-sm"
+      .row-fluid
+        .form-group.col-md-12
+          .input-group
+            %span.input-group-addon.input-sm Misceláneos
+            = f.text_field :miscellaneous, class: "form-control input-sm"
+      .row-fluid
+        .form-group.col-md-12
+          .input-group
+            %span.input-group-addon.input-sm Terapéutico
+            = f.text_field :treatment_plan, class: "form-control input-sm"
+      .row-fluid
+        .form-group.col-md-12.prescriptions
+          %table.table.table-striped.table-hover
+            %thead
+              %tr
+                %th.col-md-6 Inscripción
+                %th.col-md-6 Suscripción
+            %tbody
+              = f.fields_for :prescriptions do |ff|
+                %tr
+                  %td
+                    = ff.text_field :inscription, class: "form-control input-sm inscription", autocomplete: "off"
+                  %td
+                    = ff.text_field :subscription, class: "form-control input-sm subscription"
+      .row-fluid
+        .form-group.col-md-12
+          .input-group
+            %span.input-group-addon.input-sm Educacional
+            = f.text_field :educational_plan, class: "form-control input-sm"
 
   .row-fluid
     = link_to "Cancelar", patients_path, class: "btn btn-default"
