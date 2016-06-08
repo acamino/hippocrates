@@ -1,7 +1,7 @@
 module API
   class DiseasesController < ApplicationController
     def index
-      render json: Disease.all.map { |d| { value: d.name, data: d.code } }
+      render json: Disease.all
     end
   end
 end
