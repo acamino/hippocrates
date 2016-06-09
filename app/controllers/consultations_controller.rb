@@ -22,6 +22,12 @@ class ConsultationsController < ApplicationController
     :larynx,
     :neck,
     :others,
+    :diagnostic_plan,
+    :miscellaneous,
+    :treatment_plan,
+    :educational_plan,
+    :next_appointment,
+    patient: :special,
     diagnoses_attributes: [:disease_code, :description, :type],
     prescriptions_attributes: [:inscription, :subscription]
   ].freeze
@@ -37,6 +43,8 @@ class ConsultationsController < ApplicationController
 
   def create
     Consultation.create(consultation_params)
+    patient = Patient.find(params[:patient_id])
+    patient.update_attributes(special: patient_special)
 
     # XXX: Pull out the messages form a locale file.
     redirect_to patients_path, notice: 'Consulta creada correctamente'
@@ -46,6 +54,10 @@ class ConsultationsController < ApplicationController
 
   def consultation_params
     params.require(:consultation).permit(*ATTRIBUTE_WHITELIST).merge(
-      patient_id: params[:patient_id])
+      patient_id: params[:patient_id]).except("patient")
+  end
+
+  def patient_special
+    params[:consultation][:patient][:special]
   end
 end

@@ -179,6 +179,21 @@
           .input-group
             %span.input-group-addon.input-sm Educacional
             = f.text_field :educational_plan, class: "form-control input-sm"
+  .panel.panel-default
+    .panel-heading
+      %b Seguimiento
+    .panel-body
+      .row-fluid
+        .form-group.col-md-3
+          .input-group
+            %span.input-group-addon.input-sm Paciente Especial
+            / XXX: Keep in sync the model with the UI.
+            = f.fields_for :patient do |ff|
+              = ff.select :special, options_for_select([['No', '0'], ['Si', '1']], @patient.special), {}, class: "form-control input-sm"
+        .form-group.col-md-3
+          .input-group
+            %span.input-group-addon.input-sm Próxima cita
+            = f.text_field :next_appointment, class: "form-control input-sm"
 
   .row-fluid
     = link_to "Cancelar", patients_path, class: "btn btn-default"

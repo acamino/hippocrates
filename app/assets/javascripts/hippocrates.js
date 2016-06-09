@@ -16,6 +16,13 @@ $(document).ready(function() {
     Hippocrates.Autocomplete.init();
     Hippocrates.Consultations.init();
 
+    $('#consultation_next_appointment').datepicker({
+        format: "yyyy-mm-dd",
+        language: "es",
+        calendarWeeks: true,
+        autoclose: true
+    });
+
     $('#patient_birthdate').datepicker({
         format: "yyyy-mm-dd",
         language: "es",

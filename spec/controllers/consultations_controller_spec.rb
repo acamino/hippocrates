@@ -24,7 +24,9 @@ describe ConsultationsController do
 
   describe '#create' do
     let(:patient)                     { create(:patient) }
-    let(:attributes_for_consultation) { attributes_for(:consultation) }
+    let(:attributes_for_consultation) do
+      attributes_for(:consultation).merge(patient: { special: '1' })
+    end
 
     before do |example|
       unless example.metadata[:skip_on_before]
@@ -63,6 +65,14 @@ describe ConsultationsController do
           })
 
       expect(patient.consultations.last.prescriptions.count).to eq(2)
+    end
+
+    it "updates patient's special field", :skip_on_before do
+      expect do
+        post :create, patient_id: patient.id.to_s,
+          consultation: attributes_for_consultation
+        patient.reload
+      end.to change { patient.special }.from(false).to(true)
     end
 
     it { is_expected.to redirect_to patients_path }
