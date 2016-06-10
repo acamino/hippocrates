@@ -20,12 +20,13 @@ describe ApplicationHelper do
 
   describe '#nav_to' do
     before do
-      allow(helper).to receive(:params).and_return(controller: 'patients')
+      allow(helper).to receive(:params).
+        and_return({ controller: 'patients', action: 'special' })
     end
 
     context 'when the nav_path includes the controller' do
       it 'builds an active nav_to' do
-        expect(helper.nav_to('nav-text', '/patients')).to include('active')
+        expect(helper.nav_to('nav-text', '/patients/special')).to include('active')
       end
     end
 
