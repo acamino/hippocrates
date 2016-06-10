@@ -18,15 +18,14 @@ describe PatientsController do
   end
 
   describe '#special' do
-    let(:patients) { [double(:patient)] }
+    let!(:bob)   { create(:patient, :special, :with_consultations) }
+    let!(:tom)   { create(:patient, :special, :with_consultations) }
+    let!(:alice) { create(:patient, :with_consultations) }
 
-    before do
-      allow(Patient).to receive(:special) { patients }
-      get :special
-    end
+    before { get :special }
 
-    it 'assings @patients' do
-      expect(assigns(:patients)).to eq(patients)
+    it 'assings special patients sorted by the most recent consultation to @patients' do
+      expect(assigns(:patients)).to eq([tom, bob])
     end
 
     it { is_expected.to render_template :special }

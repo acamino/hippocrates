@@ -16,4 +16,12 @@ FactoryGirl.define do
       patient.anamnesis = FactoryGirl.build(:anamnesis)
     end
   end
+
+  trait :special do
+    special true
+  end
+
+  trait :with_consultations do
+    consultations { [create(:consultation)] }
+  end
 end
