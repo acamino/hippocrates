@@ -17,6 +17,22 @@ describe PatientsController do
     it { is_expected.to respond_with :ok }
   end
 
+  describe '#special' do
+    let(:patients) { [double(:patient)] }
+
+    before do
+      allow(Patient).to receive(:special) { patients }
+      get :special
+    end
+
+    it 'assings @patients' do
+      expect(assigns(:patients)).to eq(patients)
+    end
+
+    it { is_expected.to render_template :special }
+    it { is_expected.to respond_with :ok }
+  end
+
   describe '#new' do
     let(:patient) { double(:patient) }
 

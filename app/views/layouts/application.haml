@@ -22,6 +22,7 @@
         .navbar-collapse.collapse#navbar-main
           %ul.nav.navbar-nav
             = nav_to 'Pacientes', patients_path
+            = nav_to 'Pacientes Especiales', special_patients_path
             = nav_to 'Medicinas', medicines_path
             - if consultations?
               %li

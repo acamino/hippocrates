@@ -17,6 +17,12 @@ class PatientsController < ApplicationController
     @patients = Patient.search(params[:search])
   end
 
+  def special
+    @patients = Patient.special.sort_by do |p|
+      p.consultations.most_recent.created_at
+    end.reverse
+  end
+
   def new
     @patient = Patient.new
   end
