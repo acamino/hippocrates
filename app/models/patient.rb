@@ -19,6 +19,8 @@ class Patient < ActiveRecord::Base
             :identity_card_number, uniqueness: true
   validates :email, uniqueness: true, allow_nil: true, allow_blank: true
 
+  scope :special, -> { where(special: true) }
+
   def self.search(query)
     if query
       where('lower(last_name) LIKE ?', "%#{query.downcase}%")
