@@ -5,32 +5,50 @@
 %table.table.table-striped
   %thead
     %tr
-      %th.col-md-1 Historia
+      %th.col-md-2.hidden-xs Historia
       %th.col-md-3 Apellidos
       %th.col-md-3 Nombres
-      %th.col-md-2 Fecha Nacimiento
+      %th.col-md-2.hidden-xs Fecha Nacimiento
       %th.col-md-1 Sexo
-      %th.col-md-2
+      %th.col-md-1
   %tbody
   - @patients.each do |patient|
     %tr
-      %td= patient.medical_history
+      %td.hidden-xs= patient.medical_history
       %td= patient.last_name
       %td= patient.first_name
-      %td= patient.birthdate.strftime("%Y-%m-%d")
+      %td.hidden-xs= patient.birthdate.strftime("%Y-%m-%d")
       %td
         - if patient.male?
           %span.label.label-primary Masculino
         - else
           %span.label.label-info Femenino
       %td.text-right
-        = link_to "Consulta", new_patient_consultation_path(patient)
-        |
-        / XXX: How to rid of this logic from the view.
-        - if patient.anamnesis?
-          = link_to "Anamnesis", edit_patient_anamnesis_path(patient, patient.anamnesis)
-        - else
-          %b
-            = link_to "Anamnesis", new_patient_anamnesis_path(patient)
-        |
-        = link_to "Editar", edit_patient_path(patient)
+        .btn-group
+          %button.btn.btn-default.btn-xs.dropdown-toggle{ "aria-expanded": "false",
+                                                          "aria-haspopup": "true",
+                                                          "data-toggle": "dropdown",
+                                                          type: "button" }
+            -if patient.anamnesis?
+              .span.text-primary
+                %i.fa.fa-cog
+                %span.caret
+            -else
+              .span.text-warning
+                %i.fa.fa-cog
+                %span.caret
+          %ul.dropdown-menu.pull-right
+            - if patient.anamnesis?
+              %li
+                = link_to "Consulta", new_patient_consultation_path(patient)
+            - else
+              %li.disabled
+                = link_to "Consulta", new_patient_consultation_path(patient)
+            %li
+              - if patient.anamnesis?
+                = link_to "Anamnesis", edit_patient_anamnesis_path(patient, patient.anamnesis)
+              - else
+                = link_to "Anamnesis*", new_patient_anamnesis_path(patient)
+            %li.divider{:role => "separator"}
+            %li
+              = link_to "Editar", edit_patient_path(patient)
