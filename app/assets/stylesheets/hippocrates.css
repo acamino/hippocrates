@@ -7,6 +7,22 @@ body {
   margin-right: 0;
 }
 
+.external-link:hover {
+  text-decoration: none;
+}
+
+tr.tr-caution {
+  background-color: #E55934;
+  border-color: #E55934;
+  color: #FFF;
+}
+
+tr.tr-advice {
+  background-color: #722340;
+  border-color: #722340;
+  color: #FFF;
+}
+
 .panel > .panel-body > .row-fluid:last-child > .form-group {
   padding-bottom: 8px;
 }

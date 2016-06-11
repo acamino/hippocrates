@@ -34,10 +34,11 @@
     .col-md-9
       {{reason}}
   %br
+
   {{#hasDiagnoses}}
-  %table.table.table-striped
+  %table.table.table-striped.table-condensed
     %thead
-      %tr{ style: "background-color: #FF9800; color: #FFF" }
+      %tr.tr-caution
         %th.col-md-12 Diagnóstico
     %tbody
       {{#diagnoses}}
@@ -45,10 +46,11 @@
         %td {{disease_code}} {{description}}
       {{/diagnoses}}
   {{/hasDiagnoses}}
+
   {{#hasPrescriptions}}
-  %table.table.table-striped
+  %table.table.table-striped.table-condensed
     %thead
-      %tr{ style: "background-color: #4CAF50; color: #FFF" }
+      %tr.tr-advice
         %th.col-md-6 Receta
         %th.col-md-6 &nbsp;
     %tbody
