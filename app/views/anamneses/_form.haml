@@ -1,6 +1,6 @@
 = error_messages_for @anamnesis
 = form_for [@patient, @anamnesis], html: { class: "form" } do |f|
-  .panel.panel-default
+  .panel.panel-success
     .panel-heading
       %b Antecedentes Personales
     .panel-body
@@ -24,7 +24,7 @@
             %span.input-group-addon.input-sm Hábitos
             = f.text_field :habits, class: "form-control input-sm"
 
-  .panel.panel-default
+  .panel.panel-success
     .panel-heading
       %b Antecedentes Familiares
     .panel-body
