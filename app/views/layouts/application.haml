@@ -24,10 +24,6 @@
             = nav_to 'Pacientes', patients_path
             = nav_to 'Pacientes Especiales', special_patients_path
             = nav_to 'Medicinas', medicines_path
-            - if consultations?
-              %li
-                %a#show(href="#")
-                  %strong.text-primary Historia
 
           = form_tag(patients_path, method: 'GET', class: 'navbar-form navbar-left') do
             .form-group
