@@ -6,8 +6,33 @@ body {
   margin-right: 0;
 }
 
-.panel > .panel-body > .row-fluid:last-child > .form-group{
+.panel > .panel-body > .row-fluid:last-child > .form-group {
   padding-bottom: 8px;
+}
+
+.panel-primary > .panel-heading {
+  background-color: #1CA8DD;
+  border-color: #1CA8DD;
+}
+
+.panel-success > .panel-heading {
+  background-color: #1BC98E;
+  border-color: #1BC98E;
+}
+
+.panel-info > .panel-heading {
+  background-color: #9F86FF;
+  border-color: #9F86FF;
+}
+
+.panel-warning > .panel-heading {
+  background-color: #E4D836;
+  border-color: #E4D836;
+}
+
+.panel-danger > .panel-heading {
+  background-color: ##ED7E8A;
+  border-color: ##ED7E8A;
 }
 
 .colored {
