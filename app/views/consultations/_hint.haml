@@ -5,6 +5,14 @@
     .hint-content
       .hint-title= @patient.name
       .hint-item
+        .row
+          .col-xs-1
+            %span.text-primary
+              %i.fa.fa-external-link
+          .col-xs-10
+            %span
+              %a#show(href="") Historia
+      .hint-item
         - if @patient.anamnesis.allergies?
           .row
             .col-xs-1

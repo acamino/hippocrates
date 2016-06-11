@@ -4,7 +4,8 @@ Hippocrates.Consultations = {
   init: function() {
     self = this;
 
-    $("#show").on("click", function() {
+    $("#show").on("click", function(e) {
+      e.preventDefault();
       self.openModal();
     });
 
