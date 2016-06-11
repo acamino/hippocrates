@@ -1,6 +1,9 @@
 = content_for :alerts do
   = alerts_for(@patient.anamnesis)
 
+= content_for :nav_option do
+  = active_nav_to('Consulta', new_patient_consultation_path(@patient.id))
+
 = error_messages_for @consultation
 = form_for [@patient, @consultation], html: { class: "form" } do |f|
   .panel.panel-default
