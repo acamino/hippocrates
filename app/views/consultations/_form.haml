@@ -6,7 +6,7 @@
 
 = error_messages_for @consultation
 = form_for [@patient, @consultation], html: { class: "form" } do |f|
-  .panel.panel-default
+  .panel.panel-info
     .panel-heading
       %b Motivo de Consulta
     .panel-body
@@ -14,21 +14,24 @@
         .form-group.col-md-12
           = f.text_area :reason, class: "form-control input-sm"
   = render 'anamnesis'
-  .panel.panel-default
+
+  .panel.panel-info
     .panel-heading
       %b Enfermedad o Problema Actual
     .panel-body
       .row-fluid
         .form-group.col-md-12
           = f.text_area :ongoing_issue, class: "form-control input-sm"
-  .panel.panel-default
+
+  .panel.panel-warning
     .panel-heading
       %b Revisión de Órganos y Sistemas
     .panel-body
       .row-fluid
         .form-group.col-md-12
           = f.text_area :organs_examination, class: "form-control input-sm"
-  .panel.panel-default
+
+  .panel.panel-danger
     .panel-heading
       %b Signos Vitales
     .panel-body
@@ -58,7 +61,8 @@
           .input-group
             %span.input-group-addon.input-sm Talla
             = f.text_field :height, class: "form-control input-sm"
-  .panel.panel-default
+
+  .panel.panel-danger
     .panel-heading
       %b Examen Físico
     .panel-body
@@ -120,7 +124,8 @@
           .input-group
             %span.input-group-addon.input-sm Otros
             = f.text_field :others, class: "form-control input-sm", placeholder: 'NORMAL'
-  .panel.panel-default
+
+  .panel.panel-caution
     .panel-heading
       %b Diagnóstico
     .panel-body
@@ -144,7 +149,8 @@
                     = ff.radio_button :type, "presuntive", class: "input-sm"
                   %td.text-center
                     = ff.radio_button :type, "definitive", class: "input-sm"
-  .panel.panel-default
+
+  .panel.panel-caution
     .panel-heading
       %b Planes
     .panel-body
@@ -182,7 +188,8 @@
           .input-group
             %span.input-group-addon.input-sm Educacional
             = f.text_field :educational_plan, class: "form-control input-sm"
-  .panel.panel-default
+
+  .panel.panel-advice
     .panel-heading
       %b Seguimiento
     .panel-body

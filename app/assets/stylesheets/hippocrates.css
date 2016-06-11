@@ -12,28 +12,40 @@ body {
 }
 
 .panel-primary > .panel-heading {
-  background-color: #1CA8DD;
-  border-color: #1CA8DD;
+  background-color: #5BC0DE;
+  border-color: #5BC0DE;
 }
 
 .panel-success > .panel-heading {
-  background-color: #1BC98E;
-  border-color: #1BC98E;
+  background-color: #5CB85C;
+  border-color: #5CB85C;
 }
 
 .panel-info > .panel-heading {
-  background-color: #9F86FF;
-  border-color: #9F86FF;
+  background-color: #685D9F;
+  border-color: #685D9F;
 }
 
 .panel-warning > .panel-heading {
-  background-color: #E4D836;
-  border-color: #E4D836;
+  background-color: #F0AD4E;
+  border-color: #F0AD4E;
 }
 
 .panel-danger > .panel-heading {
-  background-color: ##ED7E8A;
-  border-color: ##ED7E8A;
+  background-color: #F45B69;
+  border-color: #F45B69;
+}
+
+.panel-caution > .panel-heading {
+  background-color: #E55934;
+  border-color: #E55934;
+  color: #FFF;
+}
+
+.panel-advice > .panel-heading {
+  background-color: #722340;
+  border-color: #722340;
+  color: #FFF;
 }
 
 .colored {
