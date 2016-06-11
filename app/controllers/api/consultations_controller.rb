@@ -1,7 +1,7 @@
 module API
   class ConsultationsController < BaseController
     def last
-      consultation = patient.consultations.last
+      consultation = patient.consultations.most_recent
       render json: consultation
     end
 
@@ -16,6 +16,14 @@ module API
     end
 
     private
+
+    def patient
+      Patient.find(params[:patient_id])
+    end
+
+    def patient_consultations
+      @consultations ||= patient.consultations.ordered_by_date.pluck(:id).reverse
+    end
 
     def previous_consultation_id
       patient_consultations[current_consultation_index.succ]
@@ -34,14 +42,6 @@ module API
 
     def current_consultation
       params[:current_consultation].to_i
-    end
-
-    def patient
-      Patient.find(params[:patient_id])
-    end
-
-    def patient_consultations
-      @consultations ||= patient.consultations.pluck(:id).reverse
     end
   end
 end
