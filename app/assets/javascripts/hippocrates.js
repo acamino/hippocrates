@@ -17,6 +17,7 @@ $(document).ready(function() {
     Hippocrates.Consultations.init();
 
     $('#consultation_next_appointment').datepicker({
+        todayHighlight: true,
         format: "yyyy-mm-dd",
         language: "es",
         calendarWeeks: true,
@@ -24,6 +25,7 @@ $(document).ready(function() {
     });
 
     $('#patient_birthdate').datepicker({
+        startView: 3,
         format: "yyyy-mm-dd",
         language: "es",
         calendarWeeks: true,
