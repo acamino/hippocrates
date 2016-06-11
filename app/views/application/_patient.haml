@@ -32,6 +32,20 @@
             %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.first_name }
 
       .row-fluid
+        .form-group.col-md-6
+          .input-group
+            %span.input-group-addon.input-sm Dirección
+            %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.address }
+        .form-group.col-md-3
+          .input-group
+            %span.input-group-addon.input-sm Teléfono
+            %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.phone_number }
+        .form-group.col-md-3
+          .input-group
+            %span.input-group-addon.input-sm Fuente
+            %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.source }
+
+      .row-fluid
         .form-group.col-md-2
           .input-group
             %span.input-group-addon.input-sm Sexo

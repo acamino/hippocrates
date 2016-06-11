@@ -37,21 +37,36 @@
             = f.text_field :first_name, class: "form-control input-sm"
 
       .row-fluid
-        .form-group.col-md-2
+        .form-group.col-md-6
+          .input-group
+            %span.input-group-addon.input-sm Dirección
+            = f.text_field :address, class: "form-control input-sm"
+        .form-group.col-md-3
+          .input-group
+            %span.input-group-addon.input-sm Teléfono
+            = f.text_field :phone_number, class: "form-control input-sm"
+        .form-group.col-md-3
+          .input-group
+            %span.input-group-addon.input-sm Fuente
+            / XXX: Keep in sync the model with the UI.
+            = f.select :source, options_for_select([['Televisión', 'television'], ['Radio', 'radio'], ['Periódico', 'newspaper'], ['Otro paciente', 'patient_reference']], @patient.source), {}, class: "form-control input-sm"
+
+      .row-fluid
+        .form-group.col-md-3
           .input-group
             %span.input-group-addon.input-sm Sexo
             / XXX: Keep in sync the model with the UI.
             = f.select :gender, options_for_select([['Masculino', 'male'], ['Femenino', 'female']], @patient.gender), {}, class: "form-control input-sm"
-        .form-group.col-md-2
+        .form-group.col-md-3
           .input-group
             %span.input-group-addon.input-sm Edad
             %input.form-control.input-sm.colored.patient-age{ disabled: 'disabled'}
-        .form-group.col-md-4
+        .form-group.col-md-3
           .input-group
             %span.input-group-addon.input-sm Estado Civil
             / XXX: Keep in sync the model with the UI.
             = f.select :civil_status, options_for_select([['Soltero', 'single'], ['Casado', 'married'], ['Union Libre', 'civil_union'], ['Divorciado', 'divorced'], ['Viudo', 'widowed']], @patient.civil_status), {}, class: "form-control input-sm"
-        .form-group.col-md-4
+        .form-group.col-md-3
           .input-group
             %span.input-group-addon.input-sm Ocupación
             = f.text_field :profession, class: "form-control input-sm"

@@ -7,6 +7,8 @@ class PatientsController < ApplicationController
     :birthdate,
     :gender,
     :civil_status,
+    :address,
+    :phone_number,
     :source,
     :profession
   ].freeze
