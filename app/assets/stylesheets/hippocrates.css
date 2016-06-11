@@ -64,10 +64,11 @@ body {
 .hint {
   display: block;
   position: fixed;
-  top: 105px;
+  top: 101px;
   right: 0;
   overflow: hidden;
   z-index: 200;
+  padding: 4px 0 4px 0;
 }
 
 .hint-box {
@@ -97,7 +98,12 @@ body {
 .hint-content {
   width: 220px;
   margin-left: 40px;
-  background: #f3f3f4;
+  background: #fafafa;
+  border-color: #dddddd;
+  border-bottom-left-radius: 2px;
+  -webkit-box-shadow: 0 1px 4px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  padding-bottom: 8px;
 }
 
 .hint-content .hint-title {
