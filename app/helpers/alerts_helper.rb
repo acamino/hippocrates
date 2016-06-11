@@ -65,7 +65,7 @@ module AlertsHelper
     end
 
     def hint_tag(name, color, width)
-      content_tag(:div, class: "col-md-#{width} text-center") do
+      content_tag(:div, class: "col-md-#{width} col-xs-#{width} text-center") do
         [
           content_tag(:span, class: "text-#{color}") do
             content_tag(:i, nil, class: 'fa fa-circle')
