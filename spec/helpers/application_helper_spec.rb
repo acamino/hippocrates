@@ -37,6 +37,12 @@ describe ApplicationHelper do
     end
   end
 
+  describe '#active_nav_to' do
+    it 'builds an active nav_to' do
+      expect(helper.active_nav_to('nav-text', '/patients/special')).to include('active')
+    end
+  end
+
   describe '#consultations?' do
     let(:nav_params) { { controller: 'consultations', action: 'new' } }
     before  { allow(helper).to receive(:params) { nav_params } }

@@ -17,6 +17,12 @@ module ApplicationHelper
     end
   end
 
+  def active_nav_to(nav_text, nav_path)
+    content_tag(:li, class: 'active') do
+      link_to(nav_text, nav_path)
+    end
+  end
+
   def consultations?
     params[:controller] == "consultations" && params[:action] == "new"
   end
