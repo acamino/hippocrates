@@ -1,2 +1,5 @@
+= content_for :nav_option do
+  = active_nav_to('Consulta', new_patient_consultation_path(@patient.id))
+
 = render 'patient'
 = render 'form'

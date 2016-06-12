@@ -1,9 +1,6 @@
 = content_for :alerts do
   = alerts_for(@patient.anamnesis)
 
-= content_for :nav_option do
-  = active_nav_to('Consulta', new_patient_consultation_path(@patient.id))
-
 = error_messages_for @consultation
 = form_for [@patient, @consultation], html: { class: "form" } do |f|
   .panel.panel-info
@@ -131,7 +128,7 @@
     .panel-body
       .row-fluid
         .form-group.col-md-12.diagnoses
-          %table.table.table-striped.table-hover
+          %table.table.table-striped.table-hover.table-condensed
             %thead
               %tr
                 %th.col-md-9
@@ -171,7 +168,7 @@
             = f.text_field :treatment_plan, class: "form-control input-sm"
       .row-fluid
         .form-group.col-md-12.prescriptions
-          %table.table.table-striped.table-hover
+          %table.table.table-striped.table-hover.table-condensed
             %thead
               %tr
                 %th.col-md-6 Inscripción
@@ -199,11 +196,14 @@
             %span.input-group-addon.input-sm Paciente Especial
             / XXX: Keep in sync the model with the UI.
             = f.fields_for :patient do |ff|
-              = ff.select :special, options_for_select([['No', '0'], ['Si', '1']], @patient.special), {}, class: "form-control input-sm"
+              = ff.select :special, options_for_select([['No', 'false'], ['Si', 'true']], @patient.special), {}, class: "form-control input-sm"
         .form-group.col-md-3
           .input-group
             %span.input-group-addon.input-sm Próxima cita
-            = f.text_field :next_appointment, class: "form-control input-sm"
+            - if @consultation.new_record?
+              = f.text_field :next_appointment, class: "form-control input-sm"
+            - else
+              = f.text_field :next_appointment, value: @consultation.next_appointment.strftime("%Y-%m-%d"), class: "form-control input-sm"
 
   .row-fluid
     = link_to "Cancelar", patients_path, class: "btn btn-default"

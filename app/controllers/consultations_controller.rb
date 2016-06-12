@@ -31,14 +31,14 @@ class ConsultationsController < ApplicationController
     diagnoses_attributes: [:disease_code, :description, :type],
     prescriptions_attributes: [:inscription, :subscription]
   ].freeze
+  MAXIMUM_DIAGNOSES = 4
+  MAXIMUM_PRESCRIPTIONS = 4
 
   def new
     @patient      = Patient.find(params[:patient_id])
     @consultation = Consultation.new
-    4.times do
-      @consultation.diagnoses.build
-      @consultation.prescriptions.build
-    end
+    MAXIMUM_DIAGNOSES.times     { @consultation.diagnoses.build }
+    MAXIMUM_PRESCRIPTIONS.times { @consultation.prescriptions.build }
   end
 
   def create
@@ -50,6 +50,13 @@ class ConsultationsController < ApplicationController
     redirect_to patients_path, notice: 'Consulta creada correctamente'
   end
 
+  def edit
+    @patient      = Patient.find(params[:patient_id])
+    @consultation = Consultation.find(params[:id])
+    remaining_diagnoses.times     { @consultation.diagnoses.build }
+    remaining_prescriptions.times { @consultation.prescriptions.build }
+  end
+
   private
 
   def consultation_params
@@ -59,5 +66,13 @@ class ConsultationsController < ApplicationController
 
   def patient_special
     params[:consultation][:patient][:special]
+  end
+
+  def remaining_diagnoses
+    MAXIMUM_DIAGNOSES - @consultation.diagnoses.count
+  end
+
+  def remaining_prescriptions
+    MAXIMUM_PRESCRIPTIONS - @consultation.prescriptions.count
   end
 end

@@ -78,4 +78,25 @@ describe ConsultationsController do
     it { is_expected.to redirect_to patients_path }
     it { is_expected.to respond_with :redirect }
   end
+
+  describe '#edit' do
+    let!(:patient)      { create(:patient) }
+    let!(:consultation) { create(:consultation, patient: patient) }
+
+    before do
+      get :edit, id: consultation.id,
+                 patient_id: patient.id
+    end
+
+    it 'assings @patient' do
+      expect(assigns(:patient)).to eq(patient)
+    end
+
+    it 'assings @consultation' do
+      expect(assigns(:consultation)).to eq(consultation)
+    end
+
+    it { is_expected.to render_template :edit }
+    it { is_expected.to respond_with :ok }
+  end
 end
