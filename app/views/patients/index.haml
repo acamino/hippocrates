@@ -43,7 +43,13 @@
                 = link_to "Consulta", new_patient_consultation_path(patient)
             - else
               %li.disabled
-                = link_to "Consulta", new_patient_consultation_path(patient)
+                %a(href="#") Consulta
+            - if patient.consultations?
+              %li
+                = link_to "Última Consulta", edit_patient_consultation_path(patient, patient.consultations.most_recent.id)
+            - else
+              %li.disabled
+                %a(href="#") Última consulta
             %li
               - if patient.anamnesis?
                 = link_to "Anamnesis", edit_patient_anamnesis_path(patient, patient.anamnesis)
