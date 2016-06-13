@@ -5,10 +5,10 @@
   %tbody
   - @patients.each do |patient|
     %tr
-      %td.col-md-2.hidden-xs
+      %td.col-md-1.hidden-xs
         %big
           = patient.medical_history
-      %td.col-md-10
+      %td.col-md-11
         .row
           .col-xs-8
             %strong
@@ -21,15 +21,15 @@
                   %a(href = "tel:#{patient.phone_number}")
                     %i.fa.fa-phone.hidden-xs
                     %strong= patient.phone_number
-        - if patient.consultations.most_recent.miscellaneous?
-          .row
-            .col-md-12
-              %strong
-                Misceláneos.
-              = patient.consultations.most_recent.miscellaneous
         - if patient.consultations.most_recent.next_appointment?
           .row
             .col-md-12
               %strong
-                Próxima cita.
+                Próxima cita:
               = patient.consultations.most_recent.next_appointment.strftime("%Y-%m-%d")
+        - if patient.consultations.most_recent.miscellaneous?
+          .row
+            .col-md-12
+              %strong
+                Misceláneos:
+              = patient.consultations.most_recent.miscellaneous
