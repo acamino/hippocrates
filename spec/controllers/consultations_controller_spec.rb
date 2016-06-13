@@ -25,7 +25,7 @@ describe ConsultationsController do
   describe '#create' do
     let(:patient)                     { create(:patient) }
     let(:attributes_for_consultation) do
-      attributes_for(:consultation).merge(patient: { special: '1' })
+      attributes_for(:consultation).merge(patient: { special: 'true' })
     end
 
     before do |example|
@@ -75,7 +75,8 @@ describe ConsultationsController do
       end.to change { patient.special }.from(false).to(true)
     end
 
-    it { is_expected.to redirect_to patients_path }
+    it { is_expected.to redirect_to edit_patient_consultation_path(
+      patient.id, patient.consultations.most_recent.id) }
     it { is_expected.to respond_with :redirect }
   end
 
@@ -98,5 +99,25 @@ describe ConsultationsController do
 
     it { is_expected.to render_template :edit }
     it { is_expected.to respond_with :ok }
+  end
+
+  describe '#update' do
+    let!(:patient)      { create(:patient) }
+    let!(:consultation) { create(:consultation, patient: patient) }
+    before do
+      patch :update, id: consultation.id,
+                     patient_id: patient.id,
+                     consultation: {
+                       reason: 'updated reason', patient: { special: false }
+                     }
+    end
+
+    it 'updates consultation' do
+      consultation.reload
+      expect(consultation.reason).to eq('updated reason')
+    end
+
+    it { is_expected.to redirect_to patients_path }
+    it { is_expected.to respond_with :redirect }
   end
 end

@@ -34,6 +34,7 @@ class ConsultationsController < ApplicationController
   MAXIMUM_DIAGNOSES = 4
   MAXIMUM_PRESCRIPTIONS = 4
 
+  before_action :fetch_consultation, only: [:edit, :update]
   before_action :fetch_patient
 
   def new
@@ -43,20 +44,31 @@ class ConsultationsController < ApplicationController
   end
 
   def create
-    Consultation.create(consultation_params)
-    @patient.update_attributes(special: patient_special)
+    consultation = Consultation.create(consultation_params)
+    @patient.update_attributes(patient_params)
 
     # XXX: Pull out the messages form a locale file.
-    redirect_to patients_path, notice: 'Consulta creada correctamente'
+    redirect_to edit_patient_consultation_path(
+      @patient.id, consultation.id), notice: 'Consulta creada correctamente'
   end
 
   def edit
-    @consultation = Consultation.find(params[:id])
     remaining_diagnoses.times     { @consultation.diagnoses.build }
     remaining_prescriptions.times { @consultation.prescriptions.build }
   end
 
+  def update
+    @consultation.update_attributes(consultation_params)
+    @patient.update_attributes(patient_params)
+
+    redirect_to patients_path, notice: 'Consulta actualizada correctamente'
+  end
+
   private
+
+  def fetch_consultation
+    @consultation = Consultation.find(params[:id])
+  end
 
   def fetch_patient
     @patient = Patient.find(params[:patient_id])
@@ -67,8 +79,8 @@ class ConsultationsController < ApplicationController
       patient_id: params[:patient_id]).except("patient")
   end
 
-  def patient_special
-    params[:consultation][:patient][:special]
+  def patient_params
+    { special: params[:consultation][:patient][:special] }
   end
 
   def remaining_diagnoses
