@@ -28,8 +28,8 @@ class ConsultationsController < ApplicationController
     :educational_plan,
     :next_appointment,
     patient: :special,
-    diagnoses_attributes: [:disease_code, :description, :type],
-    prescriptions_attributes: [:inscription, :subscription]
+    diagnoses_attributes: [:id, :disease_code, :description, :type],
+    prescriptions_attributes: [:id, :inscription, :subscription]
   ].freeze
   MAXIMUM_DIAGNOSES = 4
   MAXIMUM_PRESCRIPTIONS = 4
