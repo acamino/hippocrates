@@ -64,7 +64,7 @@ Hippocrates.Consultations = {
       data = { current_consultation: $("#current-consultation").val() };
     }
 
-    var path = "/api" + $("#new_consultation").attr("action") + "/" + type;
+    var path = "/api" + $(".container > form").attr("action").replace(/\/\d+$/, '') + "/" + type;
     $.post(path, data, function(consultation) {
       self.renderConsultation(consultation);
     });
