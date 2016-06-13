@@ -67,4 +67,21 @@ describe Patient do
       end
     end
   end
+
+  describe '#consultations?' do
+    let(:patient) { build(:patient) }
+
+    context 'when consultations are present' do
+      it 'returns true' do
+        patient.consultations << Consultation.new
+        expect(patient.consultations?).to be_truthy
+      end
+    end
+
+    context 'when consultations are not present' do
+      it 'returns false' do
+        expect(patient.consultations?).to be_falsey
+      end
+    end
+  end
 end

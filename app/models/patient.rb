@@ -47,4 +47,8 @@ class Patient < ActiveRecord::Base
   def anamnesis?
     anamnesis.present?
   end
+
+  def consultations?
+    consultations.present?
+  end
 end
