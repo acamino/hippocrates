@@ -79,7 +79,7 @@ class ConsultationsController < ApplicationController
 
   def consultation_params
     params.require(:consultation).permit(*ATTRIBUTE_WHITELIST).merge(
-      patient_id: params[:patient_id]).except("patient")
+      patient_id: params[:patient_id]).except('patient')
   end
 
   def patient_params

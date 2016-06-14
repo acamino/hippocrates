@@ -5,18 +5,18 @@ if(typeof Hippocrates === "undefined") {
 }
 
 $(document).ready(function() {
-    $('.hint-icon, .hint-title').click(function (){
+    $(".hint-icon, .hint-title").click(function (){
       $(".hint-box").toggleClass("show");
     });
 
-    $('.progress, .progress-hint').click(function (){
+    $(".progress, .progress-hint").click(function (){
       $(".progress-hint").slideToggle();
     });
 
     Hippocrates.Autocomplete.init();
     Hippocrates.Consultations.init();
 
-    $('#consultation_next_appointment').datepicker({
+    $("#consultation_next_appointment").datepicker({
         todayHighlight: true,
         format: "yyyy-mm-dd",
         language: "es",
@@ -24,23 +24,23 @@ $(document).ready(function() {
         autoclose: true
     });
 
-    $('#patient_birthdate').datepicker({
+    $("#patient_birthdate").datepicker({
         startView: 3,
         format: "yyyy-mm-dd",
         language: "es",
         calendarWeeks: true,
         autoclose: true
-    }).on('changeDate', function(e) {
+    }).on("changeDate", function(e) {
         var birthday = e.date;
         var today = Date.now();
         var patientAge = calculateAge(birthday, today);
 
-        $('.patient-age').val(patientAge);
+        $(".patient-age").val(patientAge);
     });
 
-    $('.panel-heading').on('click', function(e) {
+    $(".panel-heading").on("click", function(e) {
         var panelBody = $(this).siblings();
-        panelBody.slideToggle('slow');
+        panelBody.slideToggle("slow");
     });
 
     var calculateAge = function(birthday, today) {
@@ -48,15 +48,15 @@ $(document).ready(function() {
         var millisecondsFromEpoc = new Date(diffMilliseconds);
 
         return Math.abs(millisecondsFromEpoc.getUTCFullYear() - 1970);
-    }
+    };
 
     // XXX: Move this presentation logic to a presenter.
-    var patientBirthdate = $('#patient_birthdate').val();
+    var patientBirthdate = $("#patient_birthdate").val();
     if (patientBirthdate) {
-        var birthday = new Date(patientBirthdate)
+        var birthday = new Date(patientBirthdate);
         var today = Date.now();
         var patientAge = calculateAge(birthday, today);
 
-        $('.patient-age').val(patientAge);
+        $(".patient-age").val(patientAge);
     }
 });

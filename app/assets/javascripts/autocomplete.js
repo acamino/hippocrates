@@ -1,21 +1,21 @@
 Hippocrates.Autocomplete = {
   init: function() {
-    $.get('/api/diseases').done(function(suggestions) {
-      $('.disease').autocomplete({
+    $.get("/api/diseases").done(function(suggestions) {
+      $(".disease").autocomplete({
         lookup: suggestions,
         onSelect: function (suggestion) {
-          $(this).closest('tr').find('input.code').val(suggestion.data);
+          $(this).closest("tr").find("input.code").val(suggestion.data);
         }
       });
     });
 
-    $.get('/api/medicines').done(function(medicines) {
-      $('.inscription').autocomplete({
+    $.get("/api/medicines").done(function(medicines) {
+      $(".inscription").autocomplete({
         lookup: medicines,
         onSelect: function (medicine) {
-          $(this).closest('tr').find('input.subscription').val(medicine.data);
+          $(this).closest("tr").find("input.subscription").val(medicine.data);
         }
       });
     });
   }
-}
+};
