@@ -6,7 +6,7 @@ if(typeof Hippocrates === "undefined") {
 
 $(document).ready(function() {
     $(".hint-icon, .hint-title").click(function (){
-      $(".hint-box").toggleClass("show");
+      $(".hint-box").toggleClass("hint-box-show");
     });
 
     $(".progress, .progress-hint").click(function (){
