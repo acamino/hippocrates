@@ -37,6 +37,9 @@ class ConsultationsController < ApplicationController
   before_action :fetch_consultation, only: [:edit, :update]
   before_action :fetch_patient
 
+  def index
+  end
+
   def new
     @consultation = Consultation.new
     MAXIMUM_DIAGNOSES.times     { @consultation.diagnoses.build }

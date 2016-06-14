@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :medicines, only: [:index, :new, :create, :edit, :update]
   resources :patients, only: [:index, :new, :create, :edit, :update] do
     resources :anamneses, only: [:new, :create, :edit, :update]
-    resources :consultations, only: [:new, :create, :edit, :update]
+    resources :consultations, only: [:index, :new, :create, :edit, :update]
     get :special, on: :collection
   end
 

@@ -3,6 +3,22 @@ require 'rails_helper'
 describe ConsultationsController do
   describe '#new' do
     let(:patient)      { double(:patient) }
+
+    before do
+      allow(Patient).to receive(:find).with('1') { patient }
+      get :index, patient_id: '1'
+    end
+
+    it 'assings @patient' do
+      expect(assigns(:patient)).to eq(patient)
+    end
+
+    it { is_expected.to render_template :index }
+    it { is_expected.to respond_with :ok }
+  end
+
+  describe '#new' do
+    let(:patient)      { double(:patient) }
     let(:consultation) { double(:consultation) }
 
     before do

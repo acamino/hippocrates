@@ -68,6 +68,10 @@ tr.tr-advice {
   color: #666666;
 }
 
+.semi-strong {
+  font-weight: 500;
+}
+
 .panel > .panel-heading {
   cursor: pointer; cursor: hand;
 }

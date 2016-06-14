@@ -1,0 +1,56 @@
+.row
+  .col-md-12
+    %strong
+      %h4
+        = @patient.name
+        %small
+          #{@patient.age} años
+          - if @patient.male?
+            %i.fa.fa-male
+          -else
+            %i.fa.fa-female
+
+.row
+  .col-md-2
+    %span.semi-strong.text-muted
+      %i.fa.fa-user
+      = @patient.identity_card_number
+  .col-md-2
+    %span.semi-strong.text-muted
+      %i.fa.fa-history
+      = @patient.medical_history
+
+.row.pull-right
+  .col-md-12
+    = link_to "Nueva consulta", new_patient_consultation_path(@patient), class: "btn btn-success"
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th.col-md-10 Consulta
+      %th.col-md-2
+  %tbody
+  - @patient.consultations.each do |consultation|
+    %tr
+      %td
+        .row
+          .col-md-2.text-right
+          .col-md-10
+            %strong
+              %big= consultation.created_at.strftime("%b %d, %Y")
+        - if consultation.reason.present?
+          .row
+            .col-md-2.text-right
+              %span.semi-strong.text-muted Motivo
+            .col-md-10
+              %span
+                = consultation.reason
+        - if consultation.diagnostic_plan.present?
+          .row
+            .col-md-2.text-right
+              %span.semi-strong.text-muted Plan diagnóstico
+            .col-md-10
+              %span.semi-strong
+              = consultation.diagnostic_plan
+      %td.text-right
+        = link_to "Editar", edit_patient_consultation_path(@patient, consultation), class: 'btn btn-primary btn-sm'
