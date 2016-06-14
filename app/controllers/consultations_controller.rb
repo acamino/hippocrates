@@ -52,7 +52,7 @@ class ConsultationsController < ApplicationController
 
     # XXX: Pull out the messages form a locale file.
     redirect_to edit_patient_consultation_path(
-      @patient.id, consultation.id), notice: 'Consulta creada correctamente'
+      @patient, consultation), notice: 'Consulta creada correctamente'
   end
 
   def edit

@@ -1,5 +1,5 @@
 = content_for :nav_option do
-  = active_nav_to('Anamnesis', edit_patient_anamnesis_path(@patient.id, @anamnesis.id))
+  = active_nav_to('Anamnesis', edit_patient_anamnesis_path(@patient, @anamnesis))
 
 = render 'patient'
 = render 'form'
