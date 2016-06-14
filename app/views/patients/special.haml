@@ -13,7 +13,12 @@
           .col-xs-8
             %strong
               %big= patient.name
-              %span.text-muted #{patient.age} años
+              %span.text-muted
+                #{patient.age} años
+                - if patient.male?
+                  %i.fa.fa-male
+                -else
+                  %i.fa.fa-female
           .col-xs-4
             .pull-right
               - if patient.phone_number.present?
