@@ -11,10 +11,11 @@ class Consultation < ActiveRecord::Base
                                 reject_if: -> (attributes) { attributes[:inscription].blank? },
                                 allow_destroy: true
 
-  scope :ordered_by_date, -> { order(created_at: :asc) }
+  # scope :ordered_by_date, -> { order(created_at: :desc) }
+  default_scope { order(created_at: :desc) }
 
   def self.most_recent
-    ordered_by_date.last
+    first
   end
 
   def miscellaneous?

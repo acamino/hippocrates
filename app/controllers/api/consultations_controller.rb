@@ -22,7 +22,7 @@ module API
     end
 
     def patient_consultations
-      @consultations ||= patient.consultations.ordered_by_date.pluck(:id).reverse
+      @consultations ||= patient.consultations.pluck(:id)
     end
 
     def previous_consultation_id
