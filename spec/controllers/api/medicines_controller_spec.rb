@@ -7,7 +7,7 @@ describe API::MedicinesController do
       get :index, format: :json
     end
 
-    it "formats the reponse as JSON" do
+    it 'formats the reponse as JSON' do
       medicines = ::JSON.parse(response.body)
       expect(medicines.count).to eq(2)
     end

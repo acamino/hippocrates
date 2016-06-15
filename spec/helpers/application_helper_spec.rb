@@ -5,7 +5,11 @@ describe ApplicationHelper do
     context 'when the resource contains errors' do
       it 'returns the error messages' do
         resource = double(:resource,
-                          errors: double(:errors, any?: true, full_messages: { attribute: 'error message' }))
+                          errors: double(:errors,
+                                         any?: true,
+                                         full_messages: {
+                                           attribute: 'error message'
+                                         }))
         expect(helper.error_messages_for(resource)).to include('error message')
       end
     end
@@ -20,13 +24,14 @@ describe ApplicationHelper do
 
   describe '#nav_to' do
     before do
-      allow(helper).to receive(:params).
-        and_return({ controller: 'patients', action: 'special' })
+      allow(helper).to receive(:params)
+        .and_return(controller: 'patients', action: 'special')
     end
 
     context 'when the nav_path includes the controller' do
       it 'builds an active nav_to' do
-        expect(helper.nav_to('nav-text', '/patients/special')).to include('active')
+        expect(helper.nav_to('nav-text', '/patients/special'))
+          .to include('active')
       end
     end
 
@@ -39,7 +44,8 @@ describe ApplicationHelper do
 
   describe '#active_nav_to' do
     it 'builds an active nav_to' do
-      expect(helper.active_nav_to('nav-text', '/patients/special')).to include('active')
+      expect(helper.active_nav_to('nav-text', '/patients/special'))
+        .to include('active')
     end
   end
 end

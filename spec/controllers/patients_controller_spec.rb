@@ -24,7 +24,7 @@ describe PatientsController do
 
     before { get :special }
 
-    it 'assings special patients sorted by the most recent consultation to @patients' do
+    it 'assings sorted by most recent special patients to @patients' do
       expect(assigns(:patients)).to eq([tom, bob])
     end
 

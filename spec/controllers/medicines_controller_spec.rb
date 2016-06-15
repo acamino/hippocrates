@@ -86,7 +86,9 @@ describe MedicinesController do
     let(:medicine) { create(:medicine, name: 'paracetamol') }
 
     context 'when the information is valid' do
-      before { put :update, id: medicine.id, medicine: { name: 'acetaminophen' } }
+      before do
+        patch :update, id: medicine.id, medicine: { name: 'acetaminophen' }
+      end
 
       it 'updates the medicine' do
         medicine.reload

@@ -3,22 +3,6 @@ require 'rails_helper'
 describe ConsultationsController do
   describe '#new' do
     let(:patient)      { double(:patient) }
-
-    before do
-      allow(Patient).to receive(:find).with('1') { patient }
-      get :index, patient_id: '1'
-    end
-
-    it 'assings @patient' do
-      expect(assigns(:patient)).to eq(patient)
-    end
-
-    it { is_expected.to render_template :index }
-    it { is_expected.to respond_with :ok }
-  end
-
-  describe '#new' do
-    let(:patient)      { double(:patient) }
     let(:consultation) { double(:consultation) }
 
     before do
@@ -63,22 +47,36 @@ describe ConsultationsController do
       rhinitis    = Disease.create(code: 'A002', name: 'Rhinitis')
 
       post :create, patient_id: patient.id.to_s,
-        consultation: attributes_for_consultation.merge(
-          diagnoses_attributes: {
-            '0': { disease_code: pharyngitis.code, description: pharyngitis.name, type: 'presuntive' },
-            '1': { disease_code: rhinitis.code, description: rhinitis.name, type: 'presuntive' },
-          })
+                    consultation: attributes_for_consultation.merge(
+                      diagnoses_attributes: {
+                        '0' => {
+                          disease_code: pharyngitis.code,
+                          description: pharyngitis.name,
+                          type: 'presuntive'
+                        },
+                        '1' => {
+                          disease_code: rhinitis.code,
+                          description: rhinitis.name,
+                          type: 'presuntive'
+                        }
+                      })
 
       expect(patient.consultations.last.diagnoses.count).to eq(2)
     end
 
     it 'creates new prescriptions', :skip_on_before do
       post :create, patient_id: patient.id.to_s,
-        consultation: attributes_for_consultation.merge(
-          prescriptions_attributes: {
-            '0': { inscription: 'inscription-one', subscription: 'subscription' },
-            '1': { inscription: 'inscription-two', subscription: 'subscription' },
-          })
+                    consultation: attributes_for_consultation.merge(
+                      prescriptions_attributes: {
+                        '0' => {
+                          inscription: 'inscription-one',
+                          subscription: 'subscription'
+                        },
+                        '1' => {
+                          inscription: 'inscription-two',
+                          subscription: 'subscription'
+                        }
+                      })
 
       expect(patient.consultations.last.prescriptions.count).to eq(2)
     end
@@ -86,13 +84,16 @@ describe ConsultationsController do
     it "updates patient's special field", :skip_on_before do
       expect do
         post :create, patient_id: patient.id.to_s,
-          consultation: attributes_for_consultation
+                      consultation: attributes_for_consultation
         patient.reload
       end.to change { patient.special }.from(false).to(true)
     end
 
-    it { is_expected.to redirect_to edit_patient_consultation_path(
-      patient.id, patient.consultations.most_recent.id) }
+    it 'redirects to edit consultations' do
+      expect(response).to redirect_to edit_patient_consultation_path(
+        patient.id, patient.consultations.most_recent.id)
+    end
+
     it { is_expected.to respond_with :redirect }
   end
 

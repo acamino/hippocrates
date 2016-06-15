@@ -11,10 +11,9 @@ describe API::DiseasesController do
 
     it { is_expected.to respond_with :ok }
 
-    it "formats the reponse as JSON" do
+    it 'formats the reponse as JSON' do
       diseases = ::JSON.parse(response.body)
       expect(diseases.last['data']).to eq('A002')
     end
   end
 end
-
