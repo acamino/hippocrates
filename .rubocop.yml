@@ -1,0 +1,14 @@
+Documentation:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 100
+
+AllCops:
+  Exclude:
+    - config/**/*
+    - db/**/*
+    - bin/*
+    - script/*
+    - lib/tasks/cucumber.rake
+    - features/support/env.rb
