@@ -6,6 +6,7 @@ gem 'pg'
 gem 'rails_12factor', group: :production
 gem 'puma'
 gem 'haml'
+gem 'kaminari'
 gem 'active_model_serializers', '~> 0.10.0'
 
 gem 'sass-rails', '~> 5.0'
