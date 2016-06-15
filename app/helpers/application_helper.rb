@@ -13,9 +13,8 @@ module ApplicationHelper
 
   def nav_to(nav_text, nav_path)
     current_action = params[:action] == 'index' ? '' : params[:action]
-    computed_path =
-      "/#{[params[:controller], current_action].reject(&:empty?).join('/')}"
-    class_name = nav_path == computed_path ? 'active' : ''
+    computed_path  = "/#{[params[:controller], current_action].reject(&:empty?).join('/')}"
+    class_name     = nav_path == computed_path ? 'active' : ''
 
     content_tag(:li, class: class_name) do
       link_to(nav_text, nav_path)

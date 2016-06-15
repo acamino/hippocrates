@@ -48,8 +48,7 @@ module AlertsHelper
       [
         { label: 'Alergias', color: 'danger', visible: has_allergies },
         { label: 'Observaciones', color: 'warning', visible: has_observations },
-        { label: 'Antecedentes Personales', color: 'info',
-          visible: has_personal_history }
+        { label: 'Antecedentes Personales', color: 'info', visible: has_personal_history }
       ]
     end
 

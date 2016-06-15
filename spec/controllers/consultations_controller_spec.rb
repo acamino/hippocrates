@@ -68,14 +68,8 @@ describe ConsultationsController do
       post :create, patient_id: patient.id.to_s,
                     consultation: attributes_for_consultation.merge(
                       prescriptions_attributes: {
-                        '0' => {
-                          inscription: 'inscription-one',
-                          subscription: 'subscription'
-                        },
-                        '1' => {
-                          inscription: 'inscription-two',
-                          subscription: 'subscription'
-                        }
+                        '0' => { inscription: 'inscription-one', subscription: 'subscription' },
+                        '1' => { inscription: 'inscription-two', subscription: 'subscription' }
                       })
 
       expect(patient.consultations.last.prescriptions.count).to eq(2)
