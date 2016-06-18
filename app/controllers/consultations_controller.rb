@@ -38,6 +38,7 @@ class ConsultationsController < ApplicationController
   before_action :fetch_patient
 
   def index
+    @consultations = @patient.consultations.page(params.fetch(:page, 1))
   end
 
   def new

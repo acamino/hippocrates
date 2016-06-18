@@ -84,6 +84,10 @@ body {
   padding: 10px 15px 0 15px;
 }
 
+.pagination {
+  margin: 0;
+}
+
 .consultation-date,
 .consultation-reason {
   padding-left: 8px;

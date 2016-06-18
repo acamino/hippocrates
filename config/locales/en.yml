@@ -21,3 +21,19 @@
 
 en:
   hello: "Hello world"
+  views:
+    pagination:
+      first: "<i class='fa fa-angle-double-left'></i>"
+      last: "<i class='fa fa-angle-double-right'></i>"
+      previous: "<i class='fa fa-angle-left'></i>"
+      next: "<i class='fa fa-angle-right'></i>"
+      truncate: "&hellip;"
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "No se encontró %{entry_name}"
+          one: "Mostrando <b>1</b> %{entry_name}"
+          other: "Mostrando <b>%{count}</b> %{entry_name}"
+      more_pages:
+        display_entries: "Mostrando %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> de <b>%{total}</b> en total"
