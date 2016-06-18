@@ -2,10 +2,9 @@ require 'rails_helper'
 
 describe PatientsController do
   describe '#index' do
-    let(:patients) { [double(:patient)] }
+    let(:patients) { [create(:patient)] }
 
     before do
-      allow(Patient).to receive(:search) { patients }
       get :index
     end
 

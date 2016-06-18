@@ -1,60 +1,67 @@
 / XXX: Pull out the labels from a config file.
-.row.pull-right.align-right
-  = link_to "Nuevo paciente", new_patient_path, class: "btn btn-success"
+.row.pull-right
+  .col-md-12
+    = link_to "Nuevo paciente", new_patient_path, class: "btn btn-success"
 
-%table.table.table-striped
-  %thead
-    %tr
-      %th.col-md-2.hidden-xs Historia
-      %th.col-md-3 Apellidos
-      %th.col-md-3 Nombres
-      %th.col-md-2.hidden-xs Fecha Nacimiento
-      %th.col-md-1 Sexo
-      %th.col-md-1
-  %tbody
-  - @patients.each do |patient|
-    %tr
-      %td.hidden-xs= patient.medical_history
-      %td= patient.last_name
-      %td= patient.first_name
-      %td.hidden-xs= patient.birthdate.strftime("%Y-%m-%d")
-      %td
-        - if patient.male?
-          %span.label.label-primary Masculino
-        - else
-          %span.label.label-info Femenino
-      %td.text-right
-        .btn-group
-          %button.btn.btn-default.btn-xs.dropdown-toggle{ "aria-expanded": "false",
-                                                          "aria-haspopup": "true",
-                                                          "data-toggle": "dropdown",
-                                                          type: "button" }
-            -if patient.anamnesis?
-              .span.text-primary
-                %i.fa.fa-cog
-                %span.caret
-            -else
-              .span.text-warning
-                %i.fa.fa-cog
-                %span.caret
-          %ul.dropdown-menu.pull-right
-            %li
-              - if patient.anamnesis?
-                = link_to "Anamnesis", edit_patient_anamnesis_path(patient, patient.anamnesis)
-              - else
-                = link_to "Anamnesis*", new_patient_anamnesis_path(patient)
-            - if patient.anamnesis?
-              %li
-                = link_to "Consulta", new_patient_consultation_path(patient)
+.row
+  .col-md-12
+    %table.table.table-striped
+      %thead
+        %tr
+          %th.col-md-2.hidden-xs Historia
+          %th.col-md-3 Apellidos
+          %th.col-md-3 Nombres
+          %th.col-md-2.hidden-xs Fecha Nacimiento
+          %th.col-md-1 Sexo
+          %th.col-md-1
+      %tbody
+      - @patients.each do |patient|
+        %tr
+          %td.hidden-xs= patient.medical_history
+          %td= patient.last_name
+          %td= patient.first_name
+          %td.hidden-xs= patient.birthdate.strftime("%Y-%m-%d")
+          %td
+            - if patient.male?
+              %span.label.label-primary Masculino
             - else
-              %li.disabled
-                %a(href="#") Consulta
-            - if patient.consultations?
-              %li
-                = link_to "Historia clínica", patient_consultations_path(patient)
-            - else
-              %li.disabled
-                %a(href="#") Historia clínica
-            %li.divider{:role => "separator"}
-            %li
-              = link_to "Editar", edit_patient_path(patient)
+              %span.label.label-info Femenino
+          %td.text-right
+            .btn-group
+              %button.btn.btn-default.btn-xs.dropdown-toggle{ "aria-expanded": "false",
+                                                              "aria-haspopup": "true",
+                                                              "data-toggle": "dropdown",
+                                                              type: "button" }
+                -if patient.anamnesis?
+                  .span.text-primary
+                    %i.fa.fa-cog
+                    %span.caret
+                -else
+                  .span.text-warning
+                    %i.fa.fa-cog
+                    %span.caret
+              %ul.dropdown-menu.pull-right
+                %li
+                  - if patient.anamnesis?
+                    = link_to "Anamnesis", edit_patient_anamnesis_path(patient, patient.anamnesis)
+                  - else
+                    = link_to "Anamnesis*", new_patient_anamnesis_path(patient)
+                - if patient.anamnesis?
+                  %li
+                    = link_to "Consulta", new_patient_consultation_path(patient)
+                - else
+                  %li.disabled
+                    %a(href="#") Consulta
+                - if patient.consultations?
+                  %li
+                    = link_to "Historia clínica", patient_consultations_path(patient)
+                - else
+                  %li.disabled
+                    %a(href="#") Historia clínica
+                %li.divider{:role => "separator"}
+                %li
+                  = link_to "Editar", edit_patient_path(patient)
+
+.row
+  .col-md-12.text-center
+    = paginate @patients

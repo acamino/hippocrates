@@ -14,9 +14,7 @@ class PatientsController < ApplicationController
   ].freeze
 
   def index
-    # XXX: Add pagination
-    # XXX: Move all.sort to the model. This controller knows so much :)
-    @patients = Patient.search(params[:search])
+    @patients = Patient.search(params[:search]).page(params.fetch(:page, 1))
   end
 
   def special
