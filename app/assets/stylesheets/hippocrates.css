@@ -7,10 +7,6 @@ body {
   margin-right: 0;
 }
 
-.external-link:hover {
-  text-decoration: none;
-}
-
 .tr-caution {
   background-color: #E55934;
   border-color: #E55934;
@@ -193,6 +189,10 @@ body {
   padding-right: 0;
   padding-left: 15px;
   font-weight: 500;
+}
+
+.hint-link:hover {
+  text-decoration: none;
 }
 
 .progress {

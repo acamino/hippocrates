@@ -43,6 +43,12 @@ $(document).ready(function() {
         panelBody.slideToggle("slow");
     });
 
+    $(".compress, .expand").on("click", function(e) {
+        e.preventDefault();
+        $('.panel-body').slideToggle("slow");
+        $('.zip').toggle();
+    });
+
     var calculateAge = function(birthday, today) {
         var diffMilliseconds = today - birthday.getTime();
         var millisecondsFromEpoc = new Date(diffMilliseconds);

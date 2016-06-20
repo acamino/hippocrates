@@ -5,13 +5,27 @@
     .hint-content
       .hint-title= @patient.name
       .hint-item
+        .row.zip
+          .col-xs-1
+            %span.text-primary
+              %i.fa.fa-compress
+          .col-xs-10
+            %span
+              %a.hint-link.compress(href="") Reducir
+        .row.zip{ style: "display: none;" }
+          .col-xs-1
+            %span.text-primary
+              %i.fa.fa-expand
+          .col-xs-10
+            %span
+              %a.hint-link.expand(href="") Ampliar
         .row
           .col-xs-1
             %span.text-primary
-              %i.fa.fa-external-link
+              %i.fa.fa-clone
           .col-xs-10
             %span
-              %a.external-link#show(href="") Historia
+              %a.hint-link#show(href="") Historia
       .hint-item
         - if @patient.anamnesis.allergies?
           .row
