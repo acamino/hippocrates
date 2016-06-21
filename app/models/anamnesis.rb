@@ -9,7 +9,7 @@ class Anamnesis < ActiveRecord::Base
     observations.present?
   end
 
-  def personal_history?
-    personal_history.present?
+  def medical_history?
+    medical_history.present?
   end
 end

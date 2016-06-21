@@ -42,10 +42,10 @@
                 %i.fa.fa-circle
             .col-xs-10
               %span= @patient.anamnesis.observations
-        - if @patient.anamnesis.personal_history?
+        - if @patient.anamnesis.medical_history?
           .row
             .col-xs-1
               %span.text-info
                 %i.fa.fa-circle
             .col-xs-10
-              %span= @patient.anamnesis.personal_history
+              %span= @patient.anamnesis.medical_history

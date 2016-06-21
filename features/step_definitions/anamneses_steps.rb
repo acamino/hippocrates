@@ -7,7 +7,7 @@ When(/^I go to the new anamnesis page$/) do
 end
 
 When(/^I input Bob's anamnesis$/) do
-  fill_in :anamnesis_personal_history, with: 'personal history'
+  fill_in :anamnesis_medical_history,  with: 'medical history'
   fill_in :anamnesis_surgical_history, with: 'surgical history'
   fill_in :anamnesis_allergies,        with: 'allergies'
   fill_in :anamnesis_observations,     with: 'observations'

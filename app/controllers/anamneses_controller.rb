@@ -1,6 +1,6 @@
 class AnamnesesController < ApplicationController
   ATTRIBUTE_WHITELIST = [
-    :personal_history,
+    :medical_history,
     :surgical_history,
     :allergies,
     :observations,

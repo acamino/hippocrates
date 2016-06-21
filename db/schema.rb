@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160620114213) do
+ActiveRecord::Schema.define(version: 20160620121251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "anamneses", force: :cascade do |t|
     t.integer  "patient_id"
-    t.string   "personal_history"
+    t.string   "medical_history"
     t.string   "surgical_history"
     t.string   "allergies"
     t.string   "observations"

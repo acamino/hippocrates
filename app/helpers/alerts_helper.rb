@@ -8,7 +8,7 @@ module AlertsHelper
       @view                 = view
       @has_allergies        = anamnesis.allergies?
       @has_observations     = anamnesis.observations?
-      @has_personal_history = anamnesis.personal_history?
+      @has_medical_history = anamnesis.medical_history?
     end
 
     def html
@@ -22,7 +22,7 @@ module AlertsHelper
     private
 
     attr_accessor :view,
-                  :has_allergies, :has_observations, :has_personal_history
+                  :has_allergies, :has_observations, :has_medical_history
 
     delegate :content_tag, to: :view
 
@@ -48,7 +48,7 @@ module AlertsHelper
       [
         { label: 'Alergias', color: 'danger', visible: has_allergies },
         { label: 'Observaciones', color: 'warning', visible: has_observations },
-        { label: 'Antecedentes Personales', color: 'info', visible: has_personal_history }
+        { label: 'Antecedentes Personales', color: 'info', visible: has_medical_history }
       ]
     end
 

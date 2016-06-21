@@ -19,15 +19,15 @@ describe Anamnesis do
 
   describe '#observations?' do
     it 'returns true when observations are not empty' do
-      anamnesis = build(:anamnesis, observations: 'pnc')
+      anamnesis = build(:anamnesis, observations: 'observations')
       expect(anamnesis.observations?).to be_truthy
     end
   end
 
-  describe '#personal_history?' do
-    it 'returns true when personal_history is not empty' do
-      anamnesis = build(:anamnesis, personal_history: 'pnc')
-      expect(anamnesis.personal_history?).to be_truthy
+  describe '#medical_history?' do
+    it 'returns true when medical history is not empty' do
+      anamnesis = build(:anamnesis, medical_history: 'medical history')
+      expect(anamnesis.medical_history?).to be_truthy
     end
   end
 end

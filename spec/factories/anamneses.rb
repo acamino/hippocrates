@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :anamnesis do
-    personal_history 'personal history'
+    medical_history  'medical history'
     surgical_history 'surgical history'
     allergies        'allergies'
     observations     'observations'
