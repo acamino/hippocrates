@@ -2,19 +2,13 @@ if(typeof Hippocrates === "undefined") {
   var Hippocrates = {};
   Hippocrates.Autocomplete = {};
   Hippocrates.Consultations = {};
+  Hippocrates.Hint = {}
 }
 
 $(document).ready(function() {
-    $(".hint-icon, .hint-title").click(function (){
-      $(".hint-box").toggleClass("hint-box-show");
-    });
-
-    $(".progress, .progress-hint").click(function (){
-      $(".progress-hint").slideToggle();
-    });
-
     Hippocrates.Autocomplete.init();
     Hippocrates.Consultations.init();
+    Hippocrates.Hint.init();
 
     $("#consultation_next_appointment").datepicker({
         todayHighlight: true,
@@ -41,12 +35,6 @@ $(document).ready(function() {
     $(".panel-heading").on("click", function(e) {
         var panelBody = $(this).siblings();
         panelBody.slideToggle("slow");
-    });
-
-    $(".compress, .expand").on("click", function(e) {
-        e.preventDefault();
-        $('.panel-body').slideToggle("slow");
-        $('.zip').toggle();
     });
 
     var calculateAge = function(birthday, today) {

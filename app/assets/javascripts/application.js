@@ -17,3 +17,4 @@
 //= require hippocrates
 //= require autocomplete
 //= require consultations
+//= require hint

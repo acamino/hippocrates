@@ -7,21 +7,21 @@
       .hint-item
         .row.zip
           .col-xs-1
-            %span.text-primary
+            %span.text-muted
               %i.fa.fa-compress
           .col-xs-10
             %span
               %a.hint-link.compress(href="") Reducir
         .row.zip{ style: "display: none;" }
           .col-xs-1
-            %span.text-primary
+            %span.text-muted
               %i.fa.fa-expand
           .col-xs-10
             %span
               %a.hint-link.expand(href="") Ampliar
         .row
           .col-xs-1
-            %span.text-primary
+            %span.text-muted
               %i.fa.fa-clone
           .col-xs-10
             %span
@@ -49,3 +49,22 @@
                 %i.fa.fa-circle
             .col-xs-10
               %span= @patient.anamnesis.medical_history
+      .hint-item
+        .row
+          .col-xs-1
+            %span.text-success
+              %i.fa.fa-circle-o
+          .col-xs-10#temperature
+            #{@consultation.temperature} °C
+        .row
+          .col-xs-1
+            %span.text-primary
+              %i.fa.fa-circle-o
+          .col-xs-10#blood_pressure
+            #{@consultation.blood_pressure} mmHg
+        .row
+          .col-xs-1
+            %span
+              %i.fa.fa-circle-o
+          .col-xs-10#weight
+            #{@consultation.weight} Kg
