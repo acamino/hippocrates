@@ -21,6 +21,7 @@ class ConsultationSerializer < ActiveModel::Serializer
 
   class PatientSerializer < ActiveModel::Serializer
     attributes :name, :age
+    attribute :male?, key: :isMale
 
     def name
       "#{object.last_name} #{object.first_name}"

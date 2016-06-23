@@ -19,7 +19,17 @@
 
 %script#consultation-header{ type: "x-tmpl-mustache" }
   {{patient.name}}
-  %small {{patient.age}} años
+  %small
+    {{patient.age}} años
+
+    {{#patient.isMale}}
+    %i.fa.fa-male
+    {{/patient.isMale}}
+
+    {{^patient.isMale}}
+    %i.fa.fa-female
+    {{/patient.isMale}}
+
 
 %script#consultation-body{ type: "x-tmpl-mustache" }
   %input#current-consultation{ type: "hidden", value: "{{id}}" }
