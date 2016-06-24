@@ -12,6 +12,13 @@ describe Consultation do
     it { is_expected.to accept_nested_attributes_for(:prescriptions).allow_destroy(true) }
   end
 
+  describe 'normalize attributes' do
+    it 'upcases the attributes' do
+      consultation = create(:consultation, reason: 'reason razón')
+      expect(consultation.reload.reason).to eq('REASON RAZÓN')
+    end
+  end
+
   describe '.most_recent' do
     let!(:old_consultation)    { create :consultation, created_at: 1.hour.ago }
     let!(:recent_consultation) { create :consultation, created_at: Time.now }

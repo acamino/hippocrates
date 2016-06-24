@@ -3,6 +3,10 @@ body {
   padding-bottom: 23px;
 }
 
+input, textarea, select {
+  text-transform: uppercase;
+}
+
 .align-right {
   margin-right: 0;
 }

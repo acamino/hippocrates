@@ -5,6 +5,13 @@ describe Anamnesis do
     it { is_expected.to belong_to(:patient) }
   end
 
+  describe 'normalize attributes' do
+    it 'upcases the attributes' do
+      anamnesis = create(:anamnesis, medical_history: 'medical history')
+      expect(anamnesis.reload.medical_history).to eq('MEDICAL HISTORY')
+    end
+  end
+
   describe '#allergies?' do
     it 'returns true when allergies are not empty' do
       anamnesis = build(:anamnesis, allergies: 'PNC')

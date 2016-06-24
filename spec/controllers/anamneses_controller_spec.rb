@@ -78,7 +78,7 @@ describe AnamnesesController do
 
     it 'updates the patient' do
       patient.reload
-      expect(patient.anamnesis.family_history).to eq('family history updated')
+      expect(patient.anamnesis.family_history).to eq('FAMILY HISTORY UPDATED')
     end
 
     it { is_expected.to redirect_to patients_path }

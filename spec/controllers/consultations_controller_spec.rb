@@ -143,8 +143,7 @@ describe ConsultationsController do
     end
 
     it 'updates consultation' do
-      consultation.reload
-      expect(consultation.reason).to eq('updated reason')
+      expect(consultation.reload.reason).to eq('UPDATED REASON')
     end
 
     it { is_expected.to redirect_to patients_path }

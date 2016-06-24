@@ -90,7 +90,7 @@ describe MedicinesController do
 
       it 'updates the medicine' do
         medicine.reload
-        expect(medicine.name).to eq('acetaminophen')
+        expect(medicine.name).to eq('ACETAMINOPHEN')
       end
 
       it { is_expected.to redirect_to medicines_path }
@@ -102,7 +102,7 @@ describe MedicinesController do
 
       it 'do not update the medicine' do
         medicine.reload
-        expect(medicine.name).to eq('paracetamol')
+        expect(medicine.name).to eq('PARACETAMOL')
       end
 
       it { is_expected.to render_template :edit }

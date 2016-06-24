@@ -22,6 +22,14 @@ describe Patient do
     it { is_expected.to have_many(:consultations) }
   end
 
+  describe 'normalize attributes' do
+    it 'normalizes the attributes' do
+      patient = create(:patient, first_name: 'bob', email: 'bob@example.com')
+      expect(patient.reload.first_name).to eq('BOB')
+      expect(patient.email).to eq('bob@example.com')
+    end
+  end
+
   describe '#age' do
     context 'when a patient has a birthdate' do
       subject { build(:patient, birthdate: Date.new(2011, 12, 8)) }

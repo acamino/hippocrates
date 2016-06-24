@@ -106,8 +106,7 @@ describe PatientsController do
       before { put :update, id: patient.id, patient: { first_name: 'Chad' } }
 
       it 'updates the patient' do
-        patient.reload
-        expect(patient.first_name).to eq('Chad')
+        expect(patient.reload.first_name).to eq('CHAD')
       end
 
       it { is_expected.to redirect_to patients_path }
@@ -118,8 +117,7 @@ describe PatientsController do
       before { put :update, id: patient.id, patient: { first_name: '' } }
 
       it 'do not update the patient' do
-        patient.reload
-        expect(patient.first_name).to eq('Bob')
+        expect(patient.reload.first_name).to eq('BOB')
       end
 
       it { is_expected.to render_template :edit }
