@@ -10,8 +10,8 @@ When(/^I go to the patients page$/) do
 end
 
 Then(/^I see Reed and Sue$/) do
-  expect(page).to have_content('Reed')
-  expect(page).to have_content('Sue')
+  expect(page).to have_content('REED')
+  expect(page).to have_content('SUE')
 end
 
 Given(/^Reed is not a registered patient$/) do
@@ -60,7 +60,7 @@ When(/^I search for Storm$/) do
 end
 
 Then(/^I see Sue$/) do
-  expect(page).to have_content('Sue')
+  expect(page).to have_content('SUE')
 end
 
 Then(/^I don't see Reed$/) do
