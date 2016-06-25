@@ -7,6 +7,10 @@ input, textarea, select {
   text-transform: uppercase;
 }
 
+input[type="email"] {
+  text-transform: none;
+}
+
 .align-right {
   margin-right: 0;
 }

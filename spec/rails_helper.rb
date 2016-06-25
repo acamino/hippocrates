@@ -9,7 +9,7 @@ require 'shoulda/matchers'
 
 require_relative 'matchers/be_json_matcher'
 
-Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 # Add additional requires below this line. Rails is not loaded until this point!
 

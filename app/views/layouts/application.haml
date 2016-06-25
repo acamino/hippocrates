@@ -20,23 +20,24 @@
             %span.icon-bar
             %span.icon-bar
         .navbar-collapse.collapse#navbar-main
-          %ul.nav.navbar-nav
-            = nav_to 'Pacientes', patients_path
-            = nav_to 'Pacientes Especiales', special_patients_path
-            = nav_to 'Medicinas', medicines_path
-            = yield :nav_option
+          - if user_signed_in?
+            %ul.nav.navbar-nav
+              = nav_to 'Pacientes', patients_path
+              = nav_to 'Pacientes Especiales', special_patients_path
+              = nav_to 'Medicinas', medicines_path
+              = yield :nav_option
 
-          = form_tag(patients_path, method: 'GET', class: 'navbar-form navbar-left') do
-            .form-group
-              = text_field_tag :search, params[:search], placeholder: 'APELLIDOS', class: 'form-control'
-            %button.btn.btn-default{ type: "submit" } Buscar
+            = form_tag(patients_path, method: 'GET', class: 'navbar-form navbar-left') do
+              .form-group
+                = text_field_tag :search, params[:search], placeholder: 'APELLIDOS', class: 'form-control'
+              %button.btn.btn-default{ type: "submit" } Buscar
 
           %ul.nav.navbar-nav.navbar-right
             - if user_signed_in?
               %li
-                = link_to 'Edit profile', edit_user_registration_path
+                = link_to "Editar Usuario", edit_user_registration_path
               %li
-                = link_to "Logout", destroy_user_session_path, method: :delete
+                = link_to "Salir", destroy_user_session_path, method: :delete
             - else
               %li
                 = link_to "Sign up", new_user_registration_path

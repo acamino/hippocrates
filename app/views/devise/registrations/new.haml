@@ -1,21 +1,24 @@
-%h2 Sign up
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+.row
+  .col-md-10.col-md-offset-2
+    %h4 Crear Usuario
+
+= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "form-horizontal" }) do |f|
   = devise_error_messages!
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true
-  .field
-    = f.label :password
-    - if @minimum_password_length
-      %em
-        (#{@minimum_password_length} characters minimum)
-    %br/
-    = f.password_field :password, autocomplete: "off"
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "off"
-  .actions
-    = f.submit "Sign up"
-= render "devise/shared/links"
+  .form-group
+    = f.label :email, class: "col-md-2 control-label email"
+    .col-md-10
+      = f.email_field :email, autofocus: true, class: "form-control input-sm"
+  .form-group
+    = f.label :password, class: "col-md-2 control-label"
+    .col-md-10
+      = f.password_field :password, autocomplete: "off", class: "form-control input-sm"
+      - if @minimum_password_length
+        %em.text-muted
+          (mínimo #{@minimum_password_length} caracteres)
+  .form-group
+    = f.label :password_confirmation, class: "col-md-2 control-label"
+    .col-md-10
+      = f.password_field :password_confirmation, autocomplete: "off", class: "form-control input-sm"
+  .form-group
+    .col-md-10.col-md-offset-2
+      = f.submit "Sign up", class: "btn btn-primary"
