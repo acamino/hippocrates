@@ -1,26 +1,14 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  helpers:
+    page_entries_info:
+      more_pages:
+        display_entries: Displaying %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> in total
+      one_page:
+        display_entries:
+          one: Displaying <b>%{count}</b> %{entry_name}
+          other: Displaying <b>all %{count}</b> %{entry_name}
+          zero: No %{entry_name} found
+
   views:
     pagination:
       first: "<i class='fa fa-angle-double-left'></i>"
@@ -28,12 +16,22 @@ en:
       previous: "<i class='fa fa-angle-left'></i>"
       next: "<i class='fa fa-angle-right'></i>"
       truncate: "&hellip;"
-  helpers:
-    page_entries_info:
-      one_page:
-        display_entries:
-          zero: "No se encontró %{entry_name}"
-          one: "Mostrando <b>1</b> %{entry_name}"
-          other: "Mostrando <b>%{count}</b> %{entry_name}"
-      more_pages:
-        display_entries: "Mostrando %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> de <b>%{total}</b> en total"
+
+  patients:
+    new:
+      button: New Patient
+    table-header:
+      history: History
+      last-name: Last Name
+      first-name: First Name
+      birthdate: Birthdate
+      gender: Gender
+    label:
+      male: Male
+      female: Female
+    actions:
+      anamnesis: Anamnesis
+      anamnesis-star: Anamnesis*
+      consultation: Consultation
+      clinical-history: Clinical history
+      edit: Edit
