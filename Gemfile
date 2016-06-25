@@ -9,6 +9,7 @@ gem 'haml'
 gem 'kaminari'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'unicode_utils'
+gem 'devise'
 
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -33,4 +34,5 @@ group :test do
   gem 'shoulda-matchers', require: false
   gem 'coveralls', require: false
   gem 'timecop'
+  gem 'rspec-activemodel-mocks'
 end

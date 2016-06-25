@@ -1,4 +1,5 @@
 Given(/^the following patients exist:$/) do |table|
+  log_in(create(:user))
   table.hashes.each do |patient|
     create(:patient,
            first_name: patient[:first_name], last_name: patient[:last_name])
@@ -15,6 +16,7 @@ Then(/^I see Reed and Sue$/) do
 end
 
 Given(/^Reed is not a registered patient$/) do
+  log_in(create(:user))
   reed = Patient.where(first_name: 'Reed').first
   reed.destroy if reed.present?
 end
@@ -38,6 +40,7 @@ Then(/^I see a creation message$/) do
 end
 
 Given(/^Reed is a registered patient$/) do
+  log_in(create(:user))
   @reed = create(:patient, first_name: 'Reed')
 end
 

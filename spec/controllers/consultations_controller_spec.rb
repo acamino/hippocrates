@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe ConsultationsController do
+  before { sign_in_user_mock }
+
   describe '#index' do
     let(:patient) { create(:patient, :with_consultations) }
 

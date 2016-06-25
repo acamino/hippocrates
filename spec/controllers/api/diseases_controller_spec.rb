@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe API::DiseasesController do
+  before { sign_in_user_mock }
+
   describe '#index' do
     before do
       Disease.create(code: 'A001', name: 'sinusitis')

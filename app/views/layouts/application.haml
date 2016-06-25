@@ -32,8 +32,18 @@
             %button.btn.btn-default{ type: "submit" } Buscar
 
           %ul.nav.navbar-nav.navbar-right
-            %li
-              %a(href='#') Salir
+            - if user_signed_in?
+              %li
+                = link_to 'Edit profile', edit_user_registration_path
+              %li
+                = link_to "Logout", destroy_user_session_path, method: :delete
+            - else
+              %li
+                = link_to "Sign up", new_user_registration_path
+              %li
+                = link_to "Login", new_user_session_path
+
+
       = yield :alerts
 
     .container

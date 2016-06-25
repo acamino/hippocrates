@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe AnamnesesController do
+  before { sign_in_user_mock }
+
   describe '#new' do
     let(:patient) { double(:patient) }
     let(:anamnesis) { double(:anamnesis) }

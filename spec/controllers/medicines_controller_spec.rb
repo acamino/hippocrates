@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe MedicinesController do
+  before { sign_in_user_mock }
+
   describe '#index' do
     let(:medicines) { [double(:medicine)] }
 

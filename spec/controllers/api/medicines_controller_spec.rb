@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe API::MedicinesController do
+  before { sign_in_user_mock }
+
   describe '#index' do
     before do
       create_list(:medicine, 2)

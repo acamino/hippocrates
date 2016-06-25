@@ -1,4 +1,5 @@
 Given(/^Bob is an existing patient$/) do
+  log_in(create(:user))
   @bob = create(:patient, first_name: 'Bob')
 end
 
