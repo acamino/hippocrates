@@ -37,27 +37,33 @@
           .input-group
             %span.input-group-addon.input-sm Temperatura
             = f.text_field :temperature, class: "form-control input-sm"
+            %span.input-group-addon.input-sm °C
         .form-group.col-md-4
           .input-group
             %span.input-group-addon.input-sm Pulso
             = f.text_field :heart_rate, class: "form-control input-sm"
+            %span.input-group-addon.input-sm lpm
         .form-group.col-md-4
           .input-group
             %span.input-group-addon.input-sm T. Arterial
             = f.text_field :blood_pressure, class: "form-control input-sm"
+            %span.input-group-addon.input-sm mmHg
       .row-fluid
         .form-group.col-md-4
           .input-group
             %span.input-group-addon.input-sm Frec. Respiratoria
             = f.text_field :respiratory_rate, class: "form-control input-sm"
+            %span.input-group-addon.input-sm rpm
         .form-group.col-md-4
           .input-group
             %span.input-group-addon.input-sm Peso:
             = f.text_field :weight, class: "form-control input-sm"
+            %span.input-group-addon.input-sm Kg
         .form-group.col-md-4
           .input-group
             %span.input-group-addon.input-sm Talla
             = f.text_field :height, class: "form-control input-sm"
+            %span.input-group-addon.input-sm cm
 
   .panel.panel-danger
     .panel-heading
