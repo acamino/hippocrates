@@ -25,6 +25,7 @@
               = nav_to 'Pacientes', patients_path
               = nav_to 'Pacientes Especiales', special_patients_path
               = nav_to 'Medicinas', medicines_path
+              = nav_to 'Enfermedades', diseases_path
               = yield :nav_option
 
             = form_tag(patients_path, method: 'GET', class: 'navbar-form navbar-left') do
