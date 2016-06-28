@@ -35,4 +35,19 @@ es:
       consultation: Consulta
       clinical-history: Historia clínica
       edit: Editar
-
+  medicines:
+    button:
+      new: Nueva medicina
+    table-header:
+      name: Nombre
+      instructions: Instrucciones
+    actions:
+      edit: Editar
+  diseases:
+    button:
+      new: Nueva enfermedad
+    table-header:
+      code: Código
+      name: Nombre
+    actions:
+      edit: Editar

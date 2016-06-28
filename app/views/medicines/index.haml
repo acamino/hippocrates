@@ -1,13 +1,12 @@
-/ XXX: Pull out the labels from a config file.
 .row
   .col-md-12.text-right
-    = link_to "Nueva medicina", new_medicine_path, class: "btn btn-success"
+    = link_to t('medicines.button.new'), new_medicine_path, class: "btn btn-success"
 
 %table.table.table-striped
   %thead
     %tr
-      %th.col-md-5 Nombre
-      %th.col-md-5 Instrucciones
+      %th.col-md-5= t('medicines.table-header.name')
+      %th.col-md-5= t('medicines.table-header.instructions')
       %th.col-md-2
   %tbody
   - @medicines.each do |medicine|
@@ -15,4 +14,4 @@
       %td= medicine.name
       %td= medicine.instructions
       %td.text-right
-        = link_to "Editar", edit_medicine_path(medicine), class: 'btn btn-primary btn-sm'
+        = link_to t('medicines.actions.edit'), edit_medicine_path(medicine), class: 'btn btn-primary btn-sm'

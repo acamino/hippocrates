@@ -35,3 +35,19 @@ en:
       consultation: Consultation
       clinical-history: Clinical history
       edit: Edit
+  medicines:
+    button:
+      new: New medicine
+    table-header:
+      name: Name
+      instructions: Instructions
+    actions:
+      edit: Edit
+  diseases:
+    button:
+      new: New disease
+    table-header:
+      code: Code
+      name: Name
+    actions:
+      edit: Edit

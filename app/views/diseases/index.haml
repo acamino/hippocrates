@@ -1,15 +1,14 @@
-/ XXX: Pull out the labels from a config file.
 .row
   .col-md-12.text-right
-    = link_to "Nueva enfermedad", new_medicine_path, class: "btn btn-success"
+    = link_to t('diseases.button.new'), new_medicine_path, class: "btn btn-success"
 
 .row
   .col-md-12
     %table.table.table-striped
       %thead
         %tr
-          %th.col-md-2 Código
-          %th.col-md-8 Nombre
+          %th.col-md-2= t('diseases.table-header.code')
+          %th.col-md-8= t('diseases.table-header.name')
           %th.col-md-2
       %tbody
       - @diseases.each do |disease|
@@ -17,7 +16,7 @@
           %td= disease.code
           %td= disease.name
           %td.text-right
-            = link_to "Editar", edit_disease_path(disease), class: 'btn btn-primary btn-sm'
+            = link_to t('diseases.actions.edit'), edit_disease_path(disease), class: 'btn btn-primary btn-sm'
 
 .row
   .col-md-12.text-center
