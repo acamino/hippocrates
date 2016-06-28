@@ -11,10 +11,6 @@ input[type="email"] {
   text-transform: none;
 }
 
-.align-right {
-  margin-right: 0;
-}
-
 .tr-caution {
   background-color: #E55934;
   border-color: #E55934;

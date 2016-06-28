@@ -1,6 +1,6 @@
 / XXX: Pull out the labels from a config file.
-.row.pull-right
-  .col-md-12
+.row
+  .col-md-12.text-right
     = link_to "Nueva enfermedad", new_medicine_path, class: "btn btn-success"
 
 .row
@@ -8,8 +8,8 @@
     %table.table.table-striped
       %thead
         %tr
-          %th.col-md-5 Código
-          %th.col-md-5 Nombre
+          %th.col-md-2 Código
+          %th.col-md-8 Nombre
           %th.col-md-2
       %tbody
       - @diseases.each do |disease|
