@@ -45,4 +45,20 @@ describe ApplicationHelper do
       expect(helper.active_nav_to('nav-text', '/patients/special')).to include('active')
     end
   end
+
+  describe '#gender_tag' do
+    context 'when the patient is male' do
+      it 'builds a tag for male' do
+        patient = double(:patient, male?: true)
+        expect(helper.gender_tag(patient)).to include('fa-male')
+      end
+    end
+
+    context 'when the patient is female' do
+      it 'builds a tag for female' do
+        patient = double(:patient, male?: false)
+        expect(helper.gender_tag(patient)).to include('fa-female')
+      end
+    end
+  end
 end

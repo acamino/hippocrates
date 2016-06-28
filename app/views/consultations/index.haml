@@ -8,10 +8,7 @@
         = @patient.name
         %small
           #{@patient.age} años
-          - if @patient.male?
-            %i.fa.fa-male
-          -else
-            %i.fa.fa-female
+          = gender_tag(@patient)
 
 .row
   .col-md-1.col-xs-4

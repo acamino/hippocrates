@@ -1,7 +1,7 @@
 %table.table.table-striped.table-hover
   %thead
     %tr
-      %th{ colspan: 2 } PACIENTES ESPECIALES
+      %th{ colspan: 2 } Pacientes Especiales
   %tbody
   - @patients.each do |patient|
     %tr
@@ -15,10 +15,7 @@
               %big= patient.name
               %span.text-muted
                 #{patient.age} años
-                - if patient.male?
-                  %i.fa.fa-male
-                -else
-                  %i.fa.fa-female
+                = gender_tag(patient)
           .col-xs-4
             .pull-right
               - if patient.phone_number.present?
@@ -30,11 +27,11 @@
           .row
             .col-md-12
               %strong
-                Próxima cita:
+                %span.text-muted Próxima cita
               = patient.consultations.most_recent.next_appointment.strftime("%Y-%m-%d")
         - if patient.consultations.most_recent.miscellaneous?
           .row
             .col-md-12
               %strong
-                Misceláneos:
+                %span.text-muted Misceláneos
               = patient.consultations.most_recent.miscellaneous

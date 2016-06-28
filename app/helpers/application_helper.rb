@@ -26,4 +26,12 @@ module ApplicationHelper
       link_to(nav_text, nav_path)
     end
   end
+
+  def gender_tag(patient)
+    if patient.male?
+      content_tag(:i, nil, class: 'fa fa-male')
+    else
+      content_tag(:i, nil, class: 'fa fa-female')
+    end
+  end
 end
