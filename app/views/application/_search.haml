@@ -1,0 +1,6 @@
+.row
+  .col-md-12
+    = form_tag(path, method: 'GET', class: 'navbar-form navbar-left') do
+      .form-group
+        = text_field_tag :query, params[:query], placeholder: placeholder, class: 'form-control'
+      %button.btn.btn-default{ type: "submit" } Buscar

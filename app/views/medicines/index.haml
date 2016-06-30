@@ -1,3 +1,5 @@
+= render partial: 'search', locals: { path: medicines_path, placeholder: 'Nombre' }
+
 .row
   .col-md-12.text-right
     = link_to t('medicines.button.new'), new_medicine_path, class: "btn btn-success"

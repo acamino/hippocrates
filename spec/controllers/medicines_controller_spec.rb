@@ -4,10 +4,9 @@ describe MedicinesController do
   before { sign_in_user_mock }
 
   describe '#index' do
-    let(:medicines) { [double(:medicine)] }
+    let(:medicines) { [create(:medicine)] }
 
     before do
-      allow(Medicine).to receive(:all) { medicines }
       get :index
     end
 

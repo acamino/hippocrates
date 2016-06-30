@@ -6,6 +6,15 @@ class Medicine < ActiveRecord::Base
 
   before_save :normalize_values
 
+  def self.search(query)
+    if query
+      where('lower(name) LIKE ?', "%#{query.downcase}%")
+        .order(:name)
+    else
+      all.order(:name)
+    end
+  end
+
   private
 
   def normalize_values

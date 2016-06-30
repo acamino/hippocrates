@@ -1,6 +1,6 @@
 class DiseasesController < ApplicationController
   def index
-    @diseases = Disease.page(params.fetch(:page, 1))
+    @diseases = Disease.search(query).page(page)
   end
 
   def new

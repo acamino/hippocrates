@@ -1,6 +1,6 @@
 class MedicinesController < ApplicationController
   def index
-    @medicines = Medicine.all
+    @medicines = Medicine.search(query).page(page)
   end
 
   def new

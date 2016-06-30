@@ -58,7 +58,7 @@ Then(/^I see an update message$/) do
 end
 
 When(/^I search for Storm$/) do
-  fill_in :search, with: 'Storm'
+  fill_in :query, with: 'Storm'
   click_on 'Buscar'
 end
 
