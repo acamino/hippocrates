@@ -10,27 +10,27 @@ When(/^I go to the patients page$/) do
   visit patients_path
 end
 
-Then(/^I see Reed and Sue$/) do
-  expect(page).to have_content('REED')
-  expect(page).to have_content('SUE')
+Then(/^I see Bob and Alice$/) do
+  expect(page).to have_content('BOB')
+  expect(page).to have_content('ALICE')
 end
 
-Given(/^Reed is not a registered patient$/) do
+Given(/^Bob is not a registered patient$/) do
   log_in(create(:user))
-  reed = Patient.where(first_name: 'Reed').first
-  reed.destroy if reed.present?
+  bob = Patient.where(first_name: 'Bob').first
+  bob.destroy if bob.present?
 end
 
 When(/^I go to the new patient page$/) do
   visit new_patient_path
 end
 
-When(/^I input Reeds information$/) do
+When(/^I input Bob information$/) do
   fill_in :patient_birthdate, with: '1990/02/10'
   fill_in :patient_identity_card_number, with: '0502231248'
   fill_in :patient_medical_history, with: '20073'
-  fill_in :patient_last_name, with: 'Reed'
-  fill_in :patient_first_name, with: 'Richards'
+  fill_in :patient_last_name, with: 'Bob'
+  fill_in :patient_first_name, with: 'Smith'
   fill_in :patient_profession, with: 'Developer'
   click_on 'Guardar'
 end
@@ -39,33 +39,33 @@ Then(/^I see a creation message$/) do
   expect(page).to have_content('Paciente creado correctamente')
 end
 
-Given(/^Reed is a registered patient$/) do
+Given(/^Bob is a registered patient$/) do
   log_in(create(:user))
-  @reed = create(:patient, first_name: 'Reed')
+  @bob = create(:patient, first_name: 'Bob')
 end
 
 When(/^I go to the edit patient page$/) do
-  visit edit_patient_path(@reed)
+  visit edit_patient_path(@bob)
 end
 
-When(/^I update Reed's informaton$/) do
-  fill_in :patient_last_name, with: 'Doom'
+When(/^I update Bob's informaton$/) do
+  fill_in :patient_last_name, with: 'Rob'
   click_on 'Guardar'
 end
 
-Then(/^I see an update message$/) do
+Then(/^I see a confirmation message for update$/) do
   expect(page).to have_content('Paciente actualizado correctamente')
 end
 
-When(/^I search for Storm$/) do
-  fill_in :query, with: 'Storm'
+When(/^I search for Doe$/) do
+  fill_in :query, with: 'Doe'
   click_on 'Buscar'
 end
 
-Then(/^I see Sue$/) do
-  expect(page).to have_content('SUE')
+Then(/^I see Alice$/) do
+  expect(page).to have_content('ALICE')
 end
 
-Then(/^I don't see Reed$/) do
-  expect(page).to have_no_content('Reed')
+Then(/^I don't see Bob$/) do
+  expect(page).to have_no_content('BOB')
 end
