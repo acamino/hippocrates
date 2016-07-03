@@ -180,7 +180,7 @@
                 %th.col-md-6 Receta
                 %th.col-md-6 Indicaciones
             %tbody
-              = f.fields_for :prescriptions do |ff|
+              = f.fields_for :prescriptions, f.object.prescriptions.order(:id) do |ff|
                 %tr
                   %td
                     = ff.text_field :inscription, class: "form-control input-sm inscription", autocomplete: "off"
@@ -246,7 +246,7 @@
             %td{ style: "width: 50%" }
               {{inscription}}
             %td
-              {{subscription}}
+              {{{subscription}}}
           {{/prescriptions}}
       {{/hasPrescriptions}}
 

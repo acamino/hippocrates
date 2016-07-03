@@ -32,7 +32,7 @@ class ConsultationsController < ApplicationController
     prescriptions_attributes: [:id, :inscription, :subscription]
   ].freeze
   MAXIMUM_DIAGNOSES = 4
-  MAXIMUM_PRESCRIPTIONS = 4
+  MAXIMUM_PRESCRIPTIONS = 7
 
   before_action :fetch_consultation, only: [:edit, :update]
   before_action :fetch_patient

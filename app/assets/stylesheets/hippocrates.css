@@ -255,10 +255,16 @@ input[type="email"] {
     padding-top: 1cm;
   }
 
+  #printable-prescription .body td {
+    vertical-align: top;
+    padding-bottom: 7px;
+  }
+
   #printable-prescription .footer {
     position: absolute;
+    top: 18.5cm;
     padding-left: 12.7cm;
-    padding-top: 9.1cm;
     font-weight: 600;
+    font-size: 18px;
   }
 }
