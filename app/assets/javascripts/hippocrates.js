@@ -2,13 +2,15 @@ if(typeof Hippocrates === "undefined") {
   var Hippocrates = {};
   Hippocrates.Autocomplete = {};
   Hippocrates.Consultations = {};
-  Hippocrates.Hint = {}
+  Hippocrates.Hint = {};
+  Hippocrates.Prescription = {};
 }
 
 $(document).ready(function() {
     Hippocrates.Autocomplete.init();
     Hippocrates.Consultations.init();
     Hippocrates.Hint.init();
+    Hippocrates.Prescription.init();
 
     $("#consultation_next_appointment").datepicker({
         todayHighlight: true,

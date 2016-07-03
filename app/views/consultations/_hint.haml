@@ -26,6 +26,15 @@
           .col-xs-10
             %span
               %a.hint-link#show(href="") Historia
+
+        .row
+          .col-xs-1
+            %span.text-muted
+              %i.fa.fa-sticky-note-o
+          .col-xs-10
+            %span
+              %a.hint-link#print(href="") Imprimir Receta
+
       .hint-item
         - if @patient.anamnesis.allergies?
           .row

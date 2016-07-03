@@ -18,3 +18,4 @@
 //= require autocomplete
 //= require consultations
 //= require hint
+//= require prescription

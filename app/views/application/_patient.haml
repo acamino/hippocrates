@@ -7,7 +7,7 @@
         .form-group.col-md-3
           .input-group
             %span.input-group-addon.input-sm Fecha
-            %input.form-control.input-sm.colored{ disabled: 'disabled', value: Date.today }
+            %input.form-control.input-sm.colored#current_date{ disabled: 'disabled', value: Date.today }
         .form-group.col-md-3
           .input-group
             %span.input-group-addon.input-sm Fecha Nacimiento
@@ -25,11 +25,11 @@
         .form-group.col-md-6
           .input-group
             %span.input-group-addon.input-sm Apellidos
-            %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.last_name }
+            %input.form-control.input-sm.colored#patient_last_name{ disabled: 'disabled', value: @patient.last_name }
         .form-group.col-md-6
           .input-group
             %span.input-group-addon.input-sm Nombres
-            %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.first_name }
+            %input.form-control.input-sm.colored#patient_first_name{ disabled: 'disabled', value: @patient.first_name }
 
       .row-fluid
         .form-group.col-md-6

@@ -230,3 +230,35 @@ input[type="email"] {
 .diagnoses > table {
   margin-bottom: 10px;
 }
+
+#printable-prescription {
+  display: none;
+}
+
+@media print {
+  #printable-prescription {
+    border-color: #CCC;
+    margin-top: 0;
+    font-size: 12px;
+    display: block;
+  }
+
+  #printable-prescription .header {
+    padding-top: 2.5cm;
+  }
+
+  #printable-prescription .header tr {
+    line-height: 20px;
+  }
+
+  #printable-prescription .body {
+    padding-top: 1cm;
+  }
+
+  #printable-prescription .footer {
+    position: absolute;
+    padding-left: 12.7cm;
+    padding-top: 9.1cm;
+    font-weight: 600;
+  }
+}
