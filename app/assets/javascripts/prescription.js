@@ -6,7 +6,7 @@ Hippocrates.Prescription = {
   },
 
   init: function() {
-    self = this;
+    var self = this;
 
     $(self.config.printLink).on("click", function(e) {
       e.preventDefault();
@@ -15,13 +15,11 @@ Hippocrates.Prescription = {
   },
 
   print: function() {
-    self = this;
+    var prescription = this.renderTemplate(
+      this.config.prescriptionTmpl, this.getPrescription());
 
-    var prescription = self.renderTemplate(
-      self.config.prescriptionTmpl, self.getPrescriptions());
-
-    $(self.config.printablePrescription).html(prescription);
-    $(self.config.printablePrescription).print();
+    $(this.config.printablePrescription).html(prescription);
+    $(this.config.printablePrescription).print();
   },
 
   renderTemplate: function (target, data) {
@@ -30,24 +28,28 @@ Hippocrates.Prescription = {
     return Mustache.render(template, data);
   },
 
-  getPrescriptions: function() {
-    self = this;
+  getPrescription: function() {
+    var prescriptions = this.getPrescriptions();
 
-    var prescriptions = _.filter(
+    return {
+      currentDate: this.getCurrentDate(),
+      patientName: this.getPatientName(),
+      hasPrescriptions: prescriptions.length != 0,
+      prescriptions: prescriptions,
+      nextAppointment: this.getNextAppointment()
+    }
+  },
+
+  getPrescriptions: function() {
+    var self = this;
+
+    return _.filter(
       _.map($('.prescriptions tbody tr'), function(item) {
       return {
         inscription: $(item).find('td:first-child input').val(),
         subscription: self.formatSubscription($(item).find('td:last-child input').val())
       };
     }), self.isPrescriptionAvailable);
-
-    return {
-      currentDate: self.getCurrentDate(),
-      patientName: self.getPatientName(),
-      hasPrescriptions: prescriptions.length != 0,
-      prescriptions: prescriptions,
-      nextAppointment: self.getNextAppointment()
-    }
   },
 
   formatSubscription: function(subscription) {
@@ -56,7 +58,7 @@ Hippocrates.Prescription = {
       var medicineName = components[0];
       var instructions = components[1];
 
-      return "<strong>" + medicineName + "</strong>: " + instructions;
+      return `<strong>${medicineName}</strong> ${instructions}`;
     }
 
     return subscription;
@@ -67,7 +69,7 @@ Hippocrates.Prescription = {
   },
 
   getPatientName: function() {
-    return $("#patient_last_name").val() + " " + $("#patient_first_name").val();
+    return `${$("#patient_last_name").val()} ${$("#patient_first_name").val()}`;
   },
 
   getCurrentDate: function() {

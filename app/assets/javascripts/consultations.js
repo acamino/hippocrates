@@ -1,8 +1,6 @@
 Hippocrates.Consultations = {
-  self: false,
-
   init: function() {
-    self = this;
+    var self = this;
 
     $("#show").on("click", function(e) {
       e.preventDefault();
@@ -48,8 +46,8 @@ Hippocrates.Consultations = {
 
   renderConsultation: function(consultation) {
     if (consultation) {
-      var consultationHeader = self.renderTemplate("#consultation-header", consultation);
-      var consultationBody = self.renderTemplate("#consultation-body", consultation);
+      var consultationHeader = this.renderTemplate("#consultation-header", consultation);
+      var consultationBody = this.renderTemplate("#consultation-body", consultation);
 
       $(".modal").find(".modal-title").html(consultationHeader);
       $(".modal").find(".modal-body").html(consultationBody);
@@ -59,8 +57,10 @@ Hippocrates.Consultations = {
   consultationType: { LAST: "last", PREV: "previous", NEXT: "next" },
 
   getConsultation: function(type) {
+    var self = this;
     var data = {};
-    if (type !== self.consultationType.LAST) {
+
+    if (type !== this.consultationType.LAST) {
       data = { current_consultation: $("#current-consultation").val() };
     }
 
@@ -71,14 +71,14 @@ Hippocrates.Consultations = {
   },
 
   getLastConsultation: function() {
-    self.getConsultation(self.consultationType.LAST);
+    this.getConsultation(this.consultationType.LAST);
   },
 
   getPreviousConsultation: function() {
-    self.getConsultation(self.consultationType.PREV);
+    this.getConsultation(this.consultationType.PREV);
   },
 
   getNextConsultation: function() {
-    self.getConsultation(self.consultationType.NEXT);
+    this.getConsultation(this.consultationType.NEXT);
   }
 };
