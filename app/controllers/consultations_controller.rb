@@ -65,7 +65,7 @@ class ConsultationsController < ApplicationController
     @consultation.update_attributes(consultation_params)
     @patient.update_attributes(patient_params)
 
-    redirect_to patients_path, notice: 'Consulta actualizada correctamente'
+    redirect_to patient_consultations_path(@patient), notice: 'Consulta actualizada correctamente'
   end
 
   private
