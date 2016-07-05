@@ -237,14 +237,15 @@ input[type="email"] {
 
 @media print {
   #printable-prescription {
-    border-color: #CCC;
     margin-top: 0;
     font-size: 12px;
     display: block;
   }
 
   #printable-prescription .header {
-    padding-top: 2.5cm;
+    position: absolute;
+    top: 5.3cm;
+    width: 98%;
   }
 
   #printable-prescription .header tr {
@@ -252,7 +253,9 @@ input[type="email"] {
   }
 
   #printable-prescription .body {
-    padding-top: 1cm;
+    position: absolute;
+    top: 7.5cm;
+    width: 98%;
   }
 
   #printable-prescription .body td {
@@ -262,9 +265,14 @@ input[type="email"] {
 
   #printable-prescription .footer {
     position: absolute;
-    top: 18.5cm;
-    padding-left: 12.7cm;
+    top: 18.3cm;
     font-weight: 600;
+    text-align: right;
     font-size: 18px;
+    width: 98%;
+  }
+
+  #printable-prescription .footer > .col-md-12 {
+    padding-right: 5cm;
   }
 }
