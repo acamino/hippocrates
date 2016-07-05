@@ -1,0 +1,24 @@
+.modal.fade#certificates{ tabindex: "-1", role: "dialog" }
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{ type: "button",
+                       "data-dismiss": "modal",
+                       "aria-label": "Close" }
+          %span{ "aria-hidden": "true" } &times;
+        %h4.modal-title
+          = @patient.name
+          %small
+            #{@patient.age} años
+            = gender_tag(@patient)
+      .modal-body
+        .form-horizontal
+          .form-group
+            %label.col-sm-2.control-label{ for: "certificate" } Certificado
+            .col-md-6
+              %select#certificate.form-control.input-sm
+                %option{ value: "simple" } Simple
+              %em.text-muted Selecciona un certificado
+      .modal-footer
+        %button.btn.btn-default{ "data-dismiss": "modal" } Cerrar
+        = link_to "Descargar certificado", download_certificates_path(consultation_id: @consultation.id), class: 'btn btn-primary'

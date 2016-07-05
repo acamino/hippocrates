@@ -7,7 +7,7 @@ Hippocrates.Consultations = {
       self.openModal();
     });
 
-    $(".modal").on("show.bs.modal", function (e) {
+    $("#consultation").on("show.bs.modal", function (e) {
       self.getLastConsultation(this);
     });
 
@@ -35,7 +35,7 @@ Hippocrates.Consultations = {
   },
 
   openModal: function() {
-    $(".modal").modal({ backdrop: "static" });
+    $("#consultation").modal({ backdrop: "static" });
   },
 
   renderTemplate: function(target, data) {

@@ -2,6 +2,7 @@
   = alerts_for(@patient.anamnesis)
 
 = error_messages_for @consultation
+%input{ type: "hidden", value: @consultation.id, id: "consultation_id" }
 = form_for [@patient, @consultation], html: { class: "form" } do |f|
   .panel.panel-info
     .panel-heading
@@ -216,6 +217,7 @@
     = f.submit "Guardar", class: "btn btn-success"
 
 = render 'modal'
+= render 'modal_certificates'
 = render 'hint'
 
 #printable-prescription

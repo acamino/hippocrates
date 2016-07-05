@@ -16,6 +16,7 @@
 //= require turbolinks
 //= require hippocrates
 //= require autocomplete
+//= require certificates
 //= require consultations
 //= require hint
 //= require prescription
