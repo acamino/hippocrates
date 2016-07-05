@@ -58,7 +58,7 @@ Hippocrates.Prescription = {
       var medicineName = components[0];
       var instructions = components[1];
 
-      return `<strong>${medicineName}</strong> ${instructions}`;
+      return "<strong>" + medicineName + "</strong>: " + instructions;
     }
 
     return subscription;
@@ -69,7 +69,7 @@ Hippocrates.Prescription = {
   },
 
   getPatientName: function() {
-    return `${$("#patient_last_name").val()} ${$("#patient_first_name").val()}`;
+    return $("#patient_last_name").val() + " " + $("#patient_first_name").val();
   },
 
   getCurrentDate: function() {
