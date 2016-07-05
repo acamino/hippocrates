@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   root 'patients#index'
+  resources :certificates, only: [] do
+    get :download, on: :collection
+  end
+
   resources :medicines, only: [:index, :new, :create, :edit, :update]
   resources :diseases, only: [:index, :new, :create, :edit, :update]
   resources :patients, only: [:index, :new, :create, :edit, :update] do

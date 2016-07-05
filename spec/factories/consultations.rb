@@ -25,4 +25,8 @@ FactoryGirl.define do
 
     patient
   end
+
+  trait :with_diagnoses do
+    diagnoses { [Diagnosis.create(disease_code: 'A01', description: 'disease')] }
+  end
 end
