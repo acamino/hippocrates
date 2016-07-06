@@ -34,8 +34,8 @@ Hippocrates.Certificates = {
     $("#certificates").modal({ backdrop: "static" });
   },
 
-  updateUrl: function(certificateType = "") {
-    if (certificateType === "") {
+  updateUrl: function(certificateType) {
+    if (_.isUndefined(certificateType)) {
       certificateType = $("#certificate").val();
     }
     var url = this.buildUrl(certificateType);
