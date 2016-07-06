@@ -21,6 +21,7 @@ class Certificate
       current_date: current_date,
       start_time: options.fetch(:start_time, ''),
       end_time: options.fetch(:end_time, ''),
+      rest_time: options.fetch(:rest_time, ''),
       consultation_reason: consultation.reason
     }
   end

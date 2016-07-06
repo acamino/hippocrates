@@ -27,7 +27,8 @@ class CertificatesController < ApplicationController
   def certificate_options
     {
       start_time: params[:start_time],
-      end_time: params[:end_time]
+      end_time: params[:end_time],
+      rest_time: params[:rest_time]
     }
   end
 end

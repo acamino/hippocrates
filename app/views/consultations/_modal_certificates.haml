@@ -34,6 +34,12 @@
               .col-md-6
                 %input.form-control.input-sm#certificate_end_time{ type: "text" }
                 %em.text-muted Hora de fin de consulta
+          .rest-controls{ style: "display:none" }
+            .form-group
+              %label.col-sm-2.control-label{ for: "certificate_rest_time" } Inicio
+              .col-md-6
+                %input.form-control.input-sm#certificate_rest_time{ type: "number" }
+                %em.text-muted Tiempo de reposo médico (en horas)
 
       .modal-footer
         %button.btn.btn-default{ "data-dismiss": "modal" } Cerrar

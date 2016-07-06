@@ -2,8 +2,9 @@ require 'rails_helper'
 
 describe Certificate do
   describe '#build' do
-    let(:start_time) { '' }
-    let(:end_time) { '' }
+    let(:start_time)   { '' }
+    let(:end_time)     { '' }
+    let(:rest_time)    { '' }
     let(:consultation) { build(:consultation, :with_diagnoses, patient: patient) }
     let(:patient) do
       build(:patient, identity_card_number: 'icn-101',
@@ -23,6 +24,7 @@ describe Certificate do
         current_date: '21 de Octubre de 2015',
         start_time: start_time,
         end_time: end_time,
+        rest_time: rest_time,
         consultation_reason: 'reason'
       }
     end
@@ -49,15 +51,28 @@ describe Certificate do
       end
     end
 
-    context 'when time options are passed' do
+    context 'when time options are given' do
       let(:start_time)       { '10:00 am' }
       let(:end_time)         { '11:30 am' }
       let(:gender)           { 'female' }
       let(:definite_article) { 'la' }
 
-      it 'builds certificate with time info' do
+      it 'builds certificate for attendance' do
         Timecop.freeze('2015-10-21') do
           options = { start_time: '10:00 am', end_time: '11:30 am' }
+          expect(described_class.for(consultation, options).build).to eq(certificate)
+        end
+      end
+    end
+
+    context 'when rest options are given' do
+      let(:rest_time)        { '48' }
+      let(:gender)           { 'female' }
+      let(:definite_article) { 'la' }
+
+      it 'builds certificate for rest' do
+        Timecop.freeze('2015-10-21') do
+          options = { rest_time: '48' }
           expect(described_class.for(consultation, options).build).to eq(certificate)
         end
       end

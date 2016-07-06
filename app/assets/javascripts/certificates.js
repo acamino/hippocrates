@@ -9,13 +9,18 @@ Hippocrates.Certificates = {
 
     $("#certificate").on("change", function() {
       var certificateType = $(this).val();
-      self.toggleTimeControls(certificateType);
+      self.toggleControls(certificateType);
       self.updateUrl(certificateType);
     });
 
     $("#certificate_start_time, #certificate_end_time").datetimepicker({
       format: 'LT',
     }).on("dp.change", function() {
+      var certificateType = $("#certificate").val();
+      self.updateUrl(certificateType);
+    });
+
+    $("#certificate_rest_time").on("change", function() {
       var certificateType = $("#certificate").val();
       self.updateUrl(certificateType);
     });
@@ -41,9 +46,13 @@ Hippocrates.Certificates = {
     var params = [];
     params.push("certificate_type=" + certificateType);
 
-    if (this.hasTimeControls(certificateType)) {
+    if (this.isAttendance(certificateType)) {
       params.push("start_time=" + this.getStartTime());
       params.push("end_time=" + this.getEndTime());
+    }
+
+    if (this.isRest(certificateType)) {
+      params.push("rest_time=" + this.getRestTime());
     }
 
     return params.join("&");
@@ -61,15 +70,28 @@ Hippocrates.Certificates = {
     return $("#certificate_end_time").val();
   },
 
+  getRestTime: function () {
+    return $("#certificate_rest_time").val();
+  },
+
   isAttendance: function (certificateType) {
     return certificateType === "attendance";
   },
 
-  hasTimeControls: function(certificateType) {
-    return this.isAttendance(certificateType);
+  isRest: function (certificateType) {
+    return certificateType === "rest";
   },
 
   toggleTimeControls: function(certificateType) {
-    $(".time-controls").toggle(this.hasTimeControls(certificateType));
+    $(".time-controls").toggle(this.isAttendance(certificateType));
+  },
+
+  toggleRestControls: function (certificateType) {
+    $(".rest-controls").toggle(this.isRest(certificateType));
+  },
+
+  toggleControls: function (certificateType) {
+    this.toggleTimeControls(certificateType);
+    this.toggleRestControls(certificateType);
   }
 }
