@@ -16,9 +16,22 @@
           .form-group
             %label.col-sm-2.control-label{ for: "certificate" } Certificado
             .col-md-6
-              %select#certificate.form-control.input-sm
+              %select.form-control.input-sm#certificate
                 %option{ value: "simple" } Simple
+                %option{ value: "attendance" } Asistencia
               %em.text-muted Selecciona un certificado
+          .time-controls{ style: "display:none" }
+            .form-group
+              %label.col-sm-2.control-label{ for: "certificate_start_time" } Inicio
+              .col-md-6
+                %input.form-control.input-sm#certificate_start_time{ type: "text" }
+                %em.text-muted Hora de inicio de consulta
+            .form-group
+              %label.col-sm-2.control-label{ for: "certificate_end_time" } Fin
+              .col-md-6
+                %input.form-control.input-sm#certificate_end_time{ type: "text" }
+                %em.text-muted Hora de fin de consulta
+
       .modal-footer
         %button.btn.btn-default{ "data-dismiss": "modal" } Cerrar
-        = link_to "Descargar certificado", download_certificates_path(consultation_id: @consultation.id), class: 'btn btn-primary'
+        = link_to "Descargar certificado", download_certificates_path(consultation_id: @consultation.id, certificate_type: "simple"), class: 'btn btn-primary'

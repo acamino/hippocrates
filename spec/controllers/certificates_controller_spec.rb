@@ -11,7 +11,7 @@ describe CertificatesController do
       {
         type: 'application/msword',
         disposition: 'attachment',
-        filename: 'certificate.docx'
+        filename: 'simple_certificate.docx'
       }
     end
 
@@ -24,7 +24,8 @@ describe CertificatesController do
     end
 
     it 'returns a docx file attachment' do
-      get :download, consultation_id: consultation.id
+      get :download, consultation_id: consultation.id,
+                     certificate_type: 'simple'
 
       expect(controller).to have_received(:send_data)
         .with(certificate, options).once

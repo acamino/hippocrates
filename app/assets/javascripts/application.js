@@ -14,6 +14,8 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
+//= require vendor/moment.min
+//= require vendor/bootstrap-datetimepicker.min
 //= require hippocrates
 //= require autocomplete
 //= require certificates
