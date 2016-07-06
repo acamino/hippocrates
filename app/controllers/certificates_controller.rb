@@ -28,7 +28,10 @@ class CertificatesController < ApplicationController
     {
       start_time: params[:start_time],
       end_time: params[:end_time],
-      rest_time: params[:rest_time]
+      rest_time: params[:rest_time],
+      surgical_treatment: params[:surgical_treatment],
+      surgery_tentative_date: params[:surgery_tentative_date],
+      surgery_cost: params[:surgery_cost]
     }
   end
 end

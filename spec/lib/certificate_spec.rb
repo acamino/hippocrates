@@ -2,9 +2,12 @@ require 'rails_helper'
 
 describe Certificate do
   describe '#build' do
-    let(:start_time)   { '' }
-    let(:end_time)     { '' }
-    let(:rest_time)    { '' }
+    let(:start_time)             { '' }
+    let(:end_time)               { '' }
+    let(:rest_time)              { '' }
+    let(:surgical_treatment)     { '' }
+    let(:surgery_tentative_date) { '' }
+    let(:surgery_cost)           { '' }
     let(:consultation) { build(:consultation, :with_diagnoses, patient: patient) }
     let(:patient) do
       build(:patient, identity_card_number: 'icn-101',
@@ -22,7 +25,10 @@ describe Certificate do
         current_date: '21 de Octubre de 2015',
         start_time: start_time,
         end_time: end_time,
-        rest_time: rest_time
+        rest_time: rest_time,
+        surgical_treatment: surgical_treatment,
+        surgery_tentative_date: surgery_tentative_date,
+        surgery_cost: surgery_cost
       }
     end
 
@@ -70,6 +76,26 @@ describe Certificate do
       it 'builds certificate for rest' do
         Timecop.freeze('2015-10-21') do
           options = { rest_time: '48' }
+          expect(described_class.for(consultation, options).build).to eq(certificate)
+        end
+      end
+    end
+
+    context 'when surgery options are given' do
+      let(:surgical_treatment)     { 'treatment' }
+      let(:surgery_tentative_date) { 'tentative date' }
+      let(:surgery_cost)           { 'cost' }
+      let(:gender)                 { 'female' }
+      let(:definite_article)       { 'la' }
+
+      it 'builds certificate for surgery' do
+        Timecop.freeze('2015-10-21') do
+          options = {
+            surgical_treatment: 'treatment',
+            surgery_tentative_date: 'tentative date',
+            surgery_cost: 'cost'
+          }
+
           expect(described_class.for(consultation, options).build).to eq(certificate)
         end
       end

@@ -20,7 +20,14 @@ Hippocrates.Certificates = {
       self.updateUrl(certificateType);
     });
 
-    $("#certificate_rest_time").on("change", function() {
+
+    var observableControls = [
+      "#certificate_rest_time",
+      "#certificate_surgical_treatment",
+      "#certificate_surgery_tentative_date",
+      "#certificate_surgery_cost"
+    ].join(", ")
+    $(observableControls).on("change", function() {
       var certificateType = $("#certificate").val();
       self.updateUrl(certificateType);
     });
@@ -55,6 +62,12 @@ Hippocrates.Certificates = {
       params.push("rest_time=" + this.getRestTime());
     }
 
+    if (this.isSurgery(certificateType)) {
+      params.push("surgical_treatment=" + this.getSurgicalTreatment());
+      params.push("surgery_tentative_date=" + this.getSurgeryTentativeDate());
+      params.push("surgery_cost=" + this.getSurgeryCost());
+    }
+
     return params.join("&");
   },
 
@@ -74,12 +87,28 @@ Hippocrates.Certificates = {
     return $("#certificate_rest_time").val();
   },
 
+  getSurgicalTreatment: function () {
+    return $("#certificate_surgical_treatment").val();
+  },
+
+  getSurgeryTentativeDate: function () {
+    return $("#certificate_surgery_tentative_date").val();
+  },
+
+  getSurgeryCost: function () {
+    return $("#certificate_surgery_cost").val();
+  },
+
   isAttendance: function (certificateType) {
     return certificateType === "attendance";
   },
 
   isRest: function (certificateType) {
     return certificateType === "rest";
+  },
+
+  isSurgery: function (certificateType) {
+    return certificateType === "surgery";
   },
 
   toggleTimeControls: function(certificateType) {
@@ -90,8 +119,13 @@ Hippocrates.Certificates = {
     $(".rest-controls").toggle(this.isRest(certificateType));
   },
 
+  toggleSurgeryControls: function (certificateType) {
+    $(".surgery-controls").toggle(this.isSurgery(certificateType));
+  },
+
   toggleControls: function (certificateType) {
     this.toggleTimeControls(certificateType);
     this.toggleRestControls(certificateType);
+    this.toggleSurgeryControls(certificateType);
   }
 }

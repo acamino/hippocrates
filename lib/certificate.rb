@@ -8,6 +8,8 @@ class Certificate
     @options = options
   end
 
+  # rubocop:disable MethodLength
+  # rubocop:disable Metrics/AbcSize
   def build
     {
       patient: patient,
@@ -17,7 +19,10 @@ class Certificate
       current_date: current_date,
       start_time: options.fetch(:start_time, ''),
       end_time: options.fetch(:end_time, ''),
-      rest_time: options.fetch(:rest_time, '')
+      rest_time: options.fetch(:rest_time, ''),
+      surgical_treatment: options.fetch(:surgical_treatment, ''),
+      surgery_tentative_date: options.fetch(:surgery_tentative_date, ''),
+      surgery_cost: options.fetch(:surgery_cost, '')
     }
   end
 

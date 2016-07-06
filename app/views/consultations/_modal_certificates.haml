@@ -18,6 +18,7 @@
             .col-md-6
               %select.form-control.input-sm#certificate
                 %option{ value: "attendance" } Asistencia
+                %option{ value: "surgery" } Cirugía
                 %option{ value: "specialty" } Especialidad ORL
                 %option{ value: "fracture" } Fractura de huesos propios nasales
                 %option{ value: "rest" } Reposo médico
@@ -34,6 +35,7 @@
               .col-md-6
                 %input.form-control.input-sm#certificate_end_time{ type: "text" }
                 %em.text-muted Hora de fin de consulta
+
           .rest-controls{ style: "display:none" }
             .form-group
               %label.col-sm-2.control-label{ for: "certificate_rest_time" } Inicio
@@ -41,6 +43,22 @@
                 %input.form-control.input-sm#certificate_rest_time{ type: "number" }
                 %em.text-muted Tiempo de reposo médico (en horas)
 
+          .surgery-controls{ style: "display:none" }
+            .form-group
+              %label.col-sm-2.control-label{ for: "certificate_surgical_treatment" } Tratamiento
+              .col-md-6
+                %input.form-control.input-sm#certificate_surgical_treatment{ type: "text" }
+                %em.text-muted Tratamiento quirúrgico
+            .form-group
+              %label.col-sm-2.control-label{ for: "certificate_surgery_tentative_date" } Fecha
+              .col-md-6
+                %input.form-control.input-sm#certificate_surgery_tentative_date{ type: "text" }
+                %em.text-muted Fecha tentativa de la cirugía.
+            .form-group
+              %label.col-sm-2.control-label{ for: "certificate_surgery_cost" } Costo
+              .col-md-6
+                %input.form-control.input-sm#certificate_surgery_cost{ type: "number" }
+                %em.text-muted Costo de la cirugía (en dólares)
       .modal-footer
         %button.btn.btn-default{ "data-dismiss": "modal" } Cerrar
         = link_to "Descargar certificado", download_certificates_path(consultation_id: @consultation.id, certificate_type: "simple"), class: 'btn btn-primary'
