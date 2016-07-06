@@ -8,18 +8,14 @@ Hippocrates.Certificates = {
     });
 
     $("#certificate").on("change", function() {
-      var certificateType = $(this).val();
-      self.toggleControls(certificateType);
-      self.updateUrl(certificateType);
+      self.updateUrlAndToggleControls();
     });
 
     $("#certificate_start_time, #certificate_end_time").datetimepicker({
       format: 'LT',
     }).on("dp.change", function() {
-      var certificateType = $("#certificate").val();
-      self.updateUrl(certificateType);
+      self.updateUrl();
     });
-
 
     var observableControls = [
       "#certificate_rest_time",
@@ -28,18 +24,30 @@ Hippocrates.Certificates = {
       "#certificate_surgery_cost"
     ].join(", ")
     $(observableControls).on("change", function() {
-      var certificateType = $("#certificate").val();
-      self.updateUrl(certificateType);
+      self.updateUrl();
     });
+
+    self.updateUrlAndToggleControls();
   },
 
   openModal: function() {
     $("#certificates").modal({ backdrop: "static" });
   },
 
-  updateUrl: function(certificateType) {
+  updateUrl: function(certificateType = "") {
+    if (certificateType === "") {
+      certificateType = $("#certificate").val();
+    }
     var url = this.buildUrl(certificateType);
+
     $("#certificates").find(".btn-primary").attr("href", url);
+  },
+
+  updateUrlAndToggleControls: function () {
+    var certificateType = $("#certificate").val();
+
+    this.updateUrl(certificateType);
+    this.toggleControls(certificateType);
   },
 
   buildUrl: function(certificateType) {
