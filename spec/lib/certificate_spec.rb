@@ -15,17 +15,14 @@ describe Certificate do
     end
     let(:certificate) do
       {
+        patient: patient,
+        consultation: consultation,
+        diagnosis: consultation.diagnoses.first,
         definite_article: definite_article,
-        patient_name: 'Brown Rene',
-        patient_age: '3 años',
-        identity_card_number: 'icn-101',
-        disease: 'disease',
-        disease_code: 'A01',
         current_date: '21 de Octubre de 2015',
         start_time: start_time,
         end_time: end_time,
-        rest_time: rest_time,
-        consultation_reason: 'reason'
+        rest_time: rest_time
       }
     end
 
