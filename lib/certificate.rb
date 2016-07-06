@@ -8,6 +8,8 @@ class Certificate
     @options = options
   end
 
+  # rubocop:disable MethodLength
+  # rubocop:disable Metrics/AbcSize
   def build
     {
       definite_article: definite_article,
