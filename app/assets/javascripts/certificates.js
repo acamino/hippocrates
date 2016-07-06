@@ -119,8 +119,8 @@ Hippocrates.Certificates = {
     return certificateType === "surgery";
   },
 
-  toggleTimeControls: function(certificateType) {
-    $(".time-controls").toggle(this.isAttendance(certificateType));
+  toggleAttendanceControls: function(certificateType) {
+    $(".attendance-controls").toggle(this.isAttendance(certificateType));
   },
 
   toggleRestControls: function (certificateType) {
@@ -132,7 +132,7 @@ Hippocrates.Certificates = {
   },
 
   toggleControls: function (certificateType) {
-    this.toggleTimeControls(certificateType);
+    this.toggleAttendanceControls(certificateType);
     this.toggleRestControls(certificateType);
     this.toggleSurgeryControls(certificateType);
   }
