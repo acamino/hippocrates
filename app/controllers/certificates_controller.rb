@@ -9,7 +9,7 @@ class CertificatesController < ApplicationController
   def certificate
     template = Sablon.template(
       "#{Rails.root}/public/templates/certificates/#{certificate_type}.docx")
-    template.render_to_string(Certificate.for(@consultation, certificate_options).build)
+    template.render_to_string(Certificate.for(@consultation, certificate_options))
   end
 
   def download_options

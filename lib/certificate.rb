@@ -1,6 +1,6 @@
 class Certificate
   def self.for(consultation, options = {})
-    new(consultation, options)
+    new(consultation, options).build
   end
 
   def initialize(consultation, options)
@@ -20,8 +20,8 @@ class Certificate
       start_time: options.fetch(:start_time, ''),
       end_time: options.fetch(:end_time, ''),
       rest_time: options.fetch(:rest_time, ''),
-      surgical_treatment: options.fetch(:surgical_treatment, ''),
-      surgery_tentative_date: options.fetch(:surgery_tentative_date, ''),
+      surgical_treatment: options.fetch(:surgical_treatment, '').upcase,
+      surgery_tentative_date: options.fetch(:surgery_tentative_date, '').upcase,
       surgery_cost: options.fetch(:surgery_cost, '')
     }
   end

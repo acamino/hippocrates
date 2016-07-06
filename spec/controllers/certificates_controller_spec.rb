@@ -17,8 +17,8 @@ describe CertificatesController do
 
     before do
       expect(Sablon).to receive(:template) { template }
+      expect(Certificate).to receive(:for)
       expect(template).to receive(:render_to_string) { certificate }
-
       allow(controller).to receive(:send_data)
         .with(certificate, options) { controller.render nothing: true }
     end

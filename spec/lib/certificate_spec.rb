@@ -38,7 +38,7 @@ describe Certificate do
 
       it 'builds certificate for male' do
         Timecop.freeze('2015-10-21') do
-          expect(described_class.for(consultation).build).to eq(certificate)
+          expect(described_class.for(consultation)).to eq(certificate)
         end
       end
     end
@@ -49,7 +49,7 @@ describe Certificate do
 
       it 'builds certificate for female' do
         Timecop.freeze('2015-10-21') do
-          expect(described_class.for(consultation).build).to eq(certificate)
+          expect(described_class.for(consultation)).to eq(certificate)
         end
       end
     end
@@ -63,7 +63,7 @@ describe Certificate do
       it 'builds certificate for attendance' do
         Timecop.freeze('2015-10-21') do
           options = { start_time: '10:00 am', end_time: '11:30 am' }
-          expect(described_class.for(consultation, options).build).to eq(certificate)
+          expect(described_class.for(consultation, options)).to eq(certificate)
         end
       end
     end
@@ -76,14 +76,14 @@ describe Certificate do
       it 'builds certificate for rest' do
         Timecop.freeze('2015-10-21') do
           options = { rest_time: '48' }
-          expect(described_class.for(consultation, options).build).to eq(certificate)
+          expect(described_class.for(consultation, options)).to eq(certificate)
         end
       end
     end
 
     context 'when surgery options are given' do
-      let(:surgical_treatment)     { 'treatment' }
-      let(:surgery_tentative_date) { 'tentative date' }
+      let(:surgical_treatment)     { 'TREATMENT' }
+      let(:surgery_tentative_date) { 'TENTATIVE DATE' }
       let(:surgery_cost)           { 'cost' }
       let(:gender)                 { 'female' }
       let(:definite_article)       { 'la' }
@@ -96,7 +96,7 @@ describe Certificate do
             surgery_cost: 'cost'
           }
 
-          expect(described_class.for(consultation, options).build).to eq(certificate)
+          expect(described_class.for(consultation, options)).to eq(certificate)
         end
       end
     end
