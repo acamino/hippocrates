@@ -1,41 +1,21 @@
 class CertificatesController < ApplicationController
   def download
     @consultation = Consultation.find(params[:consultation_id])
-
-    template = Sablon.template("#{Rails.root}/public/templates/certificates/simple.docx")
-    certificate = template.render_to_string(context)
-
-    send_data(certificate, type: 'application/msword',
-                           disposition: 'attachment',
-                           filename: 'certificate.docx')
+    send_data(certificate, download_options)
   end
 
   private
 
-  def patient
-    @consultation.patient
+  def certificate
+    template = Sablon.template("#{Rails.root}/public/templates/certificates/simple.docx")
+    template.render_to_string(Certificate.for(@consultation).build)
   end
 
-  def diagnosis
-    @consultation.diagnoses.first
-  end
-
-  def definite_article
-    return 'el' if patient.male?
-    'la'
-  end
-
-  def date
-    I18n.localize(Date.today, format: :long)
-  end
-
-  def context
+  def download_options
     {
-      definite_article: definite_article,
-      patient_name: patient.name,
-      identity_card_number: patient.identity_card_number,
-      disease: "#{diagnosis.description} (#{diagnosis.disease_code})",
-      date: date
+      type: 'application/msword',
+      disposition: 'attachment',
+      filename: 'certificate.docx'
     }
   end
 end
