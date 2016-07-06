@@ -9,18 +9,21 @@ describe Certificate do
       build(:patient, identity_card_number: 'icn-101',
                       first_name: 'Rene',
                       last_name: 'Brown',
+                      birthdate: Date.new(2011, 12, 8),
                       gender: gender)
     end
     let(:certificate) do
       {
         definite_article: definite_article,
         patient_name: 'Brown Rene',
+        patient_age: '3 años',
         identity_card_number: 'icn-101',
         disease: 'disease',
         disease_code: 'A01',
         current_date: '21 de Octubre de 2015',
         start_time: start_time,
-        end_time: end_time
+        end_time: end_time,
+        consultation_reason: 'reason'
       }
     end
 
