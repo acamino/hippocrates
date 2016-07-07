@@ -32,6 +32,6 @@ class CertificatesController < ApplicationController
       surgical_treatment: params[:surgical_treatment],
       surgery_tentative_date: params[:surgery_tentative_date],
       surgery_cost: params[:surgery_cost]
-    }
+    }.reject { |_, v| v.nil? }
   end
 end
