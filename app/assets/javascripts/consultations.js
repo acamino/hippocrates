@@ -49,8 +49,8 @@ Hippocrates.Consultations = {
       var consultationHeader = this.renderTemplate("#consultation-header", consultation);
       var consultationBody = this.renderTemplate("#consultation-body", consultation);
 
-      $(".modal").find(".modal-title").html(consultationHeader);
-      $(".modal").find(".modal-body").html(consultationBody);
+      $("#consultation").find(".modal-title").html(consultationHeader);
+      $("#consultation").find(".modal-body").html(consultationBody);
     }
   },
 
