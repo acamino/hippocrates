@@ -19,14 +19,6 @@ class Consultation < ActiveRecord::Base
     first
   end
 
-  def miscellaneous?
-    miscellaneous.present?
-  end
-
-  def next_appointment?
-    next_appointment.present?
-  end
-
   %w(right_ear left_ear left_nostril right_nostril nasopharynx
      nose_others oral_cavity oropharynx hypopharynx larynx neck
      others).each do |method_name|
@@ -36,6 +28,22 @@ class Consultation < ActiveRecord::Base
       return 'NORMAL' if value.blank?
       value
     end
+  end
+
+  def date
+    self[:created_at].strftime('%Y-%m-%d')
+  end
+
+  def time
+    self[:created_at].strftime('%I:%M %p')
+  end
+
+  def miscellaneous?
+    miscellaneous.present?
+  end
+
+  def next_appointment?
+    next_appointment.present?
   end
 
   private

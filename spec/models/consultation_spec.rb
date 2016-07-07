@@ -19,6 +19,15 @@ describe Consultation do
     end
   end
 
+  describe '.most_recent' do
+    let!(:old_consultation)    { create :consultation, created_at: 1.hour.ago }
+    let!(:recent_consultation) { create :consultation, created_at: Time.now }
+
+    it 'returns the most recent consultation' do
+      expect(Consultation.most_recent).to eq(recent_consultation)
+    end
+  end
+
   describe 'override getters' do
     context 'when the attribute has a value' do
       it 'returns the same value' do
@@ -35,12 +44,17 @@ describe Consultation do
     end
   end
 
-  describe '.most_recent' do
-    let!(:old_consultation)    { create :consultation, created_at: 1.hour.ago }
-    let!(:recent_consultation) { create :consultation, created_at: Time.now }
+  describe '#date' do
+    it 'returns the consultation date' do
+      consultation = build(:consultation, created_at: '2016-01-15 11:15')
+      expect(consultation.date).to eq('2016-01-15')
+    end
+  end
 
-    it 'returns the most recent consultation' do
-      expect(Consultation.most_recent).to eq(recent_consultation)
+  describe '#time' do
+    it 'returns the consultation time' do
+      consultation = build(:consultation, created_at: '2016-01-15 11:15')
+      expect(consultation.time).to eq('11:15 AM')
     end
   end
 
