@@ -181,7 +181,7 @@
                 %th.col-md-6 Receta
                 %th.col-md-6 Indicaciones
             %tbody
-              = f.fields_for :prescriptions, f.object.prescriptions.order(:id) do |ff|
+              = f.fields_for :prescriptions do |ff|
                 %tr
                   %td
                     = ff.text_field :inscription, class: "form-control input-sm inscription", autocomplete: "off"

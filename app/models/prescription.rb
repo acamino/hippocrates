@@ -3,4 +3,6 @@ class Prescription < ActiveRecord::Base
 
   validates :inscription,
             :subscription, presence: true
+
+  default_scope { order(id: :asc) }
 end
