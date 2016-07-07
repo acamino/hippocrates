@@ -58,6 +58,13 @@ describe Consultation do
     end
   end
 
+  describe '#pretty_date' do
+    it 'returns the formatted consultation date' do
+      consultation = build(:consultation, created_at: '2016-04-13 11:15')
+      expect(consultation.pretty_date).to eq('Abril 13 de 2016')
+    end
+  end
+
   describe '#miscellaneous?' do
     let(:consultation) { build(:consultation) }
 

@@ -38,6 +38,10 @@ class Consultation < ActiveRecord::Base
     self[:created_at].strftime('%I:%M %p')
   end
 
+  def pretty_date
+    I18n.localize(self[:created_at], format: '%B %d de %Y')
+  end
+
   def miscellaneous?
     miscellaneous.present?
   end
