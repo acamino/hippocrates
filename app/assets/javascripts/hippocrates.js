@@ -2,6 +2,7 @@ if(typeof Hippocrates === "undefined") {
   var Hippocrates = {};
   Hippocrates.Autocomplete = {};
   Hippocrates.Certificates = {};
+  Hippocrates.ClinicalHistory = {};
   Hippocrates.Consultations = {};
   Hippocrates.Hint = {};
   Hippocrates.Prescription = {};
@@ -10,6 +11,7 @@ if(typeof Hippocrates === "undefined") {
 $(document).ready(function() {
     Hippocrates.Autocomplete.init();
     Hippocrates.Certificates.init();
+    Hippocrates.ClinicalHistory.init();
     Hippocrates.Consultations.init();
     Hippocrates.Hint.init();
     Hippocrates.Prescription.init();

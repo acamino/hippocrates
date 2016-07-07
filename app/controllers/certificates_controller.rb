@@ -1,6 +1,6 @@
 class CertificatesController < ApplicationController
   def download
-    @consultation = Consultation.find(params[:consultation_id])
+    @consultation = Consultation.find(consultation_id)
     send_data(certificate, download_options)
   end
 
@@ -20,10 +20,18 @@ class CertificatesController < ApplicationController
     }
   end
 
+  def consultation_id
+    consultations = params[:consultations]
+    return consultations.split('_').first if consultations.present?
+
+    params[:consultation_id]
+  end
+
   def certificate_type
     params[:certificate_type]
   end
 
+  # rubocop:disable Metrics/AbcSize
   def certificate_options
     {
       start_time: params[:start_time],
@@ -31,7 +39,8 @@ class CertificatesController < ApplicationController
       rest_time: params[:rest_time],
       surgical_treatment: params[:surgical_treatment],
       surgery_tentative_date: params[:surgery_tentative_date],
-      surgery_cost: params[:surgery_cost]
+      surgery_cost: params[:surgery_cost],
+      consultations: params[:consultations]
     }.reject { |_, v| v.nil? }
   end
 end

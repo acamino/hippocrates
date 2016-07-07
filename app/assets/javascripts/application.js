@@ -19,6 +19,7 @@
 //= require hippocrates
 //= require autocomplete
 //= require certificates
+//= require clinical_history
 //= require consultations
 //= require hint
 //= require prescription

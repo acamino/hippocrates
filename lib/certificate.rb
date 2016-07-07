@@ -22,7 +22,8 @@ class Certificate
       rest_time: options.fetch(:rest_time, ''),
       surgical_treatment: options.fetch(:surgical_treatment, '').upcase,
       surgery_tentative_date: options.fetch(:surgery_tentative_date, '').upcase,
-      surgery_cost: options.fetch(:surgery_cost, '')
+      surgery_cost: options.fetch(:surgery_cost, ''),
+      consultations: consultations
     }
   end
 
@@ -44,5 +45,12 @@ class Certificate
 
   def current_date
     I18n.localize(Date.today, format: :long)
+  end
+
+  def consultations
+    selected_consultations =
+      options.fetch(:consultations, '').split('_').map(&:to_i)
+
+    patient.consultations.select { |c| selected_consultations.include? c.id }
   end
 end

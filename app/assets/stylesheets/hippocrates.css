@@ -235,6 +235,10 @@ input[type="email"] {
   margin-bottom: 10px;
 }
 
+.check-consultation, .check-all {
+  margin-left: 10px !important;
+}
+
 #printable-prescription {
   display: none;
 }

@@ -8,13 +8,14 @@ describe Certificate do
     let(:surgical_treatment)     { '' }
     let(:surgery_tentative_date) { '' }
     let(:surgery_cost)           { '' }
-    let(:consultation) { build(:consultation, :with_diagnoses, patient: patient) }
+    let(:consultations)          { [] }
+    let(:consultation) { create(:consultation, :with_diagnoses, patient: patient) }
     let(:patient) do
-      build(:patient, identity_card_number: 'icn-101',
-                      first_name: 'Rene',
-                      last_name: 'Brown',
-                      birthdate: Date.new(2011, 12, 8),
-                      gender: gender)
+      create(:patient, identity_card_number: 'icn-101',
+                       first_name: 'Rene',
+                       last_name: 'Brown',
+                       birthdate: Date.new(2011, 12, 8),
+                       gender: gender)
     end
     let(:certificate) do
       {
@@ -28,7 +29,8 @@ describe Certificate do
         rest_time: rest_time,
         surgical_treatment: surgical_treatment,
         surgery_tentative_date: surgery_tentative_date,
-        surgery_cost: surgery_cost
+        surgery_cost: surgery_cost,
+        consultations: consultations
       }
     end
 
@@ -97,6 +99,34 @@ describe Certificate do
           }
 
           expect(described_class.for(consultation, options)).to eq(certificate)
+        end
+      end
+    end
+
+    context 'when medical history options are given' do
+      let(:gender)           { 'female' }
+      let(:definite_article) { 'la' }
+
+      it 'builds certificate for medical history' do
+        Timecop.freeze('2015-10-21') do
+          options = { consultations: '' }
+          expect(described_class.for(consultation, options)).to eq(certificate)
+        end
+      end
+
+      context 'when no consultations are selected' do
+        it 'returns an empty list' do
+          options = { consultations: '' }
+          certificate = described_class.for(consultation, options)
+          expect(certificate[:consultations]).to eq([])
+        end
+      end
+
+      context 'when consultations are selected' do
+        it 'returns a list of selected certificates' do
+          options = { consultations: consultation.id.to_s }
+          certificate = described_class.for(consultation, options)
+          expect(certificate[:consultations]).to eq([consultation])
         end
       end
     end
