@@ -19,6 +19,22 @@ describe Consultation do
     end
   end
 
+  describe 'override getters' do
+    context 'when the attribute has a value' do
+      it 'returns the same value' do
+        consultation = build(:consultation, right_ear: 'RIGHT EAR')
+        expect(consultation.right_ear).to eq('RIGHT EAR')
+      end
+    end
+
+    context 'when the attribute is empty' do
+      it 'returns the NORMAL' do
+        consultation = build(:consultation, right_ear: '')
+        expect(consultation.right_ear).to eq('NORMAL')
+      end
+    end
+  end
+
   describe '.most_recent' do
     let!(:old_consultation)    { create :consultation, created_at: 1.hour.ago }
     let!(:recent_consultation) { create :consultation, created_at: Time.now }

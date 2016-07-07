@@ -27,6 +27,17 @@ class Consultation < ActiveRecord::Base
     next_appointment.present?
   end
 
+  %w(right_ear left_ear left_nostril right_nostril nasopharynx
+     nose_others oral_cavity oropharynx hypopharynx larynx neck
+     others).each do |method_name|
+    define_method(method_name) do
+      value = self[method_name]
+
+      return 'NORMAL' if value.blank?
+      value
+    end
+  end
+
   private
 
   def normalize_values
