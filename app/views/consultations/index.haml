@@ -25,8 +25,8 @@
     %span.semi-strong
       = @patient.medical_history
 
-.row.pull-right
-  .col-md-12.buttons
+.row
+  .col-md-12.text-right.buttons
     %a.btn.btn-primary(href = "#") Descargar historia
     = link_to "Nueva consulta", new_patient_consultation_path(@patient), class: "btn btn-success"
 .row
