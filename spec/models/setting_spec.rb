@@ -9,9 +9,9 @@ describe Setting do
     it { is_expected.to validate_uniqueness_of :name }
   end
 
-  ['maximum_diagnoses', 'maximum_prescriptions'].each do |setting_name|
+  %w(maximum_diagnoses maximum_prescriptions).each do |setting_name|
     describe ".#{setting_name}" do
-      it "returns its value" do
+      it 'returns its value' do
         described_class.create(name: setting_name, value: '4')
         expect(described_class.send(setting_name)).to eq(4)
       end

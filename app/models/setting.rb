@@ -1,6 +1,6 @@
 class Setting < ActiveRecord::Base
-  MAXIMUM_DIAGNOSES = 'maximum_diagnoses'
-  MAXIMUM_PRESCRIPTIONS = 'maximum_prescriptions'
+  MAXIMUM_DIAGNOSES = 'maximum_diagnoses'.freeze
+  MAXIMUM_PRESCRIPTIONS = 'maximum_prescriptions'.freeze
 
   validates_presence_of :name, :value
   validates_uniqueness_of :name
