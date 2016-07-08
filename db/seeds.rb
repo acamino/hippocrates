@@ -414,3 +414,8 @@ Disease.create([
   { code: 'H814',  name: 'VERTIGO DE ORIGEN CENTRAL' },
   { code: 'H811',  name: 'VERTIGO PAROXISTICO BENIGNO' }
 ])
+
+Setting.create([
+  { name: 'maximum_diagnoses', value: '5' },
+  { name: 'maximum_prescriptions', value: '5' }
+])
