@@ -5,6 +5,7 @@ class Setting < ActiveRecord::Base
 
   validates_presence_of :name, :value
   validates_uniqueness_of :name
+  validates_numericality_of :value, only_integer: true
 
   [MAXIMUM_DIAGNOSES, MAXIMUM_PRESCRIPTIONS].each do |setting_name|
     define_singleton_method setting_name do

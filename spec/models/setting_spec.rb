@@ -7,6 +7,7 @@ describe Setting do
     it { is_expected.to validate_presence_of :name }
     it { is_expected.to validate_presence_of :value }
     it { is_expected.to validate_uniqueness_of :name }
+    it { is_expected.to validate_numericality_of(:value).only_integer }
   end
 
   %w(maximum_diagnoses maximum_prescriptions).each do |setting_name|
