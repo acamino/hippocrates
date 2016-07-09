@@ -17,6 +17,7 @@ end
 
 Given(/^Bob is not a registered patient$/) do
   log_in(create(:user))
+  create(:setting, :medical_history_sequence)
   bob = Patient.where(first_name: 'Bob').first
   bob.destroy if bob.present?
 end
@@ -28,7 +29,6 @@ end
 When(/^I input Bob information$/) do
   fill_in :patient_birthdate, with: '1990/02/10'
   fill_in :patient_identity_card_number, with: '0502231248'
-  fill_in :patient_medical_history, with: '20073'
   fill_in :patient_last_name, with: 'Bob'
   fill_in :patient_first_name, with: 'Smith'
   fill_in :patient_profession, with: 'Developer'

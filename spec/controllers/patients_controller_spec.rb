@@ -1,7 +1,10 @@
 require 'rails_helper'
 
 describe PatientsController do
-  before { sign_in_user_mock }
+  before do
+    create(:setting, :medical_history_sequence, value: '4')
+    sign_in_user_mock
+  end
 
   describe '#index' do
     let(:patients) { [create(:patient)] }
@@ -34,15 +37,10 @@ describe PatientsController do
   end
 
   describe '#new' do
-    let(:patient) { double(:patient) }
-
-    before do
-      allow(Patient).to receive(:new) { patient }
-      get :new
-    end
+    before { get :new }
 
     it 'assings @patient' do
-      expect(assigns(:patient)).to eq(patient)
+      expect(assigns(:patient)).to be_a_new(Patient)
     end
 
     it { is_expected.to render_template :new }
@@ -65,6 +63,11 @@ describe PatientsController do
         end.to change { Patient.count }.by(1)
       end
 
+      it 'updates the medical history sequence', :skip_on_before do
+        post :create, patient: attributes_for_patient
+        expect(Setting::MedicalHistorySequence.next).to eq(6)
+      end
+
       it { is_expected.to redirect_to patients_path }
       it { is_expected.to respond_with :redirect }
     end
@@ -78,6 +81,11 @@ describe PatientsController do
         expect do
           post :create, patient: attributes_for_patient
         end.to change { Patient.count }.by(0)
+      end
+
+      it 'does not update the medical history sequence', :skip_on_before do
+        post :create, patient: attributes_for_patient
+        expect(Setting::MedicalHistorySequence.next).to eq(5)
       end
 
       it { is_expected.to render_template :new }

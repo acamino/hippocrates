@@ -25,11 +25,13 @@ class PatientsController < ApplicationController
 
   def new
     @patient = Patient.new
+    @patient.medical_history = Setting::MedicalHistorySequence.next
   end
 
   def create
     @patient = Patient.new(patient_params)
     if @patient.save
+      Setting::MedicalHistorySequence.new.save
       # XXX: Pull out the messages form a locale file.
       redirect_to patients_path, notice: 'Paciente creado correctamente'
     else
