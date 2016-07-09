@@ -21,7 +21,7 @@ Hippocrates.ClinicalHistory = {
     var consultations = this.getSelectedConsultations();
     var url = this.buildUrl(consultations);
 
-    $(".buttons").find(".btn-primary").attr("href", url);
+    $(".download-medical-history").attr("href", url);
   },
 
   buildUrl: function (consultations) {
