@@ -2,6 +2,11 @@ Hippocrates.Consultations = {
   init: function() {
     var self = this;
 
+    $("#consultation_reason").on("keyup", function () {
+      var reason = $(this).val();
+      $("#consultation_ongoing_issue").val(reason);
+    });
+
     $("#show").on("click", function(e) {
       e.preventDefault();
       self.openModal();
