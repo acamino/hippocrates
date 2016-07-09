@@ -31,8 +31,6 @@ class ConsultationsController < ApplicationController
     diagnoses_attributes: [:id, :disease_code, :description, :type],
     prescriptions_attributes: [:id, :inscription, :subscription]
   ].freeze
-  MAXIMUM_DIAGNOSES = 4
-  MAXIMUM_PRESCRIPTIONS = 7
 
   before_action :fetch_consultation, only: [:edit, :update]
   before_action :fetch_patient
@@ -43,8 +41,8 @@ class ConsultationsController < ApplicationController
 
   def new
     @consultation = Consultation.new
-    MAXIMUM_DIAGNOSES.times     { @consultation.diagnoses.build }
-    MAXIMUM_PRESCRIPTIONS.times { @consultation.prescriptions.build }
+    maximum_diagnoses.times     { @consultation.diagnoses.build }
+    maximum_prescriptions.times { @consultation.prescriptions.build }
   end
 
   def create
@@ -87,11 +85,19 @@ class ConsultationsController < ApplicationController
     { special: params[:consultation][:patient][:special] }
   end
 
+  def maximum_diagnoses
+    Setting.maximum_diagnoses
+  end
+
+  def maximum_prescriptions
+    Setting.maximum_prescriptions
+  end
+
   def remaining_diagnoses
-    MAXIMUM_DIAGNOSES - @consultation.diagnoses.count
+    maximum_diagnoses - @consultation.diagnoses.count
   end
 
   def remaining_prescriptions
-    MAXIMUM_PRESCRIPTIONS - @consultation.prescriptions.count
+    maximum_prescriptions - @consultation.prescriptions.count
   end
 end

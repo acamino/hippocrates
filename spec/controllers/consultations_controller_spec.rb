@@ -1,7 +1,12 @@
 require 'rails_helper'
 
 describe ConsultationsController do
-  before { sign_in_user_mock }
+  before do
+    create(:setting, :maximum_diagnoses)
+    create(:setting, :maximum_prescriptions)
+
+    sign_in_user_mock
+  end
 
   describe '#index' do
     let(:patient) { create(:patient, :with_consultations) }
@@ -23,12 +28,10 @@ describe ConsultationsController do
   end
 
   describe '#new' do
-    let(:patient)      { double(:patient) }
-    let(:consultation) { double(:consultation) }
+    let(:patient) { create(:patient, :with_consultations) }
 
     before do
-      allow(Patient).to receive(:find).with('1') { patient }
-      get :new, patient_id: '1'
+      get :new, patient_id: patient.id
     end
 
     it 'assings @patient' do
