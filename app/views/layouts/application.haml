@@ -9,6 +9,7 @@
     = stylesheet_link_tag '//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'
     = stylesheet_link_tag '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker3.min.css'
     = stylesheet_link_tag '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css'
+    = stylesheet_link_tag '//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/css/bootstrap-editable.css'
     = stylesheet_link_tag 'application', media: 'all'
     = csrf_meta_tags
   %body
@@ -27,6 +28,7 @@
               = nav_to 'Pacientes Especiales', special_patients_path
               = nav_to 'Medicinas', medicines_path
               = nav_to 'Enfermedades', diseases_path
+              = nav_to 'Preferencias', settings_path
               = yield :nav_option
 
           %ul.nav.navbar-nav.navbar-right
@@ -55,3 +57,4 @@
     = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'
     = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js'
     = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/jQuery.print/1.4.1/jQuery.print.min.js'
+    = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.js'

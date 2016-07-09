@@ -6,6 +6,7 @@ if(typeof Hippocrates === "undefined") {
   Hippocrates.Consultations = {};
   Hippocrates.Hint = {};
   Hippocrates.Prescription = {};
+  Hippocrates.Settings = {};
 }
 
 $(document).ready(function() {
@@ -15,6 +16,7 @@ $(document).ready(function() {
     Hippocrates.Consultations.init();
     Hippocrates.Hint.init();
     Hippocrates.Prescription.init();
+    Hippocrates.Settings.init();
 
     $("#consultation_next_appointment").datepicker({
         todayHighlight: true,

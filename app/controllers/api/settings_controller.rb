@@ -3,5 +3,15 @@ module API
     def index
       render json: Setting.all
     end
+
+    def update
+      setting = Setting.find(params[:id])
+
+      if setting.update_attributes(value: params[:value])
+        render json: setting
+      else
+        render json: { errors: setting.errors.messages }, status: :unprocessable_entity
+      end
+    end
   end
 end

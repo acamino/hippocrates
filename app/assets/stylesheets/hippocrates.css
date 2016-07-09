@@ -239,6 +239,10 @@ input[type="email"] {
   margin-left: 10px !important;
 }
 
+.editableform .form-control {
+  width: 50px;
+}
+
 #printable-prescription {
   display: none;
 }

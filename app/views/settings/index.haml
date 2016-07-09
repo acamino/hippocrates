@@ -1,0 +1,26 @@
+.row
+  .col-md-12
+    %table.table.table-striped
+      %thead
+        %tr
+          %th.col-md-4 Preferencia
+          %th.col-md-8 Valor
+      %tbody
+        %tr
+          %td Máximo número de diagnósticos
+          %td
+            %a#diagnoses{"data-pk": @maximum_diagnoses.id,
+                         "data-value": @maximum_diagnoses.value,
+                         "data-title": "Select status",
+                         "data-type": "select",
+                         "data-url": "/api/settings/#{@maximum_diagnoses.id}",
+                         "href": "#"}= @maximum_diagnoses.value
+        %tr
+          %td Máximo número de prescripciones
+          %td
+            %a#prescriptions{"data-pk": @maximum_prescriptions.id,
+                             "data-value": @maximum_prescriptions.value,
+                             "data-title": "Select status",
+                             "data-type": "select",
+                             "data-url": "/api/settings/#{@maximum_prescriptions.id}",
+                             "href": "#"}= @maximum_prescriptions.value

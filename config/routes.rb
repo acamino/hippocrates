@@ -6,13 +6,14 @@ Rails.application.routes.draw do
     get :download, on: :collection
   end
 
-  resources :medicines, only: [:index, :new, :create, :edit, :update]
   resources :diseases, only: [:index, :new, :create, :edit, :update]
+  resources :medicines, only: [:index, :new, :create, :edit, :update]
   resources :patients, only: [:index, :new, :create, :edit, :update] do
     resources :anamneses, only: [:new, :create, :edit, :update]
     resources :consultations, only: [:index, :new, :create, :edit, :update]
     get :special, on: :collection
   end
+  resources :settings, only: [:index]
 
   namespace :api, defaults: { format: 'json' } do
     resources :patients, only: [] do
@@ -27,6 +28,6 @@ Rails.application.routes.draw do
 
     resources :diseases, only: [:index]
     resources :medicines, only: [:index]
-    resources :settings, only: [:index]
+    resources :settings, only: [:index, :update]
   end
 end

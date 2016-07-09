@@ -5,8 +5,8 @@ describe API::SettingsController do
 
   describe '#index' do
     before do
-      Setting.create(name: 'name-1', value: 'value-1')
-      Setting.create(name: 'name-2', value: 'value-2')
+      create(:setting, name: 'name-1', value: 'value-1')
+      create(:setting, name: 'name-2', value: 'value-2')
 
       get :index, format: :json
     end
@@ -17,5 +17,32 @@ describe API::SettingsController do
     end
 
     it { is_expected.to respond_with :ok }
+  end
+
+  describe '#update' do
+    let!(:setting) { create(:setting, value: 'original value') }
+    let(:value)    { 'updated value' }
+
+    before do
+      patch :update, id: setting.id, value: value
+    end
+
+    context 'when the information is valid' do
+      it 'updates setting' do
+        expect(setting.reload.value).to eq('updated value')
+      end
+
+      it { is_expected.to respond_with :ok }
+    end
+
+    context 'when the information is invalid' do
+      let(:value) { '' }
+
+      it 'does not update the setting' do
+        expect(setting.reload.value).to eq('original value')
+      end
+
+      it { is_expected.to respond_with :unprocessable_entity }
+    end
   end
 end

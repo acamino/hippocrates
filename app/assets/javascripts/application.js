@@ -23,3 +23,4 @@
 //= require consultations
 //= require hint
 //= require prescription
+//= require settings
