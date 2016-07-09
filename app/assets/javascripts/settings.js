@@ -8,5 +8,7 @@ Hippocrates.Settings = {
         return { value: option, text: option };
       })
     });
+
+    $('#sequence').editable({});
   }
 };

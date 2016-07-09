@@ -7,20 +7,37 @@
           %th.col-md-8 Valor
       %tbody
         %tr
-          %td Máximo número de diagnósticos
           %td
-            %a#diagnoses{"data-pk": @maximum_diagnoses.id,
+            %b Sequencia de Historia Clínica
+            %br
+            %b.text-muted Última historia clínica
+          %td
+            %a#sequence{"data-pk":    @medical_history_sequence.id,
+                        "data-value": @medical_history_sequence.value,
+                        "data-type":  "text",
+                        "data-url":   "#{api_setting_path(@medical_history_sequence)}",
+                        "href": "#"}= @medical_history_sequence.value
+        %tr
+          %td
+            %b Diagnósticos
+            %br
+            %span.text-muted
+              Cantidad máxima de <strong>diagnósticos</strong> a mostrarse en consulta
+          %td
+            %a#diagnoses{"data-pk":    @maximum_diagnoses.id,
                          "data-value": @maximum_diagnoses.value,
-                         "data-title": "Select status",
-                         "data-type": "select",
-                         "data-url": "/api/settings/#{@maximum_diagnoses.id}",
+                         "data-type":  "select",
+                         "data-url":   "#{api_setting_path(@maximum_diagnoses)}",
                          "href": "#"}= @maximum_diagnoses.value
         %tr
-          %td Máximo número de prescripciones
           %td
-            %a#prescriptions{"data-pk": @maximum_prescriptions.id,
+            %b Prescripciones
+            %br
+            %span.text-muted
+              Cantidad máxima de <strong>prescripciones</strong> a mostrarse en consulta
+          %td
+            %a#prescriptions{"data-pk":    @maximum_prescriptions.id,
                              "data-value": @maximum_prescriptions.value,
-                             "data-title": "Select status",
-                             "data-type": "select",
-                             "data-url": "/api/settings/#{@maximum_prescriptions.id}",
+                             "data-type":  "select",
+                             "data-url":   "#{api_setting_path(@maximum_prescriptions)}",
                              "href": "#"}= @maximum_prescriptions.value

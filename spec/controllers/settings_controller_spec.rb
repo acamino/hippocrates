@@ -4,8 +4,22 @@ describe SettingsController do
   before { sign_in_user_mock }
 
   describe '#index' do
-    before do
-      get :index
+    let!(:maximum_diagnoses)        { create(:setting, :maximum_diagnoses) }
+    let!(:maximum_prescriptions)    { create(:setting, :maximum_prescriptions) }
+    let!(:medical_history_sequence) { create(:setting, :medical_history_sequence) }
+
+    before { get :index }
+
+    it 'assigns @maximum_diagnoses' do
+      expect(assigns(:maximum_diagnoses)).to eq(maximum_diagnoses)
+    end
+
+    it 'assigns @maximum_prescriptions' do
+      expect(assigns(:maximum_prescriptions)).to eq(maximum_prescriptions)
+    end
+
+    it 'assigns @medical_history_sequence' do
+      expect(assigns(:medical_history_sequence)).to eq(medical_history_sequence)
     end
 
     it { is_expected.to render_template :index }

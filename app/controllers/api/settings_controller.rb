@@ -10,7 +10,7 @@ module API
       if setting.update_attributes(value: params[:value])
         render json: setting
       else
-        render json: { errors: setting.errors.messages }, status: :unprocessable_entity
+        render json: setting.errors.messages[:value].first, status: :unprocessable_entity
       end
     end
   end

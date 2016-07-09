@@ -5,23 +5,23 @@ describe API::SettingsController do
 
   describe '#index' do
     before do
-      create(:setting, name: 'name-1', value: 'value-1')
-      create(:setting, name: 'name-2', value: 'value-2')
+      create(:setting, name: 'name-1', value: '1')
+      create(:setting, name: 'name-2', value: '2')
 
       get :index, format: :json
     end
 
     it 'formats the reponse as JSON' do
       diseases = ::JSON.parse(response.body)
-      expect(diseases.last['value']).to eq('value-2')
+      expect(diseases.last['value']).to eq('2')
     end
 
     it { is_expected.to respond_with :ok }
   end
 
   describe '#update' do
-    let!(:setting) { create(:setting, value: 'original value') }
-    let(:value)    { 'updated value' }
+    let!(:setting) { create(:setting, value: '1') }
+    let(:value)    { '2' }
 
     before do
       patch :update, id: setting.id, value: value
@@ -29,7 +29,7 @@ describe API::SettingsController do
 
     context 'when the information is valid' do
       it 'updates setting' do
-        expect(setting.reload.value).to eq('updated value')
+        expect(setting.reload.value).to eq('2')
       end
 
       it { is_expected.to respond_with :ok }
@@ -39,7 +39,7 @@ describe API::SettingsController do
       let(:value) { '' }
 
       it 'does not update the setting' do
-        expect(setting.reload.value).to eq('original value')
+        expect(setting.reload.value).to eq('1')
       end
 
       it { is_expected.to respond_with :unprocessable_entity }
