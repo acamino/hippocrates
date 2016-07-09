@@ -13,4 +13,9 @@ FactoryGirl.define do
     name  Setting::MAXIMUM_PRESCRIPTIONS
     value '4'
   end
+
+  trait :medical_history_sequence do
+    name  Setting::MEDICAL_HISTORY_SEQUENCE
+    value '4'
+  end
 end
