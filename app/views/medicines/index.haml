@@ -17,3 +17,7 @@
       %td= medicine.instructions
       %td.text-right
         = link_to t('medicines.actions.edit'), edit_medicine_path(medicine), class: 'btn btn-primary btn-sm'
+
+.row
+  .col-md-12.text-center
+    = paginate @medicines
