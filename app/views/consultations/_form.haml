@@ -213,7 +213,7 @@
               = f.text_field :next_appointment, value: @consultation.next_appointment.strftime("%Y-%m-%d"), class: "form-control input-sm"
 
   .row-fluid
-    = link_to "Cancelar", patients_path, class: "btn btn-default"
+    = link_to "Cancelar", patient_consultations_path(@patient), class: "btn btn-default"
     = f.submit "Guardar", class: "btn btn-success"
 
 = render 'modal_consultation'
