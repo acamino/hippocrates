@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160712104217) do
+ActiveRecord::Schema.define(version: 20160713023856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20160712104217) do
     t.string   "educational_plan"
     t.datetime "next_appointment"
     t.boolean  "special_patient",      default: false, null: false
+    t.string   "hearing_aids",         default: ""
   end
 
   add_index "consultations", ["special_patient"], name: "index_consultations_on_special_patient", using: :btree
