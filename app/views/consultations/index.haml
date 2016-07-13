@@ -77,15 +77,15 @@
                 .col-md-10
                   %span
                     = consultation.reason
-            - if consultation.diagnostic_plan.present?
+            - if consultation.miscellaneous.present?
               .row
                 .col-md-2.text-right.hidden-xs
-                  %span.semi-strong.text-muted Plan diagnóstico
+                  %span.semi-strong.text-muted Misceláneos
                 .col-md-2.visible-xs
-                  %span.semi-strong.text-muted Plan diagnóstico
+                  %span.semi-strong.text-muted Misceláneos
                 .col-md-10
                   %span.semi-strong
-                  = consultation.diagnostic_plan
+                  = consultation.miscellaneous
           %td.text-right
             .btn-group
               %button.btn.btn-default.btn-xs.dropdown-toggle{ "aria-expanded": "false",
