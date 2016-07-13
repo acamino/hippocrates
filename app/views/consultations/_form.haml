@@ -162,17 +162,17 @@
         .form-group.col-md-12
           .input-group
             %span.input-group-addon.input-sm Diagnóstico
-            = f.text_field :diagnostic_plan, class: "form-control input-sm"
+            = f.text_area :diagnostic_plan, class: "form-control input-sm"
       .row-fluid
         .form-group.col-md-12
           .input-group
             %span.input-group-addon.input-sm Misceláneos
-            = f.text_field :miscellaneous, class: "form-control input-sm"
+            = f.text_area :miscellaneous, class: "form-control input-sm"
       .row-fluid
         .form-group.col-md-12
           .input-group
             %span.input-group-addon.input-sm Procedimiento médico
-            = f.text_field :treatment_plan, class: "form-control input-sm"
+            = f.text_area :treatment_plan, class: "form-control input-sm"
       .row-fluid
         .form-group.col-md-12.prescriptions
           %table.table.table-striped.table-hover.table-condensed
