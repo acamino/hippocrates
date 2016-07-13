@@ -41,8 +41,11 @@
             %span.text-muted
               %i.fa.fa-certificate
           .col-xs-10
-            %span
-              %a.hint-link.show-certificate(href="") Certificados
+            - if @consultation.new_record?
+              %span.text-muted Certificados
+            - else
+              %span
+                %a.disabled.hint-link.show-certificate(href="") Certificados
 
       .hint-item
         - if @patient.anamnesis.allergies?
