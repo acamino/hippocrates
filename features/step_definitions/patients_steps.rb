@@ -58,7 +58,7 @@ Then(/^I see a confirmation message for update$/) do
 end
 
 When(/^I search for Doe$/) do
-  fill_in :query, with: 'Doe'
+  fill_in :last_name, with: 'Doe'
   click_on 'Buscar'
 end
 

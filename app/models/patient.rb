@@ -23,9 +23,10 @@ class Patient < ActiveRecord::Base
 
   scope :special, -> { where(special: true) }
 
-  def self.search(query)
-    if query
-      where('lower(last_name) LIKE ?', "%#{query.downcase}%")
+  def self.search(last_name, first_name)
+    if last_name || first_name
+      where('lower(last_name) LIKE ? AND lower(first_name) LIKE ?',
+            "%#{last_name.downcase}%", "%#{first_name.downcase}%")
         .order(:last_name, :first_name)
     else
       all.order(:last_name, :first_name)

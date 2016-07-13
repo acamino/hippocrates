@@ -14,7 +14,7 @@ class PatientsController < ApplicationController
   ].freeze
 
   def index
-    @patients = Patient.search(query).page(page)
+    @patients = Patient.search(params[:last_name], params[:first_name]).page(page)
   end
 
   def special

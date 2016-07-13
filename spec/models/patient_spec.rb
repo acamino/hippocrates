@@ -30,6 +30,47 @@ describe Patient do
     end
   end
 
+  describe '.search' do
+    let!(:john_domino) { create(:patient, first_name: 'John', last_name: 'Domino') }
+    let!(:mark_lopez)  { create(:patient, first_name: 'Mark', last_name: 'López') }
+    let!(:john_carter) { create(:patient, first_name: 'John', last_name: 'Carter') }
+
+    context 'when last name and first name are empty' do
+      it 'returns all patients' do
+        patients = described_class.search('', '')
+        expect(patients).to eq([john_carter, john_domino, mark_lopez])
+      end
+    end
+
+    context "when last name matches with some patient's last name" do
+      it 'returns patients found' do
+        patients = described_class.search('lópez', '')
+        expect(patients).to eq([mark_lopez])
+      end
+    end
+
+    context "when first name matches with some patient's first name" do
+      it 'returns patients found' do
+        patients = described_class.search('', 'john')
+        expect(patients).to eq([john_carter, john_domino])
+      end
+    end
+
+    context "when first name and last name matches with some patient's name" do
+      it 'returns patients found' do
+        patients = described_class.search('carter', 'john')
+        expect(patients).to eq([john_carter])
+      end
+    end
+
+    context 'when first name and last name does not match with any patient' do
+      it 'returns an empty array' do
+        patients = described_class.search('lopez', 'john')
+        expect(patients).to eq([])
+      end
+    end
+  end
+
   describe '#age' do
     context 'when a patient has a birthdate' do
       subject { build(:patient, birthdate: Date.new(2011, 12, 8)) }
