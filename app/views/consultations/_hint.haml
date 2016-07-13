@@ -3,7 +3,11 @@
     .hint-icon
       %i.fa.fa-user-md
     .hint-content
-      .hint-title= @patient.name
+      .hint-title
+        = @patient.name
+        %small.text-muted
+          #{@patient.age} años
+          = gender_tag(@patient)
       .hint-item
         .row.zip
           .col-xs-1
