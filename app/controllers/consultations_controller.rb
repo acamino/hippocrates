@@ -27,6 +27,7 @@ class ConsultationsController < ApplicationController
     :treatment_plan,
     :educational_plan,
     :next_appointment,
+    :hearing_aids,
     patient: :special,
     diagnoses_attributes: [:id, :disease_code, :description, :type],
     prescriptions_attributes: [:id, :inscription, :subscription]

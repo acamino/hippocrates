@@ -129,6 +129,15 @@
             %span.input-group-addon.input-sm Otros
             = f.text_field :others, class: "form-control input-sm", placeholder: 'NORMAL'
 
+  .panel.panel-main
+    .panel-heading
+      %b Audioprótesis
+      %i.fa.fa-assistive-listening-systems
+    .panel-body
+      .row-fluid
+        .form-group.col-md-12
+          = f.text_area :hearing_aids, class: "form-control input-sm"
+
   .panel.panel-caution
     .panel-heading
       %b Diagnóstico

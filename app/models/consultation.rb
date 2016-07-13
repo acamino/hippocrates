@@ -57,7 +57,7 @@ class Consultation < ActiveRecord::Base
        right_ear left_ear right_nostril left_nostril nasopharynx
        nose_others oral_cavity oropharynx hypopharynx larynx
        neck others miscellaneous diagnostic_plan treatment_plan
-       educational_plan).each do |field|
+       educational_plan hearing_aids).each do |field|
       if attributes[field].present?
         send("#{field}=", UnicodeUtils.upcase(attributes[field]))
       end

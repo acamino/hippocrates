@@ -72,6 +72,12 @@ input[type="email"] {
   color: #FFF;
 }
 
+.panel-main > .panel-heading {
+  background-color: #1CA8DD;
+  border-color: #1CA8DD;
+  color: #FFF;
+}
+
 .colored {
   color: #666666;
 }
