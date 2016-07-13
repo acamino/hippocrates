@@ -77,7 +77,7 @@ describe Patient do
 
       it "calculates patient's age" do
         Timecop.freeze(Date.new(2015, 10, 21)) do
-          expect(subject.age).to eq(3)
+          expect(subject.age.years).to eq(3)
         end
       end
     end
@@ -87,7 +87,7 @@ describe Patient do
 
       it 'returns 0' do
         Timecop.freeze(Date.new(2015, 10, 21)) do
-          expect(subject.age).to eq(0)
+          expect(subject.age.years).to eq(0)
         end
       end
     end

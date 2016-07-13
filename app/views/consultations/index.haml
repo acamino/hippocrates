@@ -7,7 +7,7 @@
       %h4
         = @patient.name
         %small
-          #{@patient.age} años
+          #{@patient.age.years} años
           = gender_tag(@patient)
 
 .row

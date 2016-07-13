@@ -6,7 +6,7 @@
       .hint-title
         = @patient.name
         %small.text-muted
-          #{@patient.age} años
+          #{@patient.age.years} años
           = gender_tag(@patient)
       .hint-item
         .row.zip
