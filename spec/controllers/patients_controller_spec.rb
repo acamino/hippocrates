@@ -68,7 +68,11 @@ describe PatientsController do
         expect(Setting::MedicalHistorySequence.next).to eq(6)
       end
 
-      it { is_expected.to redirect_to patients_path }
+      it do
+        patient = Patient.last
+        is_expected.to redirect_to new_patient_anamnesis_path(patient)
+      end
+
       it { is_expected.to respond_with :redirect }
     end
 

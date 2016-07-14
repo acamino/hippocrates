@@ -7,7 +7,7 @@
         .form-group.col-md-3
           .input-group
             %span.input-group-addon.input-sm Fecha
-            - if @consultation.new_record?
+            - if (@consultation && @consultation.new_record?) || @anamnesis
               %input.form-control.input-sm.colored#current_date{ disabled: 'disabled', value: Date.today }
             - else
               %input.form-control.input-sm.colored#current_date{ disabled: 'disabled', value: @consultation.created_at.strftime("%Y-%m-%d") }

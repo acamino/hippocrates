@@ -33,7 +33,7 @@ class PatientsController < ApplicationController
     if @patient.save
       Setting::MedicalHistorySequence.new.save
       # XXX: Pull out the messages form a locale file.
-      redirect_to patients_path, notice: 'Paciente creado correctamente'
+      redirect_to new_patient_anamnesis_path(@patient), notice: 'Paciente creado correctamente'
     else
       render :new
     end
