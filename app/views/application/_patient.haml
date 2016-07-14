@@ -7,7 +7,10 @@
         .form-group.col-md-3
           .input-group
             %span.input-group-addon.input-sm Fecha
-            %input.form-control.input-sm.colored#current_date{ disabled: 'disabled', value: Date.today }
+            - if @consultation.new_record?
+              %input.form-control.input-sm.colored#current_date{ disabled: 'disabled', value: Date.today }
+            - else
+              %input.form-control.input-sm.colored#current_date{ disabled: 'disabled', value: @consultation.created_at.strftime("%Y-%m-%d") }
         .form-group.col-md-3
           .input-group
             %span.input-group-addon.input-sm Fecha Nacimiento
