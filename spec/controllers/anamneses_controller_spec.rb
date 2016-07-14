@@ -43,7 +43,7 @@ describe AnamnesesController do
       end.to change { Anamnesis.count }.by(1)
     end
 
-    it { is_expected.to redirect_to patients_path }
+    it { is_expected.to redirect_to new_patient_consultation_path(patient) }
     it { is_expected.to respond_with :redirect }
   end
 

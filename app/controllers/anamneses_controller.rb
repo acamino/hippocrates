@@ -17,7 +17,8 @@ class AnamnesesController < ApplicationController
     Anamnesis.create(anamnesis_params)
 
     # XXX: Pull out the messages form a locale file.
-    redirect_to patients_path, notice: 'Anamnesis creada correctamente'
+    redirect_to(new_patient_consultation_path(params[:patient_id]),
+                notice: 'Anamnesis creada correctamente')
   end
 
   def edit
