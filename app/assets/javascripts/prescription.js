@@ -46,7 +46,7 @@ Hippocrates.Prescription = {
     return _.filter(
       _.map($('.prescriptions tbody tr'), function(item) {
       return {
-        inscription: $(item).find('td:first-child input').val(),
+        inscription: $(item).find('td:first-child input').val().toUpperCase(),
         subscription: self.formatSubscription($(item).find('td:last-child input').val())
       };
     }), self.isPrescriptionAvailable);
@@ -58,14 +58,22 @@ Hippocrates.Prescription = {
       var medicineName = components[0];
       var instructions = components[1];
 
-      return "<strong>" + medicineName + "</strong>: " + instructions;
+      return [
+        "<strong>",
+        medicineName.toUpperCase(),
+        "</strong>: ",
+        instructions.toUpperCase()
+      ].join('');
     }
 
-    return subscription;
+    return subscription.toUpperCase();
   },
 
   isPrescriptionAvailable: function(prescription) {
-    return prescription.subscription && prescription.subscription.length != 0;
+    var hasInscription = prescription.inscription && prescription.inscription.length != 0,
+        hasSubscription = prescription.subscription && prescription.subscription.length != 0;
+
+    return hasInscription || hasSubscription;
   },
 
   getPatientName: function() {
