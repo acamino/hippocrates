@@ -65,7 +65,7 @@ Hippocrates.Prescription = {
   },
 
   isPrescriptionAvailable: function(prescription) {
-    return prescription.inscription && prescription.inscription.length != 0;
+    return prescription.subscription && prescription.subscription.length != 0;
   },
 
   getPatientName: function() {
