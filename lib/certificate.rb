@@ -48,9 +48,14 @@ class Certificate
   end
 
   def consultations
-    selected_consultations =
-      options.fetch(:consultations, '').split('_').map(&:to_i)
+    selected_consultations_ids = options.fetch(:consultations, '').split('_').map(&:to_i)
+    patient_consultations = patient.consultations.reverse
 
-    patient.consultations.select { |c| selected_consultations.include? c.id }
+    selected_consultations = patient_consultations.select do |c|
+      selected_consultations_ids.include? c.id
+    end
+
+    first_consultation_id = patient_consultations.first.id
+    selected_consultations.each { |c| c.head = c.id == first_consultation_id }
   end
 end

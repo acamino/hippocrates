@@ -9,7 +9,12 @@ describe Certificate do
     let(:surgery_tentative_date) { '' }
     let(:surgery_cost)           { '' }
     let(:consultations)          { [] }
-    let(:consultation) { create(:consultation, :with_diagnoses, patient: patient) }
+    let(:consultation) do
+      create(:consultation, :with_diagnoses, created_at: '2016-01-01', patient: patient)
+    end
+    let(:other_consultation) do
+      create(:consultation, :with_diagnoses, created_at: '2016-01-02', patient: patient)
+    end
     let(:patient) do
       create(:patient, identity_card_number: 'icn-101',
                        first_name: 'Rene',
@@ -123,10 +128,29 @@ describe Certificate do
       end
 
       context 'when consultations are selected' do
-        it 'returns a list of selected certificates' do
-          options = { consultations: consultation.id.to_s }
-          certificate = described_class.for(consultation, options)
-          expect(certificate[:consultations]).to eq([consultation])
+        let(:options)         { { consultations: "#{other_consultation.id}_#{consultation.id}" } }
+        subject(:certificate) { described_class.for(consultation, options) }
+
+        it 'returns a sorted list of selected certificates' do
+          expect(certificate[:consultations]).to eq([consultation, other_consultation])
+        end
+
+        context 'when the first consultation was selected' do
+          it 'the first consultation is marked as head' do
+            expect(certificate[:consultations].first.head).to be_truthy
+          end
+
+          it 'the other consultations are not marked as head' do
+            expect(certificate[:consultations].second.head).to be_falsey
+          end
+        end
+
+        context 'when the first consultation was not selected' do
+          let(:options) { { consultations: other_consultation.id.to_s } }
+
+          it 'the first consultation is not marked as head' do
+            expect(certificate[:consultations].first.head).to be_falsey
+          end
         end
       end
     end

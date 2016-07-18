@@ -15,6 +15,8 @@ class Consultation < ActiveRecord::Base
 
   default_scope { order(created_at: :desc) }
 
+  attr_accessor :head
+
   def self.most_recent
     first
   end
