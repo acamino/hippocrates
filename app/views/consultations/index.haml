@@ -27,8 +27,16 @@
 
 .row.hidden-sm.hidden-xs
   .col-md-12.text-right
-    %a.download-medical-history.btn.btn-primary(href = "#") Descargar historia
-    = link_to "Nueva consulta", new_patient_consultation_path(@patient), class: "btn btn-success"
+    %a.delete-consultations.btn.btn-danger(href = "")
+      %i.fa.fa-trash
+      Eliminar
+    %a.download-medical-history.btn.btn-primary(href = "#")
+      %i.fa.fa-download
+      Descargar
+    = link_to new_patient_consultation_path(@patient), class: "btn btn-success" do
+      %i.fa.fa-plus
+      Nueva Consulta
+
 
 .row.hidden-md.hidden-lg
   .col-xs-12.text-right
@@ -42,9 +50,19 @@
           %span.caret
       %ul.dropdown-menu.pull-right
         %li
-          %a.download-medical-history(href = "#") Descargar historia
+          = link_to new_patient_consultation_path(@patient) do
+            %strong
+              %i.fa.fa-plus
+              Nueva consulta
+        %li.divider{ role: "separator" }
         %li
-          = link_to "Nueva consulta", new_patient_consultation_path(@patient)
+          %a.download-medical-history(href = "#")
+            %i.fa.fa-download
+            Descargar historia
+        %li
+          %a.delete-consultations(href = "")
+            %i.fa.fa-trash-o
+            Eliminar consultas
 
 .row
   .col-md-12

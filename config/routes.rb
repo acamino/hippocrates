@@ -19,9 +19,10 @@ Rails.application.routes.draw do
     resources :patients, only: [] do
       resources :consultations, only: [:index] do
         collection do
-          post 'previous'
-          post 'next'
-          post 'last'
+          post   'previous'
+          post   'next'
+          post   'last'
+          delete 'destroy'
         end
       end
     end

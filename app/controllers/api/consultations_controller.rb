@@ -15,6 +15,13 @@ module API
       render json: consultation
     end
 
+    def destroy
+      consultations = Consultation.where(id: consultations_ids)
+      consultations.delete_all
+
+      render json: consultations
+    end
+
     private
 
     def patient
@@ -42,6 +49,10 @@ module API
 
     def current_consultation
       params[:current_consultation].to_i
+    end
+
+    def consultations_ids
+      params.fetch(:consultations, '').split('_').map(&:to_i)
     end
   end
 end

@@ -46,4 +46,38 @@ describe API::ConsultationsController do
       expect(consultation['reason']).to eq(c2.reason)
     end
   end
+
+  describe '#destroy' do
+    let(:consultations) { "#{c1.id}_#{c2.id}" }
+
+    before do |example|
+      unless example.metadata[:skip_on_before]
+        delete :destroy, patient_id: bob.id,
+                         consultations: consultations
+      end
+    end
+    context 'when consultations are given' do
+      it 'destroys consultations', :skip_on_before do
+        expect do
+          delete :destroy, patient_id: bob.id, consultations: consultations
+        end.to change { Consultation.count }.from(2).to(0)
+      end
+    end
+
+    context 'when no consultations are given' do
+      let(:consultations) { '' }
+
+      it 'does not destroy consultations', :skip_on_before do
+        expect do
+          delete :destroy, patient_id: bob.id, consultations: consultations
+        end.to change { Consultation.count }.by(0)
+      end
+    end
+
+    it { is_expected.to respond_with :ok }
+
+    it 'responds with json' do
+      expect(response).to be_json
+    end
+  end
 end
