@@ -25,8 +25,8 @@ class Patient < ActiveRecord::Base
 
   def self.search(last_name, first_name)
     if last_name || first_name
-      where('lower(last_name) LIKE ? AND lower(first_name) LIKE ?',
-            "%#{last_name.downcase}%", "%#{first_name.downcase}%")
+      where('lower(last_name) ILIKE ? AND lower(first_name) ILIKE ?',
+            "%#{last_name.strip}%", "%#{first_name.strip}%")
         .order(:last_name, :first_name)
     else
       all.order(:last_name, :first_name)

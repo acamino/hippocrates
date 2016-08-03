@@ -44,7 +44,7 @@ describe Patient do
 
     context "when last name matches with some patient's last name" do
       it 'returns patients found' do
-        patients = described_class.search('lópez', '')
+        patients = described_class.search('lÓpez', '')
         expect(patients).to eq([mark_lopez])
       end
     end
