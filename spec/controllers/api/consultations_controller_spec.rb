@@ -5,7 +5,7 @@ describe API::ConsultationsController do
 
   let!(:bob) { create(:patient) }
   let!(:c1)  { create(:consultation, reason: 'bob-c1', patient: bob) }
-  let!(:c2)  { create(:consultation, reason: 'bob-c2', patient: bob) }
+  let!(:c2)  { create(:consultation, reason: 'bob-c2', patient: bob, next_appointment: nil) }
 
   describe '#last' do
     it 'returns the last consultation' do

@@ -38,11 +38,13 @@
       %strong Fecha:
     .col-md-9
       %span.semi-strong {{date}}
+  {{#hasNextAppointment}}
   .row.consultation-next-appointment
     .col-md-3
       %strong Próxima cita:
     .col-md-9
       %span.semi-strong {{next_appointment}}
+  {{/hasNextAppointment}}
   .row.consultation-reason
     .col-md-3
       %strong Motivo de consulta:
