@@ -22,6 +22,7 @@ FactoryGirl.define do
     larynx               'larynx'
     neck                 'neck'
     others               'others'
+    next_appointment     '2016-01-11'
 
     patient
   end

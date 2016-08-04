@@ -104,6 +104,15 @@
                 .col-md-10
                   %span.semi-strong
                   = consultation.miscellaneous
+            - if consultation.next_appointment.present?
+              .row
+                .col-md-2.text-right.hidden-xs
+                  %span.semi-strong.text-muted Próxima cita
+                .col-md-2.visible-xs
+                  %span.semi-strong.text-muted Próxima cita
+                .col-md-10
+                  %span.semi-strong
+                  = consultation.created_at.strftime("%b %d, %Y")
           %td.text-right
             .btn-group
               %button.btn.btn-default.btn-xs.dropdown-toggle{ "aria-expanded": "false",

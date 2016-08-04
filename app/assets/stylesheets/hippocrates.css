@@ -103,6 +103,7 @@ input[type="email"] {
 }
 
 .consultation-date,
+.consultation-next-appointment,
 .consultation-reason {
   padding-left: 8px;
 }
