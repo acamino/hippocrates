@@ -65,3 +65,5 @@
           .input-group
             %span.input-group-addon.input-sm Ocupación
             %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.profession }
+        .col-md-12.text-right
+          = link_to t('patients.actions.edit'), edit_patient_path(@patient)

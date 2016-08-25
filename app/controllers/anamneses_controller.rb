@@ -24,12 +24,17 @@ class AnamnesesController < ApplicationController
   def edit
     @patient   = Patient.find(params[:patient_id])
     @anamnesis = Anamnesis.find(params[:id])
+    @referer_location = referer_location
   end
 
   def update
     @anamnesis = Anamnesis.find(params[:id])
     @anamnesis.update_attributes(anamnesis_params)
-    redirect_to patients_path, notice: 'Anamnesis actualizada correctamente'
+    if referer_location
+      redirect_to referer_location
+    else
+      redirect_to patients_path, notice: 'Anamnesis actualizada correctamente'
+    end
   end
 
   private

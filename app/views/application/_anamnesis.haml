@@ -29,3 +29,6 @@
       .row-fluid
         .form-group.col-md-12
           %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.anamnesis.family_history }
+        .col-md-12.text-right
+          = link_to 'Editar', edit_patient_anamnesis_path(@patient, @patient.anamnesis)
+

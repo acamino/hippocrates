@@ -14,4 +14,16 @@ class ApplicationController < ActionController::Base
   def query
     params[:query]
   end
+
+  def referer_location
+    session[:referer_location]
+  end
+
+  def store_referer_location
+    session[:referer_location] = request.original_url
+  end
+
+  def delete_referer_location
+    session.delete(:referer_location) if session[:referer_location]
+  end
 end

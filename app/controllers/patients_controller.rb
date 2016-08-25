@@ -14,6 +14,7 @@ class PatientsController < ApplicationController
   ].freeze
 
   def index
+    delete_referer_location
     @patients = Patient.search(params[:last_name], params[:first_name]).page(page)
   end
 
@@ -41,12 +42,17 @@ class PatientsController < ApplicationController
 
   def edit
     @patient = Patient.find(params[:id])
+    @referer_location = referer_location
   end
 
   def update
     @patient = Patient.find(params[:id])
     if @patient.update_attributes(patient_params)
-      redirect_to patients_path, notice: 'Paciente actualizado correctamente'
+      if referer_location
+        redirect_to referer_location
+      else
+        redirect_to patients_path, notice: 'Paciente actualizado correctamente'
+      end
     else
       render :edit
     end

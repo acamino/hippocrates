@@ -37,6 +37,7 @@ class ConsultationsController < ApplicationController
   before_action :fetch_patient
 
   def index
+    delete_referer_location
     @consultations = @patient.consultations.page(params.fetch(:page, 1))
   end
 
@@ -44,6 +45,8 @@ class ConsultationsController < ApplicationController
     @consultation = Consultation.new
     maximum_diagnoses.times     { @consultation.diagnoses.build }
     maximum_prescriptions.times { @consultation.prescriptions.build }
+
+    store_referer_location
   end
 
   def create
@@ -58,12 +61,15 @@ class ConsultationsController < ApplicationController
   def edit
     remaining_diagnoses.times     { @consultation.diagnoses.build }
     remaining_prescriptions.times { @consultation.prescriptions.build }
+
+    store_referer_location
   end
 
   def update
     @consultation.update_attributes(consultation_params)
     @patient.update_attributes(patient_params)
 
+    delete_referer_location
     redirect_to patient_consultations_path(@patient), notice: 'Consulta actualizada correctamente'
   end
 
