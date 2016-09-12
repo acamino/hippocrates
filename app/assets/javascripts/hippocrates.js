@@ -18,7 +18,11 @@ $(document).ready(function() {
     Hippocrates.Prescription.init();
     Hippocrates.Settings.init();
 
+    var date = new Date();
+    date.setDate(date.getDate() - 1);
+
     $("#consultation_next_appointment").datepicker({
+        startDate: date,
         todayHighlight: true,
         format: "yyyy-mm-dd",
         language: "es",
