@@ -12,3 +12,4 @@ AllCops:
     - script/*
     - lib/tasks/cucumber.rake
     - features/support/env.rb
+    - vendor/**/*
