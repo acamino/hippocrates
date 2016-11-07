@@ -16,10 +16,8 @@ module API
     end
 
     def destroy
-      consultations = Consultation.where(id: consultations_ids)
-      consultations.delete_all
-
-      render json: consultations
+      Consultation.where(id: consultations_ids).destroy_all
+      render json: {}
     end
 
     private

@@ -3,6 +3,7 @@
 
 .row
   .col-md-12
+    %input{ type: "hidden", value: @patient.id, id: "patient_id" }
     %strong
       %h4
         = @patient.name

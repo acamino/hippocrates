@@ -56,6 +56,7 @@ describe API::ConsultationsController do
                          consultations: consultations
       end
     end
+
     context 'when consultations are given' do
       it 'destroys consultations', :skip_on_before do
         expect do

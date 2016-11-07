@@ -15,6 +15,20 @@ Hippocrates.ClinicalHistory = {
 
       self.updateUrl();
     });
+
+    $(".delete-consultations").click(function() {
+      var consultations = self.getSelectedConsultations();
+      var patientId = $("#patient_id").val();
+
+      $.ajax({
+        url: "/api/patients/" + patientId + "/consultations/destroy",
+        type: "DELETE",
+        data: { consultations: consultations },
+        success: function(data) {
+          location.reload();
+        }
+      });
+    });
   },
 
   updateUrl: function () {
