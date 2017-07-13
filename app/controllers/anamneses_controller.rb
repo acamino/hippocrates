@@ -41,6 +41,7 @@ class AnamnesesController < ApplicationController
 
   def anamnesis_params
     params.require(:anamnesis).permit(*ATTRIBUTE_WHITELIST).merge(
-      patient_id: params[:patient_id])
+      patient_id: params[:patient_id]
+    )
   end
 end

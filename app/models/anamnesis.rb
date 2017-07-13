@@ -18,8 +18,8 @@ class Anamnesis < ActiveRecord::Base
   private
 
   def normalize_values
-    %w(medical_history surgical_history allergies observations habits
-       family_history).each do |field|
+    %w[medical_history surgical_history allergies observations habits
+       family_history].each do |field|
       if attributes[field].present?
         send("#{field}=", UnicodeUtils.upcase(attributes[field]))
       end

@@ -4,11 +4,11 @@ class Consultation < ActiveRecord::Base
   has_many   :prescriptions, dependent: :destroy
 
   accepts_nested_attributes_for :diagnoses,
-                                reject_if: -> (attributes) { attributes[:description].blank? },
+                                reject_if: ->(attributes) { attributes[:description].blank? },
                                 allow_destroy: true
 
   accepts_nested_attributes_for :prescriptions,
-                                reject_if: -> (attributes) { attributes[:inscription].blank? },
+                                reject_if: ->(attributes) { attributes[:inscription].blank? },
                                 allow_destroy: true
 
   before_save :normalize_values
@@ -21,9 +21,9 @@ class Consultation < ActiveRecord::Base
     first
   end
 
-  %w(right_ear left_ear left_nostril right_nostril nasopharynx
+  %w[right_ear left_ear left_nostril right_nostril nasopharynx
      nose_others oral_cavity oropharynx hypopharynx larynx neck
-     others).each do |method_name|
+     others].each do |method_name|
     define_method(method_name) do
       value = self[method_name]
 
@@ -55,11 +55,11 @@ class Consultation < ActiveRecord::Base
   private
 
   def normalize_values
-    %w(reason ongoing_issue organs_examination physical_examination
+    %w[reason ongoing_issue organs_examination physical_examination
        right_ear left_ear right_nostril left_nostril nasopharynx
        nose_others oral_cavity oropharynx hypopharynx larynx
        neck others miscellaneous diagnostic_plan treatment_plan
-       educational_plan hearing_aids).each do |field|
+       educational_plan hearing_aids].each do |field|
       if attributes[field].present?
         send("#{field}=", UnicodeUtils.upcase(attributes[field]))
       end

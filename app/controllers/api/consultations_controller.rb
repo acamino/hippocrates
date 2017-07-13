@@ -36,7 +36,7 @@ module API
 
     def next_consultation_id
       consultation_index = current_consultation_index.pred
-      return nil if consultation_index < 0
+      return nil if consultation_index.negative?
 
       patient_consultations[consultation_index]
     end

@@ -9,11 +9,11 @@ class ConsultationSerializer < ActiveModel::Serializer
   has_many :prescriptions
 
   def diagnoses?
-    object.diagnoses.count > 0
+    object.diagnoses.count.positive?
   end
 
   def prescriptions?
-    object.prescriptions.count > 0
+    object.prescriptions.count.positive?
   end
 
   def date
