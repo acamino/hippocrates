@@ -7,10 +7,18 @@ class Setting < ActiveRecord::Base
   validates_uniqueness_of :name
   validates_numericality_of :value, only_integer: true
 
-  [MAXIMUM_DIAGNOSES, MAXIMUM_PRESCRIPTIONS].each do |setting_name|
-    define_singleton_method setting_name do
-      find_by(name: setting_name).value.to_i
-    end
+  def self.maximum_diagnoses
+    setting = find_by(name: MAXIMUM_DIAGNOSES)
+    return setting.value.to_i if setting
+
+    raise SettingNotFoundError, 'maximun diagnoses value is not available'
+  end
+
+  def self.maximum_prescriptions
+    setting = find_by(name: MAXIMUM_PRESCRIPTIONS)
+    return setting.value.to_i if setting
+
+    raise SettingNotFoundError, 'maximun prescription value is not available'
   end
 
   class MedicalHistorySequence
@@ -26,3 +34,5 @@ class Setting < ActiveRecord::Base
     end
   end
 end
+
+class SettingNotFoundError < RuntimeError; end
