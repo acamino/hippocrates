@@ -18,7 +18,7 @@ class Disease < ActiveRecord::Base
   private
 
   def normalize_values
-    %w(code name).each do |field|
+    %w[code name].each do |field|
       if attributes[field].present?
         send("#{field}=", UnicodeUtils.upcase(attributes[field]))
       end

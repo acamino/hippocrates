@@ -31,7 +31,7 @@ module AlertsHelper
     end
 
     def alerts?
-      visible_alerts.count > 0
+      visible_alerts.count.positive?
     end
 
     def column_width

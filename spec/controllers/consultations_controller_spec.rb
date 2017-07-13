@@ -83,7 +83,8 @@ describe ConsultationsController do
                           description: rhinitis.name,
                           type: 'presuntive'
                         }
-                      })
+                      }
+                    )
 
       expect(patient.consultations.last.diagnoses.count).to eq(2)
     end
@@ -94,7 +95,8 @@ describe ConsultationsController do
                       prescriptions_attributes: {
                         '0' => { inscription: 'inscription-one', subscription: 'subscription' },
                         '1' => { inscription: 'inscription-two', subscription: 'subscription' }
-                      })
+                      }
+                    )
 
       expect(patient.consultations.last.prescriptions.count).to eq(2)
     end
@@ -109,7 +111,8 @@ describe ConsultationsController do
 
     it 'redirects to edit consultations' do
       expect(response).to redirect_to edit_patient_consultation_path(
-        patient.id, patient.consultations.most_recent.id)
+        patient.id, patient.consultations.most_recent.id
+      )
     end
 
     it { is_expected.to respond_with :redirect }

@@ -55,7 +55,8 @@ class ConsultationsController < ApplicationController
 
     # XXX: Pull out the messages form a locale file.
     redirect_to edit_patient_consultation_path(
-      @patient, consultation), notice: 'Consulta creada correctamente'
+      @patient, consultation
+    ), notice: 'Consulta creada correctamente'
   end
 
   def edit
@@ -85,7 +86,8 @@ class ConsultationsController < ApplicationController
 
   def consultation_params
     params.require(:consultation).permit(*ATTRIBUTE_WHITELIST).merge(
-      patient_id: params[:patient_id]).except('patient')
+      patient_id: params[:patient_id]
+    ).except('patient')
   end
 
   def patient_params

@@ -1,14 +1,13 @@
 module ApplicationHelper
   def error_messages_for(resource, display_header = true)
-    if resource.errors.any?
-      error_messages = resource.errors.full_messages.map do |message|
-        content_tag(:li, message)
-      end.join
+    return nil unless resource.errors.any?
 
-      header = display_header ? content_tag(:b, 'Por favor corrige los siguiente errores:') : ''
-      body = content_tag(:ul, error_messages, {}, false)
-      content_tag(:div, "#{header} #{body}".html_safe, class: 'text-danger')
-    end
+    error_messages = resource.errors.full_messages.map do |message|
+      content_tag(:li, message)
+    end.join
+    header = display_header ? content_tag(:b, 'Por favor corrige los siguiente errores:') : ''
+    body = content_tag(:ul, error_messages, {}, false)
+    content_tag(:div, "#{header} #{body}".html_safe, class: 'text-danger')
   end
 
   def nav_to(nav_text, nav_path)
