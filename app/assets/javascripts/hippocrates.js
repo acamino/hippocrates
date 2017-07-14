@@ -9,7 +9,7 @@ if(typeof Hippocrates === "undefined") {
   Hippocrates.Settings = {};
 }
 
-$(document).ready(function() {
+$(document).on('turbolinks:load', function() {
     Hippocrates.Autocomplete.init();
     Hippocrates.Certificates.init();
     Hippocrates.ClinicalHistory.init();
