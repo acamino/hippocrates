@@ -18,7 +18,7 @@ provides some basic functionality out of the box:
 
 ## Dependencies
 - Ruby 2.3.1
-- Rails 4.2.6
+- Rails 4.2.7.1
 - Postgres
 
 ## Local Development
