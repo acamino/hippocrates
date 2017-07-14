@@ -21,8 +21,7 @@ module AlertsHelper
 
     private
 
-    attr_accessor :view,
-                  :has_allergies, :has_observations, :has_medical_history
+    attr_accessor :view, :has_allergies, :has_observations, :has_medical_history
 
     delegate :content_tag, to: :view
 
