@@ -6,14 +6,11 @@ describe API::SettingsController do
   describe '#index' do
     before do
       create(:setting, name: 'name-1', value: '1')
-      create(:setting, name: 'name-2', value: '2')
-
       get :index, format: :json
     end
 
-    it 'formats the reponse as JSON' do
-      diseases = ::JSON.parse(response.body)
-      expect(diseases.last['value']).to eq('2')
+    it 'responds with json' do
+      expect(response).to be_json
     end
 
     it { is_expected.to respond_with :ok }
