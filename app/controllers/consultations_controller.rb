@@ -84,6 +84,22 @@ class ConsultationsController < ApplicationController
     @patient = Patient.find(params[:patient_id])
   end
 
+  def remaining_diagnoses
+    maximum_diagnoses - @consultation.diagnoses.count
+  end
+
+  def remaining_prescriptions
+    maximum_prescriptions - @consultation.prescriptions.count
+  end
+
+  def maximum_diagnoses
+    Setting.maximum_diagnoses.value.to_i
+  end
+
+  def maximum_prescriptions
+    Setting.maximum_prescriptions.value.to_i
+  end
+
   def consultation_params
     params.require(:consultation).permit(*ATTRIBUTE_WHITELIST).merge(
       patient_id: params[:patient_id]
@@ -91,22 +107,6 @@ class ConsultationsController < ApplicationController
   end
 
   def patient_params
-    { special: params[:consultation][:patient][:special] }
-  end
-
-  def maximum_diagnoses
-    Setting.maximum_diagnoses
-  end
-
-  def maximum_prescriptions
-    Setting.maximum_prescriptions
-  end
-
-  def remaining_diagnoses
-    maximum_diagnoses - @consultation.diagnoses.count
-  end
-
-  def remaining_prescriptions
-    maximum_prescriptions - @consultation.prescriptions.count
+    { special: params.dig(:consultation, :patient, :special) }
   end
 end
