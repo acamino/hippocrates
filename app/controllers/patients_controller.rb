@@ -25,7 +25,7 @@ class PatientsController < ApplicationController
   end
 
   def new
-    @patient = Patient.new
+    @patient = PatientPresenter.new(Patient.new)
     @patient.medical_history = Setting::MedicalHistorySequence.next
   end
 
@@ -41,7 +41,7 @@ class PatientsController < ApplicationController
   end
 
   def edit
-    @patient = Patient.find(params[:id])
+    @patient = PatientPresenter.new(Patient.find(params[:id]))
     @referer_location = referer_location
   end
 
