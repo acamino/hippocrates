@@ -40,7 +40,7 @@ describe PatientsController do
     before { get :new }
 
     it 'assings @patient' do
-      expect(assigns(:patient)).to be_a_new(Patient)
+      expect(assigns(:patient)).to be_a_new(PatientPresenter)
     end
 
     it { is_expected.to render_template :new }
