@@ -1,7 +1,7 @@
 class SettingsController < ApplicationController
   def index
-    @maximum_diagnoses        = Setting.find_by(name: Setting::MAXIMUM_DIAGNOSES)
-    @maximum_prescriptions    = Setting.find_by(name: Setting::MAXIMUM_PRESCRIPTIONS)
-    @medical_history_sequence = Setting.find_by(name: Setting::MEDICAL_HISTORY_SEQUENCE)
+    @maximum_diagnoses        = Setting.maximum_diagnoses
+    @maximum_prescriptions    = Setting.maximum_prescriptions
+    @medical_history_sequence = Setting.medical_history_sequence
   end
 end

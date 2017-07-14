@@ -8,30 +8,35 @@ class Setting < ActiveRecord::Base
   validates_numericality_of :value, only_integer: true
 
   def self.maximum_diagnoses
-    setting = find_by(name: MAXIMUM_DIAGNOSES)
-    return setting.value.to_i if setting
-
-    raise SettingNotFoundError, 'maximun diagnoses value is not available'
+    find_or_fail!(MAXIMUM_DIAGNOSES)
   end
 
   def self.maximum_prescriptions
-    setting = find_by(name: MAXIMUM_PRESCRIPTIONS)
-    return setting.value.to_i if setting
+    find_or_fail!(MAXIMUM_PRESCRIPTIONS)
+  end
 
-    raise SettingNotFoundError, 'maximun prescription value is not available'
+  def self.medical_history_sequence
+    find_or_fail!(MEDICAL_HISTORY_SEQUENCE)
   end
 
   class MedicalHistorySequence
     def self.next
-      setting = Setting.find_by(name: MEDICAL_HISTORY_SEQUENCE)
-      setting.value.to_i.succ
+      Setting.medical_history_sequence.value.to_i.succ
     end
 
     def save
-      setting = Setting.find_by(name: MEDICAL_HISTORY_SEQUENCE)
+      setting = Setting.medical_history_sequence
       setting.value = setting.value.to_i.succ.to_s
       setting.save
     end
+  end
+
+  private_class_method
+
+  def self.find_or_fail!(setting_name)
+    find_by!(name: setting_name)
+  rescue ActiveRecord::RecordNotFound
+    raise SettingNotFoundError, "#{setting_name} is not available"
   end
 end
 
