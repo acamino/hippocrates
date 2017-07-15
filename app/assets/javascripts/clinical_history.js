@@ -24,6 +24,7 @@ Hippocrates.ClinicalHistory = {
         url: "/api/patients/" + patientId + "/consultations/destroy",
         type: "DELETE",
         data: { consultations: consultations },
+        dataType: "script",
         success: function(data) {
           location.reload();
         }
