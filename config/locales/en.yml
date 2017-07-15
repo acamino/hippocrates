@@ -35,6 +35,9 @@ en:
       consultation: Consultation
       clinical-history: Clinical history
       edit: Edit
+    success:
+      creation: Patient created successfully
+      update: Patient updated successfully
   medicines:
     button:
       new: New medicine
@@ -43,6 +46,9 @@ en:
       instructions: Instructions
     actions:
       edit: Edit
+    success:
+      creation: Medicine created successfully
+      update: Medicine updated successfully
   diseases:
     button:
       new: New disease
@@ -51,3 +57,14 @@ en:
       name: Name
     actions:
       edit: Edit
+    success:
+      creation: Disease created successfully
+      update: Disease updated successfully
+  anamneses:
+    success:
+      creation: Anamnesis created successfully
+      update: Anamnesis updated successfully
+  consultations:
+    success:
+      creation: Consultation created successfully
+      update: Consultation updated successfully

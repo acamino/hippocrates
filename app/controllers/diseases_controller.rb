@@ -10,8 +10,7 @@ class DiseasesController < ApplicationController
   def create
     @disease = Disease.new(disease_params)
     if @disease.save
-      # XXX: Pull out the messages form a locale file.
-      redirect_to diseases_path, notice: 'Enfermedad creada correctamente'
+      redirect_to diseases_path, notice: t('diseases.success.creation')
     else
       render :new
     end
@@ -24,7 +23,7 @@ class DiseasesController < ApplicationController
   def update
     @disease = Disease.find(params[:id])
     if @disease.update_attributes(disease_params)
-      redirect_to diseases_path, notice: 'Enfermedad actualizada correctamente'
+      redirect_to diseases_path, notice: t('diseases.success.update')
     else
       render :edit
     end

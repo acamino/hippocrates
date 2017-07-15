@@ -10,8 +10,7 @@ class MedicinesController < ApplicationController
   def create
     @medicine = Medicine.new(medicine_params)
     if @medicine.save
-      # XXX: Pull out the messages form a locale file.
-      redirect_to medicines_path, notice: 'Medicina creada correctamente'
+      redirect_to medicines_path, notice: t('medicines.success.creation')
     else
       render :new
     end
@@ -24,7 +23,7 @@ class MedicinesController < ApplicationController
   def update
     @medicine = Medicine.find(params[:id])
     if @medicine.update_attributes(medicine_params)
-      redirect_to medicines_path, notice: 'Medicina actualizada correctamente'
+      redirect_to medicines_path, notice: t('medicines.success.update')
     else
       render :edit
     end

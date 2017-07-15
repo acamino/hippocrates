@@ -53,10 +53,9 @@ class ConsultationsController < ApplicationController
     consultation = Consultation.create(consultation_params)
     @patient.update_attributes(patient_params)
 
-    # XXX: Pull out the messages form a locale file.
     redirect_to edit_patient_consultation_path(
       @patient, consultation
-    ), notice: 'Consulta creada correctamente'
+    ), notice: t('consultations.success.creation')
   end
 
   def edit
@@ -71,7 +70,9 @@ class ConsultationsController < ApplicationController
     @patient.update_attributes(patient_params)
 
     delete_referer_location
-    redirect_to patient_consultations_path(@patient), notice: 'Consulta actualizada correctamente'
+    redirect_to patient_consultations_path(
+      @patient
+    ), notice: t('consultations.success.update')
   end
 
   private

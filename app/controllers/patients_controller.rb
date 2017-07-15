@@ -33,8 +33,9 @@ class PatientsController < ApplicationController
     @patient = Patient.new(patient_params)
     if @patient.save
       Setting::MedicalHistorySequence.new.save
-      # XXX: Pull out the messages form a locale file.
-      redirect_to new_patient_anamnesis_path(@patient), notice: 'Paciente creado correctamente'
+      redirect_to new_patient_anamnesis_path(
+        @patient
+      ), notice: t('patients.success.creation')
     else
       render :new
     end
@@ -51,7 +52,7 @@ class PatientsController < ApplicationController
       if referer_location
         redirect_to referer_location
       else
-        redirect_to patients_path, notice: 'Paciente actualizado correctamente'
+        redirect_to patients_path, notice: t('patients.success.update')
       end
     else
       render :edit
