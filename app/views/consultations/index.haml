@@ -31,7 +31,7 @@
     %a.delete-consultations.btn.btn-danger(href = "")
       %i.fa.fa-trash
       Eliminar
-    %a.download-medical-history.btn.btn-primary(href = "#")
+    %a.download-medical-history.btn.btn-primary{ href: "#", "data-turbolinks": "false" }
       %i.fa.fa-download
       Descargar
     = link_to new_patient_consultation_path(@patient), class: "btn btn-success" do
@@ -125,9 +125,12 @@
                   %span.caret
               %ul.dropdown-menu.pull-right
                 %li
-                  = link_to "Editar", edit_patient_consultation_path(@patient, consultation)
+                  = link_to "Editar",
+                    edit_patient_consultation_path(@patient, consultation)
                 %li
-                  = link_to "Descargar certificado", download_certificates_path(consultation_id: consultation.id, certificate_type: "consultation")
+                  = link_to t('certificates.button.download'),
+                    download_certificates_path(consultation_id: consultation.id, certificate_type: "consultation"),
+                    data: { turbolinks: false }
 
 .row
   .col-md-12.text-center

@@ -68,6 +68,9 @@ es:
     success:
       creation: Consulta creada correctamente
       update: Consulta actualizada correctamente
+  certificates:
+    button:
+      download: Descargar certificado
 
   activerecord:
     errors:

@@ -68,3 +68,6 @@ en:
     success:
       creation: Consultation created successfully
       update: Consultation updated successfully
+  certificates:
+    button:
+      download: Download certificate
