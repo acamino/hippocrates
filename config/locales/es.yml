@@ -35,6 +35,9 @@ es:
       consultation: Consulta
       clinical-history: Historia clínica
       edit: Editar
+    success:
+      creation: Paciente creado correctamente
+      update: Paciente actualizado correctamente
   medicines:
     button:
       new: Nueva medicina
@@ -43,6 +46,9 @@ es:
       instructions: Instrucciones
     actions:
       edit: Editar
+    success:
+      creation: Medicina creada correctamente
+      update: Medicina actualizada correctamente
   diseases:
     button:
       new: Nueva enfermedad
@@ -51,6 +57,18 @@ es:
       name: Nombre
     actions:
       edit: Editar
+    success:
+      creation: Enfermedad creada correctamente
+      update: Enfermedad actualizada correctamente
+  anamneses:
+    success:
+      creation: Anamnesis creada correctamente
+      update: Anamnesis actualizada correctamente
+  consultations:
+    success:
+      creation: Consulta creada correctamente
+      update: Consulta actualizada correctamente
+
   activerecord:
     errors:
       messages:
