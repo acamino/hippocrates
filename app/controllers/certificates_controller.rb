@@ -1,6 +1,6 @@
 class CertificatesController < ApplicationController
   def download
-    @consultation = Consultation.find(consultation_id)
+    @consultation = Consultation.find(consultation_ids || consultation_id)
     send_data(certificate, download_options)
   end
 
@@ -22,10 +22,12 @@ class CertificatesController < ApplicationController
   end
 
   def consultation_id
+    params[:consultation_id]
+  end
+
+  def consultation_ids
     consultations = params[:consultations]
     return consultations.split('_').first if consultations.present?
-
-    params[:consultation_id]
   end
 
   def certificate_type

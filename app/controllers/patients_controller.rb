@@ -13,15 +13,15 @@ class PatientsController < ApplicationController
     :profession
   ].freeze
 
-  def index
-    delete_referer_location
-    @patients = Patient.search(params[:last_name], params[:first_name]).page(page)
-  end
-
   def special
     @patients = Patient.special.sort_by do |p|
       p.consultations.most_recent.created_at
     end.reverse
+  end
+
+  def index
+    delete_referer_location
+    @patients = Patient.search(params[:last_name], params[:first_name]).page(page)
   end
 
   def new

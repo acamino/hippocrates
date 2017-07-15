@@ -5,10 +5,6 @@ class AgeCalculator
     new(birthday).years_and_months
   end
 
-  def initialize(birthday)
-    @birthday = birthday
-  end
-
   def years_and_months
     age = Struct.new(:years, :months)
 
@@ -17,6 +13,10 @@ class AgeCalculator
   end
 
   private
+
+  def initialize(birthday)
+    @birthday = birthday
+  end
 
   def age_in_days
     (Date.today - Date.new(birthday.year, birthday.month, birthday.day)).to_i

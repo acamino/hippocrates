@@ -17,7 +17,7 @@ class ConsultationSerializer < ActiveModel::Serializer
   end
 
   def date
-    object.created_at.strftime('%Y-%m-%d')
+    object.created_at.strftime('%F')
   end
 
   def next_appointment?
@@ -25,7 +25,7 @@ class ConsultationSerializer < ActiveModel::Serializer
   end
 
   def next_appointment
-    return object.next_appointment.strftime('%Y-%m-%d') if next_appointment?
+    return object.next_appointment.strftime('%F') if next_appointment?
     object.next_appointment
   end
 
