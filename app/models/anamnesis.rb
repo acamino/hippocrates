@@ -1,4 +1,4 @@
-class Anamnesis < ActiveRecord::Base
+class Anamnesis < ApplicationRecord
   belongs_to :patient
 
   before_save :normalize_values

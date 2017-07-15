@@ -34,7 +34,7 @@ describe DiseasesController do
   describe '#create' do
     before do |example|
       unless example.metadata[:skip_on_before]
-        post :create, disease: attributes_for_disease
+        post :create, params: { disease: attributes_for_disease }
       end
     end
 
@@ -43,7 +43,7 @@ describe DiseasesController do
 
       it 'creates a disease', :skip_on_before do
         expect do
-          post :create, disease: attributes_for_disease
+          post :create, params: { disease: attributes_for_disease }
         end.to change { Disease.count }.by(1)
       end
 
@@ -58,7 +58,7 @@ describe DiseasesController do
 
       it 'does not create a disease', :skip_on_before do
         expect do
-          post :create, disease: attributes_for_disease
+          post :create, params: { disease: attributes_for_disease }
         end.to change { Disease.count }.by(0)
       end
 
@@ -72,7 +72,7 @@ describe DiseasesController do
 
     before do
       allow(Disease).to receive(:find).with('1') { disease }
-      get :edit, id: '1'
+      get :edit, params: { id: '1' }
     end
 
     it 'assings @disease' do
@@ -87,7 +87,7 @@ describe DiseasesController do
     let(:disease) { create(:disease, name: 'pharyngitis') }
 
     context 'when the information is valid' do
-      before { patch :update, id: disease.id, disease: { name: 'rhinitis' } }
+      before { patch :update, params: { id: disease.id, disease: { name: 'rhinitis' } } }
 
       it 'updates the disease' do
         expect(disease.reload.name).to eq('RHINITIS')
@@ -98,7 +98,7 @@ describe DiseasesController do
     end
 
     context 'when the information is invalid' do
-      before { put :update, id: disease.id, disease: { name: '' } }
+      before { put :update, params: { id: disease.id, disease: { name: '' } } }
 
       it 'do not update the disease' do
         expect(disease.reload.name).to eq('PHARYNGITIS')

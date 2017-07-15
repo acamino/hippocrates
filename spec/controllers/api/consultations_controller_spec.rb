@@ -9,7 +9,7 @@ describe API::ConsultationsController do
 
   describe '#last' do
     it 'returns the last consultation' do
-      post :last, patient_id: bob.id
+      post :last, params: { patient_id: bob.id }
       consultation = ::JSON.parse(response.body)
       expect(consultation['reason']).to eq(c2.reason)
     end
@@ -18,7 +18,7 @@ describe API::ConsultationsController do
   describe '#previous' do
     context 'when there is a previous consultation' do
       it 'returns the previous consultation' do
-        post :previous, patient_id: bob.id, current_consultation: c2.id
+        post :previous, params: { patient_id: bob.id, current_consultation: c2.id }
         consultation = ::JSON.parse(response.body)
         expect(consultation['reason']).to eq(c1.reason)
       end
@@ -26,7 +26,7 @@ describe API::ConsultationsController do
 
     context 'when there is a previous consultation' do
       before do
-        post :previous, patient_id: bob.id, current_consultation: c1.id
+        post :previous, params: { patient_id: bob.id, current_consultation: c1.id }
       end
 
       it 'responds with not found' do
@@ -41,7 +41,7 @@ describe API::ConsultationsController do
 
   describe '#next' do
     it 'returns the next consultation' do
-      post :next, patient_id: bob.id, current_consultation: c1.id
+      post :next, params: { patient_id: bob.id, current_consultation: c1.id }
       consultation = ::JSON.parse(response.body)
       expect(consultation['reason']).to eq(c2.reason)
     end
@@ -52,15 +52,15 @@ describe API::ConsultationsController do
 
     before do |example|
       unless example.metadata[:skip_on_before]
-        delete :destroy, patient_id: bob.id,
-                         consultations: consultations
+        delete :destroy, params: { patient_id: bob.id,
+                                   consultations: consultations }
       end
     end
 
     context 'when consultations are given' do
       it 'destroys consultations', :skip_on_before do
         expect do
-          delete :destroy, patient_id: bob.id, consultations: consultations
+          delete :destroy, params: { patient_id: bob.id, consultations: consultations }
         end.to change { Consultation.count }.from(2).to(0)
       end
     end
@@ -70,7 +70,7 @@ describe API::ConsultationsController do
 
       it 'does not destroy consultations', :skip_on_before do
         expect do
-          delete :destroy, patient_id: bob.id, consultations: consultations
+          delete :destroy, params: { patient_id: bob.id, consultations: consultations }
         end.to change { Consultation.count }.by(0)
       end
     end

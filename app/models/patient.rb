@@ -1,4 +1,4 @@
-class Patient < ActiveRecord::Base
+class Patient < ApplicationRecord
   enum gender: [:male, :female]
   enum civil_status: [:single, :married, :civil_union, :divorced, :widowed]
   enum source: [:television, :radio, :newspaper, :patient_reference]

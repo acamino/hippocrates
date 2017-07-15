@@ -1,4 +1,4 @@
-class Medicine < ActiveRecord::Base
+class Medicine < ApplicationRecord
   validates :name,
             :instructions, presence: true
 

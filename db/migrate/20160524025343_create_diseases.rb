@@ -1,4 +1,4 @@
-class CreateDiseases < ActiveRecord::Migration
+class CreateDiseases < ActiveRecord::Migration[5.1]
   def change
     create_table :diseases, id: false do |t|
       t.string :code, null: false

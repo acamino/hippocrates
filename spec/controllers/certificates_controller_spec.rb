@@ -20,12 +20,11 @@ describe CertificatesController do
       expect(Certificate).to receive(:for)
       expect(template).to receive(:render_to_string) { certificate }
       allow(controller).to receive(:send_data)
-        .with(certificate, options) { controller.render nothing: true }
+        .with(certificate, options) { controller.render body: nil }
     end
 
     it 'returns a docx file attachment' do
-      get :download, consultation_id: consultation.id,
-                     certificate_type: 'simple'
+      get :download, params: { consultation_id: consultation.id, certificate_type: 'simple' }
 
       expect(controller).to have_received(:send_data)
         .with(certificate, options).once

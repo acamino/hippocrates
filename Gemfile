@@ -2,7 +2,7 @@ ruby '2.3.1'
 source 'https://rubygems.org'
 
 gem 'pg'
-gem 'rails', '4.2.7.1'
+gem 'rails', '5.1.2'
 
 gem 'puma'
 gem 'rails_12factor', group: :production
@@ -16,7 +16,7 @@ gem 'kaminari'
 gem 'sablon'
 gem 'unicode_utils'
 
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails', '~> 4.2'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 
@@ -28,6 +28,7 @@ gem 'turbolinks'
 
 group :development, :test do
   gem 'byebug'
+  gem 'listen'
   gem 'rubocop'
 end
 
@@ -36,6 +37,7 @@ group :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'factory_girl_rails'
+  gem 'rails-controller-testing'
   gem 'rspec-activemodel-mocks'
   gem 'rspec-rails'
   gem 'shoulda-matchers', require: false

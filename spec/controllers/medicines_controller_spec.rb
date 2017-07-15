@@ -34,7 +34,7 @@ describe MedicinesController do
   describe '#create' do
     before do |example|
       unless example.metadata[:skip_on_before]
-        post :create, medicine: attributes_for_medicine
+        post :create, params: { medicine: attributes_for_medicine }
       end
     end
 
@@ -43,7 +43,7 @@ describe MedicinesController do
 
       it 'creates a medicine', :skip_on_before do
         expect do
-          post :create, medicine: attributes_for_medicine
+          post :create, params: { medicine: attributes_for_medicine }
         end.to change { Medicine.count }.by(1)
       end
 
@@ -58,7 +58,7 @@ describe MedicinesController do
 
       it 'does not create a medicine', :skip_on_before do
         expect do
-          post :create, medicine: attributes_for_medicine
+          post :create, params: { medicine: attributes_for_medicine }
         end.to change { Medicine.count }.by(0)
       end
 
@@ -72,7 +72,7 @@ describe MedicinesController do
 
     before do
       allow(Medicine).to receive(:find).with('1') { medicine }
-      get :edit, id: '1'
+      get :edit, params: { id: '1' }
     end
 
     it 'assings @medicine' do
@@ -87,7 +87,9 @@ describe MedicinesController do
     let(:medicine) { create(:medicine, name: 'paracetamol') }
 
     context 'when the information is valid' do
-      before { patch :update, id: medicine.id, medicine: { name: 'acetaminophen' } }
+      before do
+        patch :update, params: { id: medicine.id, medicine: { name: 'acetaminophen' } }
+      end
 
       it 'updates the medicine' do
         medicine.reload
@@ -99,7 +101,7 @@ describe MedicinesController do
     end
 
     context 'when the information is invalid' do
-      before { put :update, id: medicine.id, medicine: { name: '' } }
+      before { put :update, params: { id: medicine.id, medicine: { name: '' } } }
 
       it 'do not update the medicine' do
         medicine.reload
