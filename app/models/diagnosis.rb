@@ -1,4 +1,4 @@
-class Diagnosis < ActiveRecord::Base
+class Diagnosis < ApplicationRecord
   self.inheritance_column = nil
 
   enum type: [:presuntive, :definitive]

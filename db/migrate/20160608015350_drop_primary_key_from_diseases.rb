@@ -1,4 +1,4 @@
-class DropPrimaryKeyFromDiseases < ActiveRecord::Migration
+class DropPrimaryKeyFromDiseases < ActiveRecord::Migration[5.1]
   def up
     execute %Q{ ALTER TABLE "diseases" DROP CONSTRAINT "diseases_pkey"; }
   end

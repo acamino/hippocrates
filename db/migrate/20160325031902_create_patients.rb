@@ -1,4 +1,4 @@
-class CreatePatients < ActiveRecord::Migration
+class CreatePatients < ActiveRecord::Migration[5.1]
   def change
     create_table :patients do |t|
       t.integer  :medical_history,      null: false

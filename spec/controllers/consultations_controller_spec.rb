@@ -12,7 +12,7 @@ describe ConsultationsController do
     let(:patient) { create(:patient, :with_consultations) }
 
     before do
-      get :index, patient_id: patient.id
+      get :index, params: { patient_id: patient.id }
     end
 
     it 'assigns @patient' do
@@ -31,7 +31,7 @@ describe ConsultationsController do
     let(:patient) { create(:patient, :with_consultations) }
 
     before do
-      get :new, patient_id: patient.id
+      get :new, params: { patient_id: patient.id }
     end
 
     it 'assings @patient' do
@@ -54,15 +54,15 @@ describe ConsultationsController do
 
     before do |example|
       unless example.metadata[:skip_on_before]
-        post :create, patient_id: patient.id.to_s,
-                      consultation: attributes_for_consultation
+        post :create, params: { patient_id: patient.id.to_s,
+                                consultation: attributes_for_consultation }
       end
     end
 
     it 'creates a new consultation', :skip_on_before do
       expect do
-        post :create, patient_id: patient.id.to_s,
-                      consultation: attributes_for_consultation
+        post :create, params: { patient_id: patient.id.to_s,
+                                consultation: attributes_for_consultation }
       end.to change { Consultation.count }.by(1)
     end
 
@@ -70,41 +70,41 @@ describe ConsultationsController do
       pharyngitis = Disease.create(code: 'A001', name: 'Pharyngitis')
       rhinitis    = Disease.create(code: 'A002', name: 'Rhinitis')
 
-      post :create, patient_id: patient.id.to_s,
-                    consultation: attributes_for_consultation.merge(
-                      diagnoses_attributes: {
-                        '0' => {
-                          disease_code: pharyngitis.code,
-                          description: pharyngitis.name,
-                          type: 'presuntive'
-                        },
-                        '1' => {
-                          disease_code: rhinitis.code,
-                          description: rhinitis.name,
-                          type: 'presuntive'
-                        }
-                      }
-                    )
+      post :create, params: { patient_id: patient.id.to_s,
+                              consultation: attributes_for_consultation.merge(
+                                diagnoses_attributes: {
+                                  '0' => {
+                                    disease_code: pharyngitis.code,
+                                    description: pharyngitis.name,
+                                    type: 'presuntive'
+                                  },
+                                  '1' => {
+                                    disease_code: rhinitis.code,
+                                    description: rhinitis.name,
+                                    type: 'presuntive'
+                                  }
+                                }
+                              ) }
 
       expect(patient.consultations.last.diagnoses.count).to eq(2)
     end
 
     it 'creates new prescriptions', :skip_on_before do
-      post :create, patient_id: patient.id.to_s,
-                    consultation: attributes_for_consultation.merge(
-                      prescriptions_attributes: {
-                        '0' => { inscription: 'inscription-one', subscription: 'subscription' },
-                        '1' => { inscription: 'inscription-two', subscription: 'subscription' }
-                      }
-                    )
+      post :create, params: { patient_id: patient.id.to_s,
+                              consultation: attributes_for_consultation.merge(
+                                prescriptions_attributes: {
+                                  '0' => { inscription: 'i1', subscription: 's1' },
+                                  '1' => { inscription: 'i2', subscription: 's2' }
+                                }
+                              ) }
 
       expect(patient.consultations.last.prescriptions.count).to eq(2)
     end
 
     it "updates patient's special field", :skip_on_before do
       expect do
-        post :create, patient_id: patient.id.to_s,
-                      consultation: attributes_for_consultation
+        post :create, params: { patient_id: patient.id.to_s,
+                                consultation: attributes_for_consultation }
         patient.reload
       end.to change { patient.special }.from(false).to(true)
     end
@@ -123,8 +123,8 @@ describe ConsultationsController do
     let!(:consultation) { create(:consultation, patient: patient) }
 
     before do
-      get :edit, id: consultation.id,
-                 patient_id: patient.id
+      get :edit, params: { id: consultation.id,
+                           patient_id: patient.id }
     end
 
     it 'assings @patient' do
@@ -143,11 +143,11 @@ describe ConsultationsController do
     let!(:patient)      { create(:patient) }
     let!(:consultation) { create(:consultation, patient: patient) }
     before do
-      patch :update, id: consultation.id,
-                     patient_id: patient.id,
-                     consultation: {
-                       reason: 'updated reason', patient: { special: false }
-                     }
+      patch :update, params: { id: consultation.id,
+                               patient_id: patient.id,
+                               consultation: {
+                                 reason: 'updated reason', patient: { special: false }
+                               } }
     end
 
     it 'updates consultation' do

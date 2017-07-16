@@ -1,4 +1,4 @@
-class Prescription < ActiveRecord::Base
+class Prescription < ApplicationRecord
   belongs_to :consultation
 
   validates :inscription,

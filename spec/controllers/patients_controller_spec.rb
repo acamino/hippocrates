@@ -50,7 +50,7 @@ describe PatientsController do
   describe '#create' do
     before do |example|
       unless example.metadata[:skip_on_before]
-        post :create, patient: attributes_for_patient
+        post :create, params: { patient: attributes_for_patient }
       end
     end
 
@@ -59,12 +59,12 @@ describe PatientsController do
 
       it 'creates a patient', :skip_on_before do
         expect do
-          post :create, patient: attributes_for_patient
+          post :create, params: { patient: attributes_for_patient }
         end.to change { Patient.count }.by(1)
       end
 
       it 'updates the medical history sequence', :skip_on_before do
-        post :create, patient: attributes_for_patient
+        post :create, params: { patient: attributes_for_patient }
         expect(Setting::MedicalHistorySequence.next).to eq(6)
       end
 
@@ -83,12 +83,12 @@ describe PatientsController do
 
       it 'does not create a patient', :skip_on_before do
         expect do
-          post :create, patient: attributes_for_patient
+          post :create, params: { patient: attributes_for_patient }
         end.to change { Patient.count }.by(0)
       end
 
       it 'does not update the medical history sequence', :skip_on_before do
-        post :create, patient: attributes_for_patient
+        post :create, params: { patient: attributes_for_patient }
         expect(Setting::MedicalHistorySequence.next).to eq(5)
       end
 
@@ -102,7 +102,7 @@ describe PatientsController do
 
     before do
       allow(Patient).to receive(:find).with('1') { patient }
-      get :edit, id: '1'
+      get :edit, params: { id: '1' }
     end
 
     it 'assings @patient' do
@@ -117,7 +117,7 @@ describe PatientsController do
     let(:patient) { create(:patient, first_name: 'Bob') }
 
     context 'when the information is valid' do
-      before { put :update, id: patient.id, patient: { first_name: 'Chad' } }
+      before { put :update, params: { id: patient.id, patient: { first_name: 'Chad' } } }
 
       it 'updates the patient' do
         expect(patient.reload.first_name).to eq('CHAD')
@@ -128,7 +128,7 @@ describe PatientsController do
     end
 
     context 'when the information is invalid' do
-      before { put :update, id: patient.id, patient: { first_name: '' } }
+      before { put :update, params: { id: patient.id, patient: { first_name: '' } } }
 
       it 'do not update the patient' do
         expect(patient.reload.first_name).to eq('BOB')

@@ -10,7 +10,7 @@ describe AnamnesesController do
     before do
       allow(Patient).to receive(:find).with('1') { patient }
       allow(Anamnesis).to receive(:new) { anamnesis }
-      get :new, patient_id: '1'
+      get :new, params: { patient_id: '1' }
     end
 
     it 'assings @patient' do
@@ -31,15 +31,15 @@ describe AnamnesesController do
 
     before do |example|
       unless example.metadata[:skip_on_before]
-        post :create, anamnesis: attributes_for_anamnesis,
-                      patient_id: patient.id.to_s
+        post :create, params: { anamnesis: attributes_for_anamnesis,
+                                patient_id: patient.id.to_s }
       end
     end
 
     it 'creates a new anamnesis', :skip_on_before do
       expect do
-        post :create, anamnesis: attributes_for_anamnesis,
-                      patient_id: patient.id.to_s
+        post :create, params: { anamnesis: attributes_for_anamnesis,
+                                patient_id: patient.id.to_s }
       end.to change { Anamnesis.count }.by(1)
     end
 
@@ -54,7 +54,7 @@ describe AnamnesesController do
     before do
       allow(Patient).to receive(:find).with('1') { patient }
       allow(Anamnesis).to receive(:find).with('1') { anamnesis }
-      get :edit, id: '1', patient_id: '1'
+      get :edit, params: { id: '1', patient_id: '1' }
     end
 
     it 'assings @patient' do
@@ -73,9 +73,9 @@ describe AnamnesesController do
     let(:patient) { create(:patient_with_anamnesis) }
 
     before do
-      put :update, patient_id: patient.id,
-                   id: patient.anamnesis.id,
-                   anamnesis: { family_history: 'family history updated' }
+      put :update, params: { patient_id: patient.id,
+                             id: patient.anamnesis.id,
+                             anamnesis: { family_history: 'family history updated' } }
     end
 
     it 'updates the patient' do

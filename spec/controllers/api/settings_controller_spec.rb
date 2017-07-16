@@ -21,7 +21,7 @@ describe API::SettingsController do
     let(:value)    { '2' }
 
     before do
-      patch :update, id: setting.id, value: value
+      patch :update, params: { id: setting.id, value: value }
     end
 
     context 'when the information is valid' do

@@ -1,4 +1,4 @@
-class Setting < ActiveRecord::Base
+class Setting < ApplicationRecord
   MAXIMUM_DIAGNOSES = 'maximum_diagnoses'.freeze
   MAXIMUM_PRESCRIPTIONS = 'maximum_prescriptions'.freeze
   MEDICAL_HISTORY_SEQUENCE = 'medical_history_sequence'.freeze

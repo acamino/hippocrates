@@ -5,4 +5,4 @@ rvm:
 
 before_script:
   - bundle exec rubocop
-  - RAILS_ENV=test bundle exec rake db:create db:migrate
+  - RAILS_ENV=test bundle exec rails db:create db:migrate

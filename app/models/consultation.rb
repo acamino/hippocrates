@@ -1,4 +1,4 @@
-class Consultation < ActiveRecord::Base
+class Consultation < ApplicationRecord
   belongs_to :patient
   has_many   :diagnoses, dependent: :destroy
   has_many   :prescriptions, dependent: :destroy
