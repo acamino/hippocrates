@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def fetch_patient
+    @patient = PatientPresenter.new(Patient.find(params[:patient_id]))
+  end
+
   def page
     params.fetch(:page, 1)
   end

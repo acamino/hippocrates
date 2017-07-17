@@ -81,10 +81,6 @@ class ConsultationsController < ApplicationController
     @consultation = Consultation.find(params[:id])
   end
 
-  def fetch_patient
-    @patient = Patient.find(params[:patient_id])
-  end
-
   def remaining_diagnoses
     maximum_diagnoses - @consultation.diagnoses.count
   end

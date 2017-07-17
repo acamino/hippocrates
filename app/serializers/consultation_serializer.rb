@@ -34,7 +34,17 @@ class ConsultationSerializer < ActiveModel::Serializer
     attribute :male?, key: :isMale
 
     def name
-      "#{object.last_name} #{object.first_name}"
+      presenter.name
+    end
+
+    def age
+      presenter.age
+    end
+
+    private
+
+    def presenter
+      PatientPresenter.new(object)
     end
   end
 
