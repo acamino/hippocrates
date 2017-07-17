@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ConsultationsController < ApplicationController
   ATTRIBUTE_WHITELIST = [
     :reason,
@@ -38,7 +40,9 @@ class ConsultationsController < ApplicationController
 
   def index
     delete_referer_location
-    @consultations = @patient.consultations.page(params.fetch(:page, 1))
+    @consultations = ConsultationsPresenter.new(
+      @patient.consultations.page(params.fetch(:page, 1))
+    )
   end
 
   def new
@@ -78,7 +82,7 @@ class ConsultationsController < ApplicationController
   private
 
   def fetch_consultation
-    @consultation = Consultation.find(params[:id])
+    @consultation = ConsultationPresenter.new(Consultation.find(params[:id]))
   end
 
   def remaining_diagnoses

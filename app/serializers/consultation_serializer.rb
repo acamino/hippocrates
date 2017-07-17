@@ -9,24 +9,23 @@ class ConsultationSerializer < ActiveModel::Serializer
   has_many :prescriptions
 
   def diagnoses?
-    object.diagnoses.count.positive?
+    consultation_presenter.diagnoses?
   end
 
   def prescriptions?
-    object.prescriptions.count.positive?
+    consultation_presenter.prescriptions?
   end
 
   def date
-    object.created_at.strftime('%F')
+    consultation_presenter.date
   end
 
   def next_appointment?
-    object.next_appointment.present?
+    consultation_presenter.next_appointment?
   end
 
   def next_appointment
-    return object.next_appointment.strftime('%F') if next_appointment?
-    object.next_appointment
+    return consultation_presenter.next_appointment_date if consultation_presenter.next_appointment?
   end
 
   class PatientSerializer < ActiveModel::Serializer
@@ -34,16 +33,16 @@ class ConsultationSerializer < ActiveModel::Serializer
     attribute :male?, key: :isMale
 
     def name
-      presenter.name
+      patient_presenter.name
     end
 
     def age
-      presenter.age
+      patient_presenter.age
     end
 
     private
 
-    def presenter
+    def patient_presenter
       PatientPresenter.new(object)
     end
   end
@@ -55,5 +54,11 @@ class ConsultationSerializer < ActiveModel::Serializer
 
   class PrescriptionSerializer < ActiveModel::Serializer
     attributes :inscription, :subscription
+  end
+
+  private
+
+  def consultation_presenter
+    ConsultationPresenter.new(object)
   end
 end

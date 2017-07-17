@@ -43,42 +43,4 @@ describe Consultation do
       end
     end
   end
-
-  describe '#date' do
-    it 'returns the consultation date' do
-      consultation = build(:consultation, created_at: '2016-01-15 11:15')
-      expect(consultation.date).to eq('2016-01-15')
-    end
-  end
-
-  describe '#time' do
-    it 'returns the consultation time' do
-      consultation = build(:consultation, created_at: '2016-01-15 11:15')
-      expect(consultation.time).to eq('11:15 AM')
-    end
-  end
-
-  describe '#pretty_date' do
-    it 'returns the formatted consultation date' do
-      consultation = build(:consultation, created_at: '2016-04-13 11:15')
-      expect(consultation.pretty_date).to eq('Abril 13 de 2016')
-    end
-  end
-
-  describe '#miscellaneous?' do
-    let(:consultation) { build(:consultation) }
-
-    context 'when miscellaneous is present' do
-      it 'returns true' do
-        consultation.miscellaneous = 'notes'
-        expect(consultation.miscellaneous?).to be_truthy
-      end
-    end
-
-    context 'when miscellaneous is not present' do
-      it 'returns false' do
-        expect(consultation.miscellaneous?).to be_falsey
-      end
-    end
-  end
 end

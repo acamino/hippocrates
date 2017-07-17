@@ -78,59 +78,59 @@
                 Consultas
           %th.col-sm-2
       %tbody
-      - @consultations.each do |consultation|
-        %tr
-          %td.checkbox-container
-            %input.check-consultation{ type: "checkbox", id: consultation.id }
-          %td
-            .row
-              .col-md-10.col-md-offset-2
-                %strong
-                  %big= consultation.created_at.strftime("%b %d, %Y")
-            - if consultation.reason.present?
+        - @consultations.each do |consultation|
+          %tr
+            %td.checkbox-container
+              %input.check-consultation{ type: "checkbox", id: consultation.id }
+            %td
               .row
-                .col-md-2.text-right.hidden-xs
-                  %span.semi-strong.text-muted Motivo
-                .col-md-2.visible-xs
-                  %span.semi-strong.text-muted Motivo
-                .col-md-10
-                  %span
-                    = consultation.reason
-            - if consultation.miscellaneous.present?
-              .row
-                .col-md-2.text-right.hidden-xs
-                  %span.semi-strong.text-muted Misceláneos
-                .col-md-2.visible-xs
-                  %span.semi-strong.text-muted Misceláneos
-                .col-md-10
-                  %span.semi-strong
-                  = consultation.miscellaneous
-            - if consultation.next_appointment.present?
-              .row
-                .col-md-2.text-right.hidden-xs
-                  %span.semi-strong.text-muted Próxima cita
-                .col-md-2.visible-xs
-                  %span.semi-strong.text-muted Próxima cita
-                .col-md-10
-                  %span.semi-strong
-                  = consultation.next_appointment.strftime("%b %d, %Y")
-          %td.text-right
-            .btn-group
-              %button.btn.btn-default.btn-xs.dropdown-toggle{ "aria-expanded": "false",
-                                                              "aria-haspopup": "true",
-                                                              "data-toggle": "dropdown",
-                                                              "type": "button" }
-                .span.text-primary
-                  %i.fa.fa-cog
-                  %span.caret
-              %ul.dropdown-menu.pull-right
-                %li
-                  = link_to "Editar",
-                    edit_patient_consultation_path(@patient, consultation)
-                %li
-                  = link_to t('certificates.button.download'),
-                    download_certificates_path(consultation_id: consultation.id, certificate_type: "consultation"),
-                    data: { turbolinks: false }
+                .col-md-10.col-md-offset-2
+                  %strong
+                    %big= consultation.long_date
+              - if consultation.reason.present?
+                .row
+                  .col-md-2.text-right.hidden-xs
+                    %span.semi-strong.text-muted Motivo
+                  .col-md-2.visible-xs
+                    %span.semi-strong.text-muted Motivo
+                  .col-md-10
+                    %span
+                      = consultation.reason
+              - if consultation.miscellaneous.present?
+                .row
+                  .col-md-2.text-right.hidden-xs
+                    %span.semi-strong.text-muted Misceláneos
+                  .col-md-2.visible-xs
+                    %span.semi-strong.text-muted Misceláneos
+                  .col-md-10
+                    %span.semi-strong
+                    = consultation.miscellaneous
+              - if consultation.next_appointment.present?
+                .row
+                  .col-md-2.text-right.hidden-xs
+                    %span.semi-strong.text-muted Próxima cita
+                  .col-md-2.visible-xs
+                    %span.semi-strong.text-muted Próxima cita
+                  .col-md-10
+                    %span.semi-strong
+                    = consultation.next_appointment_long_date
+            %td.text-right
+              .btn-group
+                %button.btn.btn-default.btn-xs.dropdown-toggle{ "aria-expanded": "false",
+                                                                "aria-haspopup": "true",
+                                                                "data-toggle": "dropdown",
+                                                                "type": "button" }
+                  .span.text-primary
+                    %i.fa.fa-cog
+                    %span.caret
+                %ul.dropdown-menu.pull-right
+                  %li
+                    = link_to "Editar",
+                      edit_patient_consultation_path(@patient, consultation)
+                  %li
+                    = link_to t('certificates.button.download'),
+                      download_certificates_path(consultation_id: consultation.id, certificate_type: "consultation"),
+                      data: { turbolinks: false }
 
 .row
   .col-md-12.text-center

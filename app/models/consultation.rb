@@ -32,26 +32,6 @@ class Consultation < ApplicationRecord
     end
   end
 
-  def date
-    self[:created_at].strftime('%Y-%m-%d')
-  end
-
-  def time
-    self[:created_at].strftime('%I:%M %p')
-  end
-
-  def pretty_date
-    I18n.localize(self[:created_at], format: '%B %d de %Y')
-  end
-
-  def miscellaneous?
-    miscellaneous.present?
-  end
-
-  def next_appointment?
-    next_appointment.present?
-  end
-
   private
 
   # rubocop:disable MethodLength

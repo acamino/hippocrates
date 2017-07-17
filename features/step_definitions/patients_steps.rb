@@ -1,8 +1,9 @@
 Given(/^the following patients exist:$/) do |table|
   log_in(create(:user))
   table.hashes.each do |patient|
-    create(:patient,
-           first_name: patient[:first_name], last_name: patient[:last_name])
+    create(
+      :patient, first_name: patient[:first_name], last_name: patient[:last_name]
+    )
   end
 end
 

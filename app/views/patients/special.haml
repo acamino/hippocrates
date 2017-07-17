@@ -28,7 +28,7 @@
             .col-md-12
               %strong
                 %span.text-muted Próxima cita
-              = patient.consultations.most_recent.next_appointment.strftime("%Y-%m-%d")
+              = patient.consultations.most_recent.next_appointment_date
         - if patient.consultations.most_recent.miscellaneous?
           .row
             .col-md-12
