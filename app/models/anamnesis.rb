@@ -1,7 +1,7 @@
 class Anamnesis < ApplicationRecord
   belongs_to :patient
 
-  before_save :normalize_values
+  before_save :normalize
 
   def allergies?
     allergies.present?
@@ -17,12 +17,12 @@ class Anamnesis < ApplicationRecord
 
   private
 
-  def normalize_values
-    %w[medical_history surgical_history allergies observations habits
-       family_history].each do |field|
-      if attributes[field].present?
-        send("#{field}=", UnicodeUtils.upcase(attributes[field]))
-      end
-    end
+  def normalize
+    normalize_fields :medical_history,
+                     :surgical_history,
+                     :allergies,
+                     :observations,
+                     :habits,
+                     :family_history
   end
 end

@@ -11,7 +11,7 @@ describe Disease do
 
   describe 'normalize attributes' do
     it 'upcases the attributes' do
-      disease = create(:disease, code: 'A002', name: 'rhinitis')
+      disease = create(:disease, name: 'rhinitis')
       expect(disease.name).to eq('RHINITIS')
     end
   end

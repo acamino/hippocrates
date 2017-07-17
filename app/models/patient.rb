@@ -19,7 +19,7 @@ class Patient < ApplicationRecord
             :identity_card_number, uniqueness: true
   validates :email, uniqueness: true, allow_nil: true, allow_blank: true
 
-  before_save :normalize_values
+  before_save :normalize
 
   scope :special, -> { where(special: true) }
 
@@ -51,13 +51,11 @@ class Patient < ApplicationRecord
 
   private
 
-  def normalize_values
-    %w[last_name first_name address profession].each do |field|
-      if attributes[field].present?
-        send("#{field}=", UnicodeUtils.upcase(attributes[field]))
-      end
-    end
-
+  def normalize
+    normalize_fields :last_name,
+                     :first_name,
+                     :address,
+                     :profession
     email.downcase! if email.present?
   end
 end

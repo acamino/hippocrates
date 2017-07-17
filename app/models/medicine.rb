@@ -4,7 +4,7 @@ class Medicine < ApplicationRecord
 
   validates :name, uniqueness: true
 
-  before_save :normalize_values
+  before_save :normalize
 
   def self.search(query)
     if query
@@ -17,11 +17,7 @@ class Medicine < ApplicationRecord
 
   private
 
-  def normalize_values
-    %w[name instructions].each do |field|
-      if attributes[field].present?
-        send("#{field}=", UnicodeUtils.upcase(attributes[field]))
-      end
-    end
+  def normalize
+    normalize_fields :name, :instructions
   end
 end
