@@ -4,7 +4,7 @@ class Disease < ApplicationRecord
   validates_presence_of :code, :name
   validates_uniqueness_of :code
 
-  before_save :normalize_values
+  before_save :normalize
 
   def self.search(query)
     if query
@@ -17,11 +17,7 @@ class Disease < ApplicationRecord
 
   private
 
-  def normalize_values
-    %w[code name].each do |field|
-      if attributes[field].present?
-        send("#{field}=", UnicodeUtils.upcase(attributes[field]))
-      end
-    end
+  def normalize
+    normalize_fields :code, :name
   end
 end
