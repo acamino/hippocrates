@@ -27,7 +27,7 @@
           %td.hidden-xs= patient.medical_history
           %td= patient.last_name
           %td= patient.first_name
-          %td.hidden-xs= patient.birthdate.strftime("%Y-%m-%d")
+          %td.hidden-xs= patient.formatted_birthdate
           %td
             - if patient.male?
               %span.label.label-primary= t('patients.label.male')
