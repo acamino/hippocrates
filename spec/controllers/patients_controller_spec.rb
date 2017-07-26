@@ -14,7 +14,7 @@ describe PatientsController do
     end
 
     it 'assings @patients' do
-      expect(assigns(:patients)).to eq(patients)
+      expect(assigns(:patients)).to be_a(PatientsPresenter)
     end
 
     it { is_expected.to render_template :index }
