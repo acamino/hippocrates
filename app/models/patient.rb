@@ -33,14 +33,6 @@ class Patient < ApplicationRecord
     end
   end
 
-  def age
-    AgeCalculator.calculate(birthdate)
-  end
-
-  def name
-    "#{last_name} #{first_name}"
-  end
-
   def anamnesis?
     anamnesis.present?
   end

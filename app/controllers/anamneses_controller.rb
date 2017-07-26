@@ -8,8 +8,9 @@ class AnamnesesController < ApplicationController
     :family_history
   ].freeze
 
+  before_action :fetch_patient, only: [:new, :edit]
+
   def new
-    @patient   = Patient.find(params[:patient_id])
     @anamnesis = Anamnesis.new
   end
 
@@ -22,7 +23,6 @@ class AnamnesesController < ApplicationController
   end
 
   def edit
-    @patient   = Patient.find(params[:patient_id])
     @anamnesis = Anamnesis.find(params[:id])
     @referer_location = referer_location
   end

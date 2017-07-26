@@ -1,5 +1,6 @@
 Feature: User can manage the patients
 
+  # TODO: Reword the expectations, it's too verbose
   Scenario: Listing patients
     Given the following patients exist:
       | first_name | last_name |

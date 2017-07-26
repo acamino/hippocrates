@@ -71,35 +71,6 @@ describe Patient do
     end
   end
 
-  describe '#age' do
-    context 'when a patient has a birthdate' do
-      subject { build(:patient, birthdate: Date.new(2011, 12, 8)) }
-
-      it "calculates patient's age" do
-        Timecop.freeze(Date.new(2015, 10, 21)) do
-          expect(subject.age.years).to eq(3)
-        end
-      end
-    end
-
-    context "when a patient doesn't have a birthdate" do
-      subject { Patient.new }
-
-      it 'returns 0' do
-        Timecop.freeze(Date.new(2015, 10, 21)) do
-          expect(subject.age.years).to eq(0)
-        end
-      end
-    end
-  end
-
-  describe '#name' do
-    it "returns patient's full name" do
-      patient = build(:patient, first_name: 'Alice', last_name: 'Doe')
-      expect(patient.name).to eq('Doe Alice')
-    end
-  end
-
   describe '#anamnesis?' do
     let(:patient) { build(:patient) }
 
