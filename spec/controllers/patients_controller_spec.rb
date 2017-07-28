@@ -14,7 +14,7 @@ describe PatientsController do
     end
 
     it 'assings @patients' do
-      expect(assigns(:patients)).to be_a(PatientsPresenter)
+      expect(assigns(:patients)).to eq(patients)
     end
 
     it { is_expected.to render_template :index }
@@ -22,8 +22,8 @@ describe PatientsController do
   end
 
   describe '#special' do
-    let!(:bob)   { create(:patient, :special, :with_consultations) }
-    let!(:tom)   { create(:patient, :special, :with_consultations) }
+    let!(:bob)   { create(:patient, :special) }
+    let!(:tom)   { create(:patient, :special) }
     let!(:alice) { create(:patient, :with_consultations) }
 
     before { get :special }

@@ -1,4 +1,10 @@
 module ApplicationHelper
+  def present_for(object)
+    klass ||= "#{object.class}Presenter".constantize
+    presenter = klass.new(object)
+    yield presenter
+  end
+
   def error_messages_for(resource, display_header = true)
     return nil unless resource.errors.any?
 

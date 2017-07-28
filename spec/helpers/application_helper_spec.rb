@@ -1,6 +1,14 @@
 require 'rails_helper'
 
 describe ApplicationHelper do
+  describe '#present_for' do
+    it 'yields the corresponding presenter' do
+      helper.present_for(Patient.new) do |presenter|
+        expect(presenter).to be_a(PatientPresenter)
+      end
+    end
+  end
+
   describe '#error_messages_for' do
     context 'when the resource contains errors' do
       it 'returns the error messages' do

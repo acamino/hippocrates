@@ -1,32 +1,32 @@
-Feature: User can manage the patients
+Feature: User can manage patients
 
-  # TODO: Reword the expectations, it's too verbose
   Scenario: Listing patients
-    Given the following patients exist:
+    Given the following patients:
       | first_name | last_name |
-      | Bob        | Smith     |
-      | Alice      | Doe       |
-    When I go to the patients page
-    Then I see Bob and Alice
+      | Ada        | Lovelace  |
+      | Charles    | Babbage   |
+    When I open patients page
+    Then I see "Ada"
+    And I see "Charles"
 
   Scenario: Creating a patient
-    Given Bob is not a registered patient
-    When I go to the new patient page
-    And I input Bob information
-    Then I see a creation message
+    Given Charles is not a patient
+    When I open create patient page
+    And I input Charles information
+    Then I see a success message for creation
 
   Scenario: Updating a patient
-    Given Bob is a registered patient
-    When I go to the edit patient page
-    And I update Bob's informaton
-    Then I see a confirmation message for update
+    Given Ada is a patient
+    When I open edit patient page
+    And I update Ada's informaton
+    Then I see a success message for update
 
   Scenario: Searching a patient
-    Given the following patients exist:
+    Given the following patients:
       | first_name | last_name |
-      | Bob        | Smith     |
-      | Alice      | Doe       |
-    When I go to the patients page
-    And I search for Doe
-    Then I see Alice
-    And I don't see Bob
+      | Ada        | Lovelace  |
+      | Charles    | Babbage   |
+    When I open patients page
+    And I search for Ada
+    Then I see "Ada"
+    But I don't see "Charles"

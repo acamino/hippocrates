@@ -1,17 +1,17 @@
-Given(/^Bob is an existing patient$/) do
+Given(/^Ada is an patient$/) do
   log_in(create(:user))
-  @bob = create(:patient, first_name: 'Bob')
+  @ada = create(:patient, first_name: 'Ada')
 
   create(:setting, :maximum_diagnoses)
   create(:setting, :maximum_prescriptions)
   create(:setting, :medical_history_sequence)
 end
 
-When(/^I go to the new anamnesis page$/) do
-  visit new_patient_anamnesis_path(@bob)
+When(/^I open create anamnesis page$/) do
+  visit new_patient_anamnesis_path(@ada)
 end
 
-When(/^I input Bob's anamnesis$/) do
+When(/^I input Ada's anamnesis$/) do
   fill_in :anamnesis_surgical_history, with: 'surgical history'
   fill_in :anamnesis_allergies,        with: 'allergies'
   fill_in :anamnesis_observations,     with: 'observations'

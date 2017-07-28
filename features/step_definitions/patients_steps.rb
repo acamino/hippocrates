@@ -1,4 +1,4 @@
-Given(/^the following patients exist:$/) do |table|
+Given(/^the following patients:$/) do |table|
   log_in(create(:user))
   table.hashes.each do |patient|
     create(
@@ -7,66 +7,56 @@ Given(/^the following patients exist:$/) do |table|
   end
 end
 
-When(/^I go to the patients page$/) do
+When(/^I open patients page$/) do
   visit patients_path
 end
 
-Then(/^I see Bob and Alice$/) do
-  expect(page).to have_content('BOB')
-  expect(page).to have_content('ALICE')
-end
-
-Given(/^Bob is not a registered patient$/) do
+Given(/^Charles is not a patient$/) do
   log_in(create(:user))
   create(:setting, :medical_history_sequence)
-  bob = Patient.where(first_name: 'Bob').first
-  bob.destroy if bob.present?
+  charles = Patient.where(first_name: 'Charles').first
+  charles.destroy if charles.present?
 end
 
-When(/^I go to the new patient page$/) do
+When(/^I open create patient page$/) do
   visit new_patient_path
 end
 
-When(/^I input Bob information$/) do
+When(/^I input Charles information$/) do
   fill_in :patient_birthdate, with: '1990/02/10'
   fill_in :patient_identity_card_number, with: '0502231248'
-  fill_in :patient_last_name, with: 'Bob'
-  fill_in :patient_first_name, with: 'Smith'
-  fill_in :patient_profession, with: 'Developer'
+  fill_in :patient_last_name, with: 'Charles'
+  fill_in :patient_first_name, with: 'Babbage'
+  fill_in :patient_profession, with: 'Mathematician'
   click_on 'Guardar'
 end
 
-Then(/^I see a creation message$/) do
+Then(/^I see a success message for creation$/) do
   expect(page).to have_content('Paciente creado correctamente')
 end
 
-Given(/^Bob is a registered patient$/) do
-  log_in(create(:user))
-  @bob = create(:patient, first_name: 'Bob')
+When(/^I open edit patient page$/) do
+  visit edit_patient_path(@ada)
 end
 
-When(/^I go to the edit patient page$/) do
-  visit edit_patient_path(@bob)
-end
-
-When(/^I update Bob's informaton$/) do
-  fill_in :patient_last_name, with: 'Rob'
+When(/^I update Ada's informaton$/) do
+  fill_in :patient_last_name, with: 'Lovelace'
   click_on 'Guardar'
 end
 
-Then(/^I see a confirmation message for update$/) do
+Then(/^I see a success message for update$/) do
   expect(page).to have_content('Paciente actualizado correctamente')
 end
 
-When(/^I search for Doe$/) do
-  fill_in :last_name, with: 'Doe'
+When(/^I search for Ada$/) do
+  fill_in :first_name, with: 'Ada'
   click_on 'Buscar'
 end
 
-Then(/^I see Alice$/) do
-  expect(page).to have_content('ALICE')
+Then(/^I see "(.+)"$/) do |content|
+  expect(page).to have_content(/#{content}/i)
 end
 
-Then(/^I don't see Bob$/) do
-  expect(page).to have_no_content('BOB')
+But(/^I don't see "(.+)"$/) do |content|
+  expect(page).to have_no_content(/#{content}/i)
 end

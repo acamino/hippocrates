@@ -20,7 +20,7 @@ describe ConsultationsController do
     end
 
     it 'assigns @consultations' do
-      expect(assigns(:consultations)).to be_a(ConsultationsPresenter)
+      expect(assigns(:consultations)).to eq(patient.consultations)
     end
 
     it { is_expected.to render_template :index }

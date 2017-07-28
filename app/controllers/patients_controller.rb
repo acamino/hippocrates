@@ -21,9 +21,7 @@ class PatientsController < ApplicationController
 
   def index
     delete_referer_location
-    @patients = PatientsPresenter.new(
-      Patient.search(params[:last_name], params[:first_name]).page(page)
-    )
+    @patients = Patient.search(params[:last_name], params[:first_name]).page(page)
   end
 
   def new
