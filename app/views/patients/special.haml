@@ -3,35 +3,36 @@
     %tr
       %th{ colspan: 2 } Pacientes Especiales
   %tbody
-  - @patients.each do |patient|
-    %tr
-      %td.col-md-1.hidden-xs
-        %big
-          = patient.medical_history
-      %td.col-md-11
-        .row
-          .col-xs-8
-            %strong
-              %big= patient.name
-              %span.text-muted
-                #{patient.age.years} años
-                = gender_tag(patient)
-          .col-xs-4
-            .pull-right
-              - if patient.phone_number.present?
-                %big
-                  %a(href = "tel:#{patient.phone_number}")
-                    %i.fa.fa-phone.hidden-xs
-                    %strong= patient.phone_number
-        - if patient.consultations.most_recent.next_appointment?
+  - @patients.each do |_patient|
+    - present_for(_patient) do |patient|
+      %tr
+        %td.col-md-1.hidden-xs
+          %big
+            = patient.medical_history
+        %td.col-md-11
           .row
-            .col-md-12
+            .col-xs-8
               %strong
-                %span.text-muted Próxima cita
-              = patient.consultations.most_recent.next_appointment_date
-        - if patient.consultations.most_recent.miscellaneous?
-          .row
-            .col-md-12
-              %strong
-                %span.text-muted Misceláneos
-              = patient.consultations.most_recent.miscellaneous
+                %big= patient.name
+                %span.text-muted
+                  #{patient.age.years} años
+                  = gender_tag(patient)
+            .col-xs-4
+              .pull-right
+                - if patient.phone_number.present?
+                  %big
+                    %a(href = "tel:#{patient.phone_number}")
+                      %i.fa.fa-phone.hidden-xs
+                      %strong= patient.phone_number
+          - if patient.most_recent_consultation.next_appointment?
+            .row
+              .col-md-12
+                %strong
+                  %span.text-muted Próxima cita
+                = patient.most_recent_consultation.next_appointment_date
+          - if patient.most_recent_consultation.miscellaneous?
+            .row
+              .col-md-12
+                %strong
+                  %span.text-muted Misceláneos
+                = patient.most_recent_consultation.miscellaneous

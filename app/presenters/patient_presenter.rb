@@ -16,4 +16,8 @@ class PatientPresenter < SimpleDelegator
   def name
     "#{last_name} #{first_name}"
   end
+
+  def most_recent_consultation
+    ConsultationPresenter.new(consultations.most_recent)
+  end
 end

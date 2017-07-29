@@ -4,7 +4,7 @@ Given(/^Ada is a patient with consultations$/) do
   create(:consultation, patient: @ada, next_appointment: '2017-09-01')
 end
 
-When(/^I go to her consultations page$/) do
+When(/^I open her consultations page$/) do
   visit patient_consultations_path(@ada.id)
 end
 
@@ -23,7 +23,7 @@ Given(/^Ada is a patient$/) do
   create(:setting, :medical_history_sequence)
 end
 
-When(/^I go to create consultation page$/) do
+When(/^I open create consultation page$/) do
   visit new_patient_consultation_path(@ada.id)
 end
 

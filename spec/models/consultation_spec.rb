@@ -24,7 +24,7 @@ describe Consultation do
     let!(:recent_consultation) { create :consultation, created_at: Time.now }
 
     it 'returns the most recent consultation' do
-      expect(Consultation.most_recent).to eq(recent_consultation)
+      expect(described_class.most_recent).to eq(recent_consultation)
     end
   end
 

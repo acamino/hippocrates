@@ -1,5 +1,6 @@
 require 'timecop'
 require_relative '../../app/presenters/patient_presenter'
+require_relative '../../app/presenters/consultation_presenter'
 require_relative '../../lib/age_calculator'
 
 describe PatientPresenter do
@@ -31,11 +32,13 @@ describe PatientPresenter do
   end
 
   describe '#age' do
+    let(:presenter) do
+      patient = double(:patient, birthdate: age)
+      described_class.new(patient)
+    end
+
     context 'when the patient has a birthdate' do
-      subject(:presenter) do
-        patient = double(:patient, birthdate: Date.new(2011, 12, 8))
-        described_class.new(patient)
-      end
+      let(:age) { Date.new(2011, 12, 8) }
 
       it 'returns their age' do
         Timecop.freeze(Date.new(2015, 10, 21)) do
@@ -45,16 +48,23 @@ describe PatientPresenter do
     end
 
     context "when the patient doesn't have a birthdate" do
-      subject(:presenter) do
-        patient = double(:patient, birthdate: nil)
-        described_class.new(patient)
-      end
+      let(:age) { nil }
 
       it 'returns 0' do
         Timecop.freeze(Date.new(2015, 10, 21)) do
           expect(presenter.age.years).to eq(0)
         end
       end
+    end
+  end
+
+  describe '#most_recent_consultation' do
+    it 'returns the most recent consultation' do
+      patient = double(
+        :patient, consultations: double(most_recent: double)
+      )
+      presenter = described_class.new(patient)
+      expect(presenter.most_recent_consultation).to be_a(ConsultationPresenter)
     end
   end
 end

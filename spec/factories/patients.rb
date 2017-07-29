@@ -19,6 +19,7 @@ FactoryGirl.define do
 
   trait :special do
     special true
+    with_consultations
   end
 
   trait :with_consultations do

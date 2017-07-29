@@ -22,52 +22,53 @@
           %th.col-md-1= t('patients.table-header.gender')
           %th.col-md-1
       %tbody
-      - @patients.each do |patient|
-        %tr
-          %td.hidden-xs= patient.medical_history
-          %td= patient.last_name
-          %td= patient.first_name
-          %td.hidden-xs= patient.formatted_birthdate
-          %td
-            - if patient.male?
-              %span.label.label-primary= t('patients.label.male')
-            - else
-              %span.label.label-info= t('patients.label.female')
-          %td.text-right
-            .btn-group
-              %button.btn.btn-default.btn-xs.dropdown-toggle{ "aria-expanded": "false",
-                                                              "aria-haspopup": "true",
-                                                              "data-toggle": "dropdown",
-                                                              type: "button" }
-                -if patient.anamnesis?
-                  .span.text-primary
-                    %i.fa.fa-cog
-                    %span.caret
-                -else
-                  .span.text-warning
-                    %i.fa.fa-cog
-                    %span.caret
-              %ul.dropdown-menu.pull-right
-                %li
-                  - if patient.anamnesis?
-                    = link_to t('patients.actions.anamnesis'), edit_patient_anamnesis_path(patient, patient.anamnesis)
-                  - else
-                    = link_to t('patients.actions.anamnesis-star'), new_patient_anamnesis_path(patient)
-                - if patient.anamnesis?
-                  %li
-                    = link_to t('patients.actions.consultation'), new_patient_consultation_path(patient)
+        - @patients.each do |_patient|
+          - present_for(_patient) do |patient|
+            %tr
+              %td.hidden-xs= patient.medical_history
+              %td= patient.last_name
+              %td= patient.first_name
+              %td.hidden-xs= patient.formatted_birthdate
+              %td
+                - if patient.male?
+                  %span.label.label-primary= t('patients.label.male')
                 - else
-                  %li.disabled
-                    %a(href="#")= t('patients.actions.consultation')
-                - if patient.consultations?
-                  %li
-                    = link_to t('patients.actions.clinical-history'), patient_consultations_path(patient)
-                - else
-                  %li.disabled
-                    %a(href="#")= t('patients.actions.clinical-history')
-                %li.divider{ role: "separator" }
-                %li
-                  = link_to t('patients.actions.edit'), edit_patient_path(patient)
+                  %span.label.label-info= t('patients.label.female')
+              %td.text-right
+                .btn-group
+                  %button.btn.btn-default.btn-xs.dropdown-toggle{ "aria-expanded": "false",
+                                                                  "aria-haspopup": "true",
+                                                                  "data-toggle": "dropdown",
+                                                                  type: "button" }
+                    -if patient.anamnesis?
+                      .span.text-primary
+                        %i.fa.fa-cog
+                        %span.caret
+                    -else
+                      .span.text-warning
+                        %i.fa.fa-cog
+                        %span.caret
+                  %ul.dropdown-menu.pull-right
+                    %li
+                      - if patient.anamnesis?
+                        = link_to t('patients.actions.anamnesis'), edit_patient_anamnesis_path(patient, patient.anamnesis)
+                      - else
+                        = link_to t('patients.actions.anamnesis-star'), new_patient_anamnesis_path(patient)
+                    - if patient.anamnesis?
+                      %li
+                        = link_to t('patients.actions.consultation'), new_patient_consultation_path(patient)
+                    - else
+                      %li.disabled
+                        %a(href="#")= t('patients.actions.consultation')
+                    - if patient.consultations?
+                      %li
+                        = link_to t('patients.actions.clinical-history'), patient_consultations_path(patient)
+                    - else
+                      %li.disabled
+                        %a(href="#")= t('patients.actions.clinical-history')
+                    %li.divider{ role: "separator" }
+                    %li
+                      = link_to t('patients.actions.edit'), edit_patient_path(patient)
 
 .row
   .col-md-12.text-center
