@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160713023856) do
+ActiveRecord::Schema.define(version: 20170729030745) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "btree_gin"
 
-  create_table "anamneses", force: :cascade do |t|
-    t.bigint "patient_id"
+  create_table "anamneses", id: :serial, force: :cascade do |t|
+    t.integer "patient_id"
     t.string "medical_history"
     t.string "surgical_history"
     t.string "allergies"
@@ -25,11 +26,10 @@ ActiveRecord::Schema.define(version: 20160713023856) do
     t.string "family_history"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["patient_id"], name: "index_anamneses_on_patient_id"
   end
 
-  create_table "consultations", force: :cascade do |t|
-    t.bigint "patient_id"
+  create_table "consultations", id: :serial, force: :cascade do |t|
+    t.integer "patient_id"
     t.string "reason", default: ""
     t.string "ongoing_issue", default: ""
     t.string "organs_examination", default: ""
@@ -61,18 +61,16 @@ ActiveRecord::Schema.define(version: 20160713023856) do
     t.datetime "next_appointment"
     t.boolean "special_patient", default: false, null: false
     t.string "hearing_aids", default: ""
-    t.index ["patient_id"], name: "index_consultations_on_patient_id"
     t.index ["special_patient"], name: "index_consultations_on_special_patient"
   end
 
-  create_table "diagnoses", force: :cascade do |t|
-    t.bigint "consultation_id"
+  create_table "diagnoses", id: :serial, force: :cascade do |t|
+    t.integer "consultation_id"
     t.string "disease_code"
     t.string "description", null: false
     t.integer "type", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["consultation_id"], name: "index_diagnoses_on_consultation_id"
   end
 
   create_table "diseases", id: false, force: :cascade do |t|
@@ -83,7 +81,7 @@ ActiveRecord::Schema.define(version: 20160713023856) do
     t.index ["code"], name: "index_diseases_on_code", unique: true
   end
 
-  create_table "medicines", force: :cascade do |t|
+  create_table "medicines", id: :serial, force: :cascade do |t|
     t.string "name", null: false
     t.string "instructions", null: false
     t.datetime "created_at", null: false
@@ -91,7 +89,7 @@ ActiveRecord::Schema.define(version: 20160713023856) do
     t.index ["name"], name: "index_medicines_on_name", unique: true
   end
 
-  create_table "patients", force: :cascade do |t|
+  create_table "patients", id: :serial, force: :cascade do |t|
     t.integer "medical_history", null: false
     t.string "last_name", null: false
     t.string "first_name", null: false
@@ -108,25 +106,23 @@ ActiveRecord::Schema.define(version: 20160713023856) do
     t.datetime "updated_at", null: false
     t.boolean "special", default: false, null: false
     t.index ["civil_status"], name: "index_patients_on_civil_status"
-    t.index ["first_name"], name: "index_patients_on_first_name"
+    t.index ["first_name", "last_name"], name: "index_patients_on_first_name_and_last_name", using: :gin
     t.index ["gender"], name: "index_patients_on_gender"
     t.index ["identity_card_number"], name: "index_patients_on_identity_card_number", unique: true
-    t.index ["last_name"], name: "index_patients_on_last_name"
     t.index ["medical_history"], name: "index_patients_on_medical_history", unique: true
     t.index ["source"], name: "index_patients_on_source"
     t.index ["special"], name: "index_patients_on_special"
   end
 
-  create_table "prescriptions", force: :cascade do |t|
-    t.bigint "consultation_id"
+  create_table "prescriptions", id: :serial, force: :cascade do |t|
+    t.integer "consultation_id"
     t.string "inscription", null: false
     t.string "subscription", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["consultation_id"], name: "index_prescriptions_on_consultation_id"
   end
 
-  create_table "settings", force: :cascade do |t|
+  create_table "settings", id: :serial, force: :cascade do |t|
     t.string "name", null: false
     t.string "value", null: false
     t.datetime "created_at", null: false
@@ -134,7 +130,7 @@ ActiveRecord::Schema.define(version: 20160713023856) do
     t.index ["name"], name: "index_settings_on_name", unique: true
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :serial, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
