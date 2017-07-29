@@ -67,4 +67,40 @@ describe PatientPresenter do
       expect(presenter.most_recent_consultation).to be_a(ConsultationPresenter)
     end
   end
+
+  describe '#anamnesis?' do
+    context 'when anamnesis is present' do
+      it 'returns true' do
+        patient = double(:patient, anamnesis: 'extra notes')
+        presenter = described_class.new(patient)
+        expect(presenter.anamnesis?).to be_truthy
+      end
+    end
+
+    context 'when anamnesis is not present' do
+      it 'returns false' do
+        patient = double(:patient, anamnesis: nil)
+        presenter = described_class.new(patient)
+        expect(presenter.anamnesis?).to be_falsey
+      end
+    end
+  end
+
+  describe '#consultations?' do
+    context 'when consultations is present' do
+      it 'returns true' do
+        patient = double(:patient, consultations: 'extra notes')
+        presenter = described_class.new(patient)
+        expect(presenter.consultations?).to be_truthy
+      end
+    end
+
+    context 'when consultations is not present' do
+      it 'returns false' do
+        patient = double(:patient, consultations: nil)
+        presenter = described_class.new(patient)
+        expect(presenter.consultations?).to be_falsey
+      end
+    end
+  end
 end

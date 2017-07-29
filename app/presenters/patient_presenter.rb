@@ -20,4 +20,12 @@ class PatientPresenter < SimpleDelegator
   def most_recent_consultation
     ConsultationPresenter.new(consultations.most_recent)
   end
+
+  def anamnesis?
+    anamnesis.present?
+  end
+
+  def consultations?
+    consultations.present?
+  end
 end

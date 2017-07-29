@@ -35,14 +35,6 @@ class Patient < ApplicationRecord
     end
   end
 
-  def anamnesis?
-    anamnesis.present?
-  end
-
-  def consultations?
-    consultations.present?
-  end
-
   private
 
   def normalize
