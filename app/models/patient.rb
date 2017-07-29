@@ -21,15 +21,17 @@ class Patient < ApplicationRecord
 
   before_save :normalize
 
-  scope :special, -> { where(special: true) }
+  scope :special, -> { includes(:consultations).where(special: true) }
+  scope :order_by_name, -> { order(:last_name, :first_name) }
 
   def self.search(last_name, first_name)
-    if last_name || first_name
-      where('lower(last_name) ILIKE ? AND lower(first_name) ILIKE ?',
-            "%#{last_name.strip}%", "%#{first_name.strip}%")
-        .order(:last_name, :first_name)
+    if last_name.present? || first_name.present?
+      where(
+        'last_name ILIKE ? AND first_name ILIKE ?',
+        "%#{last_name.strip}%", "%#{first_name.strip}%"
+      ).order_by_name
     else
-      all.order(:last_name, :first_name)
+      order_by_name
     end
   end
 
