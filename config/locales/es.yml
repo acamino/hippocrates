@@ -68,11 +68,19 @@ es:
     success:
       creation: Consulta creada correctamente
       update: Consulta actualizada correctamente
+    error:
+      creation: No se puede crear la consulta
+      update: No se puede actualizar la consulta
   certificates:
     button:
       download: Descargar certificado
 
   activerecord:
+    models:
+      prescription: Receta
+    attributes:
+      prescription:
+        subscription: Indicación
     errors:
       messages:
         record_invalid: "La validación falló: %{errors}"

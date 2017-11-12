@@ -52,12 +52,17 @@ class ConsultationsController < ApplicationController
   end
 
   def create
-    consultation = Consultation.create(consultation_params)
-    @patient.update_attributes(patient_params)
+    @consultation = Consultation.new(consultation_params)
+    if @consultation.save
+      @patient.update_attributes(patient_params)
 
-    redirect_to edit_patient_consultation_path(
-      @patient, consultation
-    ), notice: t('consultations.success.creation')
+      redirect_to edit_patient_consultation_path(
+        @patient, @consultation
+      ), notice: t('consultations.success.creation')
+    else
+      flash[:error] = t('consultations.error.creation')
+      render :new
+    end
   end
 
   def edit
@@ -68,13 +73,16 @@ class ConsultationsController < ApplicationController
   end
 
   def update
-    @consultation.update_attributes(consultation_params)
-    @patient.update_attributes(patient_params)
-
-    delete_referer_location
-    redirect_to patient_consultations_path(
-      @patient
-    ), notice: t('consultations.success.update')
+    if @consultation.update_attributes(consultation_params)
+      @patient.update_attributes(patient_params)
+      delete_referer_location
+      redirect_to patient_consultations_path(
+        @patient
+      ), notice: t('consultations.success.update')
+    else
+      flash[:error] = t('consultations.error.update')
+      render :edit
+    end
   end
 
   private

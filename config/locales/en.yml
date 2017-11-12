@@ -68,6 +68,9 @@ en:
     success:
       creation: Consultation created successfully
       update: Consultation updated successfully
+    error:
+      creation: Cannot create the consultation
+      update: Cannot update the consultation
   certificates:
     button:
       download: Download certificate
