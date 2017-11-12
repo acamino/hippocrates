@@ -1,7 +1,7 @@
 require 'timecop'
 require_relative '../../app/presenters/patient_presenter'
 require_relative '../../app/presenters/consultation_presenter'
-require_relative '../../lib/age_calculator'
+require_relative '../../app/lib/age_calculator'
 
 describe PatientPresenter do
   describe '#formatted_birthdate' do
