@@ -3,7 +3,7 @@ Feature: User can manage medicines
   Background:
     Given I am a logged user
 
-  Scenario: Listing medicines
+  Scenario: List medicines
     Given the following medicines:
       | name        | instructions             |
       | Ibuprofen   | Ibuprofen instructions   |
@@ -12,12 +12,12 @@ Feature: User can manage medicines
     Then I see "Ibuprofen"
     And I see "Paracetamol"
 
-  Scenario: Creating a medicine
+  Scenario: Create a medicine
     When I open create medicine page
     And I input medicine information
     Then I see a success message
 
-  Scenario: Updating a medicine
+  Scenario: Update a medicine
     Given Paracetamol is a medicine
     When I open edit medicine page
     And I input medicine information
