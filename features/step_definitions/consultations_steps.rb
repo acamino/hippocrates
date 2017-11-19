@@ -35,5 +35,5 @@ When(/^I input consultation info$/) do
 end
 
 Then(/^I see a success message$/) do
-  expect(page).to have_content('Consulta creada correctamente')
+  expect(page).to have_content('correctamente')
 end
