@@ -70,7 +70,7 @@ Hippocrates.Certificates = {
       params.push("rest_time=" + this.getRestTime());
     }
 
-    if (this.isSurgery(certificateType)) {
+    if (this.isProforma(certificateType)) {
       params.push("surgical_treatment=" + this.getSurgicalTreatment());
       params.push("surgery_tentative_date=" + this.getSurgeryTentativeDate());
       params.push("surgery_cost=" + this.getSurgeryCost());
@@ -119,8 +119,8 @@ Hippocrates.Certificates = {
     return certificateType === "rest";
   },
 
-  isSurgery: function (certificateType) {
-    return certificateType === "surgery";
+  isProforma: function (certificateType) {
+    return certificateType === "proforma";
   },
 
   toggleTimeControls: function(certificateType) {
@@ -133,13 +133,13 @@ Hippocrates.Certificates = {
     $(".rest-controls").toggle(this.isRest(certificateType));
   },
 
-  toggleSurgeryControls: function (certificateType) {
-    $(".surgery-controls").toggle(this.isSurgery(certificateType));
+  toggleProformaControls: function (certificateType) {
+    $(".proforma-controls").toggle(this.isProforma(certificateType));
   },
 
   toggleControls: function (certificateType) {
     this.toggleTimeControls(certificateType);
     this.toggleRestControls(certificateType);
-    this.toggleSurgeryControls(certificateType);
+    this.toggleProformaControls(certificateType);
   }
 }

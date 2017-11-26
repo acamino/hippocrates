@@ -19,7 +19,7 @@
               %select.form-control.input-sm#certificate
                 %option{ value: "attendance" } Asistencia
                 %option{ value: "audiometry" } Audiometría
-                %option{ value: "surgery" } Cirugía
+                %option{ value: "proforma" } Proforma
                 %option{ value: "consultation" } Consulta
                 %option{ value: "consent" } Consentimiento
                 %option{ value: "strange_body" } Cuerpo extraño
@@ -58,7 +58,7 @@
                 %input.form-control.input-sm#certificate_rest_time{ type: "number" }
                 %em.text-muted Tiempo de reposo médico (en horas)
 
-          .surgery-controls{ style: "display:none" }
+          .proforma-controls{ style: "display:none" }
             .form-group
               %label.col-sm-2.control-label{ for: "certificate_surgical_treatment" } Tratamiento
               .col-md-6
