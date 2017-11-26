@@ -32,7 +32,7 @@ describe ConsultationPresenter do
       created_at = DateTime.new(2016, 4, 13)
       consultation = double(:consultation, created_at: created_at)
       presenter = described_class.new(consultation)
-      expect(I18n).to receive(:localize).with(created_at, format: '%B %d de %Y')
+      expect(I18n).to receive(:localize).with(created_at, format: '%d de %B de %Y')
       presenter.pretty_date
     end
   end

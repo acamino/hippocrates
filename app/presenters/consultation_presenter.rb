@@ -14,7 +14,7 @@ class ConsultationPresenter < SimpleDelegator
   end
 
   def pretty_date
-    I18n.localize(created_at, format: '%B %d de %Y')
+    I18n.localize(created_at, format: '%d de %B de %Y')
   end
 
   def next_appointment_date
