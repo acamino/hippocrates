@@ -61,7 +61,7 @@ Hippocrates.Certificates = {
     var params = [];
     params.push("certificate_type=" + certificateType);
 
-    if (this.isAttendance(certificateType)) {
+    if (this.isAttendance(certificateType) || this.isStrangeBody(certificateType)) {
       params.push("start_time=" + this.getStartTime());
       params.push("end_time=" + this.getEndTime());
     }
@@ -70,7 +70,7 @@ Hippocrates.Certificates = {
       params.push("rest_time=" + this.getRestTime());
     }
 
-    if (this.isSurgery(certificateType)) {
+    if (this.isProforma(certificateType)) {
       params.push("surgical_treatment=" + this.getSurgicalTreatment());
       params.push("surgery_tentative_date=" + this.getSurgeryTentativeDate());
       params.push("surgery_cost=" + this.getSurgeryCost());
@@ -111,29 +111,35 @@ Hippocrates.Certificates = {
     return certificateType === "attendance";
   },
 
+  isStrangeBody: function (certificateType) {
+    return certificateType === "strange_body";
+  },
+
   isRest: function (certificateType) {
     return certificateType === "rest";
   },
 
-  isSurgery: function (certificateType) {
-    return certificateType === "surgery";
+  isProforma: function (certificateType) {
+    return certificateType === "proforma";
   },
 
-  toggleAttendanceControls: function(certificateType) {
-    $(".attendance-controls").toggle(this.isAttendance(certificateType));
+  toggleTimeControls: function(certificateType) {
+    var hasTimeControls =
+      this.isAttendance(certificateType) || this.isStrangeBody(certificateType);
+    $(".time-controls").toggle(hasTimeControls);
   },
 
   toggleRestControls: function (certificateType) {
     $(".rest-controls").toggle(this.isRest(certificateType));
   },
 
-  toggleSurgeryControls: function (certificateType) {
-    $(".surgery-controls").toggle(this.isSurgery(certificateType));
+  toggleProformaControls: function (certificateType) {
+    $(".proforma-controls").toggle(this.isProforma(certificateType));
   },
 
   toggleControls: function (certificateType) {
-    this.toggleAttendanceControls(certificateType);
+    this.toggleTimeControls(certificateType);
     this.toggleRestControls(certificateType);
-    this.toggleSurgeryControls(certificateType);
+    this.toggleProformaControls(certificateType);
   }
 }
