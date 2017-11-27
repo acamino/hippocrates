@@ -18,11 +18,11 @@ class ConsultationPresenter < SimpleDelegator
   end
 
   def next_appointment_date
-    next_appointment.strftime('%F')
+    next_appointment&.strftime('%F')
   end
 
   def next_appointment_long_date
-    next_appointment.strftime('%b %d, %Y')
+    next_appointment&.strftime('%b %d, %Y')
   end
 
   def next_appointment?
