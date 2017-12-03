@@ -65,6 +65,10 @@ en:
       creation: Anamnesis created successfully
       update: Anamnesis updated successfully
   consultations:
+    diagnosis: Diagnosis
+    next_appointment: Next Appointment
+    miscellaneous: Miscellaneous
+    reason: Reason
     success:
       creation: Consultation created successfully
       update: Consultation updated successfully
