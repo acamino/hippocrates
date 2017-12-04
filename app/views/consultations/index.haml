@@ -88,33 +88,23 @@
                   .col-md-10.col-md-offset-2
                     %strong
                       %big= consultation.long_date
-                - if consultation.reason.present?
+                = render partial: "details", locals: { label: t("consultations.reason"),
+                                                       content: consultation.reason }
+                = render partial: "details", locals: { label: t("consultations.miscellaneous"),
+                                                       content: consultation.miscellaneous }
+                - if consultation.next_appointment?
                   .row
                     .col-md-2.text-right.hidden-xs
-                      %span.semi-strong.text-muted Motivo
+                      %span.semi-strong.text-muted
+                        = t("consultations.next_appointment")
                     .col-md-2.visible-xs
-                      %span.semi-strong.text-muted Motivo
-                    .col-md-10
-                      %span
-                        = consultation.reason
-                - if consultation.miscellaneous.present?
-                  .row
-                    .col-md-2.text-right.hidden-xs
-                      %span.semi-strong.text-muted Misceláneos
-                    .col-md-2.visible-xs
-                      %span.semi-strong.text-muted Misceláneos
-                    .col-md-10
-                      %span.semi-strong
-                      = consultation.miscellaneous
-                - if consultation.next_appointment.present?
-                  .row
-                    .col-md-2.text-right.hidden-xs
-                      %span.semi-strong.text-muted Próxima cita
-                    .col-md-2.visible-xs
-                      %span.semi-strong.text-muted Próxima cita
+                      %span.semi-strong.text-muted
+                        = t("consultations.next_appointment")
                     .col-md-10
                       %span.semi-strong
                       = consultation.next_appointment_long_date
+                = render partial: "details", locals: { label: t("consultations.diagnosis"),
+                                                       content: consultation.diagnostic_plan }
               %td.text-right
                 .btn-group
                   %button.btn.btn-default.btn-xs.dropdown-toggle{ "aria-expanded": "false",

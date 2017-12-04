@@ -65,6 +65,10 @@ es:
       creation: Anamnesis creada correctamente
       update: Anamnesis actualizada correctamente
   consultations:
+    diagnosis: Diagnóstico
+    next_appointment: Próxima cita
+    miscellaneous: Misceláneos
+    reason: Motivo
     success:
       creation: Consulta creada correctamente
       update: Consulta actualizada correctamente
