@@ -17,7 +17,7 @@ class PatientsController < ApplicationController
 
   def special
     @patients = Patient.special.sort_by do |p|
-      p.consultations.most_recent.next_appointment
+      p.consultations.most_recent.created_at
     end.reverse
   end
 
