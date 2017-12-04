@@ -9,11 +9,12 @@
         %td.col-md-1.hidden-xs
           %big
             = patient.medical_history
-        %td.col-md-11
+        %td
           .row
             .col-xs-8
               %strong
-                %big= patient.name
+                %big
+                  = patient.name
                 %span.text-muted
                   #{patient.age.years} años
                   = gender_tag(patient)
@@ -26,13 +27,23 @@
                       %strong= patient.phone_number
           - if patient.most_recent_consultation.next_appointment?
             .row
-              .col-md-12
-                %strong
-                  %span.text-muted Próxima cita
+              .col-md-2.text-right.hidden-xs
+                %span.semi-strong.text-muted Próxima cita
+              .col-md-2.visible-xs
+                %span.semi-strong.text-muted Próxima cita
+              .col-md-8
                 = patient.most_recent_consultation.next_appointment_date
           - if patient.most_recent_consultation.miscellaneous?
             .row
-              .col-md-12
-                %strong
-                  %span.text-muted Misceláneos
+              .col-md-2.text-right.hidden-xs
+                %span.semi-strong.text-muted Misceláneos
+              .col-md-2.visible-xs
+                %span.semi-strong.text-muted Misceláneos
+              .col-md-8
                 = patient.most_recent_consultation.miscellaneous
+        %td
+          = link_to remove_special_patient_path(_patient),
+              data: { confirm: t("patients.special.remove.confirmation") },
+              method: :delete do
+            %big
+              %i.fa.fa-times

@@ -38,6 +38,10 @@ en:
     success:
       creation: Patient created successfully
       update: Patient updated successfully
+    special:
+      remove:
+        success: Are you sure to remove the special patient?
+        success: Special patient successfully removed
   medicines:
     button:
       new: New medicine
