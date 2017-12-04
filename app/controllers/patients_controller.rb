@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PatientsController < ApplicationController
   ATTRIBUTE_WHITELIST = [
     :medical_history,
@@ -15,8 +17,14 @@ class PatientsController < ApplicationController
 
   def special
     @patients = Patient.special.sort_by do |p|
-      p.consultations.most_recent.created_at
+      p.consultations.most_recent.next_appointment
     end.reverse
+  end
+
+  def remove_special
+    patient = Patient.find(params[:id])
+    patient.update_attributes(special: false)
+    redirect_to special_patients_path, notice: t('patients.special.remove.success')
   end
 
   def index

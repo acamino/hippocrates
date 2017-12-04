@@ -38,6 +38,10 @@ es:
     success:
       creation: Paciente creado correctamente
       update: Paciente actualizado correctamente
+    special:
+      remove:
+        confirmation: ¿Está seguro de remover el paciente especial?
+        success: Paciente especial removido correctamente
   medicines:
     button:
       new: Nueva medicina

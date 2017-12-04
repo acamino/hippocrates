@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :anamneses, only: [:new, :create, :edit, :update]
     resources :consultations, only: [:index, :new, :create, :edit, :update]
     get :special, on: :collection
+    delete :remove_special, on: :member
   end
   resources :settings, only: [:index]
 

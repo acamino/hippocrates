@@ -36,6 +36,24 @@ describe PatientsController do
     it { is_expected.to respond_with :ok }
   end
 
+  describe '#remove_special' do
+    let!(:patient) { create(:patient, :special) }
+
+    before do |example|
+      unless example.metadata[:skip_on_before]
+        delete :remove_special, params: { id: patient.id }
+      end
+    end
+
+    it 'removes patient from special', :skip_on_before do
+      expect do
+        delete :remove_special, params: { id: patient.id }
+      end.to change { patient.reload.special }.from(true).to(false)
+    end
+
+    it { is_expected.to redirect_to special_patients_path }
+  end
+
   describe '#new' do
     before { get :new }
 
