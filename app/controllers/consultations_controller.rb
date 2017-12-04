@@ -11,6 +11,7 @@ class ConsultationsController < ApplicationController
     :respiratory_rate,
     :weight,
     :height,
+    :oxygen_saturation,
     :physical_examination,
     :right_ear,
     :left_ear,
