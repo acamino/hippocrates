@@ -1,7 +1,7 @@
 language: ruby
 cache: bundler
 rvm:
-  - rvm 2.3.1
+  - rvm 2.6.3
 
 before_script:
   - bundle exec rubocop
