@@ -28,11 +28,15 @@ class Patient < ApplicationRecord
     if last_name.present? || first_name.present?
       where(
         'last_name ILIKE ? AND first_name ILIKE ?',
-        "%#{last_name.strip}%", "%#{first_name.strip}%"
+        "%#{last_name.upcase.strip}%", "%#{first_name.upcase.strip}%"
       ).order_by_name
     else
       order_by_name
     end
+  end
+
+  def full_name
+    [last_name, first_name].join(' ')
   end
 
   private

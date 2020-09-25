@@ -82,6 +82,9 @@ es:
   certificates:
     button:
       download: Descargar certificado
+  prescriptions:
+    button:
+      download: Descargar receta
 
   activerecord:
     models:

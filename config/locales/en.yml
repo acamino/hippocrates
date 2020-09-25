@@ -82,3 +82,6 @@ en:
   certificates:
     button:
       download: Download certificate
+  prescriptions:
+    button:
+      download: Download prescription

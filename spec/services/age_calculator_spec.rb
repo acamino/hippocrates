@@ -1,5 +1,5 @@
 require 'timecop'
-require_relative '../../app/lib/age_calculator'
+require_relative '../../app/services/age_calculator'
 
 describe AgeCalculator do
   it 'calculates age in years and months' do

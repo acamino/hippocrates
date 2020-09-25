@@ -55,7 +55,8 @@ class Consultation < ApplicationRecord
                      :miscellaneous,
                      :diagnostic_plan,
                      :treatment_plan,
-                     :educational_plan,
+                     :warning_signs,
+                     :recommendations,
                      :hearing_aids
   end
 end

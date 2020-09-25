@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   resources :medicines, only: [:index, :new, :create, :edit, :update]
   resources :patients, only: [:index, :new, :create, :edit, :update] do
     resources :anamneses, only: [:new, :create, :edit, :update]
-    resources :consultations, only: [:index, :new, :create, :edit, :update]
+    resources :consultations, only: [:index, :new, :create, :edit, :update] do
+      get :prescription, to: 'prescriptions#download'
+    end
     get :special, on: :collection
     delete :remove_special, on: :member
   end

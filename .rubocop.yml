@@ -17,6 +17,12 @@ Style/NumericPredicate:
 Style/SymbolArray:
   Enabled: false
 
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
+
+Lint/MissingCopEnableDirective:
+  Enabled: false
+
 AllCops:
   Exclude:
     - config/**/*

@@ -31,8 +31,6 @@ class Setting < ApplicationRecord
     end
   end
 
-  private_class_method
-
   def self.find_or_fail!(setting_name)
     find_by!(name: setting_name)
   rescue ActiveRecord::RecordNotFound

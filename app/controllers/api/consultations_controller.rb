@@ -27,7 +27,7 @@ module API
     end
 
     def patient_consultations
-      @consultations ||= patient.consultations.pluck(:id)
+      @patient_consultations ||= patient.consultations.pluck(:id)
     end
 
     def previous_consultation_id
