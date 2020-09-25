@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171204105641) do
+ActiveRecord::Schema.define(version: 2020_09_24_135244) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
   enable_extension "btree_gin"
+  enable_extension "plpgsql"
 
   create_table "anamneses", id: :serial, force: :cascade do |t|
     t.integer "patient_id"
@@ -57,11 +57,12 @@ ActiveRecord::Schema.define(version: 20171204105641) do
     t.string "miscellaneous"
     t.string "diagnostic_plan"
     t.string "treatment_plan"
-    t.string "educational_plan"
+    t.string "warning_signs"
     t.datetime "next_appointment"
     t.boolean "special_patient", default: false, null: false
     t.string "hearing_aids", default: ""
     t.integer "oxygen_saturation", default: 0
+    t.text "recommendations"
     t.index ["special_patient"], name: "index_consultations_on_special_patient"
   end
 

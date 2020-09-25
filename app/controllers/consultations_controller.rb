@@ -28,9 +28,8 @@ class ConsultationsController < ApplicationController
     :diagnostic_plan,
     :miscellaneous,
     :treatment_plan,
-    :educational_plan,
-    :next_appointment,
-    :hearing_aids,
+    :warning_signs,
+    :recommendations,
     patient: :special,
     diagnoses_attributes: [:id, :disease_code, :description, :type],
     prescriptions_attributes: [:id, :inscription, :subscription]

@@ -205,8 +205,14 @@
       .row-fluid
         .form-group.col-md-12
           .input-group
-            %span.input-group-addon.input-sm Educacional
-            = f.text_field :educational_plan, class: "form-control input-sm"
+            %span.input-group-addon.input-sm Señales de alarma
+            = f.text_field :warning_signs, class: "form-control input-sm"
+
+      .row-fluid
+        .form-group.col-md-12
+          .input-group
+            %span.input-group-addon.input-sm Recomendaciones
+            = f.text_field :recommendations, class: "form-control input-sm"
 
   .panel.panel-advice
     .panel-heading

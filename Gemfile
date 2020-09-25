@@ -12,6 +12,7 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'activerecord-import', '~> 1.0'
 gem 'haml'
 gem 'kaminari'
+gem 'prawn'
 gem 'sablon'
 gem 'unicode_utils'
 
