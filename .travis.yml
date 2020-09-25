@@ -18,4 +18,6 @@ deploy:
   run: bundle exec rake db:migrate
   skip_cleanup: true
   on:
-    branch: master
+    branch:
+      - master
+      - deploy-to-heroku
