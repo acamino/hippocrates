@@ -24,9 +24,9 @@ module Prescriptions
       def call
         pdf.font('Helvetica') do
           pdf.text_box content,
-            at: at,
-            width: width,
-            **options
+                       at: at,
+                       width: width,
+                       **options
         end
       end
 

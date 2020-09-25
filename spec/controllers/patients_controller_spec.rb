@@ -40,9 +40,7 @@ describe PatientsController do
     let!(:patient) { create(:patient, :special) }
 
     before do |example|
-      unless example.metadata[:skip_on_before]
-        delete :remove_special, params: { id: patient.id }
-      end
+      delete :remove_special, params: { id: patient.id } unless example.metadata[:skip_on_before]
     end
 
     it 'removes patient from special', :skip_on_before do

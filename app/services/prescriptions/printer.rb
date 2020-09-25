@@ -6,7 +6,7 @@ module Prescriptions
       page_size: 'A4',
       page_layout: :landscape,
       background: BACKGROUND,
-      background_scale: 0.12,
+      background_scale: 0.12
     }.freeze
 
     def self.call(consultation)
@@ -17,6 +17,8 @@ module Prescriptions
       @consultation = consultation
     end
 
+    # rubocop:disable AbcSize
+    # rubocop:disable MethodLength
     def call
       pdf = Prawn::Document.new(**DOCUMENT_OPTIONS)
       Printers::Section.call(pdf, [244, 463], 136, location_and_date, align: :right)
@@ -44,7 +46,7 @@ module Prescriptions
         page_size: 'A4',
         page_layout: :landscape,
         background: BACKGROUND,
-        background_scale: 0.12,
+        background_scale: 0.12
       }
     end
 
@@ -88,8 +90,8 @@ module Prescriptions
 
     def subscriptions
       prescriptions.map(&:subscription)
-        .map(&formatted_subscription)
-        .join("\n\n")
+                   .map(&formatted_subscription)
+                   .join("\n\n")
     end
 
     def formatted_subscription
