@@ -3,12 +3,16 @@
   .form-group
     = f.label :name, "Nombre", class: "col-md-2 control-label"
     .col-md-10
-      = f.text_field :name, class: "form-control input-sm"
+      = f.text_area :name, class: "form-control input-sm"
   .form-group
     = f.label :instructions, "Instrucciones", class: "col-md-2 control-label"
     .col-md-10
-      = f.text_field :instructions, class: "form-control input-sm"
+      = f.text_area :instructions, class: "form-control input-sm"
   .form-group
     .col-md-10.col-md-offset-2
       = link_to "Cancelar", medicines_path, class: "btn btn-default"
+      = link_to t('medicines.actions.destroy'), @medicine,
+          data: { confirm: t("medicines.destroy.confirm") },
+          method: :delete,
+          class: "btn btn-danger"
       = f.submit "Guardar", class: "btn btn-success"

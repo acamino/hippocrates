@@ -4,4 +4,12 @@ class Diagnosis < ApplicationRecord
   enum type: [:presuntive, :definitive]
 
   belongs_to :consultation
+
+  before_save :normalize
+
+  private
+
+  def normalize
+    normalize_fields :disease_code, :description
+  end
 end

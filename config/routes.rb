@@ -6,8 +6,8 @@ Rails.application.routes.draw do
     get :download, on: :collection
   end
 
-  resources :diseases, only: [:index, :new, :create, :edit, :update]
-  resources :medicines, only: [:index, :new, :create, :edit, :update]
+  resources :diseases, only: [:index, :new, :create, :edit, :update, :destroy]
+  resources :medicines, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :patients, only: [:index, :new, :create, :edit, :update] do
     resources :anamneses, only: [:new, :create, :edit, :update]
     resources :consultations, only: [:index, :new, :create, :edit, :update] do

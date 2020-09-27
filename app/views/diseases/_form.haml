@@ -11,4 +11,8 @@
   .form-group
     .col-md-10.col-md-offset-2
       = link_to "Cancelar", diseases_path, class: "btn btn-default"
+      = link_to t("diseases.actions.destroy"), @disease,
+          data: { confirm: t("diseases.destroy.confirm") },
+          method: :delete,
+          class: "btn btn-danger"
       = f.submit "Guardar", class: "btn btn-success"

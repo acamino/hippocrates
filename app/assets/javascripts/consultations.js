@@ -2,6 +2,10 @@ Hippocrates.Consultations = {
   init: function() {
     var self = this;
 
+    $(".destroy").on("change", function () {
+      $(this).closest("tr").toggleClass("destroyable");
+    });
+
     $("#consultation_reason").on("keyup", function () {
       var reason = $(this).val();
       $("#consultation_ongoing_issue").val(reason);

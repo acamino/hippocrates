@@ -1,4 +1,6 @@
 class MedicinesController < ApplicationController
+  before_action :fetch_medicine, only: [:edit, :update, :destroy]
+
   def index
     @medicines = Medicine.search(query).page(page)
   end
@@ -16,12 +18,9 @@ class MedicinesController < ApplicationController
     end
   end
 
-  def edit
-    @medicine = Medicine.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @medicine = Medicine.find(params[:id])
     if @medicine.update_attributes(medicine_params)
       redirect_to medicines_path, notice: t('medicines.success.update')
     else
@@ -29,7 +28,16 @@ class MedicinesController < ApplicationController
     end
   end
 
+  def destroy
+    @medicine.destroy
+    redirect_to medicines_path, notice: t('medicines.success.destroy')
+  end
+
   private
+
+  def fetch_medicine
+    @medicine = Medicine.find(params[:id])
+  end
 
   def medicine_params
     params.require(:medicine).permit(:name, :instructions)

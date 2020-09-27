@@ -154,7 +154,6 @@ describe ConsultationsController do
       expect(consultation.reload.reason).to eq('UPDATED REASON')
     end
 
-    it { is_expected.to redirect_to patient_consultations_path(patient) }
-    it { is_expected.to respond_with :redirect }
+    it { is_expected.to redirect_to edit_patient_consultation_path(patient, consultation) }
   end
 end

@@ -1,4 +1,6 @@
 class DiseasesController < ApplicationController
+  before_action :fetch_disease, only: [:edit, :update, :destroy]
+
   def index
     @diseases = Disease.search(query).page(page)
   end
@@ -16,12 +18,9 @@ class DiseasesController < ApplicationController
     end
   end
 
-  def edit
-    @disease = Disease.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @disease = Disease.find(params[:id])
     if @disease.update_attributes(disease_params)
       redirect_to diseases_path, notice: t('diseases.success.update')
     else
@@ -29,7 +28,16 @@ class DiseasesController < ApplicationController
     end
   end
 
+  def destroy
+    @disease.destroy
+    redirect_to diseases_path, notice: t('diseases.success.destroy')
+  end
+
   private
+
+  def fetch_disease
+    @disease = Disease.find(params[:id])
+  end
 
   def disease_params
     params.require(:disease).permit(:code, :name)

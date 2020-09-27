@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_24_135244) do
+ActiveRecord::Schema.define(version: 2020_09_26_042150) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 2020_09_24_135244) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "diseases", id: false, force: :cascade do |t|
+  create_table "diseases", force: :cascade do |t|
     t.string "code", null: false
     t.string "name", null: false
     t.datetime "created_at", null: false
