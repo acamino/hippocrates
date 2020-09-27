@@ -46,8 +46,8 @@ Hippocrates.Prescription = {
     return _.filter(
       _.map($('.prescriptions tbody tr'), function(item) {
       return {
-        inscription: $(item).find('td:first-child input').val().toUpperCase(),
-        subscription: self.formatSubscription($(item).find('td:last-child input').val())
+        inscription: $(item).find('textarea').eq(0).val().toUpperCase(),
+        subscription: self.formatSubscription($(item).find('textarea').eq(1).val())
       };
     }), self.isPrescriptionAvailable);
   },

@@ -13,7 +13,10 @@ Hippocrates.Autocomplete = {
       $(".inscription").autocomplete({
         lookup: medicines,
         onSelect: function (medicine) {
-          $(this).closest("tr").find("input.subscription").val(medicine.data);
+          var locked = $(this).closest("tr").find(".locked").is(':checked');
+          if (!locked) {
+            $(this).closest("tr").find("textarea.subscription").val(medicine.data);
+          }
         }
       });
     });

@@ -50,9 +50,13 @@ es:
       instructions: Instrucciones
     actions:
       edit: Editar
+      destroy: Eliminar
+    destroy:
+      confirm: ¿Está seguro de eliminar este registro?
     success:
       creation: Medicina creada correctamente
       update: Medicina actualizada correctamente
+      destroy: Medicina eliminada correctamente
   diseases:
     button:
       new: Nueva enfermedad
@@ -61,9 +65,13 @@ es:
       name: Nombre
     actions:
       edit: Editar
+      destroy: Eliminar
+    destroy:
+      confirm: ¿Está seguro de eliminar este registro?
     success:
       creation: Enfermedad creada correctamente
       update: Enfermedad actualizada correctamente
+      destroy: Enfermedad eliminada correctamente
   anamneses:
     success:
       creation: Anamnesis creada correctamente

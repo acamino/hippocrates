@@ -258,6 +258,14 @@ input[type="email"] {
   display: none;
 }
 
+.destroyable {
+  background-color: khaki !important;
+}
+
+.clue {
+  padding-right: 7px;
+}
+
 @media print {
   #printable-prescription {
     margin-top: 0;

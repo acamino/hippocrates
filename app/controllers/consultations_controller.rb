@@ -31,8 +31,8 @@ class ConsultationsController < ApplicationController
     :warning_signs,
     :recommendations,
     patient: :special,
-    diagnoses_attributes: [:id, :disease_code, :description, :type],
-    prescriptions_attributes: [:id, :inscription, :subscription]
+    diagnoses_attributes: [:id, :disease_code, :description, :type, :_destroy],
+    prescriptions_attributes: [:id, :inscription, :subscription, :_destroy]
   ].freeze
 
   before_action :fetch_consultation, only: [:edit, :update]
@@ -76,8 +76,9 @@ class ConsultationsController < ApplicationController
     if @consultation.update_attributes(consultation_params)
       @patient.update_attributes(patient_params)
       delete_referer_location
-      redirect_to patient_consultations_path(
-        @patient
+
+      redirect_to edit_patient_consultation_path(
+        @patient, @consultation
       ), notice: t('consultations.success.update')
     else
       flash[:error] = t('consultations.error.update')

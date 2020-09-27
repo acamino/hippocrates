@@ -112,4 +112,20 @@ describe MedicinesController do
       it { is_expected.to respond_with :ok }
     end
   end
+
+  describe '#destroy' do
+    let!(:medicine) { create(:medicine) }
+
+    before do |example|
+      delete :destroy, params: { id: medicine.id } unless example.metadata[:skip_on_before]
+    end
+
+    it 'deletes the medicine', :skip_on_before do
+      expect do
+        delete :destroy, params: { id: medicine.id }
+      end.to change { Medicine.count }.from(1).to(0)
+    end
+
+    it { is_expected.to redirect_to medicines_path }
+  end
 end
