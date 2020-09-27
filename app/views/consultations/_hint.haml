@@ -46,10 +46,12 @@
               %i.fa.fa-download
           .col-xs-10
             - if @consultation.new_record?
-              %span.text-muted Descargar receta
+              %span.text-muted
+                = t('prescriptions.button.download')
             - else
               %span
-                =link_to t('prescriptions.button.download'), patient_consultation_prescription_path(@patient, @consultation), target: '_blank'
+                %a.disabled.hint-link.show-prescription(href="")
+                  = t('prescriptions.button.download')
 
         .row
           .col-xs-1
