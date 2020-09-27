@@ -218,13 +218,13 @@
         .form-group.col-md-12
           .input-group
             %span.input-group-addon.input-sm Señales de alarma
-            = f.text_area :warning_signs, class: "form-control input-sm"
+            = f.text_field :warning_signs, class: "form-control input-sm"
 
       .row-fluid
         .form-group.col-md-12
           .input-group
             %span.input-group-addon.input-sm Recomendaciones
-            = f.text_area :recommendations, class: "form-control input-sm"
+            = f.text_field :recommendations, class: "form-control input-sm"
 
   .panel.panel-advice
     .panel-heading
