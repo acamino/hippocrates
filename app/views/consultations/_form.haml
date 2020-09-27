@@ -256,6 +256,7 @@
 = render 'prescription'
 = render 'hint'
 
-:javascript
-  var options = { height: "600px", pdfOpenParams: { view: "FitH" } };
-  PDFObject.embed("#{patient_consultation_prescription_path(@patient, @consultation)}", "#pdf", options);
+- unless @consultation.new_record?
+  :javascript
+    var options = { height: "600px", pdfOpenParams: { view: "FitH" } };
+    PDFObject.embed("#{patient_consultation_prescription_path(@patient, @consultation)}", "#pdf", options);
