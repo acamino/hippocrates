@@ -10,7 +10,7 @@ class PrescriptionsController < ApplicationController
   def download_options
     {
       type: 'application/pdf',
-      disposition: 'attachment',
+      disposition: 'inline',
       filename: 'receta.pdf',
       status: :accepted
     }

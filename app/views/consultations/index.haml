@@ -121,6 +121,7 @@
                     %li
                       =link_to t('prescriptions.button.download'),
                         patient_consultation_prescription_path(consultation.patient, consultation),
+                        target: "_blank",
                         data: { turbolinks: false }
                     %li
                       = link_to t('certificates.button.download'),

@@ -12,6 +12,11 @@ Hippocrates.Prescription = {
       e.preventDefault();
       self.print();
     });
+
+    $(".show-prescription").on("click", function(e) {
+      e.preventDefault();
+      self.openModal();
+    });
   },
 
   print: function() {
@@ -86,5 +91,9 @@ Hippocrates.Prescription = {
 
   getNextAppointment: function() {
     return $("#consultation_next_appointment").val();
-  }
+  },
+
+  openModal: function() {
+    $("#prescription").modal({ backdrop: "static" });
+  },
 };
