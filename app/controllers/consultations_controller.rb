@@ -30,6 +30,7 @@ class ConsultationsController < ApplicationController
     :treatment_plan,
     :warning_signs,
     :recommendations,
+    :next_appointment,
     patient: :special,
     diagnoses_attributes: [:id, :disease_code, :description, :type, :_destroy],
     prescriptions_attributes: [:id, :inscription, :subscription, :_destroy]
