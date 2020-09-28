@@ -52,7 +52,7 @@ module Prescriptions
 
     # Move to a presenter
     def location_and_date
-      "Latacunga, #{Time.zone.now.strftime('%d/%m/%Y')}"
+      "Latacunga, #{consultation.created_at.strftime('%d/%m/%Y')}"
     end
 
     def patient
