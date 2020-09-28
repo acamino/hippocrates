@@ -97,8 +97,8 @@ module Prescriptions
     def formatted_subscription
       lambda do |subscription|
         if subscription.include?(':')
-          medicine, instructions = subscription.split(':')
-          "<b>#{medicine.strip}</b>: #{instructions.strip}"
+          medicine, *instructions = subscription.split(':')
+          "<b>#{medicine.strip}</b>: #{instructions.join(':').strip}"
         else
           subscription
         end
