@@ -1,5 +1,6 @@
 language: ruby
-cache: bundler
+cache:
+  bundler: true
 rvm:
   - rvm 2.6.3
 services:
@@ -9,7 +10,9 @@ addons:
 
 script:
   - bundle exec rubocop
-  - RAILS_ENV=test bundle exec rails db:create db:migrate
+  - RAILS_ENV=test bundle exec rails db:create db:schema:load --trace
+  - bundle exec rspec
+  - bundle exec cucumber
 
 deploy:
   provider: heroku
@@ -20,4 +23,3 @@ deploy:
   on:
     branch:
       - master
-      - deploy-to-heroku
