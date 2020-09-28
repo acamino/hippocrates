@@ -25,6 +25,7 @@ class ConsultationsController < ApplicationController
     :larynx,
     :neck,
     :others,
+    :hearing_aids,
     :diagnostic_plan,
     :miscellaneous,
     :treatment_plan,
