@@ -146,12 +146,16 @@ describe ConsultationsController do
       patch :update, params: { id: consultation.id,
                                patient_id: patient.id,
                                consultation: {
-                                 reason: 'updated reason', patient: { special: false }
+                                 reason: 'updated reason',
+                                 hearing_aids: 'updated hearing aids',
+                                 patient: { special: false }
                                } }
     end
 
     it 'updates consultation' do
-      expect(consultation.reload.reason).to eq('UPDATED REASON')
+      consultation.reload
+      expect(consultation.reason).to eq('UPDATED REASON')
+      expect(consultation.hearing_aids).to eq('UPDATED HEARING AIDS')
     end
 
     it { is_expected.to redirect_to edit_patient_consultation_path(patient, consultation) }
