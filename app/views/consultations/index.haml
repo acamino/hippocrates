@@ -119,12 +119,12 @@
                       = link_to "Editar",
                         edit_patient_consultation_path(@patient, consultation)
                     %li
-                      =link_to t('prescriptions.button.download'),
+                      =link_to t('prescriptions.button.print'),
                         patient_consultation_prescription_path(consultation.patient, consultation),
                         target: "_blank",
                         data: { turbolinks: false }
                     %li
-                      = link_to t('certificates.button.download'),
+                      = link_to t('consultations.button.download'),
                         download_certificates_path(consultation_id: consultation.id, certificate_type: "consultation"),
                         data: { turbolinks: false }
 
