@@ -37,8 +37,13 @@
             %span.text-muted
               %i.fa.fa-print
           .col-xs-10
-            %span
-              %a.hint-link#print(href="") Imprimir receta
+            - if @consultation.new_record?
+              %span.text-muted
+                = t('prescriptions.button.print')
+            - else
+              %span
+                %a.disabled.hint-link.show-prescription(href="")
+                  = t('prescriptions.button.print')
 
         .row
           .col-xs-1
@@ -47,11 +52,12 @@
           .col-xs-10
             - if @consultation.new_record?
               %span.text-muted
-                = t('prescriptions.button.download')
+                = t('certificates.button.download')
             - else
               %span
-                %a.disabled.hint-link.show-prescription(href="")
-                  = t('prescriptions.button.download')
+                = link_to t('consultations.button.download'),
+                          download_certificates_path(consultation_id: @consultation.id, certificate_type: "consultation"),
+                          data: { turbolinks: false }
 
         .row
           .col-xs-1

@@ -87,9 +87,11 @@ en:
     error:
       creation: Cannot create the consultation
       update: Cannot update the consultation
+    button:
+      download: Download consultation
   certificates:
     button:
       download: Download certificate
   prescriptions:
     button:
-      download: Download prescription
+      print: Print prescription

@@ -87,12 +87,14 @@ es:
     error:
       creation: No se puede crear la consulta
       update: No se puede actualizar la consulta
+    button:
+      download: Descargar consulta
   certificates:
     button:
       download: Descargar certificado
   prescriptions:
     button:
-      download: Descargar receta
+      print: Imprimir receta
 
   activerecord:
     models:
