@@ -14,7 +14,6 @@ class Certificate
     {
       patient: patient,
       consultation: ConsultationPresenter.new(consultation),
-      diagnosis: diagnosis,
       definite_article: definite_article,
       current_date: current_date,
       start_time: options.fetch(:start_time, ''),
@@ -33,10 +32,6 @@ class Certificate
 
   def patient
     PatientPresenter.new(consultation.patient)
-  end
-
-  def diagnosis
-    consultation.diagnoses.first
   end
 
   def definite_article

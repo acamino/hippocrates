@@ -26,7 +26,6 @@ describe Certificate do
       {
         patient: patient,
         consultation: consultation,
-        diagnosis: consultation.diagnoses.first,
         definite_article: definite_article,
         current_date: '21 de Octubre de 2015',
         start_time: start_time,
