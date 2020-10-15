@@ -81,6 +81,7 @@ en:
     next_appointment: Next Appointment
     miscellaneous: Miscellaneous
     reason: Reason
+    ongoing_issue: Ongoing Issue
     success:
       creation: Consultation created successfully
       update: Consultation updated successfully
