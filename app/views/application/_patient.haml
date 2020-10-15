@@ -49,6 +49,16 @@
             %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.source }
 
       .row-fluid
+        .form-group.col-md-6
+          .input-group
+            %span.input-group-addon.input-sm Email
+            %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.email }
+        .form-group.col-md-6
+          .input-group
+            %span.input-group-addon.input-sm Seguro médico
+            %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.health_insurance }
+
+      .row-fluid
         .form-group.col-md-2
           .input-group
             %span.input-group-addon.input-sm Sexo

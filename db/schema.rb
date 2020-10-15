@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_26_042150) do
+ActiveRecord::Schema.define(version: 2020_10_15_110708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 2020_09_26_042150) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "special", default: false, null: false
+    t.text "health_insurance"
     t.index ["civil_status"], name: "index_patients_on_civil_status"
     t.index ["first_name", "last_name"], name: "index_patients_on_first_name_and_last_name", using: :gin
     t.index ["gender"], name: "index_patients_on_gender"

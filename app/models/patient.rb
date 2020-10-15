@@ -45,7 +45,8 @@ class Patient < ApplicationRecord
     normalize_fields :last_name,
                      :first_name,
                      :address,
-                     :profession
+                     :profession,
+                     :health_insurance
     email.downcase! if email.present?
   end
 end
