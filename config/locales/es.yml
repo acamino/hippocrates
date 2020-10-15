@@ -81,6 +81,7 @@ es:
     next_appointment: Próxima cita
     miscellaneous: Misceláneos
     reason: Motivo
+    ongoing_issue: Enfermedad
     success:
       creation: Consulta creada correctamente
       update: Consulta actualizada correctamente

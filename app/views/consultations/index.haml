@@ -88,8 +88,8 @@
                   .col-md-10.col-md-offset-2
                     %strong
                       %big= consultation.long_date
-                = render partial: "details", locals: { label: t("consultations.reason"),
-                                                       content: consultation.reason }
+                = render partial: "details", locals: { label: t("consultations.ongoing_issue"),
+                                                       content: consultation.ongoing_issue }
                 = render partial: "details", locals: { label: t("consultations.miscellaneous"),
                                                        content: consultation.miscellaneous }
                 - if consultation.next_appointment?
