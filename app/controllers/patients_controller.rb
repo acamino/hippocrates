@@ -12,7 +12,9 @@ class PatientsController < ApplicationController
     :address,
     :phone_number,
     :source,
-    :profession
+    :profession,
+    :email,
+    :health_insurance
   ].freeze
 
   def special
