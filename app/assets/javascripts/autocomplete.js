@@ -15,7 +15,7 @@ Hippocrates.Autocomplete = {
         onSelect: function (medicine) {
           var locked = $(this).closest("tr").find(".locked").is(':checked');
           if (!locked) {
-            $(this).closest("tr").find("textarea.subscription").val(medicine.data);
+            $(this).closest("tr").find("input.subscription").val(medicine.data);
           }
         }
       });
