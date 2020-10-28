@@ -31,7 +31,9 @@ class Certificate
   attr_reader :consultation, :options
 
   def patient
-    PatientPresenter.new(consultation.patient)
+    PatientPresenter.new(consultation.patient).tap do |p|
+      p.consultation_date = consultation&.created_at&.to_date
+    end
   end
 
   def definite_article

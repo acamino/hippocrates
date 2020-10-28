@@ -58,6 +58,43 @@ describe PatientPresenter do
     end
   end
 
+  describe '#formatted_age' do
+    let(:presenter) do
+      patient = double(:patient, birthdate: age)
+      described_class.new(patient)
+    end
+
+    context 'when years and months are plural' do
+      let(:age) { Date.new(2011, 12, 8) }
+
+      it 'returns their age' do
+        Timecop.freeze(Date.new(2015, 10, 21)) do
+          expect(presenter.formatted_age).to eq('3 AÑOS 10 MESES')
+        end
+      end
+    end
+
+    context 'when there are *NO* months' do
+      let(:age) { Date.new(2014, 10, 21) }
+
+      it 'returns their age' do
+        Timecop.freeze(Date.new(2015, 10, 21)) do
+          expect(presenter.formatted_age).to eq('1 AÑO')
+        end
+      end
+    end
+
+    context 'when there are *NO* years' do
+      let(:age) { Date.new(2015, 0o4, 21) }
+
+      it 'returns their age' do
+        Timecop.freeze(Date.new(2015, 10, 21)) do
+          expect(presenter.formatted_age).to eq('6 MESES')
+        end
+      end
+    end
+  end
+
   describe '#most_recent_consultation' do
     it 'returns the most recent consultation' do
       patient = double(

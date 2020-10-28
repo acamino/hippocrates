@@ -1,8 +1,13 @@
 class AgeCalculator
   attr_reader :birthday
 
-  def self.calculate(birthday)
-    new(birthday).years_and_months
+  def self.calculate(birthday, date = Date.today)
+    new(birthday, date).years_and_months
+  end
+
+  def initialize(birthday, date)
+    @birthday = birthday
+    @date     = date || Date.today
   end
 
   def years_and_months
@@ -14,12 +19,8 @@ class AgeCalculator
 
   private
 
-  def initialize(birthday)
-    @birthday = birthday
-  end
-
   def age_in_days
-    (Date.today - Date.new(birthday.year, birthday.month, birthday.day)).to_i
+    (@date - Date.new(birthday.year, birthday.month, birthday.day)).to_i
   end
 
   def years
