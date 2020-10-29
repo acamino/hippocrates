@@ -58,38 +58,31 @@ describe PatientPresenter do
     end
   end
 
-  describe '#formatted_age' do
-    let(:presenter) do
-      patient = double(:patient, birthdate: age)
-      described_class.new(patient)
-    end
+  describe '#relative_age' do
+    context 'when a consultation date is set' do
+      let(:presenter) do
+        patient = double(:patient, birthdate: Date.new(2011, 12, 8))
+        presenter = described_class.new(patient)
+        presenter.consultation_date = Date.new(2020, 10, 28)
+        presenter
+      end
 
-    context 'when years and months are plural' do
-      let(:age) { Date.new(2011, 12, 8) }
-
-      it 'returns their age' do
-        Timecop.freeze(Date.new(2015, 10, 21)) do
-          expect(presenter.formatted_age).to eq('3 AÑOS 10 MESES')
-        end
+      it 'calculates the age relative to the consultation date' do
+        expect(presenter.relative_age.years).to eq(8)
+        expect(presenter.relative_age.months).to eq(10)
       end
     end
 
-    context 'when there are *NO* months' do
-      let(:age) { Date.new(2014, 10, 21) }
-
-      it 'returns their age' do
-        Timecop.freeze(Date.new(2015, 10, 21)) do
-          expect(presenter.formatted_age).to eq('1 AÑO')
-        end
+    context 'when a consultation date is *NOT* set' do
+      let(:presenter) do
+        patient = double(:patient, birthdate: Date.new(2011, 12, 8))
+        described_class.new(patient)
       end
-    end
 
-    context 'when there are *NO* years' do
-      let(:age) { Date.new(2015, 0o4, 21) }
-
-      it 'returns their age' do
+      it 'calculates the age relative to the current date' do
         Timecop.freeze(Date.new(2015, 10, 21)) do
-          expect(presenter.formatted_age).to eq('6 MESES')
+          expect(presenter.relative_age.years).to eq(3)
+          expect(presenter.relative_age.months).to eq(10)
         end
       end
     end
