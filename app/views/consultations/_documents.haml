@@ -1,0 +1,8 @@
+- if documents.count > 0
+  .row
+    .col-md-2.text-right.hidden-xs
+    .col-md-2.visible-xs
+    .col-md-10
+      %span
+        = link_to 'Documentos', patient_consultation_documents_path(patient, consultation),
+          data: { turbolinks: false }

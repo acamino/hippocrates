@@ -70,6 +70,20 @@
               %span
                 %a.disabled.hint-link.show-certificate(href="") Certificados
 
+        .row
+          .col-xs-1
+            %span.text-muted
+              %i.fa.fa-file
+          .col-xs-10
+            - if @consultation.new_record?
+              %span.text-muted
+                Documentos
+            - else
+              %span
+                = link_to 'Documentos',
+                          patient_consultation_documents_path(@patient, @consultation),
+                          data: { turbolinks: false }
+
       .hint-item
         - if @patient.anamnesis.allergies?
           .row

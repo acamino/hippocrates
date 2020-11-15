@@ -23,6 +23,11 @@ class PatientsController < ApplicationController
     end.reverse
   end
 
+  def export
+    @csv = Patient.to_csv
+    send_data(@csv, download_options)
+  end
+
   def remove_special
     patient = Patient.find(params[:id])
     patient.update_attributes(special: false)
@@ -73,5 +78,13 @@ class PatientsController < ApplicationController
 
   def patient_params
     params.require(:patient).permit(*ATTRIBUTE_WHITELIST)
+  end
+
+  def download_options
+    {
+      type: 'text/csv',
+      disposition: 'attachment',
+      filename: "#{Date.today}-patients.csv"
+    }
   end
 end

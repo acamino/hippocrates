@@ -8,7 +8,14 @@
 
 .row
   .col-md-12.text-right
-    = link_to t('patients.button.new'), new_patient_path, class: "btn btn-success"
+    = link_to t('patients.button.export'),
+      export_patients_path,
+      class: "btn btn-primary",
+      data: { turbolinks: false }
+
+    = link_to t('patients.button.new'),
+      new_patient_path,
+      class: "btn btn-success"
 
 .row
   .col-md-12

@@ -20,6 +20,7 @@ es:
   patients:
     button:
       new: Nuevo Paciente
+      export: Exportar Pacientes
     table-header:
       history: Historia
       last-name: Apellidos
