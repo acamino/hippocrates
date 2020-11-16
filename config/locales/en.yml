@@ -18,8 +18,9 @@ en:
       truncate: "&hellip;"
 
   patients:
-    new:
-      button: New Patient
+    button:
+      new: New Patient
+      export: Export Patients
     table-header:
       history: History
       last-name: Last Name

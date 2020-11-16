@@ -11,10 +11,13 @@ gem 'devise'
 
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'activerecord-import', '~> 1.0'
+gem 'aws-sdk-s3'
+gem 'dotenv-rails'
 gem 'haml'
 gem 'kaminari'
 gem 'prawn'
 gem 'sablon'
+gem 'shrine', '~> 3.0'
 gem 'unicode_utils'
 
 gem 'coffee-rails', '~> 5.0'

@@ -2,6 +2,7 @@ class Consultation < ApplicationRecord
   belongs_to :patient
   has_many   :diagnoses, dependent: :destroy
   has_many   :prescriptions, dependent: :destroy
+  has_many   :documents, dependent: :destroy
 
   accepts_nested_attributes_for :diagnoses,
                                 reject_if: ->(attributes) { attributes[:description].blank? },

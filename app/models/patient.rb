@@ -1,3 +1,5 @@
+require 'csv'
+
 class Patient < ApplicationRecord
   enum gender: [:male, :female]
   enum civil_status: [:single, :married, :civil_union, :divorced, :widowed]
@@ -23,6 +25,19 @@ class Patient < ApplicationRecord
 
   scope :special, -> { includes(:consultations).where(special: true) }
   scope :order_by_name, -> { order(:last_name, :first_name) }
+
+  def self.to_csv
+    attributes = %w[
+      medical_history first_name last_name identity_card_number birthdate gender civil_status source
+    ]
+
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+      all.each do |user|
+        csv << user.attributes.values_at(*attributes)
+      end
+    end
+  end
 
   def self.search(last_name, first_name)
     if last_name.present? || first_name.present?

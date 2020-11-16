@@ -16,8 +16,11 @@ Rails.application.routes.draw do
     resources :anamneses, only: [:new, :create, :edit, :update]
     resources :consultations, only: [:index, :new, :create, :edit, :update] do
       get :prescription, to: 'prescriptions#download'
+
+      resources :documents, only: [:index, :new, :create, :edit, :update, :destroy]
     end
     get :special, on: :collection
+    get :export,  on: :collection
     delete :remove_special, on: :member
   end
   resources :settings, only: [:index]

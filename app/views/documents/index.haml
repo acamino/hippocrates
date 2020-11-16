@@ -1,0 +1,60 @@
+.row
+  .col-md-12
+    %input{ type: "hidden", value: @patient.id, id: "patient_id" }
+    %strong
+      %h4
+        = @patient.name
+        %small
+          #{@patient.age.years} años
+          = gender_tag(@patient)
+
+.row
+  .col-md-1.col-xs-4
+    %span.semi-strong.text-muted
+      No. Cédula
+  .col-md-3.col-xs-4
+    %span.semi-strong
+      = @patient.identity_card_number
+.row
+  .col-md-1.col-xs-4
+    %span.semi-strong.text-muted
+      Historia
+  .col-md-3.col-xs-4
+    %span.semi-strong
+      = @patient.medical_history
+.row
+  .col-md-1.col-xs-4
+    %span.semi-strong.text-muted
+      Fecha
+  .col-md-3.col-xs-4
+    %span.semi-strong
+      = @consultation.created_at.strftime('%b %d, %Y')
+
+.row
+  .col-md-12.text-right
+    = link_to 'Nuevo documento', new_patient_consultation_document_path(@patient, @consultation), class: "btn btn-success"
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th.col-md-8 Documento
+      %th.col-md-4
+  %tbody
+  - @documents.each do |document|
+    %tr
+      %td
+        %big
+          = document.description
+        %br
+        - document.images.each do |image|
+          = image_tag image.content_url, class: 'document-preview'
+          %br
+          %br
+      %td.text-right
+        = link_to "Editar", edit_patient_consultation_document_path(@patient, @consultation, document), class: 'btn btn-primary btn-sm'
+
+.row
+  .col-md-12.text-center
+    = paginate @documents
+
+= link_to "Consulta", edit_patient_consultation_path(@patient, @consultation), class: "btn btn-default"

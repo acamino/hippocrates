@@ -105,6 +105,7 @@
                       = consultation.next_appointment_long_date
                 = render partial: "details", locals: { label: t("consultations.diagnosis"),
                                                        content: consultation.diagnostic_plan }
+                = render partial: "documents", locals: { patient: @patient, consultation: consultation, documents: consultation.documents }
               %td.text-right
                 .btn-group
                   %button.btn.btn-default.btn-xs.dropdown-toggle{ "aria-expanded": "false",
