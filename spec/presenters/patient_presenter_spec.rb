@@ -88,6 +88,58 @@ describe PatientPresenter do
     end
   end
 
+  describe '#gender_es' do
+    context 'when the patient is male' do
+      it 'returns the gender' do
+        patient = double(:patient, male?: true)
+        presenter = described_class.new(patient)
+        expect(presenter.gender_es).to eq('Masculino')
+      end
+    end
+
+    context 'when the patient is female' do
+      it 'returns the gender' do
+        patient = double(:patient, male?: false)
+        presenter = described_class.new(patient)
+        expect(presenter.gender_es).to eq('Femenino')
+      end
+    end
+  end
+
+  shared_examples 'translated civil status' do |civil_status_en, civil_status_es|
+    context "when the patient is #{civil_status_en}" do
+      let(:civil_status) { civil_status_en }
+
+      it "returns #{civil_status_es}" do
+        presenter = described_class.new(patient)
+        expect(presenter.civil_status_es).to eq(civil_status_es)
+      end
+    end
+  end
+
+  describe '#civil_status_es' do
+    let(:patient) { double(:patient, male?: male, civil_status: civil_status) }
+    context 'when the patient is male' do
+      let(:male) { true }
+
+      it_behaves_like 'translated civil status', 'single',      'SOLTERO'
+      it_behaves_like 'translated civil status', 'married',     'CASADO'
+      it_behaves_like 'translated civil status', 'civil_union', 'UNIÓN LIBRE'
+      it_behaves_like 'translated civil status', 'divorced',    'DIVORCIADO'
+      it_behaves_like 'translated civil status', 'widowed',     'VIUDO'
+    end
+
+    context 'when the patient is female' do
+      let(:male) { false }
+
+      it_behaves_like 'translated civil status', 'single',      'SOLTERA'
+      it_behaves_like 'translated civil status', 'married',     'CASADA'
+      it_behaves_like 'translated civil status', 'civil_union', 'UNIÓN LIBRE'
+      it_behaves_like 'translated civil status', 'divorced',    'DIVORCIADA'
+      it_behaves_like 'translated civil status', 'widowed',     'VIUDA'
+    end
+  end
+
   describe '#most_recent_consultation' do
     it 'returns the most recent consultation' do
       patient = double(
