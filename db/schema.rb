@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_15_015125) do
+ActiveRecord::Schema.define(version: 2020_11_18_021643) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -26,6 +26,14 @@ ActiveRecord::Schema.define(version: 2020_11_15_015125) do
     t.string "family_history"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "attachments", force: :cascade do |t|
+    t.bigint "document_id"
+    t.jsonb "content_data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["document_id"], name: "index_attachments_on_document_id"
   end
 
   create_table "consultations", id: :serial, force: :cascade do |t|
@@ -89,14 +97,6 @@ ActiveRecord::Schema.define(version: 2020_11_15_015125) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["consultation_id"], name: "index_documents_on_consultation_id"
-  end
-
-  create_table "images", force: :cascade do |t|
-    t.bigint "document_id"
-    t.jsonb "content_data"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["document_id"], name: "index_images_on_document_id"
   end
 
   create_table "medicines", id: :serial, force: :cascade do |t|
@@ -167,9 +167,9 @@ ActiveRecord::Schema.define(version: 2020_11_15_015125) do
   end
 
   add_foreign_key "anamneses", "patients"
+  add_foreign_key "attachments", "documents", on_delete: :cascade
   add_foreign_key "consultations", "patients"
   add_foreign_key "diagnoses", "consultations"
   add_foreign_key "documents", "consultations", on_delete: :cascade
-  add_foreign_key "images", "documents", on_delete: :cascade
   add_foreign_key "prescriptions", "consultations"
 end

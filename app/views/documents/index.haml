@@ -46,8 +46,11 @@
         %big
           = document.description
         %br
-        - document.images.each do |image|
-          = image_tag image.content_url, class: 'document-preview'
+        - document.attachments.each do |attachment|
+          - if attachment.image?
+            = image_tag attachment.content_url, class: 'document-preview'
+          - else
+            = link_to attachment.content.original_filename, attachment.content_url, target: "_blank"
           %br
           %br
       %td.text-right

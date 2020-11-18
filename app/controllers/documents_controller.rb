@@ -43,15 +43,17 @@ class DocumentsController < ApplicationController
   private
 
   def document_params
-    images_attributes = raw_document_params[:images_attributes].to_h.merge(new_images_attributes)
-    raw_document_params.merge(images_attributes: images_attributes)
+    attachments_attributes = raw_document_params[:attachments_attributes].to_h.merge(
+      new_attachments_attributes
+    )
+    raw_document_params.merge(attachments_attributes: attachments_attributes)
   end
 
   def raw_document_params
     params.require(:document).permit(*Document::ATTRIBUTE_WHITELIST)
   end
 
-  def new_images_attributes
+  def new_attachments_attributes
     return {} unless params[:files].present?
 
     params[:files].inject({}) do |acc, file|

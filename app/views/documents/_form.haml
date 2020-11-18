@@ -8,18 +8,21 @@
   .form-group
     = f.label :content, "Documento", class: "col-md-2 control-label"
     .col-md-10
-      - if @document.images.count > 0
+      - if @document.attachments.count > 0
         %table.table.table-striped.table-hover.table-condensed
           %thead
             %tr
-              %th.col-md-6 Imagen
+              %th.col-md-6 Archivos
               %th.col-md-4 Accion
               %th.col-md-2 Eliminar
           %tbody
-            = f.fields_for :images do |ff|
+            = f.fields_for :attachments do |ff|
               %tr
                 %td
-                  = image_tag ff.object.content_url, class: "document-preview"
+                  - if ff.object.image?
+                    = image_tag ff.object.content_url, class: "document-preview"
+                  - else
+                    = link_to ff.object.content.original_filename, ff.object.content_url, target: "_blank"
                 %td
                   = ff.hidden_field :content, value: ff.object.cached_content_data
                   = ff.file_field :content, class: "form-content-file"
