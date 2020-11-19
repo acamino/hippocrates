@@ -61,7 +61,7 @@ Hippocrates.Certificates = {
     var params = [];
     params.push("certificate_type=" + certificateType);
 
-    if (this.isAttendance(certificateType) || this.isStrangeBody(certificateType)) {
+    if (this.isAttendance(certificateType)) {
       params.push("start_time=" + this.getStartTime());
       params.push("end_time=" + this.getEndTime());
     }
@@ -111,10 +111,6 @@ Hippocrates.Certificates = {
     return certificateType === "attendance";
   },
 
-  isStrangeBody: function (certificateType) {
-    return certificateType === "strange_body";
-  },
-
   isRest: function (certificateType) {
     return certificateType === "rest";
   },
@@ -124,8 +120,7 @@ Hippocrates.Certificates = {
   },
 
   toggleTimeControls: function(certificateType) {
-    var hasTimeControls =
-      this.isAttendance(certificateType) || this.isStrangeBody(certificateType);
+    var hasTimeControls = this.isAttendance(certificateType);
     $(".time-controls").toggle(hasTimeControls);
   },
 

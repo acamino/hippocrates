@@ -5,7 +5,7 @@ class Certificate
 
   def initialize(consultation, options)
     @consultation = consultation
-    @options = options
+    @options      = options
   end
 
   # rubocop:disable MethodLength
