@@ -25,7 +25,7 @@ module Prescriptions
       Printers::Section.call(pdf, [-26, 442], 269, patient_name)
       Printers::Section.call(pdf, [244, 443], 136, patient_age)
       Printers::Section.call(pdf, [-26, 426], 269, diagnoses, leading: 2)
-      Printers::Section.call(pdf, [244, 426], 136, allergies)
+      Printers::Section.call(pdf, [244, 426], 136, allergies, color: 'FF0000')
       Printers::Section.call(pdf, [-26, 370], 405, inscriptions)
 
       Printers::Section.call(pdf, [664, 464], 136, location_and_date, align: :right)
