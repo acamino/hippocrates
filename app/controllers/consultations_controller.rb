@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/ClassLength
 class ConsultationsController < ApplicationController
   ATTRIBUTE_WHITELIST = [
     :reason,
@@ -32,6 +33,7 @@ class ConsultationsController < ApplicationController
     :warning_signs,
     :recommendations,
     :next_appointment,
+    :created_at,
     patient: :special,
     diagnoses_attributes: [:id, :disease_code, :description, :type, :_destroy],
     prescriptions_attributes: [:id, :inscription, :subscription, :_destroy]
@@ -39,6 +41,7 @@ class ConsultationsController < ApplicationController
 
   before_action :fetch_consultation, only: [:edit, :update]
   before_action :fetch_patient
+  before_action :adjust_time!, only: [:update]
 
   def index
     delete_referer_location
@@ -118,5 +121,12 @@ class ConsultationsController < ApplicationController
 
   def patient_params
     { special: params.dig(:consultation, :patient, :special) }
+  end
+
+  def adjust_time!
+    _, time_with_timezone = @consultation.created_at.iso8601.split('T')
+    time, = time_with_timezone.split('-')
+    date = consultation_params[:created_at]
+    params[:consultation][:created_at] = "#{date} #{time}"
   end
 end
