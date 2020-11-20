@@ -10,7 +10,7 @@
             - if (@consultation && @consultation.new_record?) || @anamnesis
               %input.form-control.input-sm.colored#current_date{ disabled: 'disabled', value: Date.today }
             - else
-              %input.form-control.input-sm.colored#current_date{ disabled: 'disabled', value: @consultation.date }
+              = form.text_field :created_at, class: 'form-control input-sm', value: @consultation.date
         .form-group.col-md-3
           .input-group
             %span.input-group-addon.input-sm Fecha Nacimiento

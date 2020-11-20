@@ -30,6 +30,15 @@ $(document).on('turbolinks:load', function() {
         autoclose: true
     });
 
+    $("#consultation_created_at").datepicker({
+        // startDate: date,
+        todayHighlight: true,
+        format: "yyyy-mm-dd",
+        language: "es",
+        calendarWeeks: true,
+        autoclose: true
+    });
+
     $("#patient_birthdate").datepicker({
         startView: 3,
         format: "yyyy-mm-dd",
