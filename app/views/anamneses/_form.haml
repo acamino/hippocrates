@@ -23,6 +23,10 @@
           .input-group
             %span.input-group-addon.input-sm Hábitos
             = f.text_field :habits, class: "form-control input-sm"
+        .form-group.col-md-4
+          .input-group
+            %span.input-group-addon.input-sm Audioprótesis
+            = f.select :hearing_aids, options_for_select([['No', 'false'], ['Si', 'true']], @anamnesis.hearing_aids), {}, class: "form-control input-sm"
 
   .panel.panel-success
     .panel-heading

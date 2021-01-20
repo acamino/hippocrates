@@ -22,6 +22,10 @@
           .input-group
             %span.input-group-addon.input-sm Hábitos
             %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.anamnesis.habits }
+        .form-group.col-md-12
+          .input-group
+            %span.input-group-addon.input-sm Audioprótesis
+            %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.anamnesis.hearing_aids ? "SI" : "NO" }
   .panel.panel-success
     .panel-heading
       %b Antecedentes Familiares
