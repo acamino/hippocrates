@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_18_021643) do
+ActiveRecord::Schema.define(version: 2021_01_20_160222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2020_11_18_021643) do
     t.string "family_history"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "hearing_aids", default: false, null: false
   end
 
   create_table "attachments", force: :cascade do |t|

@@ -5,7 +5,8 @@ class AnamnesesController < ApplicationController
     :allergies,
     :observations,
     :habits,
-    :family_history
+    :family_history,
+    :hearing_aids
   ].freeze
 
   before_action :fetch_patient, only: [:new, :edit]
