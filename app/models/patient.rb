@@ -32,9 +32,9 @@ class Patient < ApplicationRecord
     ]
 
     CSV.generate(headers: true) do |csv|
-      csv << attributes
-      all.each do |user|
-        csv << user.attributes.values_at(*attributes)
+      csv << attributes + ['hearing_aids']
+      all.includes(:anamnesis).each do |user|
+        csv << user.attributes.values_at(*attributes) + [user.anamnesis&.hearing_aids || false]
       end
     end
   end
