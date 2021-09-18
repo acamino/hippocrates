@@ -17,8 +17,8 @@ provides some basic functionality out of the box:
   - Register medical prescriptions
 
 ## Dependencies
-- Ruby 2.6.3
-- Rails 5.2.3
+- Ruby 2.7.0
+- Rails 5.2.6
 - Postgres
 
 ## Local Development

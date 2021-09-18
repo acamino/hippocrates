@@ -40,6 +40,6 @@ class MedicinesController < ApplicationController
   end
 
   def medicine_params
-    params.require(:medicine).permit(:name, :instructions)
+    params.require(:medicine).permit(*Medicine::ATTRIBUTE_WHITELIST)
   end
 end

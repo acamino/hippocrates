@@ -1,5 +1,11 @@
-require 'coveralls'
-Coveralls.wear!('rails')
+if ENV['TRAVIS']
+  require 'simplecov'
+  require 'coveralls'
+  Coveralls.wear!('rails')
+
+  SimpleCov.formatter = Coveralls::SimpleCov::Formatter
+  SimpleCov.start
+end
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|

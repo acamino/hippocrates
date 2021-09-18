@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class DocumentsController < ApplicationController
   before_action :fetch_patient, :fetch_consultation
   before_action :fetch_document, only: [:edit, :update, :destroy]

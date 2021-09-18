@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
-ruby '2.6.8'
+ruby '2.7.0'
 
 gem 'pg'
-gem 'rails', '~> 5.2'
+gem 'rails', '~> 5.2.6'
 
 gem 'puma'
 gem 'rails_12factor', group: :production
@@ -35,13 +35,15 @@ group :development, :test do
   gem 'byebug'
   gem 'listen'
   gem 'rubocop'
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
 end
 
 group :test do
   gem 'coveralls', require: false
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'rails-controller-testing'
   gem 'rspec-activemodel-mocks'
   gem 'rspec-rails'

@@ -1,22 +1,4 @@
-# frozen_string_literal: true
-
 class PatientsController < ApplicationController
-  ATTRIBUTE_WHITELIST = [
-    :medical_history,
-    :identity_card_number,
-    :first_name,
-    :last_name,
-    :birthdate,
-    :gender,
-    :civil_status,
-    :address,
-    :phone_number,
-    :source,
-    :profession,
-    :email,
-    :health_insurance
-  ].freeze
-
   def special
     @patients = Patient.special.sort_by do |p|
       p.consultations.most_recent.created_at
@@ -77,7 +59,7 @@ class PatientsController < ApplicationController
   private
 
   def patient_params
-    params.require(:patient).permit(*ATTRIBUTE_WHITELIST)
+    params.require(:patient).permit(*Patient::ATTRIBUTE_WHITELIST)
   end
 
   def download_options

@@ -40,6 +40,6 @@ class DiseasesController < ApplicationController
   end
 
   def disease_params
-    params.require(:disease).permit(:code, :name)
+    params.require(:disease).permit(*Disease::ATTRIBUTE_WHITELIST)
   end
 end

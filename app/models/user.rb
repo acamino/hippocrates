@@ -36,4 +36,8 @@ class User < ApplicationRecord
 
     serial
   end
+
+  def admin_or_super_admin?
+    admin? || super_admin?
+  end
 end

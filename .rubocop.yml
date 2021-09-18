@@ -1,12 +1,9 @@
-Documentation:
+Style/Documentation:
   Enabled: false
-
-Metrics/LineLength:
-  Max: 100
 
 Metrics/BlockLength:
   Max: 40
-  ExcludedMethods: ['describe', 'context', 'namespace', 'task']
+  IgnoredMethods: ['describe', 'context', 'namespace', 'task']
 
 Style/FrozenStringLiteralComment:
   Enabled: false
@@ -17,18 +14,25 @@ Style/NumericPredicate:
 Style/SymbolArray:
   Enabled: false
 
+Style/HashAsLastArrayItem:
+  Enabled: false
+
 Layout/EmptyLineAfterGuardClause:
   Enabled: false
+
+Layout/LineLength:
+  Max: 100
 
 Lint/MissingCopEnableDirective:
   Enabled: false
 
 AllCops:
+  NewCops: enable
   Exclude:
+    - bin/*
     - config/**/*
     - db/**/*
-    - bin/*
-    - script/*
-    - lib/tasks/cucumber.rake
     - features/support/env.rb
-    - vendor/**/*
+    - lib/tasks/cucumber.rake
+    - script/*
+    - vendor/bundle/**/*

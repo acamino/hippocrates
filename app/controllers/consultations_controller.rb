@@ -1,44 +1,4 @@
-# frozen_string_literal: true
-
-# rubocop:disable Metrics/ClassLength
 class ConsultationsController < ApplicationController
-  ATTRIBUTE_WHITELIST = [
-    :reason,
-    :ongoing_issue,
-    :organs_examination,
-    :temperature,
-    :heart_rate,
-    :blood_pressure,
-    :respiratory_rate,
-    :weight,
-    :height,
-    :oxygen_saturation,
-    :physical_examination,
-    :right_ear,
-    :left_ear,
-    :right_nostril,
-    :left_nostril,
-    :nasopharynx,
-    :nose_others,
-    :oral_cavity,
-    :oropharynx,
-    :hypopharynx,
-    :larynx,
-    :neck,
-    :others,
-    :hearing_aids,
-    :diagnostic_plan,
-    :miscellaneous,
-    :treatment_plan,
-    :warning_signs,
-    :recommendations,
-    :next_appointment,
-    :created_at,
-    patient: :special,
-    diagnoses_attributes: [:id, :disease_code, :description, :type, :_destroy],
-    prescriptions_attributes: [:id, :inscription, :subscription, :_destroy]
-  ].freeze
-
   before_action :fetch_consultation, only: [:edit, :update]
   before_action :fetch_patient
   before_action :adjust_time!, only: [:update]
@@ -114,7 +74,7 @@ class ConsultationsController < ApplicationController
   end
 
   def consultation_params
-    params.require(:consultation).permit(*ATTRIBUTE_WHITELIST).merge(
+    params.require(:consultation).permit(*Consultation::ATTRIBUTE_WHITELIST).merge(
       patient_id: params[:patient_id]
     ).except('patient')
   end

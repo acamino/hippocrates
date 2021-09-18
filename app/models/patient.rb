@@ -1,6 +1,22 @@
 require 'csv'
 
 class Patient < ApplicationRecord
+  ATTRIBUTE_WHITELIST = [
+    :medical_history,
+    :identity_card_number,
+    :first_name,
+    :last_name,
+    :birthdate,
+    :gender,
+    :civil_status,
+    :address,
+    :phone_number,
+    :source,
+    :profession,
+    :email,
+    :health_insurance
+  ].freeze
+
   enum gender: [:male, :female]
   enum civil_status: [:single, :married, :civil_union, :divorced, :widowed]
   enum source: [:television, :radio, :newspaper, :patient_reference]
@@ -32,9 +48,9 @@ class Patient < ApplicationRecord
     ]
 
     CSV.generate(headers: true) do |csv|
-      csv << attributes + ['hearing_aids']
+      csv << (attributes + ['hearing_aids'])
       all.includes(:anamnesis).each do |user|
-        csv << user.attributes.values_at(*attributes) + [user.anamnesis&.hearing_aids || false]
+        csv << (user.attributes.values_at(*attributes) + [user.anamnesis&.hearing_aids || false])
       end
     end
   end
