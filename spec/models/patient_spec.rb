@@ -34,11 +34,17 @@ describe Patient do
     let!(:john_domino) { create(:patient, first_name: 'John', last_name: 'Domino') }
     let!(:mark_lopez)  { create(:patient, first_name: 'Mark', last_name: 'López') }
     let!(:john_carter) { create(:patient, first_name: 'John', last_name: 'Carter') }
+    # Necessary to support legacy patients
+    let!(:unnamed) do
+      patient = build(:patient, first_name: '', last_name: '')
+      patient.save(validate: false)
+      patient
+    end
 
     context 'when last name and first name are empty' do
       it 'returns all patients' do
         patients = described_class.search('', '')
-        expect(patients).to eq([john_carter, john_domino, mark_lopez])
+        expect(patients).to eq([john_carter, john_domino, mark_lopez, unnamed])
       end
     end
 

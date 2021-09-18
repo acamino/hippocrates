@@ -1,5 +1,3 @@
-require 'csv'
-
 class Patient < ApplicationRecord
   ATTRIBUTE_WHITELIST = [
     :medical_history,
@@ -15,6 +13,17 @@ class Patient < ApplicationRecord
     :profession,
     :email,
     :health_insurance
+  ].freeze
+
+  CSV_ATTRIBUTES = %w[
+    medical_history
+    last_name
+    first_name
+    identity_card_number
+    birthdate
+    gender
+    civil_status
+    source
   ].freeze
 
   enum gender: [:male, :female]
@@ -40,17 +49,15 @@ class Patient < ApplicationRecord
   before_save :normalize
 
   scope :special, -> { includes(:consultations).where(special: true) }
-  scope :order_by_name, -> { order(:last_name, :first_name) }
+  scope :order_by_name, -> { empty_names_to_end.order(:last_name, :first_name) }
+  scope :empty_names_to_end, -> { order(Arel.sql("first_name = '', last_name = ''")) }
 
   def self.to_csv
-    attributes = %w[
-      medical_history first_name last_name identity_card_number birthdate gender civil_status source
-    ]
-
     CSV.generate(headers: true) do |csv|
-      csv << (attributes + ['hearing_aids'])
+      csv << (CSV_ATTRIBUTES + ['hearing_aids'])
       all.includes(:anamnesis).each do |user|
-        csv << (user.attributes.values_at(*attributes) + [user.anamnesis&.hearing_aids || false])
+        hearing_aids = user.anamnesis&.hearing_aids || false
+        csv << (user.attributes.values_at(*CSV_ATTRIBUTES) + [hearing_aids])
       end
     end
   end
