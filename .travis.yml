@@ -3,7 +3,7 @@ language: ruby
 cache:
   bundler: true
 rvm:
-  - rvm 2.7.0
+  - rvm 2.7.4
 services:
   - postgresql
 addons:
