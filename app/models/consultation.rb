@@ -1,8 +1,10 @@
 class Consultation < ApplicationRecord
+  belongs_to :doctor, class_name: 'User', foreign_key: 'user_id'
   belongs_to :patient
-  has_many   :diagnoses, dependent: :destroy
+
+  has_many   :diagnoses,     dependent: :destroy
+  has_many   :documents,     dependent: :destroy
   has_many   :prescriptions, dependent: :destroy
-  has_many   :documents, dependent: :destroy
 
   accepts_nested_attributes_for :diagnoses,
                                 reject_if: ->(attributes) { attributes[:description].blank? },
@@ -13,6 +15,8 @@ class Consultation < ApplicationRecord
                                 allow_destroy: true
 
   before_save :normalize
+
+  after_create :update_serial!
 
   default_scope { order(created_at: :desc) }
 
@@ -59,5 +63,12 @@ class Consultation < ApplicationRecord
                      :warning_signs,
                      :recommendations,
                      :hearing_aids
+  end
+
+  def update_serial!
+    serial = doctor.next_serial!
+    self.serial = serial.to_s.rjust(5, '0')
+
+    save!
   end
 end

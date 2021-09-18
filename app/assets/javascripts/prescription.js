@@ -15,7 +15,12 @@ Hippocrates.Prescription = {
 
     $(".show-prescription").on("click", function(e) {
       e.preventDefault();
-      self.openModal();
+      self.openPrescriptionModal();
+    });
+
+    $(".show-empty-prescription").on("click", function(e) {
+      e.preventDefault();
+      self.openEmptyPrescriptionModal();
     });
   },
 
@@ -93,7 +98,11 @@ Hippocrates.Prescription = {
     return $("#consultation_next_appointment").val();
   },
 
-  openModal: function() {
+  openPrescriptionModal: function() {
     $("#prescription").modal({ backdrop: "static" });
+  },
+
+  openEmptyPrescriptionModal: function() {
+    $("#empty-prescription").modal({ backdrop: "static" });
   },
 };

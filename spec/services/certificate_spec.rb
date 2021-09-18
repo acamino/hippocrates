@@ -34,7 +34,8 @@ describe Certificate do
         surgical_treatment: surgical_treatment,
         surgery_tentative_date: surgery_tentative_date,
         surgery_cost: surgery_cost,
-        consultations: consultations
+        consultations: consultations,
+        doctor: consultation.doctor
       }
     end
 

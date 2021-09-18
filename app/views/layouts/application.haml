@@ -7,7 +7,7 @@
     = javascript_include_tag 'application'
     = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.3/pdfobject.min.js'
     = stylesheet_link_tag '//maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css'
-    = stylesheet_link_tag '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'
+    = stylesheet_link_tag '//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'
     = stylesheet_link_tag '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.min.css'
     = stylesheet_link_tag '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css'
     = stylesheet_link_tag '//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/css/bootstrap-editable.css'
@@ -29,13 +29,15 @@
               = nav_to 'Pacientes Especiales', special_patients_path
               = nav_to 'Medicinas', medicines_path
               = nav_to 'Enfermedades', diseases_path
-              = nav_to 'Preferencias', settings_path
+              - if current_user.admin?
+                = nav_to 'Usuarios', admin_users_path
+                = nav_to 'Preferencias', settings_path
               = yield :nav_option
 
           %ul.nav.navbar-nav.navbar-right
             - if user_signed_in?
               %li
-                = link_to "Editar Usuario", edit_user_registration_path
+                = link_to current_user.pretty_name, edit_user_registration_path
               %li
                 = link_to "Salir", destroy_user_session_path, method: :delete
             - else

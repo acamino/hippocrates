@@ -1,7 +1,7 @@
 class PrescriptionsController < ApplicationController
   def download
     consultation = Consultation.find(params[:consultation_id])
-    Prescriptions::Printer.new(consultation).call
+    Prescriptions::Printer.new(consultation, params[:empty] || false).call
     send_file '/tmp/prescription.pdf', download_options
   end
 

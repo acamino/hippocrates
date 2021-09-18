@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe ConsultationsController do
+  let(:doctor) { create(:user) }
+
   before do
     create(:setting, :maximum_diagnoses)
     create(:setting, :maximum_prescriptions)
@@ -53,6 +55,8 @@ describe ConsultationsController do
     end
 
     before do |example|
+      allow(controller).to receive(:current_user) { doctor }
+
       unless example.metadata[:skip_on_before]
         post :create, params: { patient_id: patient.id.to_s,
                                 consultation: attributes_for_consultation }

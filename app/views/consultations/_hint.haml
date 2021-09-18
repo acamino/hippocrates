@@ -48,6 +48,19 @@
         .row
           .col-xs-1
             %span.text-muted
+              %i.fa.fa-print
+          .col-xs-10
+            - if @consultation.new_record?
+              %span.text-muted
+                = t('prescriptions.button.print_empty')
+            - else
+              %span
+                %a.disabled.hint-link.show-empty-prescription(href="")
+                  = t('prescriptions.button.print_empty')
+
+        .row
+          .col-xs-1
+            %span.text-muted
               %i.fa.fa-download
           .col-xs-10
             - if @consultation.new_record?
