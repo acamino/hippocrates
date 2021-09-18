@@ -83,6 +83,7 @@ en:
     miscellaneous: Miscellaneous
     reason: Reason
     ongoing_issue: Ongoing Issue
+    doctor: Doctor
     success:
       creation: Consultation created successfully
       update: Consultation updated successfully
@@ -97,3 +98,4 @@ en:
   prescriptions:
     button:
       print: Print prescription
+      print_empty: Print empty prescription

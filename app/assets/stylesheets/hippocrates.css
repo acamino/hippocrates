@@ -11,6 +11,10 @@ input, textarea, select {
   text-transform: uppercase;
 }
 
+.user-input {
+  text-transform: none;
+}
+
 input[type="email"] {
   text-transform: none;
 }

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users, skip: [:registrations]
+  devise_for :users, skip: [:registrations], controllers: {
+    sessions: 'auth/sessions'
+  }
   as :user do
     get 'users/edit' => 'devise/registrations#edit', as: 'edit_user_registration'
     put 'users' => 'devise/registrations#update', as: 'user_registration'
@@ -8,6 +10,10 @@ Rails.application.routes.draw do
   root 'patients#index'
   resources :certificates, only: [] do
     get :download, on: :collection
+  end
+
+  namespace :admin do
+    resources :users
   end
 
   resources :diseases, only: [:index, :new, :create, :edit, :update, :destroy]

@@ -83,6 +83,7 @@ es:
     miscellaneous: Misceláneos
     reason: Motivo
     ongoing_issue: Enfermedad
+    doctor: Médico
     success:
       creation: Consulta creada correctamente
       update: Consulta actualizada correctamente
@@ -97,6 +98,7 @@ es:
   prescriptions:
     button:
       print: Imprimir receta
+      print_empty: Imprimir receta vacía*
 
   activerecord:
     models:
@@ -104,6 +106,8 @@ es:
     attributes:
       prescription:
         subscription: Indicación
+      user:
+        registration_acess: Registro
     errors:
       messages:
         record_invalid: "La validación falló: %{errors}"

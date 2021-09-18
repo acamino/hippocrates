@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_20_160222) do
+ActiveRecord::Schema.define(version: 2021_09_15_111954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -72,7 +72,10 @@ ActiveRecord::Schema.define(version: 2021_01_20_160222) do
     t.string "hearing_aids", default: ""
     t.integer "oxygen_saturation", default: 0
     t.text "recommendations"
+    t.bigint "user_id"
+    t.string "serial"
     t.index ["special_patient"], name: "index_consultations_on_special_patient"
+    t.index ["user_id"], name: "index_consultations_on_user_id"
   end
 
   create_table "diagnoses", id: :serial, force: :cascade do |t|
@@ -163,13 +166,25 @@ ActiveRecord::Schema.define(version: 2021_01_20_160222) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "admin", default: false, null: false
+    t.boolean "super_admin", default: false, null: false
+    t.boolean "active", default: true, null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "pretty_name"
+    t.string "phone_number"
+    t.string "registration_acess"
+    t.string "speciality"
+    t.integer "serial", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["registration_acess"], name: "index_users_on_registration_acess", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "anamneses", "patients"
   add_foreign_key "attachments", "documents", on_delete: :cascade
   add_foreign_key "consultations", "patients"
+  add_foreign_key "consultations", "users", on_delete: :nullify
   add_foreign_key "diagnoses", "consultations"
   add_foreign_key "documents", "consultations", on_delete: :cascade
   add_foreign_key "prescriptions", "consultations"

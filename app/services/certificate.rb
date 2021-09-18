@@ -22,7 +22,8 @@ class Certificate
       surgical_treatment: options.fetch(:surgical_treatment, '').upcase,
       surgery_tentative_date: options.fetch(:surgery_tentative_date, '').upcase,
       surgery_cost: options.fetch(:surgery_cost, ''),
-      consultations: consultations
+      consultations: consultations,
+      doctor: consultation.doctor
     }
   end
 

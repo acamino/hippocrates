@@ -1,0 +1,50 @@
+= render partial: 'search', locals: { path: admin_users_path, placeholder: 'Nombre' }
+
+.row
+  .col-md-12.text-right
+    = link_to 'Nuevo usuario', new_admin_user_path, class: "btn btn-success"
+
+.row
+  .col-md-12
+    %table.table.table-striped
+      %thead
+        %tr
+          %th.col-md-2 Usuario
+          %th.col-md-2 Teléfono
+          %th.col-md-2 Registro
+          %th.col-md-2 Email
+          %th.col-md-1.text-center Active
+          %th.col-md-1.text-center Admin
+          %th.col-md-1
+      %tbody
+      - @users.each do |user|
+        %tr
+          %td
+            = user.pretty_name
+          %td= user.phone_number
+          %td= user.registration_acess
+          %td= user.email
+          %td.text-center
+            - if user.active?
+              %span.text-success
+                %i.fa.fa-circle
+            - else
+              %span.text-success
+                %i.fa.fa-circle-o
+          %td.text-center
+            - if user.super_admin?
+              %span.text-warning
+                %i.fa.fa-crown
+            - else
+              - if user.admin?
+                %span.text-warning
+                  %i.fa.fa-circle
+              - else
+                %span.text-warning
+                  %i.fa.fa-circle-o
+          %td.text-right
+            = link_to t('diseases.actions.edit'), edit_admin_user_path(user), class: 'btn btn-primary btn-sm'
+
+.row
+  .col-md-12.text-center
+    = paginate @users

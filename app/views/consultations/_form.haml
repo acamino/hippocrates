@@ -263,3 +263,4 @@
   :javascript
     var options = { height: "600px", pdfOpenParams: { view: "FitH" } };
     PDFObject.embed("#{patient_consultation_prescription_path(@patient, @consultation)}", "#pdf", options);
+    PDFObject.embed("#{patient_consultation_prescription_path(@patient, @consultation, empty: true)}", "#empty-pdf", options);

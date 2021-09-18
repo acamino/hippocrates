@@ -8,3 +8,14 @@
           %span.pdf__close{ "aria-hidden": "true" } &times;
       .modal-body.pdf-container
         #pdf
+
+.modal.fade#empty-prescription{ tabindex: "-1", role: "dialog" }
+  .modal-dialog.modal-lg.pdf__modal-lg
+    .modal-content
+      .modal-header.pdf__modal-header
+        %button.close{ type: "button",
+                       "data-dismiss": "modal",
+                       "aria-label": "Close" }
+          %span.pdf__close{ "aria-hidden": "true" } &times;
+      .modal-body.pdf-container
+        #empty-pdf

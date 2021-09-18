@@ -1,0 +1,47 @@
+= error_messages_for @user
+= form_for @user, url: path, html: { class: "form-horizontal" } do |f|
+  .form-group
+    = f.label :first_name, "Nombres", class: "col-md-2 control-label"
+    .col-md-10
+      = f.text_field :first_name, class: "form-control input-sm user-input"
+  .form-group
+    = f.label :last_name, "Apellidos", class: "col-md-2 control-label"
+    .col-md-10
+      = f.text_field :last_name, class: "form-control input-sm user-input"
+  .form-group
+    = f.label :pretty_name, "Nombres (Impresión)", class: "col-md-2 control-label"
+    .col-md-10
+      = f.text_field :pretty_name, class: "form-control input-sm user-input"
+  .form-group
+    = f.label :speciality, "Especialidad", class: "col-md-2 control-label"
+    .col-md-10
+      = f.text_field :speciality, class: "form-control input-sm user-input"
+  .form-group
+    = f.label :phone_number, "Teléfono", class: "col-md-2 control-label"
+    .col-md-10
+      = f.phone_field :phone_number, class: "form-control input-sm", maxlength: 12
+  .form-group
+    = f.label :registration_acess, "Registro", class: "col-md-2 control-label"
+    .col-md-10
+      = f.text_field :registration_acess, class: "form-control input-sm", maxlength: 10
+  .form-group
+    = f.label :email, "Email", class: "col-md-2 control-label"
+    .col-md-10
+      = f.email_field :email, class: "form-control input-sm"
+  - unless @user.super_admin?
+    .form-group
+      = f.label :password, "Contraseña", class: "col-md-2 control-label"
+      .col-md-10
+        = f.text_field :password, class: "form-control input-sm user-input"
+    .form-group
+      = f.label :active, "Activo", class: "col-md-2 control-label"
+      .col-md-10
+        = f.check_box :active
+    .form-group
+      = f.label :admin, "Administrador", class: "col-md-2 control-label"
+      .col-md-10
+        = f.check_box :admin
+  .form-group
+    .col-md-10.col-md-offset-2
+      = link_to "Cancelar", admin_users_path, class: "btn btn-default"
+      = f.submit "Guardar", class: "btn btn-success"

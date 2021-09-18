@@ -25,6 +25,7 @@ FactoryGirl.define do
     next_appointment     '2016-01-11'
 
     patient
+    doctor { association :user }
   end
 
   trait :with_diagnoses do

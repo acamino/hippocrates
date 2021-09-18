@@ -1,39 +1,66 @@
 module Prescriptions
+  # rubocop:disable ClassLength
   class Printer
     BACKGROUND = "#{Rails.root}/public/templates/prescriptions/template.jpg".freeze
+
+    DEFAULT_SERIAL = '00000'.freeze
 
     DOCUMENT_OPTIONS = {
       page_size: 'A4',
       page_layout: :landscape,
       background: BACKGROUND,
-      background_scale: 0.12
+      background_scale: 0.12,
+      bottom_margin: 20
     }.freeze
 
-    def self.call(consultation)
-      new(consultation).call
+    DEFAULT_SIGNATURE_OPTIONS = {
+      color: '1A4384',
+      align: :center,
+      style: :bold
+    }.freeze
+
+    def self.call(consultation, empty)
+      new(consultation, empty).call
     end
 
-    def initialize(consultation)
+    def initialize(consultation, empty)
       @consultation = consultation
+      @empty        = empty
     end
 
     # rubocop:disable AbcSize
     # rubocop:disable MethodLength
     def call
       pdf = Prawn::Document.new(**DOCUMENT_OPTIONS)
-      Printers::Section.call(pdf, [244, 463], 136, location_and_date, align: :right)
-      Printers::Section.call(pdf, [-26, 442], 269, patient_name)
-      Printers::Section.call(pdf, [244, 443], 136, patient_age)
-      Printers::Section.call(pdf, [-26, 426], 269, diagnoses, leading: 2)
+      # Inscriptions
+      Printers::Section.call(pdf, [-5, 474], 136, serial)
+      Printers::Section.call(pdf, [244, 475], 136, location_and_date, align: :right)
+      Printers::Section.call(pdf, [-26, 459], 405, patient_name)
+      Printers::Section.call(pdf, [244, 442], 136, patient_age)
+      Printers::Section.call(pdf, [-26, 442], 269, diagnoses, leading: 2)
       Printers::Section.call(pdf, [244, 426], 136, allergies, color: 'FF0000')
-      Printers::Section.call(pdf, [-26, 370], 405, inscriptions)
+      Printers::Section.call(pdf, [-26, 385], 405, inscriptions) unless empty?
 
-      Printers::Section.call(pdf, [664, 464], 136, location_and_date, align: :right)
-      Printers::Section.call(pdf, [395, 442], 269, patient_name)
-      Printers::Section.call(pdf, [395, 370], 405, subscriptions)
-      Printers::Section.call(pdf, [393, 135], 405, warning_signs)
-      Printers::Section.call(pdf, [393, 81],  405, recommendations)
-      Printers::Section.call(pdf, [470, 14],  130, next_appointment)
+      # Signature
+      Printers::Section.call(pdf, [80, 34], 200, doctor_name, **DEFAULT_SIGNATURE_OPTIONS)
+      Printers::Section.call(pdf, [80, 24], 200, doctor_registration, **DEFAULT_SIGNATURE_OPTIONS)
+      Printers::Section.call(pdf, [80, 14], 200, doctor_phone, **DEFAULT_SIGNATURE_OPTIONS)
+
+      # Prescriptions
+      Printers::Section.call(pdf, [415, 474], 136, serial)
+      Printers::Section.call(pdf, [664, 475], 136, location_and_date, align: :right)
+      Printers::Section.call(pdf, [395, 459], 405, patient_name)
+      Printers::Section.call(pdf, [395, 385], 405, subscriptions) unless empty?
+      Printers::Section.call(pdf, [393, 150], 405, warning_signs)
+      Printers::Section.call(pdf, [393, 96],  405, recommendations)
+      Printers::Section.call(pdf, [470, 29],  130, next_appointment)
+
+      # Signature
+      Printers::Section.call(pdf, [600, 34], 200, doctor_name, **DEFAULT_SIGNATURE_OPTIONS)
+      Printers::Section.call(pdf, [600, 24], 200, doctor_registration, **DEFAULT_SIGNATURE_OPTIONS)
+      Printers::Section.call(pdf, [600, 14], 200, doctor_phone, **DEFAULT_SIGNATURE_OPTIONS)
+
+      # pdf.stroke_axis
       pdf.render_file('/tmp/prescription.pdf')
     end
 
@@ -41,13 +68,24 @@ module Prescriptions
 
     attr_reader :consultation
 
-    def document_options
-      {
-        page_size: 'A4',
-        page_layout: :landscape,
-        background: BACKGROUND,
-        background_scale: 0.12
-      }
+    def empty?
+      @empty
+    end
+
+    def doctor_name
+      consultation.doctor.pretty_name
+    end
+
+    def doctor_registration
+      "Reg. ACESS #{consultation.doctor.registration_acess}"
+    end
+
+    def doctor_phone
+      consultation.doctor.phone_number.to_s
+    end
+
+    def serial
+      consultation.serial || DEFAULT_SERIAL
     end
 
     # Move to a presenter
@@ -60,7 +98,7 @@ module Prescriptions
     end
 
     def patient_name
-      "#{Prawn::Text::NBSP * 22}#{patient.full_name}"
+      "#{Prawn::Text::NBSP * 22}#{patient.full_name} (#{patient.identity_card_number})"
     end
 
     def patient_age
