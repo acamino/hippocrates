@@ -30,4 +30,9 @@ class ApplicationController < ActionController::Base
   def delete_referer_location
     session.delete(:referer_location) if session[:referer_location]
   end
+
+  def authorize_admin
+    return if current_user.admin_or_super_admin?
+    redirect_to root_path, notice: 'Reservado para administradores'
+  end
 end
