@@ -1,5 +1,5 @@
 module Prescriptions
-  # rubocop:disable ClassLength
+  # rubocop:disable Metrics/ClassLength
   class Printer
     BACKGROUND = "#{Rails.root}/public/templates/prescriptions/template.jpg".freeze
 
@@ -28,8 +28,8 @@ module Prescriptions
       @empty        = empty
     end
 
-    # rubocop:disable AbcSize
-    # rubocop:disable MethodLength
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
     def call
       pdf = Prawn::Document.new(**DOCUMENT_OPTIONS)
       # Inscriptions

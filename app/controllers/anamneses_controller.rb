@@ -1,14 +1,4 @@
 class AnamnesesController < ApplicationController
-  ATTRIBUTE_WHITELIST = [
-    :medical_history,
-    :surgical_history,
-    :allergies,
-    :observations,
-    :habits,
-    :family_history,
-    :hearing_aids
-  ].freeze
-
   before_action :fetch_patient, only: [:new, :edit]
 
   def new
@@ -41,7 +31,7 @@ class AnamnesesController < ApplicationController
   private
 
   def anamnesis_params
-    params.require(:anamnesis).permit(*ATTRIBUTE_WHITELIST).merge(
+    params.require(:anamnesis).permit(*Anamnesis::ATTRIBUTE_WHITELIST).merge(
       patient_id: params[:patient_id]
     )
   end

@@ -1,6 +1,6 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :disease do
     sequence(:code) { |n| "code-#{n}" }
-    name 'name'
+    name { 'name' }
   end
 end

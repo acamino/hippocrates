@@ -1,4 +1,9 @@
 class Medicine < ApplicationRecord
+  ATTRIBUTE_WHITELIST = [
+    :name,
+    :instructions
+  ].freeze
+
   validates :name,
             :instructions, presence: true
 

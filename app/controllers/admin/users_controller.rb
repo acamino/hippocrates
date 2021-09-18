@@ -33,7 +33,7 @@ module Admin
     private
 
     def authorize_admin
-      return if current_user.admin?
+      return if current_user.admin_or_super_admin?
 
       redirect_to root_path, notice: 'Reservado para administradores'
     end

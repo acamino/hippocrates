@@ -1,4 +1,9 @@
 class Disease < ApplicationRecord
+  ATTRIBUTE_WHITELIST = [
+    :code,
+    :name
+  ].freeze
+
   validates_presence_of :code, :name
   validates_uniqueness_of :code
 

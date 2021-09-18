@@ -1,4 +1,14 @@
 class Anamnesis < ApplicationRecord
+  ATTRIBUTE_WHITELIST = [
+    :medical_history,
+    :surgical_history,
+    :allergies,
+    :observations,
+    :habits,
+    :family_history,
+    :hearing_aids
+  ].freeze
+
   belongs_to :patient
 
   before_save :normalize

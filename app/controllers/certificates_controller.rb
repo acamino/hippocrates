@@ -34,7 +34,6 @@ class CertificatesController < ApplicationController
     params[:certificate_type]
   end
 
-  # rubocop:disable Metrics/AbcSize
   def certificate_options
     {
       start_time: params[:start_time],
@@ -44,6 +43,6 @@ class CertificatesController < ApplicationController
       surgery_tentative_date: params[:surgery_tentative_date],
       surgery_cost: params[:surgery_cost],
       consultations: params[:consultations]
-    }.reject { |_, v| v.nil? }
+    }.compact
   end
 end

@@ -5,7 +5,7 @@ module ApplicationHelper
     yield presenter
   end
 
-  def error_messages_for(resource, display_header = true)
+  def error_messages_for(resource, display_header: true)
     return nil unless resource.errors.any?
 
     error_messages = resource.errors.full_messages.map do |message|
