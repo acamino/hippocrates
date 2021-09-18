@@ -1,3 +1,5 @@
+require 'csv'
+
 class Patient < ApplicationRecord
   ATTRIBUTE_WHITELIST = [
     :medical_history,
