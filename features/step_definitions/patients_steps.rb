@@ -49,7 +49,7 @@ Then(/^I see a success message for update$/) do
 end
 
 When(/^I search for Ada$/) do
-  fill_in :first_name, with: 'Ada'
+  fill_in :query, with: 'Ada'
   click_on 'Buscar'
 end
 

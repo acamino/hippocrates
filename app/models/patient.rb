@@ -1,6 +1,8 @@
 require 'csv'
 
 class Patient < ApplicationRecord
+  include PgSearch::Model
+
   ATTRIBUTE_WHITELIST = [
     :medical_history,
     :identity_card_number,
@@ -54,6 +56,11 @@ class Patient < ApplicationRecord
   scope :order_by_name, -> { empty_names_to_end.order(:last_name, :first_name) }
   scope :empty_names_to_end, -> { order(Arel.sql("first_name = '', last_name = ''")) }
 
+  pg_search_scope :lookup,
+    against:  [:first_name, :last_name],
+    using:    { tsearch: { prefix: true } },
+    ignoring: :accents
+
   def self.to_csv
     CSV.generate(headers: true) do |csv|
       csv << (CSV_ATTRIBUTES + ['hearing_aids'])
@@ -64,15 +71,8 @@ class Patient < ApplicationRecord
     end
   end
 
-  def self.search(last_name, first_name)
-    if last_name.present? || first_name.present?
-      where(
-        'last_name ILIKE ? AND first_name ILIKE ?',
-        "%#{last_name.upcase.strip}%", "%#{first_name.upcase.strip}%"
-      ).order_by_name
-    else
-      order_by_name
-    end
+  def self.search(query)
+    (query.present? ? lookup(query) : all).order_by_name
   end
 
   def full_name

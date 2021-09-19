@@ -12,7 +12,7 @@ describe Medicine do
 
   describe 'normalize attributes' do
     it 'upcases the attributes' do
-      medicine = create(:medicine, name: 'penicillin')
+      medicine = create(:medicine, name: ' penicillin  ')
       expect(medicine.reload.name).to eq('PENICILLIN')
     end
   end

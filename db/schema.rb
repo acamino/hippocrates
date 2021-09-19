@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_15_111954) do
+ActiveRecord::Schema.define(version: 2021_09_18_221257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "plpgsql"
+  enable_extension "unaccent"
 
   create_table "anamneses", id: :serial, force: :cascade do |t|
     t.integer "patient_id"
