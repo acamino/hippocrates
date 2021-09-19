@@ -1,10 +1,4 @@
-.row
-  .col-md-12
-    = form_tag(patients_path, method: 'GET', class: 'navbar-form navbar-left') do
-      .form-group
-        = text_field_tag :last_name, params[:last_name], placeholder: 'Apellidos', class: 'form-control'
-        = text_field_tag :first_name, params[:first_name], placeholder: 'Nombres', class: 'form-control'
-      %button.btn.btn-default{ type: "submit" } Buscar
+= render partial: 'search', locals: { path: patients_path, placeholder: 'Nombres y Apellidos' }
 
 .row
   .col-md-12.text-right

@@ -17,7 +17,13 @@ Style/SymbolArray:
 Style/HashAsLastArrayItem:
   Enabled: false
 
+Layout/ArgumentAlignment:
+  Enabled: false
+
 Layout/EmptyLineAfterGuardClause:
+  Enabled: false
+
+Layout/HashAlignment:
   Enabled: false
 
 Layout/LineLength:

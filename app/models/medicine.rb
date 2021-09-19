@@ -1,4 +1,6 @@
 class Medicine < ApplicationRecord
+  include PgSearch::Model
+
   ATTRIBUTE_WHITELIST = [
     :name,
     :instructions
@@ -11,13 +13,13 @@ class Medicine < ApplicationRecord
 
   before_save :normalize
 
+  pg_search_scope :lookup,
+    against:  :name,
+    using:    { tsearch: { prefix: true } },
+    ignoring: :accents
+
   def self.search(query)
-    if query
-      where('lower(name) LIKE ?', "%#{query.downcase}%")
-        .order(:name)
-    else
-      all.order(:name)
-    end
+    (query.present? ? lookup(query) : all).order(:name)
   end
 
   private

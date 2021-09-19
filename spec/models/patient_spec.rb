@@ -43,35 +43,35 @@ describe Patient do
 
     context 'when last name and first name are empty' do
       it 'returns all patients' do
-        patients = described_class.search('', '')
+        patients = described_class.search('')
         expect(patients).to eq([john_carter, john_domino, mark_lopez, unnamed])
       end
     end
 
     context "when last name matches with some patient's last name" do
       it 'returns patients found' do
-        patients = described_class.search('lÓpez', '')
+        patients = described_class.search('lÓpez')
         expect(patients).to eq([mark_lopez])
       end
     end
 
     context "when first name matches with some patient's first name" do
       it 'returns patients found' do
-        patients = described_class.search('', 'john')
-        expect(patients).to eq([john_carter, john_domino])
+        patients = described_class.search('john')
+        expect(patients).to eq([john_domino, john_carter])
       end
     end
 
     context "when first name and last name matches with some patient's name" do
       it 'returns patients found' do
-        patients = described_class.search('carter', 'john')
+        patients = described_class.search('john carter')
         expect(patients).to eq([john_carter])
       end
     end
 
     context 'when first name and last name does not match with any patient' do
       it 'returns an empty array' do
-        patients = described_class.search('lopez', 'john')
+        patients = described_class.search('john lopez')
         expect(patients).to eq([])
       end
     end

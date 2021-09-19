@@ -230,6 +230,9 @@ GEM
       ast (~> 2.4.1)
     pdf-core (0.9.0)
     pg (1.2.3)
+    pg_search (2.3.5)
+      activerecord (>= 5.2)
+      activesupport (>= 5.2)
     prawn (2.4.0)
       pdf-core (~> 0.9.0)
       ttfunk (~> 1.7)
@@ -426,6 +429,7 @@ DEPENDENCIES
   listen
   mimemagic!
   pg
+  pg_search
   prawn
   puma
   rails (~> 5.2.6)

@@ -16,6 +16,7 @@ gem 'dotenv-rails'
 gem 'haml'
 gem 'kaminari'
 gem 'mimemagic', git: 'https://github.com/mimemagicrb/mimemagic.git', ref: '01f92d8' # 0.3.5
+gem 'pg_search'
 gem 'prawn'
 gem 'redis-rails'
 gem 'sablon'

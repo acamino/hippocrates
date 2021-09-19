@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include PgSearch::Model
+
   ATTRIBUTE_WHITELIST = [
     :first_name,
     :last_name,
@@ -21,13 +23,13 @@ class User < ApplicationRecord
 
   validates_uniqueness_of :registration_acess
 
+  pg_search_scope :lookup,
+    against:  :pretty_name,
+    using:    { tsearch: { prefix: true } },
+    ignoring: :accents
+
   def self.search(query)
-    if query
-      where('lower(pretty_name) LIKE ?', "%#{query.downcase}%")
-        .order(:pretty_name)
-    else
-      all.order(:pretty_name)
-    end
+    (query.present? ? lookup(query) : all).order(:pretty_name)
   end
 
   def next_serial!
