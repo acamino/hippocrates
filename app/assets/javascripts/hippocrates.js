@@ -31,7 +31,6 @@ $(document).on('turbolinks:load', function() {
     });
 
     $("#consultation_created_at").datepicker({
-        // startDate: date,
         todayHighlight: true,
         format: "yyyy-mm-dd",
         language: "es",
