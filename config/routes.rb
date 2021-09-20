@@ -25,9 +25,9 @@ Rails.application.routes.draw do
 
       resources :documents, only: [:index, :new, :create, :edit, :update, :destroy]
     end
-    get :special, on: :collection
-    get :export,  on: :collection
-    delete :remove_special, on: :member
+    get :export, on: :collection
+    get :special, to: 'special_patients#index', on: :collection
+    delete :remove_special, to: 'special_patients#remove', on: :member
   end
   resources :settings, only: [:index]
 
