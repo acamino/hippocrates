@@ -1,24 +1,14 @@
 class PatientsController < ApplicationController
   before_action :authorize_admin, only: [:export]
 
-  def special
-    @consultations = Consultation.most_recent_for_special_patients
-  end
-
   def export
     @csv = Patient.to_csv
     send_data(@csv, download_options)
   end
 
-  def remove_special
-    patient = Patient.find(params[:id])
-    patient.update_attributes(special: false)
-    redirect_to special_patients_path, notice: t('patients.special.remove.success')
-  end
-
   def index
     delete_referer_location
-    @patients = Patient.search(params[:query]).page(page)
+    @patients = Patient.includes(:consultations, :anamnesis).search(params[:query]).page(page)
   end
 
   def new

@@ -21,40 +21,6 @@ describe PatientsController do
     it { is_expected.to respond_with :ok }
   end
 
-  describe '#special' do
-    let!(:bob_consultation) do
-      create(:patient, :special, :with_consultations).most_recent_consultation
-    end
-    let!(:alice_consultation) do
-      create(:patient, :with_consultations).most_recent_consultation
-    end
-
-    before { get :special }
-
-    it 'assings sorted by most recent special patients to @patients' do
-      expect(assigns(:consultations)).to eq([bob_consultation])
-    end
-
-    it { is_expected.to render_template :special }
-    it { is_expected.to respond_with :ok }
-  end
-
-  describe '#remove_special' do
-    let!(:patient) { create(:patient, :special) }
-
-    before do |example|
-      delete :remove_special, params: { id: patient.id } unless example.metadata[:skip_on_before]
-    end
-
-    it 'removes patient from special', :skip_on_before do
-      expect do
-        delete :remove_special, params: { id: patient.id }
-      end.to change { patient.reload.special }.from(true).to(false)
-    end
-
-    it { is_expected.to redirect_to special_patients_path }
-  end
-
   describe '#new' do
     before { get :new }
 
