@@ -3,47 +3,48 @@
     %tr
       %th{ colspan: 2 } Pacientes Especiales
   %tbody
-  - @patients.each do |_patient|
-    - present_for(_patient) do |patient|
-      %tr
-        %td.col-md-1.hidden-xs
-          %big
-            = patient.medical_history
-        %td
-          .row
-            .col-xs-8
-              %strong
-                %big
-                  = patient.name
-                %span.text-muted
-                  #{patient.age.years} años
-                  = gender_tag(patient)
-            .col-xs-4
-              .pull-right
-                - if patient.phone_number.present?
-                  %big
-                    %a(href = "tel:#{patient.phone_number}")
-                      %i.fa.fa-phone.hidden-xs
-                      %strong= patient.phone_number
-          - if patient.most_recent_consultation.next_appointment?
-            .row
-              .col-md-2.text-right.hidden-xs
-                %span.semi-strong.text-muted Próxima cita
-              .col-md-2.visible-xs
-                %span.semi-strong.text-muted Próxima cita
-              .col-md-8
-                = patient.most_recent_consultation.next_appointment_date
-          - if patient.most_recent_consultation.miscellaneous?
-            .row
-              .col-md-2.text-right.hidden-xs
-                %span.semi-strong.text-muted Misceláneos
-              .col-md-2.visible-xs
-                %span.semi-strong.text-muted Misceláneos
-              .col-md-8
-                = patient.most_recent_consultation.miscellaneous
-        %td
-          = link_to remove_special_patient_path(_patient),
-              data: { confirm: t("patients.special.remove.confirmation") },
-              method: :delete do
+  - @consultations.each do |_consultation|
+    - present_for(_consultation) do |consultation|
+      - present_for(consultation.patient) do |patient|
+        %tr
+          %td.col-md-1.hidden-xs
             %big
-              %i.fa.fa-times
+              = patient.medical_history
+          %td
+            .row
+              .col-xs-8
+                %strong
+                  %big
+                    = patient.name
+                  %span.text-muted
+                    #{patient.age.years} años
+                    = gender_tag(patient)
+              .col-xs-4
+                .pull-right
+                  - if patient.phone_number.present?
+                    %big
+                      %a(href = "tel:#{patient.phone_number}")
+                        %i.fa.fa-phone.hidden-xs
+                        %strong= patient.phone_number
+            - if consultation.next_appointment?
+              .row
+                .col-md-2.text-right.hidden-xs
+                  %span.semi-strong.text-muted Próxima cita
+                .col-md-2.visible-xs
+                  %span.semi-strong.text-muted Próxima cita
+                .col-md-8
+                  = consultation.next_appointment_date
+            - if consultation.miscellaneous?
+              .row
+                .col-md-2.text-right.hidden-xs
+                  %span.semi-strong.text-muted Misceláneos
+                .col-md-2.visible-xs
+                  %span.semi-strong.text-muted Misceláneos
+                .col-md-8
+                  = consultation.miscellaneous
+          %td
+            = link_to remove_special_patient_path(_consultation.patient),
+                data: { confirm: t("patients.special.remove.confirmation") },
+                method: :delete do
+              %big
+                %i.fa.fa-times

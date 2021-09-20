@@ -140,16 +140,6 @@ describe PatientPresenter do
     end
   end
 
-  describe '#most_recent_consultation' do
-    it 'returns the most recent consultation' do
-      patient = double(
-        :patient, consultations: double(most_recent: double)
-      )
-      presenter = described_class.new(patient)
-      expect(presenter.most_recent_consultation).to be_a(ConsultationPresenter)
-    end
-  end
-
   describe '#anamnesis?' do
     context 'when anamnesis is present' do
       it 'returns true' do

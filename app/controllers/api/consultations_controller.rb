@@ -1,7 +1,7 @@
 module API
   class ConsultationsController < BaseController
     def last
-      consultation = patient.consultations.most_recent
+      consultation = patient.most_recent_consultation
       render json: consultation
     end
 

@@ -19,12 +19,40 @@ describe Consultation do
     end
   end
 
-  describe '.most_recent' do
-    let!(:old_consultation)    { create :consultation, created_at: 1.hour.ago }
-    let!(:recent_consultation) { create :consultation, created_at: Time.now }
+  describe '.most_recent_by_patient' do
+    let(:patient)              { (create :patient) }
+    let!(:old_consultation)    { (create :consultation, patient: patient, created_at: 1.hour.ago) }
+    let!(:recent_consultation) do
+      (create :consultation, patient: patient, created_at: 1.minute.ago)
+    end
 
     it 'returns the most recent consultation' do
-      expect(described_class.most_recent).to eq(recent_consultation)
+      most_recent_consultations = described_class.most_recent_by_patient
+      expect(most_recent_consultations.count).to eq(1)
+      expect(most_recent_consultations.first).to eq(recent_consultation)
+    end
+  end
+
+  describe '.most_recent_for_special_patients' do
+    let!(:bob)                     { create(:patient, special: true) }
+    let!(:tom)                     { create(:patient, special: true) }
+    let!(:bob_old_consultation)    { create(:consultation, patient: bob, created_at: 1.day.ago) }
+    let!(:bob_recent_consultation) { create(:consultation, patient: bob, created_at: 1.hour.ago) }
+    let!(:tom_old_consultation)    { create(:consultation, patient: tom, created_at: 1.month.ago) }
+    let!(:tom_recent_consultation) { create(:consultation, patient: tom, created_at: 1.day.ago) }
+
+    before do
+      regular = create(:patient, first_name: 'Regular')
+      create(:consultation, patient: regular, created_at: 1.minute.ago)
+    end
+
+    it 'returns the most recent consultations for special patients' do
+      expect(described_class.most_recent_for_special_patients).to eq(
+        [
+          bob_recent_consultation,
+          tom_recent_consultation
+        ]
+      )
     end
   end
 

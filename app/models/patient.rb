@@ -34,7 +34,12 @@ class Patient < ApplicationRecord
   enum civil_status: [:single, :married, :civil_union, :divorced, :widowed]
   enum source: [:television, :radio, :newspaper, :patient_reference]
 
-  has_one  :anamnesis
+  has_one :anamnesis
+
+  has_one :most_recent_consultation, lambda {
+    merge(Consultation.most_recent_by_patient)
+  }, class_name: 'Consultation', inverse_of: :patient
+
   has_many :consultations
 
   validates :medical_history,
