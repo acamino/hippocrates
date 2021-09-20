@@ -115,7 +115,7 @@ describe ConsultationsController do
 
     it 'redirects to edit consultations' do
       expect(response).to redirect_to edit_patient_consultation_path(
-        patient.id, patient.consultations.most_recent.id
+        patient.id, patient.most_recent_consultation.id
       )
     end
 

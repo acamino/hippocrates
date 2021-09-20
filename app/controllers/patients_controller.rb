@@ -2,9 +2,7 @@ class PatientsController < ApplicationController
   before_action :authorize_admin, only: [:export]
 
   def special
-    @patients = Patient.special.sort_by do |p|
-      p.consultations.most_recent.created_at
-    end.reverse
+    @consultations = Consultation.most_recent_for_special_patients
   end
 
   def export

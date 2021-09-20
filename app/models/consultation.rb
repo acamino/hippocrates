@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/ClassLength
 class Consultation < ApplicationRecord
   ATTRIBUTE_WHITELIST = [
     :reason,
@@ -59,9 +60,29 @@ class Consultation < ApplicationRecord
 
   attr_accessor :head
 
-  def self.most_recent
-    first
-  end
+  scope :most_recent_by_patient, lambda {
+    from(
+      <<~SQL
+        (
+          SELECT consultations.*
+          FROM consultations JOIN (
+             SELECT patient_id, max(created_at) AS created_at
+             FROM consultations
+             GROUP BY patient_id
+          ) latest_by_patient
+          ON consultations.created_at = latest_by_patient.created_at
+          AND consultations.patient_id = latest_by_patient.patient_id
+        ) consultations
+      SQL
+    )
+  }
+
+  scope :most_recent_for_special_patients, lambda {
+    most_recent_by_patient
+      .joins(:patient)
+      .where(patients: { special: true })
+      .order('consultations.created_at')
+  }
 
   %w[right_ear left_ear left_nostril right_nostril nasopharynx
      nose_others oral_cavity oropharynx hypopharynx larynx neck
