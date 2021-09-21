@@ -29,7 +29,11 @@ class User < ApplicationRecord
     ignoring: :accents
 
   def self.search(query)
-    (query.present? ? lookup(query) : all).order(:pretty_name)
+    (query.present? ? lookup(query) : all).order(
+      super_admin: :desc,
+      active: :desc,
+      pretty_name: :asc
+    )
   end
 
   def next_serial!

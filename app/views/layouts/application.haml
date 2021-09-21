@@ -32,8 +32,14 @@
               = nav_to 'Medicinas', medicines_path
               = nav_to 'Enfermedades', diseases_path
               - if current_user.admin_or_super_admin?
-                = nav_to 'Usuarios', admin_users_path
-                = nav_to 'Preferencias', settings_path
+                %li.dropdown
+                  %a.dropdown-toggle{ href: "#", role: "button", data: { toggle: "dropdown" }, aria: { expanded: "false" } }
+                    %i.fa.fa-user-shield
+                    Admin
+                    %span.caret
+                  %ul.dropdown-menu{ role: "menu" }
+                    = nav_to 'Usuarios', admin_users_path
+                    = nav_to 'Preferencias', settings_path
               = yield :nav_option
 
           %ul.nav.navbar-nav.navbar-right
