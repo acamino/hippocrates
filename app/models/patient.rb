@@ -62,7 +62,7 @@ class Patient < ApplicationRecord
   scope :empty_names_to_end, -> { order(Arel.sql("first_name = '', last_name = ''")) }
 
   pg_search_scope :lookup,
-    against:  [:first_name, :last_name],
+    against:  [:first_name, :last_name, :identity_card_number],
     using:    { tsearch: { prefix: true } },
     ignoring: :accents
 
