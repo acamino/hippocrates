@@ -15,7 +15,7 @@ Then(/^I see her consultations$/) do
 end
 
 Given(/^Ada is a patient$/) do
-  log_in(create(:user))
+  log_in(create(:user, doctor: true, active: true, editor: true))
   @ada = create(:patient_with_anamnesis, first_name: 'Ada', last_name: 'Lovelace')
 
   create(:setting, :maximum_diagnoses)

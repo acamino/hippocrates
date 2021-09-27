@@ -50,8 +50,13 @@ describe ConsultationsController do
 
   describe '#create' do
     let(:patient) { create(:patient) }
+    let(:doctor)  { create(:user) }
     let(:attributes_for_consultation) do
-      attributes_for(:consultation).merge(patient: { special: 'true' })
+      attributes_for(:consultation)
+        .merge(
+          patient: { special: 'true' },
+          user_id: doctor.id
+        )
     end
 
     before do |example|

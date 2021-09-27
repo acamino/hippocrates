@@ -5,139 +5,131 @@
 %input{ type: "hidden", value: @consultation.id, id: "consultation_id" }
 
 = form_for [@patient, @consultation], html: { class: "form" } do |f|
+  - if current_user.editor?
+    = panel(:caution, 'Médico') do
+      .row-fluid
+        .form-group.col-md-4
+          .input-group
+            = f.select :user_id, options_for_select(ConsultationPresenter.new(@consultation).doctors, @consultation.doctor&.id), {}, class: "form-control input-md"
+
   = render partial: 'patient', locals: { form: f }
 
-  .panel.panel-info
-    .panel-heading
-      %b Motivo de Consulta
-    .panel-body
-      .row-fluid
-        .form-group.col-md-12
-          = f.text_area :reason, class: "form-control input-sm"
+  = panel(:info, 'Motivo de Consulta') do
+    .row-fluid
+      .form-group.col-md-12
+        = f.text_area :reason, class: "form-control input-sm"
 
   = render 'anamnesis'
 
-  .panel.panel-info
-    .panel-heading
-      %b Enfermedad o Problema Actual
-    .panel-body
-      .row-fluid
-        .form-group.col-md-12
-          = f.text_area :ongoing_issue, class: "form-control input-sm"
+  = panel(:info, 'Enfermedad o Problema Actual') do
+    .row-fluid
+      .form-group.col-md-12
+        = f.text_area :ongoing_issue, class: "form-control input-sm"
 
-  .panel.panel-warning
-    .panel-heading
-      %b Revisión de Órganos y Sistemas
-    .panel-body
-      .row-fluid
-        .form-group.col-md-12
-          = f.text_field :organs_examination, class: "form-control input-sm"
+  = panel(:warning, 'Revisión de Órganos y Sistemas') do
+    .row-fluid
+      .form-group.col-md-12
+        = f.text_field :organs_examination, class: "form-control input-sm"
 
-  .panel.panel-danger
-    .panel-heading
-      %b Signos Vitales
-    .panel-body
-      .row-fluid
-        .form-group.col-md-4
-          .input-group
-            %span.input-group-addon.input-sm Temperatura
-            = f.text_field :temperature, class: "form-control input-sm"
-            %span.input-group-addon.input-sm °C
-        .form-group.col-md-4
-          .input-group
-            %span.input-group-addon.input-sm Pulso
-            = f.text_field :heart_rate, class: "form-control input-sm"
-            %span.input-group-addon.input-sm lpm
-        .form-group.col-md-4
-          .input-group
-            %span.input-group-addon.input-sm T. Arterial
-            = f.text_field :blood_pressure, class: "form-control input-sm"
-            %span.input-group-addon.input-sm mmHg
-      .row-fluid
-        .form-group.col-md-4
-          .input-group
-            %span.input-group-addon.input-sm Frec. Respiratoria
-            = f.text_field :respiratory_rate, class: "form-control input-sm"
-            %span.input-group-addon.input-sm rpm
-        .form-group.col-md-4
-          .input-group
-            %span.input-group-addon.input-sm Peso:
-            = f.text_field :weight, class: "form-control input-sm"
-            %span.input-group-addon.input-sm Kg
-        .form-group.col-md-4
-          .input-group
-            %span.input-group-addon.input-sm Talla
-            = f.text_field :height, class: "form-control input-sm"
-            %span.input-group-addon.input-sm cm
-      .row-fluid
-        .form-group.col-md-4
-          .input-group
-            %span.input-group-addon.input-sm Sat. Oxígeno
-            = f.text_field :oxygen_saturation, class: "form-control input-sm"
-            %span.input-group-addon.input-sm %
+  = panel(:danger, 'Signos Vitales') do
+    .row-fluid
+      .form-group.col-md-4
+        .input-group
+          %span.input-group-addon.input-sm Temperatura
+          = f.text_field :temperature, class: "form-control input-sm"
+          %span.input-group-addon.input-sm °C
+      .form-group.col-md-4
+        .input-group
+          %span.input-group-addon.input-sm Pulso
+          = f.text_field :heart_rate, class: "form-control input-sm"
+          %span.input-group-addon.input-sm lpm
+      .form-group.col-md-4
+        .input-group
+          %span.input-group-addon.input-sm T. Arterial
+          = f.text_field :blood_pressure, class: "form-control input-sm"
+          %span.input-group-addon.input-sm mmHg
+    .row-fluid
+      .form-group.col-md-4
+        .input-group
+          %span.input-group-addon.input-sm Frec. Respiratoria
+          = f.text_field :respiratory_rate, class: "form-control input-sm"
+          %span.input-group-addon.input-sm rpm
+      .form-group.col-md-4
+        .input-group
+          %span.input-group-addon.input-sm Peso:
+          = f.text_field :weight, class: "form-control input-sm"
+          %span.input-group-addon.input-sm Kg
+      .form-group.col-md-4
+        .input-group
+          %span.input-group-addon.input-sm Talla
+          = f.text_field :height, class: "form-control input-sm"
+          %span.input-group-addon.input-sm cm
+    .row-fluid
+      .form-group.col-md-4
+        .input-group
+          %span.input-group-addon.input-sm Sat. Oxígeno
+          = f.text_field :oxygen_saturation, class: "form-control input-sm"
+          %span.input-group-addon.input-sm %
 
-  .panel.panel-danger
-    .panel-heading
-      %b Examen Físico
-    .panel-body
-      .row-fluid
-        .form-group.col-md-12
-          = f.text_field :physical_examination, class: "form-control input-sm"
-      .row-fluid
-        .form-group.col-md-6
-          .input-group
-            %span.input-group-addon.input-sm Oído Derecho
-            = f.text_field :right_ear, class: "form-control input-sm", placeholder: 'NORMAL'
-        .form-group.col-md-6
-          .input-group
-            %span.input-group-addon.input-sm Oído Izquierdo
-            = f.text_field :left_ear, class: "form-control input-sm", placeholder: 'NORMAL'
-      .row-fluid
-        .form-group.col-md-6
-          .input-group
-            %span.input-group-addon.input-sm FND
-            = f.text_field :right_nostril, class: "form-control input-sm", placeholder: 'NORMAL'
-        .form-group.col-md-6
-          .input-group
-            %span.input-group-addon.input-sm FNI
-            = f.text_field :left_nostril, class: "form-control input-sm", placeholder: 'NORMAL'
-      .row-fluid
-        .form-group.col-md-6
-          .input-group
-            %span.input-group-addon.input-sm Nasofaringe
-            = f.text_field :nasopharynx, class: "form-control input-sm", placeholder: 'NORMAL'
-        .form-group.col-md-6
-          .input-group
-            %span.input-group-addon.input-sm Otros
-            = f.text_field :nose_others, class: "form-control input-sm", placeholder: 'NORMAL'
-      .row-fluid
-        .form-group.col-md-12
-          .input-group
-            %span.input-group-addon.input-sm Cavidad Bucal
-            = f.text_field :oral_cavity, class: "form-control input-sm", placeholder: 'NORMAL'
-      .row-fluid
-        .form-group.col-md-6
-          .input-group
-            %span.input-group-addon.input-sm Orofaringe
-            = f.text_field :oropharynx, class: "form-control input-sm", placeholder: 'NORMAL'
-        .form-group.col-md-6
-          .input-group
-            %span.input-group-addon.input-sm Hipofaringe
-            = f.text_field :hypopharynx, class: "form-control input-sm", placeholder: 'NORMAL'
-      .row-fluid
-        .form-group.col-md-6
-          .input-group
-            %span.input-group-addon.input-sm Laringe
-            = f.text_field :larynx, class: "form-control input-sm", placeholder: 'NORMAL'
-        .form-group.col-md-6
-          .input-group
-            %span.input-group-addon.input-sm Cuello
-            = f.text_field :neck, class: "form-control input-sm", placeholder: 'NORMAL'
-      .row-fluid
-        .form-group.col-md-12
-          .input-group
-            %span.input-group-addon.input-sm Otros
-            = f.text_field :others, class: "form-control input-sm", placeholder: 'NORMAL'
+  = panel(:danger, 'Examen Físico') do
+    .row-fluid
+      .form-group.col-md-12
+        = f.text_field :physical_examination, class: "form-control input-sm"
+    .row-fluid
+      .form-group.col-md-6
+        .input-group
+          %span.input-group-addon.input-sm Oído Derecho
+          = f.text_field :right_ear, class: "form-control input-sm", placeholder: 'NORMAL'
+      .form-group.col-md-6
+        .input-group
+          %span.input-group-addon.input-sm Oído Izquierdo
+          = f.text_field :left_ear, class: "form-control input-sm", placeholder: 'NORMAL'
+    .row-fluid
+      .form-group.col-md-6
+        .input-group
+          %span.input-group-addon.input-sm FND
+          = f.text_field :right_nostril, class: "form-control input-sm", placeholder: 'NORMAL'
+      .form-group.col-md-6
+        .input-group
+          %span.input-group-addon.input-sm FNI
+          = f.text_field :left_nostril, class: "form-control input-sm", placeholder: 'NORMAL'
+    .row-fluid
+      .form-group.col-md-6
+        .input-group
+          %span.input-group-addon.input-sm Nasofaringe
+          = f.text_field :nasopharynx, class: "form-control input-sm", placeholder: 'NORMAL'
+      .form-group.col-md-6
+        .input-group
+          %span.input-group-addon.input-sm Otros
+          = f.text_field :nose_others, class: "form-control input-sm", placeholder: 'NORMAL'
+    .row-fluid
+      .form-group.col-md-12
+        .input-group
+          %span.input-group-addon.input-sm Cavidad Bucal
+          = f.text_field :oral_cavity, class: "form-control input-sm", placeholder: 'NORMAL'
+    .row-fluid
+      .form-group.col-md-6
+        .input-group
+          %span.input-group-addon.input-sm Orofaringe
+          = f.text_field :oropharynx, class: "form-control input-sm", placeholder: 'NORMAL'
+      .form-group.col-md-6
+        .input-group
+          %span.input-group-addon.input-sm Hipofaringe
+          = f.text_field :hypopharynx, class: "form-control input-sm", placeholder: 'NORMAL'
+    .row-fluid
+      .form-group.col-md-6
+        .input-group
+          %span.input-group-addon.input-sm Laringe
+          = f.text_field :larynx, class: "form-control input-sm", placeholder: 'NORMAL'
+      .form-group.col-md-6
+        .input-group
+          %span.input-group-addon.input-sm Cuello
+          = f.text_field :neck, class: "form-control input-sm", placeholder: 'NORMAL'
+    .row-fluid
+      .form-group.col-md-12
+        .input-group
+          %span.input-group-addon.input-sm Otros
+          = f.text_field :others, class: "form-control input-sm", placeholder: 'NORMAL'
 
   .panel.panel-main
     .panel-heading
@@ -148,106 +140,97 @@
         .form-group.col-md-12
           = f.text_area :hearing_aids, class: "form-control input-sm"
 
-  .panel.panel-caution
-    .panel-heading
-      %b Diagnóstico
-    .panel-body
-      .row-fluid
-        .form-group.col-md-12.diagnoses
-          %table.table.table-striped.table-hover.table-condensed
-            %thead
+  = panel(:caution, 'Diagnóstico') do
+    .row-fluid
+      .form-group.col-md-12.diagnoses
+        %table.table.table-striped.table-hover.table-condensed
+          %thead
+            %tr
+              %th.col-md-9
+              %th.col-md-1 CIE
+              %th.col-md-1.text-center Presuntivo
+              %th.col-md-1.text-center Definitivo
+              %th.col-md-1.text-center
+                %i.fa.fa-trash.clue
+          %tbody
+            = f.fields_for :diagnoses do |ff|
               %tr
-                %th.col-md-9
-                %th.col-md-1 CIE
-                %th.col-md-1.text-center Presuntivo
-                %th.col-md-1.text-center Definitivo
-                %th.col-md-1.text-center
-                  %i.fa.fa-trash.clue
-            %tbody
-              = f.fields_for :diagnoses do |ff|
-                %tr
-                  %td
-                    = ff.text_field :description, class: "form-control input-sm disease", autocomplete: "off"
-                  %td
-                    = ff.text_field :disease_code, class: "form-control input-sm code", readonly: "true"
-                  %td.text-center
-                    = ff.radio_button :type, "presuntive", class: "input-sm"
-                  %td.text-center
-                    = ff.radio_button :type, "definitive", class: "input-sm"
-                  %td.text-center
-                    = ff.check_box "_destroy", class: "input-sm destroy"
+                %td
+                  = ff.text_field :description, class: "form-control input-sm disease", autocomplete: "off"
+                %td
+                  = ff.text_field :disease_code, class: "form-control input-sm code", readonly: "true"
+                %td.text-center
+                  = ff.radio_button :type, "presuntive", class: "input-sm"
+                %td.text-center
+                  = ff.radio_button :type, "definitive", class: "input-sm"
+                %td.text-center
+                  = ff.check_box "_destroy", class: "input-sm destroy"
 
-  .panel.panel-caution
-    .panel-heading
-      %b Planes
-    .panel-body
-      .row-fluid
-        .form-group.col-md-12
-          .input-group
-            %span.input-group-addon.input-sm Diagnóstico
-            = f.text_area :diagnostic_plan, class: "form-control input-sm"
-      .row-fluid
-        .form-group.col-md-12
-          .input-group
-            %span.input-group-addon.input-sm Misceláneos
-            = f.text_area :miscellaneous, class: "form-control input-sm"
-      .row-fluid
-        .form-group.col-md-12
-          .input-group
-            %span.input-group-addon.input-sm Procedimiento médico
-            = f.text_field :treatment_plan, class: "form-control input-sm"
-      .row-fluid
-        .form-group.col-md-12.prescriptions
-          %table.table.table-striped.table-hover.table-condensed
-            %thead
+  = panel(:caution, 'Planes') do
+    .row-fluid
+      .form-group.col-md-12
+        .input-group
+          %span.input-group-addon.input-sm Diagnóstico
+          = f.text_area :diagnostic_plan, class: "form-control input-sm"
+    .row-fluid
+      .form-group.col-md-12
+        .input-group
+          %span.input-group-addon.input-sm Misceláneos
+          = f.text_area :miscellaneous, class: "form-control input-sm"
+    .row-fluid
+      .form-group.col-md-12
+        .input-group
+          %span.input-group-addon.input-sm Procedimiento médico
+          = f.text_field :treatment_plan, class: "form-control input-sm"
+    .row-fluid
+      .form-group.col-md-12.prescriptions
+        %table.table.table-striped.table-hover.table-condensed
+          %thead
+            %tr
+              %th.col-md-6 Receta
+              %th.col-md-6 Indicaciones
+              %th.col-md-1.text-center
+                %i.fa.fa-lock.clue
+              %th.col-md-1.text-center
+                %i.fa.fa-trash.clue
+          %tbody
+            = f.fields_for :prescriptions do |ff|
               %tr
-                %th.col-md-6 Receta
-                %th.col-md-6 Indicaciones
-                %th.col-md-1.text-center
-                  %i.fa.fa-lock.clue
-                %th.col-md-1.text-center
-                  %i.fa.fa-trash.clue
-            %tbody
-              = f.fields_for :prescriptions do |ff|
-                %tr
-                  %td
-                    = ff.text_field :inscription, class: "form-control input-sm inscription", autocomplete: "off"
-                  %td
-                    = ff.text_field :subscription, class: "form-control input-sm subscription"
-                  %td.text-center
-                    %input{ type: "checkbox", class: 'input-sm locked' }
-                  %td.text-center
-                    = ff.check_box "_destroy", class: "input-sm destroy"
-      .row-fluid
-        .form-group.col-md-12
-          .input-group
-            %span.input-group-addon.input-sm Señales de alarma
-            = f.text_field :warning_signs, class: "form-control input-sm"
+                %td
+                  = ff.text_field :inscription, class: "form-control input-sm inscription", autocomplete: "off"
+                %td
+                  = ff.text_field :subscription, class: "form-control input-sm subscription"
+                %td.text-center
+                  %input{ type: "checkbox", class: 'input-sm locked' }
+                %td.text-center
+                  = ff.check_box "_destroy", class: "input-sm destroy"
+    .row-fluid
+      .form-group.col-md-12
+        .input-group
+          %span.input-group-addon.input-sm Señales de alarma
+          = f.text_field :warning_signs, class: "form-control input-sm"
 
-      .row-fluid
-        .form-group.col-md-12
-          .input-group
-            %span.input-group-addon.input-sm Recomendaciones
-            = f.text_field :recommendations, class: "form-control input-sm"
+    .row-fluid
+      .form-group.col-md-12
+        .input-group
+          %span.input-group-addon.input-sm Recomendaciones
+          = f.text_field :recommendations, class: "form-control input-sm"
 
-  .panel.panel-advice
-    .panel-heading
-      %b Seguimiento
-    .panel-body
-      .row-fluid
-        .form-group.col-md-3
-          .input-group
-            %span.input-group-addon.input-sm Paciente Especial
-            / XXX: Keep in sync the model with the UI.
-            = f.fields_for :patient do |ff|
-              = ff.select :special, options_for_select([['No', 'false'], ['Si', 'true']], @patient.special), {}, class: "form-control input-sm"
-        .form-group.col-md-3
-          .input-group
-            %span.input-group-addon.input-sm Próxima cita
-            - if @consultation.new_record? || @consultation.next_appointment.nil?
-              = f.text_field :next_appointment, class: "form-control input-sm"
-            - else
-              = f.text_field :next_appointment, value: @consultation.next_appointment_date, class: "form-control input-sm"
+  = panel(:advice, 'Seguimiento') do
+    .row-fluid
+      .form-group.col-md-3
+        .input-group
+          %span.input-group-addon.input-sm Paciente Especial
+          / XXX: Keep in sync the model with the UI.
+          = f.fields_for :patient do |ff|
+            = ff.select :special, options_for_select([['No', 'false'], ['Si', 'true']], @patient.special), {}, class: "form-control input-sm"
+      .form-group.col-md-3
+        .input-group
+          %span.input-group-addon.input-sm Próxima cita
+          - if @consultation.new_record? || @consultation.next_appointment.nil?
+            = f.text_field :next_appointment, class: "form-control input-sm"
+          - else
+            = f.text_field :next_appointment, value: @consultation.next_appointment_date, class: "form-control input-sm"
 
   .row-fluid
     = link_to "Consultas", patient_consultations_path(@patient), class: "btn btn-default"

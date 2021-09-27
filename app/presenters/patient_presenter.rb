@@ -39,6 +39,15 @@ class PatientPresenter < SimpleDelegator
     end
   end
 
+  def source_es
+    {
+      'television'        => 'Televisión',
+      'radio'             => 'Radio',
+      'newspaper'         => 'Periódico',
+      'patient_reference' => 'Otro paciente'
+    }[source]
+  end
+
   def anamnesis?
     anamnesis.present?
   end
@@ -51,21 +60,21 @@ class PatientPresenter < SimpleDelegator
 
   def civil_status_male_es
     {
-      'single' => 'SOLTERO',
-      'married' => 'CASADO',
+      'single'      => 'SOLTERO',
+      'married'     => 'CASADO',
       'civil_union' => 'UNIÓN LIBRE',
-      'divorced' => 'DIVORCIADO',
-      'widowed' => 'VIUDO'
+      'divorced'    => 'DIVORCIADO',
+      'widowed'     => 'VIUDO'
     }
   end
 
   def civil_status_female_es
     {
-      'single' => 'SOLTERA',
-      'married' => 'CASADA',
+      'single'      => 'SOLTERA',
+      'married'     => 'CASADA',
       'civil_union' => 'UNIÓN LIBRE',
-      'divorced' => 'DIVORCIADA',
-      'widowed' => 'VIUDA'
+      'divorced'    => 'DIVORCIADA',
+      'widowed'     => 'VIUDA'
     }
   end
 end
