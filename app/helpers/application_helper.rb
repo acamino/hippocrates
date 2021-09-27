@@ -39,4 +39,16 @@ module ApplicationHelper
       content_tag(:i, nil, class: 'fa fa-female')
     end
   end
+
+  def panel(color, title, &block)
+    content_tag(:div, nil, class: "panel panel-#{color}") do
+      haml_tag(:div, { class: 'panel-heading' }) do
+        haml_tag(:strong, title)
+      end
+
+      haml_tag :div, { class: 'panel-body' } do
+        block.call
+      end
+    end
+  end
 end

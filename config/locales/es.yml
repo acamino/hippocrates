@@ -109,6 +109,8 @@ es:
         subscription: Indicación
       user:
         registration_acess: Registro
+      consultation:
+        doctor: Médico
     errors:
       messages:
         record_invalid: "La validación falló: %{errors}"

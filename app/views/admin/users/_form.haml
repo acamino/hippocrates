@@ -41,6 +41,14 @@
       = f.label :admin, "Administrador", class: "col-md-2 control-label"
       .col-md-10
         = f.check_box :admin
+    .form-group
+      = f.label :doctor, "Médico", class: "col-md-2 control-label"
+      .col-md-10
+        = f.check_box :doctor
+    .form-group
+      = f.label :editor, "Editor (Puede asignar médico en una consulta)", class: "col-md-2 control-label"
+      .col-md-10
+        = f.check_box :editor
   .form-group
     .col-md-10.col-md-offset-2
       = link_to "Cancelar", admin_users_path, class: "btn btn-default"

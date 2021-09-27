@@ -17,7 +17,7 @@ class ConsultationsController < ApplicationController
   end
 
   def create
-    @consultation = Consultation.new(consultation_params.merge(doctor: current_user))
+    @consultation = Consultation.new(consultation_params)
     if @consultation.save
       @patient.update_attributes(patient_params)
 

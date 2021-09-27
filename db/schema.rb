@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_18_221257) do
+ActiveRecord::Schema.define(version: 2021_09_25_215048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -177,6 +177,8 @@ ActiveRecord::Schema.define(version: 2021_09_18_221257) do
     t.string "registration_acess"
     t.string "speciality"
     t.integer "serial", default: 0, null: false
+    t.boolean "doctor", default: true, null: false
+    t.boolean "editor", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["registration_acess"], name: "index_users_on_registration_acess", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

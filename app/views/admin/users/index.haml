@@ -9,7 +9,9 @@
     %table.table.table-striped
       %thead
         %tr
-          %th.col-md-2 Usuario
+          %th
+          %th
+          %th.col-md-3 Usuario
           %th.col-md-2 Teléfono
           %th.col-md-2 Registro
           %th.col-md-2 Email
@@ -19,6 +21,14 @@
       %tbody
       - @users.each do |user|
         %tr
+          %td
+            - if user.doctor?
+              %span
+                %i.fa.fa-stethoscope
+          %td
+            - if user.editor?
+              %span
+                %i.fas.fa-pencil-alt
           %td
             = user.pretty_name
           %td= user.phone_number

@@ -46,4 +46,12 @@ class ConsultationPresenter < SimpleDelegator
   def miscellaneous?
     miscellaneous.present?
   end
+
+  def user_id
+    doctor&.id || current_user.id
+  end
+
+  def doctors
+    User.active_doctor.pluck(:pretty_name, :id)
+  end
 end
