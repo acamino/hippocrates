@@ -1,5 +1,9 @@
 class ConsultationSerializer < ActiveModel::Serializer
-  attributes :id, :reason, :date, :next_appointment
+  attributes :id,
+    :date,
+    :next_appointment,
+    :ongoing_issue,
+    :reason
   attribute :diagnoses?, key: :hasDiagnoses
   attribute :prescriptions?, key: :hasPrescriptions
   attribute :next_appointment?, key: :hasNextAppointment
