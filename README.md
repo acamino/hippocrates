@@ -2,8 +2,8 @@
 
 # Hippocrates
 
-[![Build Status](https://travis-ci.org/acamino/hippocrates.svg?branch=master)](https://travis-ci.org/acamino/hippocrates)
-[![Coverage Status](https://coveralls.io/repos/github/acamino/hippocrates/badge.svg?branch=master)](https://coveralls.io/github/acamino/hippocrates?branch=master)
+[![Build Status](https://app.travis-ci.com/acamino/hippocrates.svg?branch=main)](https://app.travis-ci.com/github/acamino/hippocrates)
+[![Coverage Status](https://coveralls.io/repos/github/acamino/hippocrates/badge.svg?branch=main)](https://coveralls.io/github/acamino/hippocrates?branch=main)
 
 Hippocrates is a demo application for managing patients' medical history. It
 provides some basic functionality out of the box:
