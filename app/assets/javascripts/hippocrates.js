@@ -52,6 +52,37 @@ $(document).on('turbolinks:load', function() {
         $(".patient-age").val(patientAge);
     });
 
+    $("#date_range").daterangepicker({
+        autoApply: true,
+        locale: {
+            daysOfWeek: [
+                'Do',
+                'Lu',
+                'Ma',
+                'Mi',
+                'Ju',
+                'Vi',
+                'Sa'
+            ],
+            monthNames: [
+                'Enero',
+                'Febrero',
+                'Marzo',
+                'Abril',
+                'Mayo',
+                'Junio',
+                'Julio',
+                'Agosto',
+                'Septiembre',
+                'Octubre',
+                'Noviembre',
+                'Diciembre'
+            ],
+            firstDay: 1,
+            format: 'YYYY-MM-DD'
+        }
+    });
+
     $(".panel-heading").on("click", function(e) {
         var panelBody = $(this).siblings();
         panelBody.slideToggle("slow");

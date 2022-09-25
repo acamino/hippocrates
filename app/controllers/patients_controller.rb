@@ -1,4 +1,6 @@
 class PatientsController < ApplicationController
+  include Trackable
+
   before_action :authorize_admin, only: [:export]
 
   def export
@@ -18,7 +20,10 @@ class PatientsController < ApplicationController
 
   def create
     @patient = Patient.new(patient_params)
+
     if @patient.save
+      track_activity(@patient, :created)
+
       Setting::MedicalHistorySequence.new.save
       redirect_to new_patient_anamnesis_path(
         @patient
@@ -30,12 +35,17 @@ class PatientsController < ApplicationController
 
   def edit
     @patient = PatientPresenter.new(Patient.find(params[:id]))
+
+    track_activity(@patient, :viewed)
+
     @referer_location = referer_location
   end
 
   def update
     @patient = Patient.find(params[:id])
     if @patient.update_attributes(patient_params)
+      track_activity(@patient, :updated)
+
       if referer_location
         redirect_to referer_location
       else

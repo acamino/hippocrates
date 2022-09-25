@@ -18,6 +18,7 @@ gem 'kaminari'
 gem 'mimemagic', git: 'https://github.com/mimemagicrb/mimemagic.git', ref: '01f92d8' # 0.3.5
 gem 'pg_search'
 gem 'prawn'
+gem 'public_activity'
 gem 'redis-rails'
 gem 'sablon'
 gem 'shrine', '~> 3.0'

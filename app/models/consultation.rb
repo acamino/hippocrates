@@ -1,5 +1,7 @@
 # rubocop:disable Metrics/ClassLength
 class Consultation < ApplicationRecord
+  include PublicActivity::Model
+
   ATTRIBUTE_WHITELIST = [
     :blood_pressure,
     :diagnostic_plan,

@@ -1,4 +1,6 @@
 class Anamnesis < ApplicationRecord
+  include PublicActivity::Model
+
   ATTRIBUTE_WHITELIST = [
     :medical_history,
     :surgical_history,

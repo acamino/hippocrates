@@ -1,4 +1,6 @@
 class ConsultationsController < ApplicationController
+  include Trackable
+
   before_action :fetch_consultation, only: [:edit, :update]
   before_action :fetch_patient
   before_action :adjust_time!, only: [:update]
@@ -19,6 +21,8 @@ class ConsultationsController < ApplicationController
   def create
     @consultation = Consultation.new(consultation_params)
     if @consultation.save
+      track_activity(@consultation, :created)
+
       @patient.update_attributes(patient_params)
 
       redirect_to edit_patient_consultation_path(
@@ -31,6 +35,8 @@ class ConsultationsController < ApplicationController
   end
 
   def edit
+    track_activity(@consultation, :viewed)
+
     remaining_diagnoses.times     { @consultation.diagnoses.build }
     remaining_prescriptions.times { @consultation.prescriptions.build }
 
@@ -39,6 +45,8 @@ class ConsultationsController < ApplicationController
 
   def update
     if @consultation.update_attributes(consultation_params)
+      track_activity(@consultation, :updated)
+
       @patient.update_attributes(patient_params)
       delete_referer_location
 

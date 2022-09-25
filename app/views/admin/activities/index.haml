@@ -1,0 +1,46 @@
+.row
+  .col-md-12
+    = form_tag(admin_activities_path, method: 'GET', class: 'form') do
+      .form-group.col-sm-4
+        = text_field_tag :date_range, params[:date_range], placeholder: '', class: 'form-control input-md'
+      .form-group.col-sm-4
+        = select_tag :uid,
+          options_from_collection_for_select(@users, 'id', 'pretty_name',
+          params[:uid]), include_blank: 'Todos', class: 'form-control input-md'
+      .form-group.col-sm-4
+        %button.btn.btn-md.btn-primary.hidden-xs{ type: "submit" }
+          = t('views.search')
+
+.row
+  .col-md-12
+    %table.table.table-striped
+      %thead
+        %tr
+          %th
+          %th.col-md-3 Usuario
+          %th.col-md-2 Acción
+          %th.col-md-2 Modelo
+          %th.col-md-3 Paciente
+          %th.col-md-2 Fecha
+      %tbody
+        - @activities.each do |_activity|
+          - present_for(_activity) do |activity|
+            %tr
+              %td
+                - if activity.owner.doctor?
+                  %span
+                    %i.fa.fa-stethoscope
+              %td
+                = activity.owner.pretty_name.upcase
+              %td
+                = activity.action
+              %td
+                = activity.model
+              %td
+                = activity.patient.full_name
+              %td
+                = activity.created_at.strftime('%b %d, %Y %I:%M %p')
+
+.row
+  .col-md-12.text-center
+    = paginate @activities

@@ -2,6 +2,7 @@ require 'csv'
 
 class Patient < ApplicationRecord
   include PgSearch::Model
+  include PublicActivity::Model
 
   ATTRIBUTE_WHITELIST = [
     :medical_history,
