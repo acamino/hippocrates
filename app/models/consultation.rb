@@ -34,12 +34,14 @@ class Consultation < ApplicationRecord
     :warning_signs,
     :weight,
     :user_id,
+    :branch_office_id,
     :created_at,
     patient: :special,
     diagnoses_attributes: [:id, :disease_code, :description, :type, :_destroy],
     prescriptions_attributes: [:id, :inscription, :subscription, :_destroy]
   ].freeze
 
+  belongs_to :branch_office, optional: true
   belongs_to :doctor, class_name: 'User', foreign_key: 'user_id'
   belongs_to :patient
 

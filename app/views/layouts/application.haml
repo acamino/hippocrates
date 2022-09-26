@@ -41,6 +41,7 @@
                   %ul.dropdown-menu{ role: "menu" }
                     = nav_to 'Usuarios', admin_users_path
                     = nav_to 'Actividades', admin_activities_path
+                    = nav_to 'Sucrusales', admin_branch_offices_path
                     = nav_to 'Preferencias', settings_path
               = yield :nav_option
 
@@ -70,3 +71,4 @@
     = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js'
     = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/jQuery.print/1.5.1/jQuery.print.min.js'
     = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.js'
+    = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/keyboardjs/2.7.0/keyboard.min.js'

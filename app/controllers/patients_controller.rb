@@ -16,6 +16,7 @@ class PatientsController < ApplicationController
   def new
     @patient = PatientPresenter.new(Patient.new)
     @patient.medical_history = Setting::MedicalHistorySequence.next
+    @branch_offices = BranchOffice.active.order(:active).order(:name)
   end
 
   def create
@@ -35,6 +36,7 @@ class PatientsController < ApplicationController
 
   def edit
     @patient = PatientPresenter.new(Patient.find(params[:id]))
+    @branch_offices = BranchOffice.active.order(:active).order(:name)
 
     track_activity(@patient, :viewed)
 

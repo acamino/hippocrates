@@ -1,0 +1,37 @@
+= render partial: 'search', locals: { path: admin_branch_offices_path, placeholder: 'Nombre' }
+
+.row
+  .col-md-12.text-right
+    = link_to t('branch_offices.button.new'), new_admin_branch_office_path, class: "btn btn-success"
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th.col-md-6= t('branch_offices.fields.name')
+      %th.text-center.col-md-2= t('branch_offices.fields.main')
+      %th.text-center.col-md-2= t('branch_offices.fields.active')
+      %th.col-md-2
+  %tbody
+  - @branch_offices.each do |branch_office|
+    %tr
+      %td= branch_office.name
+      %td.text-center
+        - if branch_office.main?
+          %span.text-success
+            %i.fa.fa-circle
+        - else
+          %span.text-success
+            %i.far.fa-circle
+      %td.text-center
+        - if branch_office.active?
+          %span.text-success
+            %i.fa.fa-circle
+        - else
+          %span.text-success
+            %i.far.fa-circle
+      %td.text-right
+        = link_to t('branch_offices.actions.edit'), edit_admin_branch_office_path(branch_office), class: 'btn btn-primary btn-sm'
+
+.row
+  .col-md-12.text-center
+    = paginate @branch_offices

@@ -17,7 +17,8 @@ class Patient < ApplicationRecord
     :source,
     :profession,
     :email,
-    :health_insurance
+    :health_insurance,
+    :branch_office_id
   ].freeze
 
   CSV_ATTRIBUTES = %w[
@@ -34,6 +35,8 @@ class Patient < ApplicationRecord
   enum gender: [:male, :female]
   enum civil_status: [:single, :married, :civil_union, :divorced, :widowed]
   enum source: [:television, :radio, :newspaper, :patient_reference]
+
+  belongs_to :branch_office, optional: true
 
   has_one :anamnesis
 

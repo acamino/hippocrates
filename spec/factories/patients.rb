@@ -9,6 +9,7 @@ FactoryBot.define do
     gender         { 'male' }
     civil_status   { 'married' }
     source         { 'patient_reference' }
+    branch_office
   end
 
   factory :patient_with_anamnesis, parent: :patient do

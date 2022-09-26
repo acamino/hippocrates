@@ -69,11 +69,16 @@
             %input.form-control.input-sm.colored.patient-age{ disabled: 'disabled', value: @patient.age.years }
         .form-group.col-md-4
           .input-group
-            %span.input-group-addon.input-sm Estado Civil
+            %span.input-group-addon.input-sm Estado civil
             %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.civil_status_es }
         .form-group.col-md-4
           .input-group
             %span.input-group-addon.input-sm Ocupación
             %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.profession }
+      .row-fluid
+        .form-group.col-md-6
+          .input-group
+            %span.input-group-addon.input-sm Lugar de afiliación
+            %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.branch_office&.name }
         .col-md-12.text-right
           = link_to t('patients.actions.edit'), edit_patient_path(@patient)

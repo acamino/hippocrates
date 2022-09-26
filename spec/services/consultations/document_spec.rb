@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe Certificate do
-  describe '#build' do
+describe Consultations::Document do
+  describe '.build' do
     let(:start_time)             { '' }
     let(:end_time)               { '' }
     let(:rest_time)              { '' }
@@ -45,7 +45,7 @@ describe Certificate do
 
       it 'builds certificate for male' do
         Timecop.freeze('2015-10-21') do
-          expect(described_class.for(consultation)).to eq(certificate)
+          expect(described_class.build(consultation)).to eq(certificate)
         end
       end
     end
@@ -56,7 +56,7 @@ describe Certificate do
 
       it 'builds certificate for female' do
         Timecop.freeze('2015-10-21') do
-          expect(described_class.for(consultation)).to eq(certificate)
+          expect(described_class.build(consultation)).to eq(certificate)
         end
       end
     end
@@ -70,7 +70,7 @@ describe Certificate do
       it 'builds certificate for attendance' do
         Timecop.freeze('2015-10-21') do
           options = { start_time: '10:00 am', end_time: '11:30 am' }
-          expect(described_class.for(consultation, options)).to eq(certificate)
+          expect(described_class.build(consultation, options)).to eq(certificate)
         end
       end
     end
@@ -83,7 +83,7 @@ describe Certificate do
       it 'builds certificate for rest' do
         Timecop.freeze('2015-10-21') do
           options = { rest_time: '48' }
-          expect(described_class.for(consultation, options)).to eq(certificate)
+          expect(described_class.build(consultation, options)).to eq(certificate)
         end
       end
     end
@@ -103,7 +103,7 @@ describe Certificate do
             surgery_cost: 'cost'
           }
 
-          expect(described_class.for(consultation, options)).to eq(certificate)
+          expect(described_class.build(consultation, options)).to eq(certificate)
         end
       end
     end
@@ -115,21 +115,21 @@ describe Certificate do
       it 'builds certificate for medical history' do
         Timecop.freeze('2015-10-21') do
           options = { consultations: '' }
-          expect(described_class.for(consultation, options)).to eq(certificate)
+          expect(described_class.build(consultation, options)).to eq(certificate)
         end
       end
 
       context 'when no consultations are selected' do
         it 'returns an empty list' do
           options = { consultations: '' }
-          certificate = described_class.for(consultation, options)
+          certificate = described_class.build(consultation, options)
           expect(certificate[:consultations]).to eq([])
         end
       end
 
       context 'when consultations are selected' do
         let(:options)         { { consultations: "#{other_consultation.id}_#{consultation.id}" } }
-        subject(:certificate) { described_class.for(consultation, options) }
+        subject(:certificate) { described_class.build(consultation, options) }
 
         it 'returns a sorted list of selected certificates' do
           expect(certificate[:consultations]).to eq([consultation, other_consultation])

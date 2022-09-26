@@ -86,6 +86,17 @@
         .row
           .col-xs-1
             %span.text-muted
+              %i.fa.fa-list
+          .col-xs-10
+            - if @consultation.new_record?
+              %span.text-muted Consentimientos
+            - else
+              %span
+                %a.disabled.hint-link.show-consent(href="") Consentimientos
+
+        .row
+          .col-xs-1
+            %span.text-muted
               %i.fa.fa-file
           .col-xs-10
             - if @consultation.new_record?

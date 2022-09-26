@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_10_124828) do
+ActiveRecord::Schema.define(version: 2022_09_26_014213) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -57,6 +57,15 @@ ActiveRecord::Schema.define(version: 2022_09_10_124828) do
     t.index ["document_id"], name: "index_attachments_on_document_id"
   end
 
+  create_table "branch_offices", force: :cascade do |t|
+    t.text "name", null: false
+    t.boolean "main", default: false, null: false
+    t.boolean "active", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_branch_offices_on_name", unique: true
+  end
+
   create_table "consultations", id: :serial, force: :cascade do |t|
     t.integer "patient_id"
     t.string "reason", default: ""
@@ -94,6 +103,8 @@ ActiveRecord::Schema.define(version: 2022_09_10_124828) do
     t.text "recommendations"
     t.bigint "user_id"
     t.string "serial"
+    t.bigint "branch_office_id"
+    t.index ["branch_office_id"], name: "index_consultations_on_branch_office_id"
     t.index ["special_patient"], name: "index_consultations_on_special_patient"
     t.index ["user_id"], name: "index_consultations_on_user_id"
   end
@@ -148,6 +159,8 @@ ActiveRecord::Schema.define(version: 2022_09_10_124828) do
     t.datetime "updated_at", null: false
     t.boolean "special", default: false, null: false
     t.text "health_insurance"
+    t.bigint "branch_office_id"
+    t.index ["branch_office_id"], name: "index_patients_on_branch_office_id"
     t.index ["civil_status"], name: "index_patients_on_civil_status"
     t.index ["first_name", "last_name"], name: "index_patients_on_first_name_and_last_name", using: :gin
     t.index ["gender"], name: "index_patients_on_gender"
@@ -205,9 +218,11 @@ ActiveRecord::Schema.define(version: 2022_09_10_124828) do
 
   add_foreign_key "anamneses", "patients"
   add_foreign_key "attachments", "documents", on_delete: :cascade
+  add_foreign_key "consultations", "branch_offices", on_delete: :nullify
   add_foreign_key "consultations", "patients"
   add_foreign_key "consultations", "users", on_delete: :nullify
   add_foreign_key "diagnoses", "consultations"
   add_foreign_key "documents", "consultations", on_delete: :cascade
+  add_foreign_key "patients", "branch_offices", on_delete: :nullify
   add_foreign_key "prescriptions", "consultations"
 end

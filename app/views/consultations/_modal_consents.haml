@@ -1,0 +1,56 @@
+.modal.fade#consents{ tabindex: "-1", role: "dialog" }
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{ type: "button",
+                       "data-dismiss": "modal",
+                       "aria-label": "Close" }
+          %span{ "aria-hidden": "true" } &times;
+        %h4.modal-title
+          %span.text-primary
+            %i.fa.fa-list
+          = @patient.name
+          %small
+            #{@patient.age.years} años
+            = gender_tag(@patient)
+      .modal-body
+        .form-horizontal
+          .form-group
+            %label.col-sm-2.control-label{ for: "consent" } Consentimiento
+            .col-md-6
+              %select.form-control.input-sm#consent
+                %option{ value: "bichectomy" } Bichectomía
+                %option{ value: "placeholder" } Biopsia
+                %option{ value: "placeholder" } Blefaroplastia superior e inferior
+                %option{ value: "placeholder" } Botox
+                %option{ value: "placeholder" } Cens para exeresis de masa nasal
+                %option{ value: "placeholder" } Colesteatoma
+                %option{ value: "placeholder" } Consentimiento estetica
+                %option{ value: "placeholder" } Covid
+                %option{ value: "placeholder" } Dacriocistorrinostomía endonasal
+                %option{ value: "placeholder" } Dilatación de trompa de eustaquio
+                %option{ value: "placeholder" } Epistaxis 
+                %option{ value: "placeholder" } Exéresis de quiste y fístulas cervicales
+                %option{ value: "placeholder" } Extracción de cuerpo extraño nasal
+                %option{ value: "placeholder" } Fístula periauricular 
+                %option{ value: "placeholder" } Hematoma de pabellon auricular 
+                %option{ value: "placeholder" } Hematoma septal
+                %option{ value: "placeholder" } Osteoma
+                %option{ value: "placeholder" } Otoplastia mas rinoplastia
+                %option{ value: "placeholder" } Parotidectomía del lado afecto
+                %option{ value: "placeholder" } Poliposis nasosinusal
+                %option{ value: "placeholder" } Ránula 
+                %option{ value: "placeholder" } Reduccion de fractura nasal
+                %option{ value: "placeholder" } Retoque nasal
+                %option{ value: "placeholder" } Rino mas menton
+                %option{ value: "placeholder" } Rinoplastia secundaria con costilla
+                %option{ value: "placeholder" } Tratamiento de sinusitis
+                %option{ value: "placeholder" } Tumuraciones benignas del pabellon auricular y CAE
+              %em.text-muted Selecciona un consentimiento informado
+
+      .modal-footer
+        %button.btn.btn-default{ "data-dismiss": "modal" } Cerrar
+        = link_to t('consents.button.download'),
+          download_consultations_documents_path(consultation_id: @consultation.id, certificate_type: "bichectomy", path: 'consents'),
+          class: 'btn btn-primary',
+          data: { turbolinks: false }

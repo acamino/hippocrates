@@ -7,6 +7,8 @@
                        "aria-label": "Close" }
           %span{ "aria-hidden": "true" } &times;
         %h4.modal-title
+          %span.text-primary
+            %i.fa.fa-certificate
           = @patient.name
           %small
             #{@patient.age.years} años
@@ -76,6 +78,6 @@
       .modal-footer
         %button.btn.btn-default{ "data-dismiss": "modal" } Cerrar
         = link_to t('certificates.button.download'),
-          download_certificates_path(consultation_id: @consultation.id, certificate_type: "simple"),
+          download_consultations_documents_path(consultation_id: @consultation.id, certificate_type: "simple"),
           class: 'btn btn-primary',
           data: { turbolinks: false }

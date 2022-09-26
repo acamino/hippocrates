@@ -37,6 +37,8 @@ class ConsultationsController < ApplicationController
   def edit
     track_activity(@consultation, :viewed)
 
+    @branch_offices = BranchOffice.active.order(:active).order(:name)
+
     remaining_diagnoses.times     { @consultation.diagnoses.build }
     remaining_prescriptions.times { @consultation.prescriptions.build }
 

@@ -1,5 +1,10 @@
 Hippocrates.Hint = {
   init: function() {
+
+    keyboardJS.bind('ctrl + h', (e) => {
+      $(".hint-box").toggleClass("hint-box-show");
+    });
+
     $(".progress, .progress-hint").click(function (){
       $(".progress-hint").slideToggle();
     });
