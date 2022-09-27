@@ -12,6 +12,8 @@ class ConsultationsController < ApplicationController
 
   def new
     @consultation = Consultation.new
+    @branch_offices = BranchOffice.active.order(:active).order(:name)
+
     maximum_diagnoses.times     { @consultation.diagnoses.build }
     maximum_prescriptions.times { @consultation.prescriptions.build }
 

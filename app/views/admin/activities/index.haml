@@ -20,6 +20,7 @@
           %th.col-md-3 Usuario
           %th.col-md-2 Acción
           %th.col-md-2 Modelo
+          %th
           %th.col-md-3 Paciente
           %th.col-md-2 Fecha
       %tbody
@@ -37,7 +38,14 @@
               %td
                 = activity.model
               %td
-                = activity.patient.full_name
+                - if activity.patient.present?
+                  %span.text-primary
+                    %i.fa.fa-circle
+                - else
+                  %span.text-primary
+                    %i.far.fa-circle
+              %td
+                = activity.patient&.full_name
               %td
                 = activity.created_at.strftime('%b %d, %Y %I:%M %p')
 

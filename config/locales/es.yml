@@ -37,9 +37,13 @@ es:
       consultation: Consulta
       clinical-history: Historia clínica
       edit: Editar
+      destroy: Eliminar
+    destroy:
+      confirm: ¿Está seguro de eliminar el paciente %{name}?
     success:
       creation: Paciente creado correctamente
-      update: Paciente actualizado correctamente
+      update: Paciente %{name} actualizado correctamente
+      destroy: Paciente %{name} eliminado correctamente
     special:
       remove:
         confirmation: ¿Está seguro de remover el paciente especial?

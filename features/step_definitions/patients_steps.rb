@@ -45,7 +45,7 @@ When(/^I update Ada's informaton$/) do
 end
 
 Then(/^I see a success message for update$/) do
-  expect(page).to have_content('Paciente actualizado correctamente')
+  expect(page).to have_content("Paciente #{@ada.full_name} actualizado correctamente")
 end
 
 When(/^I search for Ada$/) do

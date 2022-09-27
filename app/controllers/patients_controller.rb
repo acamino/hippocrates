@@ -51,11 +51,24 @@ class PatientsController < ApplicationController
       if referer_location
         redirect_to referer_location
       else
-        redirect_to patients_path, notice: t('patients.success.update')
+        redirect_to patients_path, notice: t('patients.success.update', name: @patient.full_name)
       end
     else
       render :edit
     end
+  end
+
+  def destroy
+    @patient = Patient.find(params[:id])
+    patient_name = @patient.full_name
+
+    ApplicationRecord.transaction do
+      @patient.consultations.destroy_all
+      @patient&.anamnesis&.destroy
+      @patient.destroy
+    end
+
+    redirect_to patients_path, notice: t('patients.success.destroy', name: patient_name)
   end
 
   private

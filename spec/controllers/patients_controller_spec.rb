@@ -123,4 +123,28 @@ describe PatientsController do
       it { is_expected.to respond_with :ok }
     end
   end
+
+  describe '#destroy' do
+    let!(:patient) { create(:patient) }
+
+    before do |example|
+      create_list(:consultation, 2, patient: patient)
+      create(:anamnesis, patient: patient)
+      create(:activity, owner: patient)
+
+      delete :destroy, params: { id: patient.id } unless example.metadata[:skip_on_before]
+    end
+
+    it 'deletes the patient and the related models', :skip_on_before do
+      expect do
+        delete :destroy, params: { id: patient.id }
+      end.to change(Patient, :count).by(-1)
+        .and change(Consultation, :count).by(-2)
+        .and change(Anamnesis, :count).by(-1)
+        .and change(Anamnesis, :count).by(-1)
+        .and change(Activity, :count).by(0)
+    end
+
+    it { is_expected.to redirect_to patients_path }
+  end
 end

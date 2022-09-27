@@ -37,9 +37,13 @@ en:
       consultation: Consultation
       clinical-history: Clinical history
       edit: Edit
+      destroy: Delete
+    destroy:
+      confirm: Are you sure you want to delete it?
     success:
       creation: Patient created successfully
-      update: Patient updated successfully
+      update: Patient %{name} updated successfully
+      destroy: Patient %{name} deleted successfully
     special:
       remove:
         success: Special patient successfully removed
@@ -53,7 +57,7 @@ en:
       edit: Edit
       destroy: Delete
     destroy:
-      confirm: Are you sure you want to delete it?
+      confirm: Are you sure you want to delete the patient %{name}?
     success:
       creation: Medicine created successfully
       update: Medicine updated successfully
