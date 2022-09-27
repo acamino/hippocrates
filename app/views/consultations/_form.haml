@@ -242,11 +242,29 @@
           - else
             = f.text_field :next_appointment, value: @consultation.next_appointment_date, class: "form-control input-sm"
 
+  = panel(:info, 'Valor de la Consulta') do
+    .row-fluid
+      .form-group.col-md-2
+        .input-group
+          %span.input-group-addon.input-lg $
+          - if @consultation.new_record?
+            = f.text_field :price,
+              class: "form-control input-lg"
+          - else
+            // XXX: No string interpolation
+            %input#consultation_price.form-control.input-lg.colored{ disabled: 'disabled', value: "#{format('%.2f', @consultation.price)}" }
+    - unless @consultation.new_record?
+      .row-fluid
+        .col-md-12.text-right
+          %a#show-change-price(href="#")
+            = t('prescriptions.actions.edit')
+
   .row-fluid
     = link_to "Consultas", patient_consultations_path(@patient), class: "btn btn-default"
     = f.submit "Guardar", class: "btn btn-success", id: "save-consultation"
 
 = render 'modal_consultation'
+= render 'modal_change_price'
 = render 'modal_certificates'
 = render 'modal_consents'
 = render 'modal_prescription'

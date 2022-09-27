@@ -7,6 +7,11 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def authorize_admin
+    return if current_user.admin_or_super_admin?
+    redirect_to root_path, notice: 'Reservado para administradores'
+  end
+
   def fetch_patient
     @patient = PatientPresenter.new(Patient.find(params[:patient_id]))
   end
@@ -31,8 +36,12 @@ class ApplicationController < ActionController::Base
     session.delete(:referer_location) if session[:referer_location]
   end
 
-  def authorize_admin
-    return if current_user.admin_or_super_admin?
-    redirect_to root_path, notice: 'Reservado para administradores'
+  def date_range
+    if params[:date_range].present?
+      start_date, end_date = params[:date_range].split(' - ').map { |date| Date.parse(date) }
+      start_date.beginning_of_day..end_date.end_of_day
+    else
+      Date.today.beginning_of_day..Date.today.end_of_day
+    end
   end
 end

@@ -30,6 +30,7 @@ class PatientsController < ApplicationController
         @patient
       ), notice: t('patients.success.creation')
     else
+      @branch_offices = BranchOffice.active.order(:active).order(:name)
       render :new
     end
   end

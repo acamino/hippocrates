@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_26_014213) do
+ActiveRecord::Schema.define(version: 2022_09_27_144600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 2022_09_26_014213) do
     t.bigint "user_id"
     t.string "serial"
     t.bigint "branch_office_id"
+    t.decimal "price", default: "0.0", null: false
     t.index ["branch_office_id"], name: "index_consultations_on_branch_office_id"
     t.index ["special_patient"], name: "index_consultations_on_special_patient"
     t.index ["user_id"], name: "index_consultations_on_user_id"
@@ -178,6 +179,18 @@ ActiveRecord::Schema.define(version: 2022_09_26_014213) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "price_changes", force: :cascade do |t|
+    t.bigint "consultation_id", null: false
+    t.bigint "user_id", null: false
+    t.decimal "previous_price", default: "0.0", null: false
+    t.decimal "updated_price", default: "0.0", null: false
+    t.text "reason", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["consultation_id"], name: "index_price_changes_on_consultation_id"
+    t.index ["user_id"], name: "index_price_changes_on_user_id"
+  end
+
   create_table "settings", id: :serial, force: :cascade do |t|
     t.string "name", null: false
     t.string "value", null: false
@@ -225,4 +238,6 @@ ActiveRecord::Schema.define(version: 2022_09_26_014213) do
   add_foreign_key "documents", "consultations", on_delete: :cascade
   add_foreign_key "patients", "branch_offices", on_delete: :nullify
   add_foreign_key "prescriptions", "consultations"
+  add_foreign_key "price_changes", "consultations", on_delete: :cascade
+  add_foreign_key "price_changes", "users", on_delete: :cascade
 end

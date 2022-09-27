@@ -12,7 +12,7 @@
         .form-group.col-md-3
           .input-group
             %span.input-group-addon.input-sm Fecha Nacimiento
-            = f.text_field :birthdate, value: @patient.formatted_birthdate, class: "form-control input-sm"
+            = f.text_field :birthdate, value: PatientPresenter.new(@patient)&.formatted_birthdate, class: "form-control input-sm"
         .form-group.col-md-3
           .input-group
             %span.input-group-addon.input-sm # Cédula

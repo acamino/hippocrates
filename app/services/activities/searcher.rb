@@ -11,7 +11,7 @@ module Activities
     end
 
     def call
-      Activity.by_date(date_range).by_owner(uid).ordey_by_date
+      Activity.by_date(date_range).by_owner(uid).order_by_date
     end
 
     private

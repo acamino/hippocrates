@@ -1,5 +1,6 @@
 module Admin
   class BranchOfficesController < ApplicationController
+    before_action :authorize_admin
     before_action :fetch_branch_office, only: [:edit, :update, :destroy]
 
     def index

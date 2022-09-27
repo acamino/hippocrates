@@ -5,6 +5,8 @@ if(typeof Hippocrates === "undefined") {
   Hippocrates.ClinicalHistory = {};
   Hippocrates.Consultations = {};
   Hippocrates.Consents = {};
+  Hippocrates.ChangePrice = {};
+  Hippocrates.Charges = {};
   Hippocrates.Hint = {};
   Hippocrates.Prescription = {};
   Hippocrates.Settings = {};
@@ -14,6 +16,8 @@ $(document).on('turbolinks:load', function() {
     Hippocrates.Autocomplete.init();
     Hippocrates.Certificates.init();
     Hippocrates.Consents.init();
+    Hippocrates.ChangePrice.init();
+    Hippocrates.Charges.init();
     Hippocrates.ClinicalHistory.init();
     Hippocrates.Consultations.init();
     Hippocrates.Hint.init();
@@ -84,6 +88,13 @@ $(document).on('turbolinks:load', function() {
             format: 'YYYY-MM-DD'
         }
     });
+
+    if ($("#changed_price").length) {
+      new Cleave('#consultation_price', {
+        numeral: true,
+        numeralThousandsGroupStyle: 'thousand'
+      });
+    }
 
     $(".panel-heading").on("click", function(e) {
         var panelBody = $(this).siblings();

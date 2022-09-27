@@ -19,9 +19,10 @@ Rails.application.routes.draw do
 
 
   namespace :admin do
-    resources :users
     resources :activities,     only: [:index]
     resources :branch_offices, only: [:index, :new, :create, :edit, :update, :destroy]
+    resources :charges,        only: [:index]
+    resources :users
   end
 
   resources :diseases,  only: [:index, :new, :create, :edit, :update, :destroy]
@@ -39,7 +40,10 @@ Rails.application.routes.draw do
   resources :settings, only: [:index]
 
   namespace :api, defaults: { format: 'json' } do
-    resources :patients, only: [] do
+    resources :consultations, only: [] do
+      resources :price_changes, only: [:index, :create]
+    end
+    resources :patients,        only: [] do
       resources :consultations, only: [:index] do
         collection do
           post   'previous'
