@@ -21,6 +21,7 @@ gem 'prawn'
 gem 'public_activity'
 gem 'redis-rails'
 gem 'sablon'
+gem 'sendgrid-ruby'
 gem 'shrine', '~> 3.0'
 gem 'unicode_utils'
 

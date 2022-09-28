@@ -8,12 +8,14 @@ module API
     end
 
     def create
-      price_change = @consultation.price_changes.build(price_change_params)
+      @price_change = @consultation.price_changes.build(price_change_params)
 
-      if price_change.save && @consultation.update(price: price_change_params[:updated_price])
+      if @price_change.save && @consultation.update(price: price_change_params[:updated_price])
+        send_notification
+
         render json: { success: true, errors: [] }
       else
-        render json: { errors: price_change.errors.full_messages }, status: :unprocessable_entity
+        render json: { errors: @price_change.errors.full_messages }, status: :unprocessable_entity
       end
     end
 
@@ -28,6 +30,13 @@ module API
 
     def fetch_consultation
       @consultation = Consultation.find(params[:consultation_id])
+    end
+
+    def send_notification
+      subject, message = Notifications::Messages::Builder.new(@price_change).call
+      Notifications::Sender.new(subject, message).call
+    rescue StandardError => e
+      Rails.logger.error(e.message)
     end
   end
 end
