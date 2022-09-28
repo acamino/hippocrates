@@ -21,7 +21,7 @@ class DiseasesController < ApplicationController
   def edit; end
 
   def update
-    if @disease.update_attributes(disease_params)
+    if @disease.update(disease_params)
       redirect_to diseases_path, notice: t('diseases.success.update')
     else
       render :edit

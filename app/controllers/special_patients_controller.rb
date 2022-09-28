@@ -5,7 +5,7 @@ class SpecialPatientsController < ApplicationController
 
   def remove
     patient = Patient.find(params[:id])
-    patient.update_attributes(special: false)
+    patient.update(special: false)
     redirect_to special_patients_path, notice: t('patients.special.remove.success')
   end
 end

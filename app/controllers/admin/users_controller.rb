@@ -42,7 +42,7 @@ module Admin
 
     def update_user!
       if user_params[:password].present?
-        @user.update_attributes(user_params)
+        @user.update(user_params)
       else
         @user.update_without_password(user_params)
       end

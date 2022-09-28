@@ -47,7 +47,7 @@ class PatientsController < ApplicationController
 
   def update
     @patient = Patient.find(params[:id])
-    if @patient.update_attributes(patient_params)
+    if @patient.update(patient_params)
       track_activity(@patient, :updated)
 
       if referer_location

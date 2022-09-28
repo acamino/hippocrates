@@ -7,7 +7,7 @@ module API
     def update
       setting = Setting.find(params[:id])
 
-      if setting.update_attributes(value: params[:value])
+      if setting.update(value: params[:value])
         render json: setting
       else
         render json: setting.errors.messages[:value].first, status: :unprocessable_entity

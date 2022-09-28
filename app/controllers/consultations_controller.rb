@@ -25,7 +25,7 @@ class ConsultationsController < ApplicationController
     if @consultation.save
       track_activity(@consultation, :created)
 
-      @patient.update_attributes(patient_params)
+      @patient.update(patient_params)
 
       redirect_to edit_patient_consultation_path(
         @patient, @consultation
@@ -48,10 +48,10 @@ class ConsultationsController < ApplicationController
   end
 
   def update
-    if @consultation.update_attributes(consultation_params)
+    if @consultation.update(consultation_params)
       track_activity(@consultation, :updated)
 
-      @patient.update_attributes(patient_params)
+      @patient.update(patient_params)
       delete_referer_location
 
       redirect_to edit_patient_consultation_path(

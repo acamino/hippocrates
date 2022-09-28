@@ -28,7 +28,7 @@ class AnamnesesController < ApplicationController
 
   def update
     @anamnesis = Anamnesis.find(params[:id])
-    @anamnesis.update_attributes(anamnesis_params)
+    @anamnesis.update(anamnesis_params)
 
     track_activity(@anamnesis, :updated)
 

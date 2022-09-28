@@ -24,7 +24,7 @@ class DocumentsController < ApplicationController
   def edit; end
 
   def update
-    if @document.update_attributes(document_params)
+    if @document.update(document_params)
       redirect_to patient_consultation_documents_path(@patient, @consultation),
                   notice: 'Documento actualizado correctamente'
     else

@@ -23,7 +23,7 @@ module Admin
     def edit; end
 
     def update
-      if @branch_office.update_attributes(branch_office_params)
+      if @branch_office.update(branch_office_params)
         redirect_to admin_branch_offices_path, notice: t('branch_offices.success.update')
       else
         render :edit

@@ -21,7 +21,7 @@ class MedicinesController < ApplicationController
   def edit; end
 
   def update
-    if @medicine.update_attributes(medicine_params)
+    if @medicine.update(medicine_params)
       redirect_to medicines_path, notice: t('medicines.success.update')
     else
       render :edit
