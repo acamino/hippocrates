@@ -1,4 +1,5 @@
 class Anamnesis < ApplicationRecord
+  include Discard::Model
   include PublicActivity::Model
 
   ATTRIBUTE_WHITELIST = [

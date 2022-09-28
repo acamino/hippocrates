@@ -13,6 +13,7 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'activerecord-import', '~> 1.0'
 gem 'aws-sdk-s3'
 gem 'dotenv-rails'
+gem 'discard', '~> 1.2'
 gem 'haml'
 gem 'kaminari'
 gem 'mimemagic', git: 'https://github.com/mimemagicrb/mimemagic.git', ref: '01f92d8' # 0.3.5

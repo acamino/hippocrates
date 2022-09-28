@@ -10,7 +10,7 @@ class PatientsController < ApplicationController
 
   def index
     delete_referer_location
-    @patients = Patient.includes(:consultations, :anamnesis).search(params[:query]).page(page)
+    @patients = Patient.kept.includes(:consultations, :anamnesis).search(params[:query]).page(page)
   end
 
   def new
@@ -26,6 +26,7 @@ class PatientsController < ApplicationController
       track_activity(@patient, :created)
 
       Setting::MedicalHistorySequence.new.save
+
       redirect_to new_patient_anamnesis_path(
         @patient
       ), notice: t('patients.success.creation')
@@ -61,15 +62,11 @@ class PatientsController < ApplicationController
 
   def destroy
     @patient = Patient.find(params[:id])
-    patient_name = @patient.full_name
+    @patient.archive
 
-    ApplicationRecord.transaction do
-      @patient.consultations.destroy_all
-      @patient&.anamnesis&.destroy
-      @patient.destroy
-    end
+    track_activity(@patient, :deleted)
 
-    redirect_to patients_path, notice: t('patients.success.destroy', name: patient_name)
+    redirect_to patients_path, notice: t('patients.success.destroy', name: @patient.full_name)
   end
 
   private

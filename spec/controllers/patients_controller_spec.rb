@@ -126,10 +126,10 @@ describe PatientsController do
 
   describe '#destroy' do
     let!(:patient) { create(:patient) }
+    let!(:anamnesis) { create(:anamnesis, patient: patient) }
 
     before do |example|
       create_list(:consultation, 2, patient: patient)
-      create(:anamnesis, patient: patient)
       create(:activity, owner: patient)
 
       delete :destroy, params: { id: patient.id } unless example.metadata[:skip_on_before]
@@ -138,11 +138,12 @@ describe PatientsController do
     it 'deletes the patient and the related models', :skip_on_before do
       expect do
         delete :destroy, params: { id: patient.id }
-      end.to change(Patient, :count).by(-1)
-        .and change(Consultation, :count).by(-2)
-        .and change(Anamnesis, :count).by(-1)
-        .and change(Anamnesis, :count).by(-1)
-        .and change(Activity, :count).by(0)
+        patient.reload
+        anamnesis.reload
+      end.to(
+        change(patient, :discarded?).from(false).to(true)
+        .and(change(anamnesis, :discarded?).from(false).to(true))
+      )
     end
 
     it { is_expected.to redirect_to patients_path }

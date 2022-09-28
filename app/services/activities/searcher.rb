@@ -1,25 +1,22 @@
 module Activities
   class Searcher
-    def self.call(uid, start_date, end_date)
-      new(uid, start_date, end_date).call
+    def self.call(uid, date_range)
+      new(uid, date_range).call
     end
 
-    def initialize(uid, start_date, end_date)
+    def initialize(uid, date_range)
       @uid        = uid
-      @start_date = start_date
-      @end_date   = end_date
+      @date_range = date_range
     end
 
     def call
-      Activity.by_date(date_range).by_owner(uid).order_by_date
+      Activity.by_date(date_range)
+              .by_owner(uid)
+              .order_by_date
     end
 
     private
 
-    attr_reader :start_date, :end_date, :uid
-
-    def date_range
-      start_date.beginning_of_day..end_date.end_of_day
-    end
+    attr_reader :date_range, :uid
   end
 end

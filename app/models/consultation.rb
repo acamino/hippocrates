@@ -1,5 +1,6 @@
 # rubocop:disable Metrics/ClassLength
 class Consultation < ApplicationRecord
+  include Discard::Model
   include PublicActivity::Model
 
   ATTRIBUTE_WHITELIST = [

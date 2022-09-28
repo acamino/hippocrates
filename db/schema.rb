@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_27_144600) do
+ActiveRecord::Schema.define(version: 2022_09_28_043339) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -47,6 +47,8 @@ ActiveRecord::Schema.define(version: 2022_09_27_144600) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "hearing_aids", default: false, null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_anamneses_on_discarded_at"
   end
 
   create_table "attachments", force: :cascade do |t|
@@ -105,7 +107,9 @@ ActiveRecord::Schema.define(version: 2022_09_27_144600) do
     t.string "serial"
     t.bigint "branch_office_id"
     t.decimal "price", default: "0.0", null: false
+    t.datetime "discarded_at"
     t.index ["branch_office_id"], name: "index_consultations_on_branch_office_id"
+    t.index ["discarded_at"], name: "index_consultations_on_discarded_at"
     t.index ["special_patient"], name: "index_consultations_on_special_patient"
     t.index ["user_id"], name: "index_consultations_on_user_id"
   end
@@ -161,8 +165,10 @@ ActiveRecord::Schema.define(version: 2022_09_27_144600) do
     t.boolean "special", default: false, null: false
     t.text "health_insurance"
     t.bigint "branch_office_id"
+    t.datetime "discarded_at"
     t.index ["branch_office_id"], name: "index_patients_on_branch_office_id"
     t.index ["civil_status"], name: "index_patients_on_civil_status"
+    t.index ["discarded_at"], name: "index_patients_on_discarded_at"
     t.index ["first_name", "last_name"], name: "index_patients_on_first_name_and_last_name", using: :gin
     t.index ["gender"], name: "index_patients_on_gender"
     t.index ["identity_card_number"], name: "index_patients_on_identity_card_number", unique: true

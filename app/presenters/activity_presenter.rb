@@ -10,7 +10,8 @@ class ActivityPresenter < SimpleDelegator
   ACTIONS = {
     'viewed'  => 'ABRIR',
     'created' => 'CREAR',
-    'updated' => 'EDITAR'
+    'updated' => 'EDITAR',
+    'deleted' => 'ELIMINAR'
   }.freeze
 
   def initialize(activity)

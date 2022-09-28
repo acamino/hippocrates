@@ -3,8 +3,8 @@ module Admin
     before_action :authorize_admin
 
     def index
-      @consultations  = Consultation.by_date(date_range).by_user(uid).by_branch_office(bid).order_by_date.page(page)
-      @total          = Consultation.by_date(date_range).by_user(uid).by_branch_office(bid).order_by_date.sum(:price)
+      @consultations  = Charges::Searcher.call(uid, bid, date_range).page(page)
+      @total          = Charges::Searcher.call(uid, bid, date_range).sum(:price)
       @users          = User.physician.order(:pretty_name)
       @branch_offices = BranchOffice.active.order(:active).order(:name)
     end

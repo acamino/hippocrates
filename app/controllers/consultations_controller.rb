@@ -7,7 +7,7 @@ class ConsultationsController < ApplicationController
 
   def index
     delete_referer_location
-    @consultations = @patient.consultations.page(params.fetch(:page, 1))
+    @consultations = @patient.consultations.kept.page(params.fetch(:page, 1))
   end
 
   def new

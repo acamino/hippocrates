@@ -1,6 +1,7 @@
 require 'csv'
 
 class Patient < ApplicationRecord
+  include Discard::Model
   include PgSearch::Model
   include PublicActivity::Model
 
@@ -41,7 +42,7 @@ class Patient < ApplicationRecord
   has_one :anamnesis
 
   has_one :most_recent_consultation, lambda {
-    merge(Consultation.most_recent_by_patient)
+    merge(Consultation.kept.most_recent_by_patient)
   }, class_name: 'Consultation', inverse_of: :patient
 
   has_many :consultations
@@ -82,6 +83,16 @@ class Patient < ApplicationRecord
 
   def self.search(query)
     (query.present? ? lookup(query) : all).order_by_name
+  end
+
+  def archive
+    ApplicationRecord.transaction do
+      consultations.discard_all
+      anamnesis&.discard
+      discard
+
+      update(identity_card_number: "#{DateTime.now.strftime('%Q')}__#{identity_card_number}")
+    end
   end
 
   def full_name

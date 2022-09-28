@@ -63,11 +63,14 @@ describe ActivityPresenter do
     it_behaves_like 'tracked action', 'anamnesis.viewed',     'ABRIR'
     it_behaves_like 'tracked action', 'anamnesis.created',    'CREAR'
     it_behaves_like 'tracked action', 'anamnesis.updated',    'EDITAR'
+    it_behaves_like 'tracked action', 'anamnesis.deleted',    'ELIMINAR'
     it_behaves_like 'tracked action', 'consultation.viewed',  'ABRIR'
     it_behaves_like 'tracked action', 'consultation.created', 'CREAR'
     it_behaves_like 'tracked action', 'consultation.updated', 'EDITAR'
+    it_behaves_like 'tracked action', 'consultation.deleted', 'ELIMINAR'
     it_behaves_like 'tracked action', 'patient.viewed',       'ABRIR'
     it_behaves_like 'tracked action', 'patient.created',      'CREAR'
     it_behaves_like 'tracked action', 'patient.updated',      'EDITAR'
+    it_behaves_like 'tracked action', 'patient.deleted',      'ELIMINAR'
   end
 end

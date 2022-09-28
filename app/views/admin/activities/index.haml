@@ -20,7 +20,6 @@
           %th.col-md-3 Usuario
           %th.col-md-2 Acción
           %th.col-md-2 Modelo
-          %th
           %th.col-md-3 Paciente
           %th.col-md-2 Fecha
       %tbody
@@ -37,13 +36,6 @@
                 = activity.action
               %td
                 = activity.model
-              %td
-                - if activity.patient.present?
-                  %span.text-primary
-                    %i.fa.fa-circle
-                - else
-                  %span.text-primary
-                    %i.far.fa-circle
               %td
                 = activity.patient&.full_name
               %td
