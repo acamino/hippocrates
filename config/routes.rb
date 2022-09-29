@@ -17,7 +17,6 @@ Rails.application.routes.draw do
     end
   end
 
-
   namespace :admin do
     resources :activities,     only: [:index]
     resources :branch_offices, only: [:index, :new, :create, :edit, :update, :destroy]
