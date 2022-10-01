@@ -28,6 +28,7 @@ describe Consultations::Document do
         consultation: consultation,
         definite_article: definite_article,
         current_date: '21 de Octubre de 2015',
+        current_time: '10:25 AM',
         start_time: start_time,
         end_time: end_time,
         rest_time: rest_time,
@@ -44,7 +45,7 @@ describe Consultations::Document do
       let(:definite_article) { 'el' }
 
       it 'builds certificate for male' do
-        Timecop.freeze('2015-10-21') do
+        Timecop.freeze('2015-10-21 10:25') do
           expect(described_class.build(consultation)).to eq(certificate)
         end
       end
@@ -55,7 +56,7 @@ describe Consultations::Document do
       let(:definite_article) { 'la' }
 
       it 'builds certificate for female' do
-        Timecop.freeze('2015-10-21') do
+        Timecop.freeze('2015-10-21 10:25') do
           expect(described_class.build(consultation)).to eq(certificate)
         end
       end
@@ -68,7 +69,7 @@ describe Consultations::Document do
       let(:definite_article) { 'la' }
 
       it 'builds certificate for attendance' do
-        Timecop.freeze('2015-10-21') do
+        Timecop.freeze('2015-10-21 10:25') do
           options = { start_time: '10:00 am', end_time: '11:30 am' }
           expect(described_class.build(consultation, options)).to eq(certificate)
         end
@@ -81,7 +82,7 @@ describe Consultations::Document do
       let(:definite_article) { 'la' }
 
       it 'builds certificate for rest' do
-        Timecop.freeze('2015-10-21') do
+        Timecop.freeze('2015-10-21 10:25') do
           options = { rest_time: '48' }
           expect(described_class.build(consultation, options)).to eq(certificate)
         end
@@ -96,7 +97,7 @@ describe Consultations::Document do
       let(:definite_article)       { 'la' }
 
       it 'builds certificate for surgery' do
-        Timecop.freeze('2015-10-21') do
+        Timecop.freeze('2015-10-21 10:25') do
           options = {
             surgical_treatment: 'treatment',
             surgery_tentative_date: 'tentative date',
@@ -113,7 +114,7 @@ describe Consultations::Document do
       let(:definite_article) { 'la' }
 
       it 'builds certificate for medical history' do
-        Timecop.freeze('2015-10-21') do
+        Timecop.freeze('2015-10-21 10:25') do
           options = { consultations: '' }
           expect(described_class.build(consultation, options)).to eq(certificate)
         end
