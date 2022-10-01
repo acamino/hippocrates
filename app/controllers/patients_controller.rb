@@ -56,6 +56,7 @@ class PatientsController < ApplicationController
         redirect_to patients_path, notice: t('patients.success.update', name: @patient.full_name)
       end
     else
+      @branch_offices = BranchOffice.active.order(:active).order(:name)
       render :edit
     end
   end
