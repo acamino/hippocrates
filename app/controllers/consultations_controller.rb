@@ -20,6 +20,7 @@ class ConsultationsController < ApplicationController
     store_referer_location
   end
 
+  # rubocop:disable Metrics/MethodLength
   def create
     @consultation = Consultation.new(consultation_params)
     if @consultation.save

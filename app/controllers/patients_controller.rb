@@ -19,6 +19,7 @@ class PatientsController < ApplicationController
     @branch_offices = BranchOffice.active.order(:active).order(:name)
   end
 
+  # rubocop:disable Metrics/MethodLength
   def create
     @patient = Patient.new(patient_params)
 
@@ -45,6 +46,7 @@ class PatientsController < ApplicationController
     @referer_location = referer_location
   end
 
+  # rubocop:disable Metrics/AbcSize
   def update
     @patient = Patient.find(params[:id])
     if @patient.update(patient_params)
