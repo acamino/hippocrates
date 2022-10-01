@@ -18,7 +18,6 @@ module Consultations
         definite_article:       definite_article,
         current_date:           current_date,
         current_time:           current_time,
-        es_gender:              es_gender,
         start_time:             options.fetch(:start_time, ''),
         end_time:               options.fetch(:end_time, ''),
         rest_time:              options.fetch(:rest_time, ''),
@@ -42,10 +41,6 @@ module Consultations
 
     def definite_article
       patient.male? ? 'el' : 'la'
-    end
-
-    def es_gender
-      patient.male? ? 'Masculino' : 'Femenino'
     end
 
     def current_date
