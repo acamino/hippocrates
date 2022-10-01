@@ -15,7 +15,7 @@
   .form-group
     .col-md-10.col-md-offset-2
       = link_to "Cancelar", admin_branch_offices_path, class: "btn btn-default"
-      = f.submit "Guardar", class: "btn btn-success"
+      = f.submit "Guardar", class: "btn btn-success hippocrates--save"
       - unless @branch_office.new_record?
         = link_to t('branch_offices.actions.destroy'), admin_branch_office_path(@branch_office),
             data: { confirm: t("branch_offices.destroy.confirm") },
