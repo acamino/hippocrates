@@ -2,11 +2,6 @@ Hippocrates.Consultations = {
   init: function() {
     var self = this;
 
-    // XXX: Maybe add the same idea to all the save buttons.
-    keyboardJS.bind('ctrl + g', (e) => {
-      $('#save-consultation').click();
-    });
-
     $(".destroy").on("change", function () {
       $(this).closest("tr").toggleClass("destroyable");
     });

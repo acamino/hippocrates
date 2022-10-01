@@ -117,6 +117,9 @@ es:
   certificates:
     button:
       download: Descargar certificado
+  consents:
+    button:
+      download: Descargar consentimiento
   prescriptions:
     button:
       print: Imprimir receta

@@ -116,6 +116,9 @@ en:
   certificates:
     button:
       download: Download certificate
+  consents:
+    button:
+      download: Download consent
   prescriptions:
     button:
       print: Print prescription

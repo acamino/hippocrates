@@ -20,24 +20,24 @@ Hippocrates.Consents = {
 
   updateUrl: function(certificateType) {
     if (_.isUndefined(certificateType)) {
-      certificateType = $("#certificate").val();
+      certificateType = $("#consent").val();
     }
     var url = this.buildUrl(certificateType);
 
-    $("#certificates").find(".btn-primary").attr("href", url);
+    $("#consents").find(".btn-primary").attr("href", url);
   },
 
   updateUrlAndToggleControls: function () {
-    var certificateType = $("#certificate").val();
+    var consentType = $("#consent").val();
 
-    this.updateUrl(certificateType);
+    this.updateUrl(consentType);
   },
 
-  buildUrl: function(certificateType) {
+  buildUrl: function(consentType) {
     var baseUrl = "/consultations/documents/download";
     var consultationId = this.getConsultationId();
 
-    return baseUrl + "?consultation_id=" + consultationId + "&" + this.buildParams(certificateType);
+    return baseUrl + "?consultation_id=" + consultationId + "&" + this.buildParams(consentType);
   },
 
   buildParams: function(certificateType) {

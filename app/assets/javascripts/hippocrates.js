@@ -27,6 +27,10 @@ $(document).on('turbolinks:load', function() {
     var date = new Date();
     date.setDate(date.getDate() - 1);
 
+    keyboardJS.bind('ctrl + g', (e) => {
+      $('.hippocrates--save').click();
+    });
+
     $("#consultation_next_appointment").datepicker({
         startDate: date,
         todayHighlight: true,

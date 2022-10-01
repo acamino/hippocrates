@@ -17,6 +17,8 @@ module Consultations
         consultation:           ConsultationPresenter.new(consultation),
         definite_article:       definite_article,
         current_date:           current_date,
+        current_time:           current_time,
+        es_gender:              es_gender,
         start_time:             options.fetch(:start_time, ''),
         end_time:               options.fetch(:end_time, ''),
         rest_time:              options.fetch(:rest_time, ''),
@@ -42,8 +44,16 @@ module Consultations
       patient.male? ? 'el' : 'la'
     end
 
+    def es_gender
+      patient.male? ? 'Masculino' : 'Femenino'
+    end
+
     def current_date
       I18n.localize(Date.today, format: :long)
+    end
+
+    def current_time
+      Time.zone.now.strftime('%I:%M %p')
     end
 
     def consultations
