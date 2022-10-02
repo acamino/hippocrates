@@ -27,7 +27,7 @@ $(document).on('turbolinks:load', function() {
     var date = new Date();
     date.setDate(date.getDate() - 1);
 
-    keyboardJS.bind('ctrl + g', (e) => {
+    keyboardJS.bind('ctrl + g', function(e) {
       $('.hippocrates--save').click();
     });
 
