@@ -58,7 +58,6 @@ class Patient < ApplicationRecord
 
   validates :medical_history,
             :identity_card_number, uniqueness: true
-  validates :email, uniqueness: true, allow_nil: true, allow_blank: true
 
   before_save :normalize
 
