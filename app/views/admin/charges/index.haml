@@ -1,0 +1,69 @@
+.row
+  .col-md-12
+    = form_tag(admin_charges_path, method: 'GET', class: 'form') do
+      .form-group.col-sm-3
+        = text_field_tag :date_range, params[:date_range], placeholder: '', class: 'form-control input-md'
+      .form-group.col-sm-3
+        = select_tag :uid,
+          options_from_collection_for_select(@users, 'id', 'pretty_name',
+          params[:uid]), include_blank: 'Todos', class: 'form-control input-md'
+      .form-group.col-sm-3
+        = select_tag :bid,
+          options_from_collection_for_select(@branch_offices, 'id', 'name',
+          params[:bid]), include_blank: 'Todos', class: 'form-control input-md'
+      .form-group.col-sm-3
+        %button.btn.btn-md.btn-primary.hidden-xs{ type: "submit" }
+          = t('views.search')
+
+.row
+  .col-md-12
+    %table.table.table-striped
+      %thead
+        %tr
+          %th.col-md-2 Sucrusal
+          %th.col-md-4 Usuario
+          %th
+          %th.col-md-3 Paciente
+          %th.col-md-1.text-right Cobro
+          %th.col-md-2 Fecha
+      %tbody
+        - @consultations.each do |_consultation|
+          - present_for(_consultation) do |consultation|
+            %tr
+              %td
+                = consultation.branch_office.name
+              %td
+                = consultation.doctor.pretty_name.upcase
+              %td
+                - unless consultation.price_changes.empty?
+                  %span.text-primary
+                    %a.show-price-changes{ href: '#', id: consultation.id, data: { turbolinks:  false } }
+                      %i.fa.fa-link
+              %td
+                = consultation.patient.full_name
+              %td.text-right
+                = "$ #{consultation.pretty_price}"
+              %td
+                = consultation.created_at.strftime('%b %d, %Y %I:%M %p')
+      %tfoot
+        %tr
+          %td
+          %td
+          %td
+          %td
+          %td.text-right
+            %b
+              = "$ #{format('%.2f', @consultations.pluck(:price).sum)}"
+          %td
+.row
+  .col-md-12
+    %big
+      %b
+        Total:
+        = "$ #{format('%.2f', @total)}"
+
+.row
+  .col-md-12.text-center
+    = paginate @consultations
+
+= render 'modal_charges'

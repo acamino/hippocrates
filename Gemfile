@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.7.4'
 
 gem 'pg'
-gem 'rails', '~> 5.2.6'
+gem 'rails', '~> 6.0'
 
 gem 'puma'
 gem 'rails_12factor', group: :production
@@ -12,14 +12,17 @@ gem 'devise'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'activerecord-import', '~> 1.0'
 gem 'aws-sdk-s3'
+gem 'discard', '~> 1.2'
 gem 'dotenv-rails'
 gem 'haml'
 gem 'kaminari'
 gem 'mimemagic', git: 'https://github.com/mimemagicrb/mimemagic.git', ref: '01f92d8' # 0.3.5
 gem 'pg_search'
 gem 'prawn'
+gem 'public_activity'
 gem 'redis-rails'
 gem 'sablon'
+gem 'sendgrid-ruby'
 gem 'shrine', '~> 3.0'
 gem 'unicode_utils'
 

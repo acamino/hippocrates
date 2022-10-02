@@ -1,4 +1,7 @@
 class Anamnesis < ApplicationRecord
+  include Discard::Model
+  include PublicActivity::Model
+
   ATTRIBUTE_WHITELIST = [
     :medical_history,
     :surgical_history,

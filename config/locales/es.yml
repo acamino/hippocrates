@@ -37,9 +37,13 @@ es:
       consultation: Consulta
       clinical-history: Historia clínica
       edit: Editar
+      destroy: Eliminar
+    destroy:
+      confirm: ¿Está seguro de eliminar el paciente %{name}?
     success:
       creation: Paciente creado correctamente
-      update: Paciente actualizado correctamente
+      update: Paciente %{name} actualizado correctamente
+      destroy: Paciente %{name} eliminado correctamente
     special:
       remove:
         confirmation: ¿Está seguro de remover el paciente especial?
@@ -59,6 +63,22 @@ es:
       creation: Medicina creada correctamente
       update: Medicina actualizada correctamente
       destroy: Medicina eliminada correctamente
+  branch_offices:
+    button:
+      new: Nuevo lugar de atención
+    fields:
+      name: Nombre
+      active: Activo
+      main: Principal
+    actions:
+      edit: Editar
+      destroy: Eliminar
+    destroy:
+      confirm: ¿Está seguro de eliminar este registro?
+    success:
+      creation: Lugar de atención creado correctamente
+      update: Lugar de atención actualizado correctamente
+      destroy: Lugar de atención eliminado correctamente
   diseases:
     button:
       new: Nueva enfermedad
@@ -85,6 +105,7 @@ es:
     reason: Motivo
     ongoing_issue: Enfermedad
     doctor: Médico
+    branch_office: Lugar de consulta
     success:
       creation: Consulta creada correctamente
       update: Consulta actualizada correctamente
@@ -96,6 +117,9 @@ es:
   certificates:
     button:
       download: Descargar certificado
+  consents:
+    button:
+      download: Descargar consentimiento
   prescriptions:
     button:
       print: Imprimir receta

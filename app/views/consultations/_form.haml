@@ -8,9 +8,19 @@
   - if current_user.editor?
     = panel(:caution, 'Médico') do
       .row-fluid
-        .form-group.col-md-4
-          .input-group
-            = f.select :user_id, options_for_select(ConsultationPresenter.new(@consultation).doctors, @consultation.doctor&.id), {}, class: "form-control input-md"
+        .form-group.col-md-5
+          = f.select :user_id,
+            options_for_select(ConsultationPresenter.new(@consultation).doctors, @consultation.doctor&.id),
+            {},
+            class: "form-control input-sm"
+
+  = panel(:caution, 'Lugar de Consulta') do
+    .row-fluid
+      .form-group.col-md-5
+        = f.select :branch_office_id,
+          options_from_collection_for_select(@branch_offices, 'id', 'name', @consultation&.branch_office_id),
+          {},
+          include_blank: true, class: "form-control input-sm"
 
   = render partial: 'patient', locals: { form: f }
 
@@ -232,12 +242,31 @@
           - else
             = f.text_field :next_appointment, value: @consultation.next_appointment_date, class: "form-control input-sm"
 
+  = panel(:info, 'Valor de la Consulta') do
+    .row-fluid
+      .form-group.col-md-2
+        .input-group
+          %span.input-group-addon.input-lg $
+          - if @consultation.new_record?
+            = f.text_field :price,
+              class: "form-control input-lg"
+          - else
+            // XXX: No string interpolation
+            %input#consultation_price.form-control.input-lg.colored{ disabled: 'disabled', value: "#{format('%.2f', @consultation.price)}" }
+    - unless @consultation.new_record?
+      .row-fluid
+        .col-md-12.text-right
+          %a#show-change-price(href="#")
+            = t('prescriptions.actions.edit')
+
   .row-fluid
     = link_to "Consultas", patient_consultations_path(@patient), class: "btn btn-default"
-    = f.submit "Guardar", class: "btn btn-success"
+    = f.submit "Guardar", class: "btn btn-success hippocrates--save"
 
 = render 'modal_consultation'
+= render 'modal_change_price'
 = render 'modal_certificates'
+= render 'modal_consents'
 = render 'modal_prescription'
 = render 'prescription'
 = render 'hint'

@@ -90,6 +90,8 @@
                       %big= consultation.long_date
                 = render partial: "details", locals: { label: t("consultations.doctor"),
                                                        content: consultation.doctor.pretty_name }
+                = render partial: "details", locals: { label: t("consultations.branch_office"),
+                                                       content: consultation.branch_office&.name }
                 = render partial: "details", locals: { label: t("consultations.ongoing_issue"),
                                                        content: consultation.ongoing_issue }
                 = render partial: "details", locals: { label: t("consultations.miscellaneous"),
@@ -128,7 +130,7 @@
                         data: { turbolinks: false }
                     %li
                       = link_to t('consultations.button.download'),
-                        download_certificates_path(consultation_id: consultation.id, certificate_type: "consultation"),
+                        download_consultations_documents_path(consultation_id: consultation.id, certificate_type: "consultation"),
                         data: { turbolinks: false }
 
 .row

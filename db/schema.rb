@@ -2,20 +2,39 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_25_215048) do
+ActiveRecord::Schema.define(version: 2022_09_29_011246) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "plpgsql"
   enable_extension "unaccent"
+
+  create_table "activities", id: :serial, force: :cascade do |t|
+    t.string "trackable_type"
+    t.integer "trackable_id"
+    t.string "owner_type"
+    t.integer "owner_id"
+    t.string "key"
+    t.text "parameters"
+    t.string "recipient_type"
+    t.integer "recipient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type"
+    t.index ["owner_type", "owner_id"], name: "index_activities_on_owner_type_and_owner_id"
+    t.index ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type"
+    t.index ["recipient_type", "recipient_id"], name: "index_activities_on_recipient_type_and_recipient_id"
+    t.index ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type"
+    t.index ["trackable_type", "trackable_id"], name: "index_activities_on_trackable_type_and_trackable_id"
+  end
 
   create_table "anamneses", id: :serial, force: :cascade do |t|
     t.integer "patient_id"
@@ -28,6 +47,8 @@ ActiveRecord::Schema.define(version: 2021_09_25_215048) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "hearing_aids", default: false, null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_anamneses_on_discarded_at"
   end
 
   create_table "attachments", force: :cascade do |t|
@@ -36,6 +57,15 @@ ActiveRecord::Schema.define(version: 2021_09_25_215048) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["document_id"], name: "index_attachments_on_document_id"
+  end
+
+  create_table "branch_offices", force: :cascade do |t|
+    t.text "name", null: false
+    t.boolean "main", default: false, null: false
+    t.boolean "active", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_branch_offices_on_name", unique: true
   end
 
   create_table "consultations", id: :serial, force: :cascade do |t|
@@ -75,6 +105,11 @@ ActiveRecord::Schema.define(version: 2021_09_25_215048) do
     t.text "recommendations"
     t.bigint "user_id"
     t.string "serial"
+    t.bigint "branch_office_id"
+    t.decimal "price", default: "0.0", null: false
+    t.datetime "discarded_at"
+    t.index ["branch_office_id"], name: "index_consultations_on_branch_office_id"
+    t.index ["discarded_at"], name: "index_consultations_on_discarded_at"
     t.index ["special_patient"], name: "index_consultations_on_special_patient"
     t.index ["user_id"], name: "index_consultations_on_user_id"
   end
@@ -129,7 +164,11 @@ ActiveRecord::Schema.define(version: 2021_09_25_215048) do
     t.datetime "updated_at", null: false
     t.boolean "special", default: false, null: false
     t.text "health_insurance"
+    t.bigint "branch_office_id"
+    t.datetime "discarded_at"
+    t.index ["branch_office_id"], name: "index_patients_on_branch_office_id"
     t.index ["civil_status"], name: "index_patients_on_civil_status"
+    t.index ["discarded_at"], name: "index_patients_on_discarded_at"
     t.index ["first_name", "last_name"], name: "index_patients_on_first_name_and_last_name", using: :gin
     t.index ["gender"], name: "index_patients_on_gender"
     t.index ["identity_card_number"], name: "index_patients_on_identity_card_number", unique: true
@@ -144,6 +183,18 @@ ActiveRecord::Schema.define(version: 2021_09_25_215048) do
     t.string "subscription", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "price_changes", force: :cascade do |t|
+    t.bigint "consultation_id", null: false
+    t.bigint "user_id", null: false
+    t.decimal "previous_price", default: "0.0", null: false
+    t.decimal "updated_price", default: "0.0", null: false
+    t.text "reason", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["consultation_id"], name: "index_price_changes_on_consultation_id"
+    t.index ["user_id"], name: "index_price_changes_on_user_id"
   end
 
   create_table "settings", id: :serial, force: :cascade do |t|
@@ -186,9 +237,13 @@ ActiveRecord::Schema.define(version: 2021_09_25_215048) do
 
   add_foreign_key "anamneses", "patients"
   add_foreign_key "attachments", "documents", on_delete: :cascade
+  add_foreign_key "consultations", "branch_offices", on_delete: :nullify
   add_foreign_key "consultations", "patients"
   add_foreign_key "consultations", "users", on_delete: :nullify
   add_foreign_key "diagnoses", "consultations"
   add_foreign_key "documents", "consultations", on_delete: :cascade
+  add_foreign_key "patients", "branch_offices", on_delete: :nullify
   add_foreign_key "prescriptions", "consultations"
+  add_foreign_key "price_changes", "consultations", on_delete: :cascade
+  add_foreign_key "price_changes", "users", on_delete: :cascade
 end

@@ -61,7 +61,12 @@ describe API::ConsultationsController do
       it 'destroys consultations', :skip_on_before do
         expect do
           delete :destroy, params: { patient_id: bob.id, consultations: consultations }
-        end.to change { Consultation.count }.from(2).to(0)
+          c1.reload
+          c2.reload
+        end.to(
+          change(c1, :discarded?).from(false).to(true)
+          .and(change(c2, :discarded?).from(false).to(true))
+        )
       end
     end
 

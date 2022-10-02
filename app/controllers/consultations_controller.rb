@@ -1,25 +1,32 @@
 class ConsultationsController < ApplicationController
+  include Trackable
+
   before_action :fetch_consultation, only: [:edit, :update]
   before_action :fetch_patient
   before_action :adjust_time!, only: [:update]
 
   def index
     delete_referer_location
-    @consultations = @patient.consultations.page(params.fetch(:page, 1))
+    @consultations = @patient.consultations.kept.page(params.fetch(:page, 1))
   end
 
   def new
     @consultation = Consultation.new
+    @branch_offices = BranchOffice.active.order(:active).order(:name)
+
     maximum_diagnoses.times     { @consultation.diagnoses.build }
     maximum_prescriptions.times { @consultation.prescriptions.build }
 
     store_referer_location
   end
 
+  # rubocop:disable Metrics/MethodLength
   def create
     @consultation = Consultation.new(consultation_params)
     if @consultation.save
-      @patient.update_attributes(patient_params)
+      track_activity(@consultation, :created)
+
+      @patient.update(patient_params)
 
       redirect_to edit_patient_consultation_path(
         @patient, @consultation
@@ -31,6 +38,10 @@ class ConsultationsController < ApplicationController
   end
 
   def edit
+    track_activity(@consultation, :viewed)
+
+    @branch_offices = BranchOffice.active.order(:active).order(:name)
+
     remaining_diagnoses.times     { @consultation.diagnoses.build }
     remaining_prescriptions.times { @consultation.prescriptions.build }
 
@@ -38,8 +49,10 @@ class ConsultationsController < ApplicationController
   end
 
   def update
-    if @consultation.update_attributes(consultation_params)
-      @patient.update_attributes(patient_params)
+    if @consultation.update(consultation_params)
+      track_activity(@consultation, :updated)
+
+      @patient.update(patient_params)
       delete_referer_location
 
       redirect_to edit_patient_consultation_path(

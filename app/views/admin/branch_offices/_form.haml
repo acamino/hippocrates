@@ -1,0 +1,23 @@
+= error_messages_for @branch_office
+= form_for @branch_office, url: path, html: { class: "form-horizontal" } do |f|
+  .form-group
+    = f.label :name, t('branch_offices.fields.name'), class: "col-md-2 control-label"
+    .col-md-10
+      = f.text_field :name, class: "form-control input-sm"
+  .form-group
+    = f.label :main, t('branch_offices.fields.main'), class: "col-md-2 control-label"
+    .col-md-10
+      = f.check_box :main
+  .form-group
+    = f.label :active, t('branch_offices.fields.active'), class: "col-md-2 control-label"
+    .col-md-10
+      = f.check_box :active
+  .form-group
+    .col-md-10.col-md-offset-2
+      = link_to "Cancelar", admin_branch_offices_path, class: "btn btn-default"
+      = f.submit "Guardar", class: "btn btn-success hippocrates--save"
+      - unless @branch_office.new_record?
+        = link_to t('branch_offices.actions.destroy'), admin_branch_office_path(@branch_office),
+            data: { confirm: t("branch_offices.destroy.confirm") },
+            method: :delete,
+            class: "btn btn-danger"

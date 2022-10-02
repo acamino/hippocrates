@@ -4,6 +4,9 @@ if(typeof Hippocrates === "undefined") {
   Hippocrates.Certificates = {};
   Hippocrates.ClinicalHistory = {};
   Hippocrates.Consultations = {};
+  Hippocrates.Consents = {};
+  Hippocrates.ChangePrice = {};
+  Hippocrates.Charges = {};
   Hippocrates.Hint = {};
   Hippocrates.Prescription = {};
   Hippocrates.Settings = {};
@@ -12,6 +15,9 @@ if(typeof Hippocrates === "undefined") {
 $(document).on('turbolinks:load', function() {
     Hippocrates.Autocomplete.init();
     Hippocrates.Certificates.init();
+    Hippocrates.Consents.init();
+    Hippocrates.ChangePrice.init();
+    Hippocrates.Charges.init();
     Hippocrates.ClinicalHistory.init();
     Hippocrates.Consultations.init();
     Hippocrates.Hint.init();
@@ -20,6 +26,10 @@ $(document).on('turbolinks:load', function() {
 
     var date = new Date();
     date.setDate(date.getDate() - 1);
+
+    keyboardJS.bind('ctrl + g', (e) => {
+      $('.hippocrates--save').click();
+    });
 
     $("#consultation_next_appointment").datepicker({
         startDate: date,
@@ -51,6 +61,44 @@ $(document).on('turbolinks:load', function() {
 
         $(".patient-age").val(patientAge);
     });
+
+    $("#date_range").daterangepicker({
+        autoApply: true,
+        locale: {
+            daysOfWeek: [
+                'Do',
+                'Lu',
+                'Ma',
+                'Mi',
+                'Ju',
+                'Vi',
+                'Sa'
+            ],
+            monthNames: [
+                'Enero',
+                'Febrero',
+                'Marzo',
+                'Abril',
+                'Mayo',
+                'Junio',
+                'Julio',
+                'Agosto',
+                'Septiembre',
+                'Octubre',
+                'Noviembre',
+                'Diciembre'
+            ],
+            firstDay: 1,
+            format: 'YYYY-MM-DD'
+        }
+    });
+
+    if ($("#changed_price").length) {
+      new Cleave('#consultation_price', {
+        numeral: true,
+        numeralThousandsGroupStyle: 'thousand'
+      });
+    }
 
     $(".panel-heading").on("click", function(e) {
         var panelBody = $(this).siblings();

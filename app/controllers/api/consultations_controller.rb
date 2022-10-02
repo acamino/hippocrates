@@ -16,7 +16,7 @@ module API
     end
 
     def destroy
-      Consultation.where(id: consultations_ids).destroy_all
+      Consultation.where(id: consultations_ids).discard_all
       render json: {}
     end
 

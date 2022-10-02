@@ -40,7 +40,7 @@ Hippocrates.ClinicalHistory = {
   },
 
   buildUrl: function (consultations) {
-    var baseUrl = "/certificates/download?certificate_type=history"
+    var baseUrl = "/consultations/documents/download?certificate_type=history"
 
     if (_.isEmpty(consultations)) {
       return baseUrl;

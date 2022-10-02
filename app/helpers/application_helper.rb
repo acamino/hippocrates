@@ -42,13 +42,14 @@ module ApplicationHelper
 
   def panel(color, title, &block)
     content_tag(:div, nil, class: "panel panel-#{color}") do
-      haml_tag(:div, { class: 'panel-heading' }) do
-        haml_tag(:strong, title)
-      end
-
-      haml_tag :div, { class: 'panel-body' } do
-        block.call
-      end
+      [
+        content_tag(:div, nil, class: 'panel-heading') do
+          content_tag(:strong, title)
+        end,
+        content_tag(:div, { class: 'panel-body' }) do
+          block.call
+        end
+      ].join.html_safe
     end
   end
 end

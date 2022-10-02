@@ -12,7 +12,7 @@
         .form-group.col-md-3
           .input-group
             %span.input-group-addon.input-sm Fecha Nacimiento
-            = f.text_field :birthdate, value: @patient.formatted_birthdate, class: "form-control input-sm"
+            = f.text_field :birthdate, value: PatientPresenter.new(@patient)&.formatted_birthdate, class: "form-control input-sm"
         .form-group.col-md-3
           .input-group
             %span.input-group-addon.input-sm # Cédula
@@ -69,7 +69,7 @@
             %input.form-control.input-sm.colored.patient-age{ disabled: 'disabled'}
         .form-group.col-md-3
           .input-group
-            %span.input-group-addon.input-sm Estado Civil
+            %span.input-group-addon.input-sm Estado civil
             / XXX: Keep in sync the model with the UI.
             = f.select :civil_status, options_for_select([['Soltero', 'single'], ['Casado', 'married'], ['Union Libre', 'civil_union'], ['Divorciado', 'divorced'], ['Viudo', 'widowed']], @patient.civil_status), {}, class: "form-control input-sm"
         .form-group.col-md-3
@@ -77,6 +77,12 @@
             %span.input-group-addon.input-sm Ocupación
             = f.text_field :profession, class: "form-control input-sm"
 
+      .row-fluid
+        .form-group.col-md-6
+          .input-group
+            %span.input-group-addon.input-sm Lugar de afiliación
+            = f.select :branch_office_id, options_from_collection_for_select(@branch_offices, 'id', 'name', @patient.branch_office_id), {}, class: "form-control input-sm"
+
   .row-fluid
     = link_to "Cancelar", @referer_location || patients_path, class: "btn btn-default"
-    = f.submit "Guardar", class: "btn btn-success"
+    = f.submit "Guardar", class: "btn btn-success hippocrates--save"

@@ -25,6 +25,7 @@ FactoryBot.define do
     next_appointment     { '2016-01-11' }
 
     patient
+    branch_office
     doctor { association :user }
   end
 

@@ -1,0 +1,56 @@
+.modal.fade#consents{ tabindex: "-1", role: "dialog" }
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{ type: "button",
+                       "data-dismiss": "modal",
+                       "aria-label": "Close" }
+          %span{ "aria-hidden": "true" } &times;
+        %h4.modal-title
+          %span.text-primary
+            %i.fa.fa-list
+          = @patient.name
+          %small
+            #{@patient.age.years} años
+            = gender_tag(@patient)
+      .modal-body
+        .form-horizontal
+          .form-group
+            %label.col-sm-2.control-label{ for: "consent" } Consentimiento
+            .col-md-6
+              %select.form-control.input-sm#consent
+                %option{ value: "bichectomy"                       } Bichectomía
+                %option{ value: "biopsy"                           } Biopsia
+                %option{ value: "blepharoplasty"                   } Blefaroplastia superior e inferior
+                %option{ value: "botox"                            } Botox
+                %option{ value: "cens"                             } Cens para exerésis de masa nasal
+                %option{ value: "cholestheatoma"                   } Colesteatoma
+                %option{ value: "consent"                          } Consentimiento estética
+                %option{ value: "covid"                            } Covid
+                %option{ value: "endonasal_dacryocystorhinostomy"  } Dacriocistorrinostomía endonasal
+                %option{ value: "eustachian_tube_balloon_dilation" } Dilatación de trompa de eustaquio
+                %option{ value: "epistaxis"                        } Epistaxis
+                %option{ value: "exeresis"                         } Exéresis de quiste y fístulas cervicales
+                %option{ value: "extraction"                       } Extracción de cuerpo extraño nasal
+                %option{ value: "fistula"                          } Fístula periauricular
+                %option{ value: "auricular_hematoma"               } Hematoma de pabellon auricular
+                %option{ value: "septal_hematoma"                  } Hematoma septal
+                %option{ value: "osteoma"                          } Osteoma
+                %option{ value: "otoplasty"                        } Otoplastia mas rinoplastia
+                %option{ value: "parotidectomy"                    } Parotidectomía del lado afecto
+                %option{ value: "sinonasal_polyposis"              } Poliposis nasosinusal
+                %option{ value: "ranula"                           } Ránula
+                %option{ value: "reduction"                        } Reduccion de fractura nasal
+                %option{ value: "nose_touch_up"                    } Retoque nasal
+                %option{ value: "functional_rhinoplasty"           } Rino mas menton
+                %option{ value: "secondary_rhinoplasty"            } Rinoplastia secundaria con costilla
+                %option{ value: "sinusitis_treatment"              } Tratamiento de sinusitis
+                %option{ value: "benign_tumors"                    } Tumuraciones benignas del pabellon auricular y CAE
+              %em.text-muted Selecciona un consentimiento informado
+
+      .modal-footer
+        %button.btn.btn-default{ "data-dismiss": "modal" } Cerrar
+        = link_to t('consents.button.download'),
+          download_consultations_documents_path(consultation_id: @consultation.id, certificate_type: "bichectomy", path: 'consents'),
+          class: 'btn btn-primary',
+          data: { turbolinks: false }

@@ -51,7 +51,7 @@ Hippocrates.Certificates = {
   },
 
   buildUrl: function(certificateType) {
-    var baseUrl = "/certificates/download";
+    var baseUrl = "/consultations/documents/download";
     var consultationId = this.getConsultationId();
 
     return baseUrl + "?consultation_id=" + consultationId + "&" + this.buildParams(certificateType);

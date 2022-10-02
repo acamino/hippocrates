@@ -1,0 +1,36 @@
+.modal.fade#price-changes{ tabindex: "-1", role: "dialog" }
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{ type: "button",
+                       "data-dismiss": "modal",
+                       "aria-label": "Close" }
+          %span{ "aria-hidden": "true" } &times;
+        %h4.modal-title
+          Valores de Consulta
+          %small
+            Historial de Cambios
+      .modal-body
+        .row-fluid
+          .form-group.col-md-12
+            #price-changes--content
+
+      .modal-footer
+        %button.btn.btn-default{ "data-dismiss": "modal" } Cerrar
+
+%script#tmpl-price-changes{ type: "x-tmpl-mustache" }
+  %table.table.table-striped.table-condensed
+    %thead
+      %tr
+        %th.col-md-3 Doctor
+        %th.col-md-4 Motivo
+        %th.col-md-2 Cambio
+        %th.col-md-3 Fecha
+    %tbody
+      {{#priceChanges}}
+      %tr
+        %td {{userName}}
+        %td {{reason}}
+        %td $ {{previousPrice}} → $ {{updatedPrice}}
+        %td {{date}}
+      {{/priceChanges}}

@@ -37,12 +37,15 @@ en:
       consultation: Consultation
       clinical-history: Clinical history
       edit: Edit
+      destroy: Delete
+    destroy:
+      confirm: Are you sure you want to delete it?
     success:
       creation: Patient created successfully
-      update: Patient updated successfully
+      update: Patient %{name} updated successfully
+      destroy: Patient %{name} deleted successfully
     special:
       remove:
-        success: Are you sure to remove the special patient?
         success: Special patient successfully removed
   medicines:
     button:
@@ -52,13 +55,29 @@ en:
       instructions: Instructions
     actions:
       edit: Edit
-      destroy: Eliminar
+      destroy: Delete
     destroy:
-      confirm: Are you sure you want to delete it?
+      confirm: Are you sure you want to delete the patient %{name}?
     success:
       creation: Medicine created successfully
       update: Medicine updated successfully
       destroy: Medicine deleted successfully
+  branch_offices:
+    button:
+      new: New branch office
+    fields:
+      name: Name
+      active: Active
+      main: Main
+    actions:
+      edit: Edit
+      destroy: Delete
+    destroy:
+      confirm: Are you sure you want to delete it?
+    success:
+      creation: Branch Office created successfully
+      update: Branch Office updated successfully
+      destroy: Branch Office deleted successfully
   diseases:
     button:
       new: New disease
@@ -85,6 +104,7 @@ en:
     reason: Reason
     ongoing_issue: Ongoing Issue
     doctor: Doctor
+    branch_office: Branch Office
     success:
       creation: Consultation created successfully
       update: Consultation updated successfully
@@ -96,6 +116,9 @@ en:
   certificates:
     button:
       download: Download certificate
+  consents:
+    button:
+      download: Download consent
   prescriptions:
     button:
       print: Print prescription

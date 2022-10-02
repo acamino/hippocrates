@@ -1,5 +1,8 @@
 # rubocop:disable Metrics/ClassLength
 class Consultation < ApplicationRecord
+  include Discard::Model
+  include PublicActivity::Model
+
   ATTRIBUTE_WHITELIST = [
     :blood_pressure,
     :diagnostic_plan,
@@ -32,18 +35,22 @@ class Consultation < ApplicationRecord
     :warning_signs,
     :weight,
     :user_id,
+    :branch_office_id,
+    :price,
     :created_at,
     patient: :special,
     diagnoses_attributes: [:id, :disease_code, :description, :type, :_destroy],
     prescriptions_attributes: [:id, :inscription, :subscription, :_destroy]
   ].freeze
 
+  belongs_to :branch_office, optional: true
   belongs_to :doctor, class_name: 'User', foreign_key: 'user_id'
   belongs_to :patient
 
   has_many   :diagnoses,     dependent: :destroy
   has_many   :documents,     dependent: :destroy
   has_many   :prescriptions, dependent: :destroy
+  has_many   :price_changes, dependent: :destroy
 
   accepts_nested_attributes_for :diagnoses,
                                 reject_if: ->(attributes) { attributes[:description].blank? },
@@ -84,6 +91,13 @@ class Consultation < ApplicationRecord
       .where(patients: { special: true })
       .order('consultations.created_at')
   }
+
+  scope :by_date,          ->(date)    { where(created_at: date) if date.present? }
+  scope :by_user,          ->(user_id) { where(user_id: user_id) if user_id.present? }
+  scope :by_branch_office, lambda { |branch_office_id|
+    where(branch_office_id: branch_office_id) if branch_office_id.present?
+  }
+  scope :order_by_date, -> { order(created_at: :desc) }
 
   %w[right_ear left_ear left_nostril right_nostril nasopharynx
      nose_others oral_cavity oropharynx hypopharynx larynx neck

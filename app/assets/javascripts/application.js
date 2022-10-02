@@ -19,6 +19,9 @@
 //= require hippocrates
 //= require autocomplete
 //= require certificates
+//= require consents
+//= require change_price
+//= require charges
 //= require clinical_history
 //= require consultations
 //= require hint
