@@ -68,8 +68,12 @@ es:
       new: Nuevo lugar de atención
     fields:
       name: Nombre
+      address: Dirección
+      phone_numbers: Teléfonos
       active: Activo
       main: Principal
+    form:
+      note: Dirección y Teléfonos requeridos para la impresión de certificados y consentimientos
     actions:
       edit: Editar
       destroy: Eliminar

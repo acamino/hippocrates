@@ -67,8 +67,12 @@ en:
       new: New branch office
     fields:
       name: Name
+      address: Address
+      phone_numbers: Phones
       active: Active
       main: Main
+    form:
+      note: Address and phone numbers required for printing certificates and consents
     actions:
       edit: Edit
       destroy: Delete
