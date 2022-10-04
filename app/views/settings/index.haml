@@ -41,3 +41,16 @@
                              "data-type":  "select",
                              "data-url":   "#{api_setting_path(@maximum_prescriptions)}",
                              "href": "#"}= @maximum_prescriptions.value
+
+        %tr
+          %td
+            %b Número de emergencia
+            %br
+            %span.text-muted
+              Número de emergencia para recetas, certificados y consentimientos
+          %td
+            %a#emergency-number{"data-pk":    @emergency_number.id,
+                                "data-value": @emergency_number.value,
+                                "data-type":  "text",
+                                "data-url":   "#{api_setting_path(@emergency_number)}",
+                                "href": "#"}= @emergency_number.value

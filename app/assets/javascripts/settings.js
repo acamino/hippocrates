@@ -10,5 +10,7 @@ Hippocrates.Settings = {
     });
 
     $('#sequence').editable({});
+
+    $('#emergency-number').editable({});
   }
 };

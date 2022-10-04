@@ -7,6 +7,7 @@ describe SettingsController do
     let!(:maximum_diagnoses)        { create(:setting, :maximum_diagnoses) }
     let!(:maximum_prescriptions)    { create(:setting, :maximum_prescriptions) }
     let!(:medical_history_sequence) { create(:setting, :medical_history_sequence) }
+    let!(:emergency_number)         { create(:setting, :emergency_number) }
 
     before { get :index }
 
@@ -20,6 +21,10 @@ describe SettingsController do
 
     it 'assigns @medical_history_sequence' do
       expect(assigns(:medical_history_sequence)).to eq(medical_history_sequence)
+    end
+
+    it 'assigns @emergency_number' do
+      expect(assigns(:emergency_number)).to eq(emergency_number)
     end
 
     it { is_expected.to render_template :index }

@@ -2,18 +2,35 @@ require 'rails_helper'
 
 describe Setting do
   describe 'validations' do
-    subject { Setting.new(name: 'maximum_diagnoses', value: '5') }
+    subject { Setting.new(name: name, value: value) }
+
+    let(:name)  { 'maximum_diagnoses' }
+    let(:value) { '5' }
 
     it { is_expected.to validate_presence_of :name }
     it { is_expected.to validate_presence_of :value }
     it { is_expected.to validate_uniqueness_of :name }
-    it { is_expected.to validate_numericality_of(:value).only_integer }
+
+    context 'when the setting is *NOT* an emergency number' do
+      let(:name)  { 'maximum_prescriptions' }
+      let(:value) { '5' }
+
+      it { is_expected.to validate_numericality_of(:value).only_integer }
+    end
+
+    context 'when the setting is an emergency number' do
+      let(:name)  { 'emergency_phone_number' }
+      let(:value) { '099 555 5555' }
+
+      it { is_expected.not_to validate_numericality_of(:value).only_integer }
+    end
   end
 
   [
     Setting::MAXIMUM_DIAGNOSES,
     Setting::MAXIMUM_PRESCRIPTIONS,
-    Setting::MEDICAL_HISTORY_SEQUENCE
+    Setting::MEDICAL_HISTORY_SEQUENCE,
+    Setting::EMERGENCY_NUMBER
   ].each do |setting_name|
     describe ".#{setting_name}" do
       subject { described_class.public_send(setting_name.to_sym) }

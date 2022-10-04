@@ -25,7 +25,8 @@ module Consultations
         surgery_tentative_date: options.fetch(:surgery_tentative_date, '').upcase,
         surgery_cost:           options.fetch(:surgery_cost, ''),
         consultations:          consultations,
-        doctor:                 consultation.doctor
+        doctor:                 consultation.doctor,
+        emergency_number:       emergency_number
       }
     end
 
@@ -65,6 +66,10 @@ module Consultations
 
     def selected_consultations_ids
       options.fetch(:consultations, '').split('_').map(&:to_i)
+    end
+
+    def emergency_number
+      Setting.emergency_number.value
     end
   end
 end
