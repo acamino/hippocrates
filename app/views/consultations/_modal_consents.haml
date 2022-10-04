@@ -18,34 +18,41 @@
           .form-group
             %label.col-sm-2.control-label{ for: "consent" } Consentimiento
             .col-md-6
-              %select.form-control.input-sm#consent
-                %option{ value: "bichectomy"                       } Bichectomía
-                %option{ value: "biopsy"                           } Biopsia
-                %option{ value: "blepharoplasty"                   } Blefaroplastia superior e inferior
-                %option{ value: "botox"                            } Botox
-                %option{ value: "cens"                             } Cens para exerésis de masa nasal
-                %option{ value: "cholestheatoma"                   } Colesteatoma
-                %option{ value: "consent"                          } Consentimiento estética
-                %option{ value: "covid"                            } Covid
-                %option{ value: "endonasal_dacryocystorhinostomy"  } Dacriocistorrinostomía endonasal
-                %option{ value: "eustachian_tube_balloon_dilation" } Dilatación de trompa de eustaquio
-                %option{ value: "epistaxis"                        } Epistaxis
-                %option{ value: "exeresis"                         } Exéresis de quiste y fístulas cervicales
-                %option{ value: "extraction"                       } Extracción de cuerpo extraño nasal
-                %option{ value: "fistula"                          } Fístula periauricular
-                %option{ value: "auricular_hematoma"               } Hematoma de pabellon auricular
-                %option{ value: "septal_hematoma"                  } Hematoma septal
-                %option{ value: "osteoma"                          } Osteoma
-                %option{ value: "otoplasty"                        } Otoplastia mas rinoplastia
-                %option{ value: "parotidectomy"                    } Parotidectomía del lado afecto
-                %option{ value: "sinonasal_polyposis"              } Poliposis nasosinusal
-                %option{ value: "ranula"                           } Ránula
-                %option{ value: "reduction"                        } Reduccion de fractura nasal
-                %option{ value: "nose_touch_up"                    } Retoque nasal
-                %option{ value: "functional_rhinoplasty"           } Rino mas menton
-                %option{ value: "secondary_rhinoplasty"            } Rinoplastia secundaria con costilla
-                %option{ value: "sinusitis_treatment"              } Tratamiento de sinusitis
-                %option{ value: "benign_tumors"                    } Tumuraciones benignas del pabellon auricular y CAE
+              %select.form-control.input-sm.selectpicker#consent{ "data-live-search": "true" }
+                %option{ value: "adenoidectomy",                    "data-tokens": "adenoidectomy"                    } ADENOIDECTOMÍA
+                %option{ value: "tonsillectomy",                    "data-tokens": "tonsillectomy"                    } AMIGDALECTOMÍA
+                %option{ value: "maxillary_antrostomy",             "data-tokens": "maxillary_antrostomy"             } ANTROSTOMÍA MAXILAR
+                %option{ value: "bichectomy",                       "data-tokens": "bichectomy"                       } BICHECTOMÍA
+                %option{ value: "biopsy",                           "data-tokens": "biopsy"                           } BIOPSIA
+                %option{ value: "blepharoplasty",                   "data-tokens": "blepharoplasty"                   } BLEFAROPLASTIA SUPERIOR E INFERIOR
+                %option{ value: "botox",                            "data-tokens": "botox"                            } BOTOX
+                %option{ value: "cens",                             "data-tokens": "cens"                             } CENS PARA EXERÉSIS DE MASA NASAL
+                %option{ value: "mastoiditis",                      "data-tokens": "mastoiditis"                      } CIRUGÍA MASTOIDITIS
+                %option{ value: "cholestheatoma",                   "data-tokens": "cholestheatoma"                   } COLESTEATOMA
+                %option{ value: "consent",                          "data-tokens": "consent"                          } CONSENTIMIENTO ESTÉTICA
+                %option{ value: "covid",                            "data-tokens": "covid"                            } COVID
+                %option{ value: "endonasal_dacryocystorhinostomy",  "data-tokens": "endonasal_dacryocystorhinostomy"  } DACRIOCISTORRINOSTOMÍA ENDONASAL
+                %option{ value: "eustachian_tube_balloon_dilation", "data-tokens": "eustachian_tube_balloon_dilation" } DILATACIÓN DE TROMPA DE EUSTAQUIO
+                %option{ value: "epistaxis",                        "data-tokens": "epistaxis"                        } EPISTAXIS
+                %option{ value: "exeresis",                         "data-tokens": "exeresis"                         } EXÉRESIS DE QUISTE Y FÍSTULAS CERVICALES
+                %option{ value: "extraction",                       "data-tokens": "extraction"                       } EXTRACCIÓN DE CUERPO EXTRAÑO NASAL
+                %option{ value: "fistula",                          "data-tokens": "fistula"                          } FÍSTULA PERIAURICULAR
+                %option{ value: "auricular_hematoma",               "data-tokens": "auricular_hematoma"               } HEMATOMA DE PABELLÓN AURICULAR
+                %option{ value: "septal_hematoma",                  "data-tokens": "septal_hematoma"                  } HEMATOMA SEPTAL
+                %option{ value: "laryngoscopy",                     "data-tokens": "laryngoscopy"                     } LARINGOSCOPÍA DIRECTA
+                %option{ value: "myringoplasty",                    "data-tokens": "myringoplasty"                    } MIRINGOPLASTIA
+                %option{ value: "osteoma",                          "data-tokens": "osteoma"                          } OSTEOMA
+                %option{ value: "otoplasty",                        "data-tokens": "otoplasty"                        } OTOPLASTIA MÁS RINOPLASTIA
+                %option{ value: "parotidectomy",                    "data-tokens": "parotidectomy"                    } PAROTIDECTOMÍA DEL LADO AFECTO
+                %option{ value: "sinonasal_polyposis",              "data-tokens": "sinonasal_polyposis"              } POLIPOSIS NASOSINUSAL
+                %option{ value: "ranula",                           "data-tokens": "ranula"                           } RÁNULA
+                %option{ value: "reduction",                        "data-tokens": "reduction"                        } REDUCCION DE FRACTURA NASAL
+                %option{ value: "nose_touch_up",                    "data-tokens": "nose_touch_up"                    } RETOQUE NASAL
+                %option{ value: "functional_rhinoplasty",           "data-tokens": "functional_rhinoplasty"           } RINO MÁS MENTÓN
+                %option{ value: "secondary_rhinoplasty",            "data-tokens": "secondary_rhinoplasty"            } RINOPLASTIA SECUNDARIA CON COSTILLA
+                %option{ value: "septoplasty",                      "data-tokens": "septoplasty"                      } SEPTOPLASTIA
+                %option{ value: "sinusitis_treatment",              "data-tokens": "sinusitis_treatment"              } TRATAMIENTO DE SINUSITIS
+                %option{ value: "benign_tumors",                    "data-tokens": "benign_tumors"                    } TUMURACIONES BENIGNAS DEL PABELLON AURICULAR Y CAE
               %em.text-muted Selecciona un consentimiento informado
 
       .modal-footer
