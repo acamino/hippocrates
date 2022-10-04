@@ -22,7 +22,7 @@ class ConsultationsController < ApplicationController
 
   # rubocop:disable Metrics/MethodLength
   def create
-    @consultation = Consultation.new(consultation_params)
+    @consultation = Consultation.new(consultation_params.merge(**create_price_params))
     if @consultation.save
       track_activity(@consultation, :created)
 
@@ -49,7 +49,7 @@ class ConsultationsController < ApplicationController
   end
 
   def update
-    if @consultation.update(consultation_params)
+    if @consultation.update(consultation_params.merge(**update_price_params))
       track_activity(@consultation, :updated)
 
       @patient.update(patient_params)
@@ -90,6 +90,22 @@ class ConsultationsController < ApplicationController
     params.require(:consultation).permit(*Consultation::ATTRIBUTE_WHITELIST).merge(
       patient_id: params[:patient_id]
     ).except('patient')
+  end
+
+  def create_price_params
+    if current_user.doctor? && @consultation.nil?
+      { priced: true }
+    else
+      {}
+    end
+  end
+
+  def update_price_params
+    if current_user.doctor? && !@consultation.priced?
+      { priced: true }
+    else
+      {}
+    end
   end
 
   def patient_params
