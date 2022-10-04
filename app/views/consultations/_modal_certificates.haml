@@ -18,27 +18,27 @@
           .form-group
             %label.col-sm-2.control-label{ for: "certificate" } Certificado
             .col-md-6
-              %select.form-control.input-sm#certificate
-                %option{ value: "attendance" } Asistencia
-                %option{ value: "audiometry" } Audiometría
-                %option{ value: "surgery" } Cirugía
-                %option{ value: "consent" } Consentimiento
-                %option{ value: "strange_body" } Cuerpo extraño
-                %option{ value: "specialty" } Especialidad ORL
-                %option{ value: "epistaxis" } Epistaxis
-                %option{ value: "fracture" } Fractura de huesos propios nasales
-                %option{ value: "ffaa" } Fuerzas Armadas
-                %option{ value: "nasophibroscopy" } Nasofibroscopía
-                %option{ value: "audiological" } Informe audiológico
-                %option{ value: "laryngoscopy" } Informe de laringoscopía
-                %option{ value: "consent_intratympanic" } Intratimpánica
-                %option{ value: "oea" } OEA
-                %option{ value: "proforma" } Proforma
-                %option{ value: "protocol" } Protocolo y epicrisis
-                %option{ value: "rest" } Reposo
-                %option{ value: "rx_spn" } RX SPN
-                %option{ value: "simple" } Simple
-                %option{ value: "vertiginous_syndrome" } Síndrome vertiginoso
+              %select.form-control.input-sm.selectpicker#certificate{ "data-live-search": "true" }
+                %option{ value: "attendance",            "data-tokens": "attendance"            } ASISTENCIA
+                %option{ value: "audiometry",            "data-tokens": "audiometry"            } AUDIOMETRÍA
+                %option{ value: "surgery",               "data-tokens": "surgery"               } CIRUGÍA
+                %option{ value: "consent",               "data-tokens": "consent"               } CONSENTIMIENTO
+                %option{ value: "strange_body",          "data-tokens": "strange_body"          } CUERPO EXTRAÑO
+                %option{ value: "specialty",             "data-tokens": "specialty"             } ESPECIALIDAD ORL
+                %option{ value: "epistaxis",             "data-tokens": "epistaxis"             } EPISTAXIS
+                %option{ value: "fracture",              "data-tokens": "fracture"              } FRACTURA DE HUESOS PROPIOS NASALES
+                %option{ value: "ffaa",                  "data-tokens": "ffaa"                  } FUERZAS ARMADAS
+                %option{ value: "nasophibroscopy",       "data-tokens": "nasophibroscopy"       } NASOFIBROSCOPÍA
+                %option{ value: "audiological",          "data-tokens": "audiological"          } INFORME AUDIOLÓGICO
+                %option{ value: "laryngoscopy",          "data-tokens": "laryngoscopy"          } INFORME DE LARINGOSCOPÍA
+                %option{ value: "consent_intratympanic", "data-tokens": "consent_intratympanic" } INTRATIMPÁNICA
+                %option{ value: "oea",                   "data-tokens": "oea"                   } OEA
+                %option{ value: "proforma",              "data-tokens": "proforma"              } PROFORMA
+                %option{ value: "protocol",              "data-tokens": "protocol"              } PROTOCOLO Y EPICRISIS
+                %option{ value: "rest",                  "data-tokens": "rest"                  } REPOSO
+                %option{ value: "rx_spn",                "data-tokens": "rx_spn"                } RX SPN
+                %option{ value: "simple",                "data-tokens": "simple"                } SIMPLE
+                %option{ value: "vertiginous_syndrome",  "data-tokens": "vertiginous_syndrome"  } SÍNDROME VERTIGINOSO
               %em.text-muted Selecciona un certificado
           .time-controls{ style: "display:none" }
             .form-group
