@@ -69,7 +69,7 @@
             - else
               %span
                 = link_to t('consultations.button.download'),
-                          download_certificates_path(consultation_id: @consultation.id, certificate_type: "consultation"),
+                          download_consultations_documents_path(consultation_id: @consultation.id, certificate_type: "consultation"),
                           data: { turbolinks: false }
 
         .row

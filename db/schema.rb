@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_06_002444) do
+ActiveRecord::Schema.define(version: 2022_10_06_185934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 2022_10_06_002444) do
     t.datetime "updated_at", null: false
     t.text "address"
     t.text "phone_numbers"
+    t.text "city"
     t.index ["name"], name: "index_branch_offices_on_name", unique: true
   end
 

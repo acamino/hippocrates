@@ -5,6 +5,7 @@ class BranchOffice < ApplicationRecord
     :name,
     :main,
     :active,
+    :city,
     :address,
     :phone_numbers
   ].freeze
