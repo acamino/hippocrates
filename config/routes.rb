@@ -20,7 +20,9 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :activities,     only: [:index]
     resources :branch_offices, only: [:index, :new, :create, :edit, :update, :destroy]
-    resources :charges,        only: [:index]
+    resources :charges,        only: [:index] do
+      get :export, on: :collection
+    end
     resources :users
   end
 

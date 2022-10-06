@@ -2,6 +2,10 @@ module Admin
   class ChargesController < ApplicationController
     before_action :authorize_admin
 
+    def export
+      send_data(Charges::CSV::Serializer.collection(consultations), download_options)
+    end
+
     def index
       consultations   = Charges::Searcher.call(uid, bid, date_range)
       @consultations  = consultations.page(page)
@@ -14,7 +18,7 @@ module Admin
     private
 
     def consultations
-      Charges::Searcher.call(uid, bid, date_range)
+      Charges::Searcher.call(uid, bid, date_range).order(created_at: :desc)
     end
 
     def uid
@@ -23,6 +27,14 @@ module Admin
 
     def bid
       params[:bid]
+    end
+
+    def download_options
+      {
+        type:        'text/csv',
+        disposition: 'attachment',
+        filename:    "payments_#{Time.zone.now.strftime('%Y_%m_%d_%H_%M_%S')}.csv"
+      }
     end
   end
 end

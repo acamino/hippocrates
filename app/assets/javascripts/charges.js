@@ -12,6 +12,11 @@ Hippocrates.Charges = {
       self.setModalTitle(type);
       self.openModal();
     });
+
+    $(".btn-charges").on("click", function(e) {
+      var action = $(this).data("action-path");
+      $('form').attr('action', action);
+    });
   },
 
   openModal: function() {

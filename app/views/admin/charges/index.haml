@@ -6,14 +6,16 @@
       .form-group.col-sm-3
         = select_tag :uid,
           options_from_collection_for_select(@users, 'id', 'pretty_name',
-          params[:uid]), include_blank: 'Todos', class: 'form-control input-md'
+          params[:uid]), include_blank: 'Usuarios', class: 'form-control input-md'
       .form-group.col-sm-3
         = select_tag :bid,
           options_from_collection_for_select(@branch_offices, 'id', 'name',
-          params[:bid]), include_blank: 'Todos', class: 'form-control input-md'
+          params[:bid]), include_blank: 'Lugares de atención', class: 'form-control input-md'
       .form-group.col-sm-3
-        %button.btn.btn-md.btn-primary.hidden-xs{ type: "submit" }
+        %button.btn-charges.btn.btn-md.btn-default.hidden-xs{ type: "submit", "data-action-path": admin_charges_path }
           = t('views.search')
+        %button.btn-charges.btn.btn-md.btn-primary.hidden-xs{ type: "submit", "data-action-path": export_admin_charges_path }
+          Exportar cobros
 
 .row
   .col-md-12
@@ -56,45 +58,32 @@
                 = consultation.created_at.strftime('%b %d, %Y %I:%M %p')
       %tfoot
         %tr
-          %td
-          %td
-          %td
-          %td.text-right
-            %b
-              = "$ #{format('%.2f', @consultations.pluck(:payment).sum)}"
-          %td
-          %td.text-right.text-danger
-            %b
-              = "$ #{format('%.2f', @consultations.pluck(:pending_payment).sum)}"
-          %td
-          %td
+          %td.text-center{ colspan: "8", style: "padding-top: 1.5em;" }
+            = paginate @consultations
+
 .row
   .col-md-3
     %big
       Total Pagado
-  .col-md-1.text-right
+  .col-md-2.text-right
     %big
       = "$ #{format('%.2f', @total_paid)}"
 
 .row
   .col-md-3
-    %big
+    %big.text-danger
       Total Adeudado
-  .col-md-1.text-right.text-danger
+  .col-md-2.text-right.text-danger
     %big
       = "$ #{format('%.2f', @total_pending)}"
 .row
   .col-md-3
     %big
       <strong>Total</strong>
-    <small>(Total Pagado — Total Adeudado)</small>
-  .col-md-1.text-right
+    <small>(Total Pagado — <span class="text-danger">Total Adeudado<span>)</small>
+  .col-md-2.text-right
     %big
       %b
         = "$ #{format('%.2f', @total_paid - @total_pending)}"
-
-.row
-  .col-md-12.text-center
-    = paginate @consultations
 
 = render 'modal_charges'
