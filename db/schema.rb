@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_05_232237) do
+ActiveRecord::Schema.define(version: 2022_10_06_002444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -111,6 +111,7 @@ ActiveRecord::Schema.define(version: 2022_10_05_232237) do
     t.decimal "payment", default: "0.0", null: false
     t.datetime "discarded_at"
     t.boolean "priced", default: false, null: false
+    t.decimal "pending_payment", default: "0.0", null: false
     t.index ["branch_office_id"], name: "index_consultations_on_branch_office_id"
     t.index ["discarded_at"], name: "index_consultations_on_discarded_at"
     t.index ["special_patient"], name: "index_consultations_on_special_patient"
@@ -188,6 +189,7 @@ ActiveRecord::Schema.define(version: 2022_10_05_232237) do
     t.text "reason", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "type", default: 0, null: false
     t.index ["consultation_id"], name: "index_payment_changes_on_consultation_id"
     t.index ["user_id"], name: "index_payment_changes_on_user_id"
   end

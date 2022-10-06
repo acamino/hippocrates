@@ -22,20 +22,22 @@
 
         .form-horizontal
           .form-group
-            %label.col-sm-2.control-label{ for: "changed_payment" } Valor
+            %label.col-sm-2.control-label{ for: "updated-payment" } Valor
             .col-md-6
-              %input.form-control.input-lg#changed_payment{ type: "text", value: @consultation.payment }
-              %em.text-muted Valor de la consulta
+              %input.form-control.input-lg#updated-payment{ type: "text", value: @consultation.payment }
+              %span#updated-payment-hint.text-muted Valor de la Consulta
           .form-group
-            %label.col-sm-2.control-label{ for: "change_payment_reason" } Motivo de cambio
+            %label.col-sm-2.control-label{ for: "updated-payment-reason" } Motivo de cambio
             .col-md-6
-              %textarea.form-control.input-sm#change_payment_reason{ type: "text" }
-              %em.text-muted Indique el motivo por el cual cambia el valor de la consulta.
+              %textarea.form-control.input-sm#updated-payment-reason{ type: "text" }
+              %span.text-muted Indique el motivo por el cual cambia el valor de la consulta.
+          .form-group
+            %input{ type: "hidden", id: "payment_change_type" }
 
       .modal-footer
         %button.btn.btn-default{ "data-dismiss": "modal" } Cerrar
         %button.btn.btn-primary#save-payment{ "data-dismiss": "modal" }
-          Cambiar Valor de Consulta
+          Actualizar
 
 %script#tmpl-payment-change-errors{ type: "x-tmpl-mustache" }
   {{#errors}}

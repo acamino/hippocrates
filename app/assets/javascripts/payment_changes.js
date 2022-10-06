@@ -1,21 +1,21 @@
 Hippocrates.PaymentChanges = {
   init: function() {
     var self = this;
-
-    $("#show-payment-change").on("click", function(e) {
+    $(".show-payment-change").on("click", function(e) {
+      $('#payment_change_type').val($(this).data('type'));
       e.preventDefault();
       self.openModal();
     });
 
-    if ($("#changed_payment").length) {
-      new Cleave('#changed_payment', {
+    if ($("#updated-payment").length) {
+      new Cleave('#updated-payment', {
         numeral: true,
         numeralThousandsGroupStyle: 'thousand'
       });
     }
 
     $("#save-payment").on("click", function(e) {
-      self.savePrice();
+      self.savePayment();
       return false;
     });
 
@@ -33,24 +33,26 @@ Hippocrates.PaymentChanges = {
     return Mustache.render(template, data);
   },
 
-  savePrice: function() {
+  savePayment: function() {
     var self = this;
 
-    var changedPrice = $("#changed_payment").val();
-    var reason = $("#change_payment_reason").val();
-    var consultationId = $("#consultation_id").val();
+    var path = "/api/consultations/" + self.consultationId() + "/payment_changes";
+    var updatedPayment = $("#updated-payment").val();
+    var reason = $("#updated-payment-reason").val();
 
-    var path = "/api/consultations/" + consultationId + "/payment_changes";
     var data = {
       change_payment: {
-        updated_payment: changedPrice,
-        reason: reason
+        previous_payment: this.previousPayment(),
+        updated_payment: updatedPayment,
+        reason: reason,
+        type: self.changePaymentType()
       }
     };
 
     $.post(path, data)
       .done(function(result) {
-        self.refreshPrice(changedPrice);
+        var payment = self.formatPayment(updatedPayment);
+        self.refreshControls(payment);
         $("#change-payment").modal('hide');
       })
       .fail(function(result) {
@@ -60,17 +62,37 @@ Hippocrates.PaymentChanges = {
       });
   },
 
-  initControls: function() {
-    var currentPrice = $("#consultation_payment").val()
-
-    $("#change-payment__errors").hide()
-    $("#changed_payment").val(currentPrice);
-    $("#change_payment_reason").val('');
+  isPaid: function() {
+    return $('#payment_change_type').val() == 'paid';
   },
 
-  refreshPrice: function(changedPrice) {
-    var formattedPrice = parseFloat(changedPrice).toFixed(2);
-    $("#consultation_payment").val(formattedPrice);
-    $("#changed_payment").val(formattedPrice);
+  changePaymentType: function() {
+    return $('#payment_change_type').val();
+  },
+
+  consultationId: function() {
+    return $("#consultation_id").val();
+  },
+
+  previousPayment: function() {
+    return this.isPaid() ? $("#consultation_payment").val() : $("#consultation_pending_payment").val();
+  },
+
+  initControls: function() {
+    $("#change-payment__errors").hide()
+    $("#updated-payment").val(this.previousPayment());
+    $("#updated-payment-reason").val('');
+    var hint = this.isPaid() ? 'Valor de la Consulta' : 'Valor <b>Pendiente</b> de la Consulta';
+    $("#updated-payment-hint").html(hint);
+  },
+
+  refreshControls: function(updatedPayment) {
+    var selector = this.isPaid() ? "#consultation_payment" : "#consultation_pending_payment";
+    $(selector).val(updatedPayment);
+    $("#updated-payment").html(updatedPayment);
+  },
+
+  formatPayment: function(payment) {
+    return parseFloat(payment).toFixed(2);
   }
 }

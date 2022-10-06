@@ -3,14 +3,13 @@ module API
     before_action :fetch_consultation
 
     def index
-      payment_changes = @consultation.payment_changes.order(:created_at)
-      render json: payment_changes
+      render json: payment_changes.order(created_at: :desc)
     end
 
     def create
       @payment_change = @consultation.payment_changes.build(payment_change_params)
 
-      if @payment_change.save && @consultation.update(payment: payment_change_params[:updated_payment])
+      if @payment_change.save
         send_notification
 
         render json: { success: true, errors: [] }
@@ -23,8 +22,7 @@ module API
 
     def payment_change_params
       params.require(:change_payment).permit(*PaymentChange::ATTRIBUTE_WHITELIST).merge(
-        user_id:        current_user.id,
-        previous_payment: @consultation.payment
+        user_id: current_user.id
       )
     end
 
@@ -37,6 +35,18 @@ module API
       Notifications::Sender.new(subject, message).call
     rescue StandardError => e
       Rails.logger.error(e.message)
+    end
+
+    def payment_changes
+      if paid?
+        @consultation.payment_changes.paid
+      else
+        @consultation.payment_changes.pending
+      end
+    end
+
+    def paid?
+      params[:type] == 'paid'
     end
   end
 end

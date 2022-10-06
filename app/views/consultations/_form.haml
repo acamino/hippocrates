@@ -256,8 +256,24 @@
       - unless @consultation.new_record? || !@consultation.priced?
         .row-fluid
           .col-md-12.text-right
-            %a#show-payment-change(href="#")
-              = t('prescriptions.actions.edit')
+            %a.show-payment-change(href="#"){ data: { type: 'paid' } }
+              = t('consultations.actions.edit')
+  - if current_user.doctor?
+    = panel(:info, 'Valor Pendiente de la Consulta') do
+      .row-fluid
+        .form-group.col-md-2
+          .input-group
+            %span.input-group-addon.input-lg $
+            - if @consultation.new_record? || !@consultation.priced?
+              = f.text_field :pending_payment,
+                class: "form-control input-lg"
+            - else
+              %input#consultation_pending_payment.form-control.input-lg.colored{ disabled: 'disabled', value: format('%.2f', @consultation.pending_payment) }
+      - unless @consultation.new_record? || !@consultation.priced?
+        .row-fluid
+          .col-md-12.text-right
+            %a.show-payment-change(href="#"){ data: { type: 'pending' } }
+              = t('consultations.actions.edit')
 
   .row-fluid
     = link_to "Consultas", patient_consultations_path(@patient), class: "btn btn-default"

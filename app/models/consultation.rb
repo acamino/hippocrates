@@ -37,6 +37,7 @@ class Consultation < ApplicationRecord
     :user_id,
     :branch_office_id,
     :payment,
+    :pending_payment,
     :created_at,
     patient: :special,
     diagnoses_attributes: [:id, :disease_code, :description, :type, :_destroy],

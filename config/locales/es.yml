@@ -110,6 +110,9 @@ es:
     ongoing_issue: Enfermedad
     doctor: Médico
     branch_office: Lugar de consulta
+    actions:
+      edit: Editar
+      destroy: Eliminar
     success:
       creation: Consulta creada correctamente
       update: Consulta actualizada correctamente

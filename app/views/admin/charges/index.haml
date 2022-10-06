@@ -21,10 +21,12 @@
       %thead
         %tr
           %th.col-md-2 Sucrusal
-          %th.col-md-4 Usuario
-          %th
+          %th.col-md-3 Usuario
           %th.col-md-3 Paciente
-          %th.col-md-1.text-right Cobro
+          %th.col-md-1.text-right Pagado
+          %th
+          %th.col-md-1.text-right Pendiente
+          %th
           %th.col-md-2 Fecha
       %tbody
         - @consultations.each do |_consultation|
@@ -35,14 +37,21 @@
               %td
                 = consultation.doctor.pretty_name.upcase
               %td
-                - unless consultation.payment_changes.empty?
-                  %span.text-primary
-                    %a.show-payment-changes{ href: '#', id: consultation.id, data: { turbolinks:  false } }
-                      %i.fa.fa-link
-              %td
                 = consultation.patient.full_name
               %td.text-right
                 = "$ #{consultation.pretty_payment}"
+              %td
+                - if consultation.payment_changes.paid.present?
+                  %span.text-primary
+                    %a.show-payment-changes{ href: '#', id: consultation.id, data: { turbolinks:  false, type: 'paid' } }
+                      %i.fa.fa-link
+              %td.text-right.text-danger
+                = "$ #{consultation.pretty_pending_payment}"
+              %td
+                - if consultation.payment_changes.pending.present?
+                  %span.text-primary
+                    %a.show-payment-changes{ href: '#', id: consultation.id, data: { turbolinks:  false, type: 'pending' } }
+                      %i.fa.fa-link
               %td
                 = consultation.created_at.strftime('%b %d, %Y %I:%M %p')
       %tfoot
@@ -50,17 +59,39 @@
           %td
           %td
           %td
-          %td
           %td.text-right
             %b
               = "$ #{format('%.2f', @consultations.pluck(:payment).sum)}"
           %td
+          %td.text-right.text-danger
+            %b
+              = "$ #{format('%.2f', @consultations.pluck(:pending_payment).sum)}"
+          %td
+          %td
 .row
-  .col-md-12
+  .col-md-3
+    %big
+      Total Pagado
+  .col-md-1.text-right
+    %big
+      = "$ #{format('%.2f', @total_paid)}"
+
+.row
+  .col-md-3
+    %big
+      Total Adeudado
+  .col-md-1.text-right.text-danger
+    %big
+      = "$ #{format('%.2f', @total_pending)}"
+.row
+  .col-md-3
+    %big
+      <strong>Total</strong>
+    <small>(Total Pagado — Total Adeudado)</small>
+  .col-md-1.text-right
     %big
       %b
-        Total:
-        = "$ #{format('%.2f', @total)}"
+        = "$ #{format('%.2f', @total_paid - @total_pending)}"
 
 .row
   .col-md-12.text-center

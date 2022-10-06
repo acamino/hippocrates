@@ -3,10 +3,13 @@ Hippocrates.Charges = {
     var self = this;
 
     $(".show-payment-changes").on("click", function(e) {
-      var consultationId = $(this).attr("id");
-      self.getPaymentChanges(consultationId);
-
       e.preventDefault();
+
+      var consultationId = $(this).attr("id");
+      var type = $(this).data('type');
+
+      self.getPaymentChanges(consultationId, type);
+      self.setModalTitle(type);
       self.openModal();
     });
   },
@@ -21,13 +24,18 @@ Hippocrates.Charges = {
     return Mustache.render(template, data);
   },
 
-  getPaymentChanges: function(consultationId) {
+  getPaymentChanges: function(consultationId, type) {
     var self = this;
 
-    var path = "/api/consultations/" + consultationId + "/payment_changes";
+    var path = "/api/consultations/" + consultationId + "/payment_changes?type=" + type;
     $.get(path, function(data) {
       var content = self.renderTemplate("#tmpl-payment-changes", { paymentChanges: data });
       $("#payment-changes--content").html(content);
     });
+  },
+
+  setModalTitle: function(type) {
+    var modalTitle = type == 'paid' ? 'Valores Pagados' : 'Valores Pendientes'
+    $("#payment-changes-title").html(modalTitle);
   }
 }

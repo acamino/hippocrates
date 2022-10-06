@@ -90,7 +90,7 @@ en:
       name: Name
     actions:
       edit: Edit
-      destroy: Eliminar
+      destroy: Delete
     destroy:
       confirm: Are you sure you want to delete it?
     success:
@@ -109,6 +109,9 @@ en:
     ongoing_issue: Ongoing Issue
     doctor: Doctor
     branch_office: Branch Office
+    actions:
+      edit: Edit
+      destroy: Delete
     success:
       creation: Consultation created successfully
       update: Consultation updated successfully
