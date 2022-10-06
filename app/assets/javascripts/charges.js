@@ -2,9 +2,9 @@ Hippocrates.Charges = {
   init: function() {
     var self = this;
 
-    $(".show-price-changes").on("click", function(e) {
+    $(".show-payment-changes").on("click", function(e) {
       var consultationId = $(this).attr("id");
-      self.getPriceChanges(consultationId);
+      self.getPaymentChanges(consultationId);
 
       e.preventDefault();
       self.openModal();
@@ -12,7 +12,7 @@ Hippocrates.Charges = {
   },
 
   openModal: function() {
-    $("#price-changes").modal({ backdrop: "static" });
+    $("#payment-changes").modal({ backdrop: "static" });
   },
 
   renderTemplate: function(target, data) {
@@ -21,13 +21,13 @@ Hippocrates.Charges = {
     return Mustache.render(template, data);
   },
 
-  getPriceChanges: function(consultationId) {
+  getPaymentChanges: function(consultationId) {
     var self = this;
 
-    var path = "/api/consultations/" + consultationId + "/price_changes";
+    var path = "/api/consultations/" + consultationId + "/payment_changes";
     $.get(path, function(data) {
-      var content = self.renderTemplate("#tmpl-price-changes", { priceChanges: data });
-      $("#price-changes--content").html(content);
+      var content = self.renderTemplate("#tmpl-payment-changes", { paymentChanges: data });
+      $("#payment-changes--content").html(content);
     });
   }
 }

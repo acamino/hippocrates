@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_04_033327) do
+ActiveRecord::Schema.define(version: 2022_10_05_232237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -108,7 +108,7 @@ ActiveRecord::Schema.define(version: 2022_10_04_033327) do
     t.bigint "user_id"
     t.string "serial"
     t.bigint "branch_office_id"
-    t.decimal "price", default: "0.0", null: false
+    t.decimal "payment", default: "0.0", null: false
     t.datetime "discarded_at"
     t.boolean "priced", default: false, null: false
     t.index ["branch_office_id"], name: "index_consultations_on_branch_office_id"
@@ -180,24 +180,24 @@ ActiveRecord::Schema.define(version: 2022_10_04_033327) do
     t.index ["special"], name: "index_patients_on_special"
   end
 
+  create_table "payment_changes", force: :cascade do |t|
+    t.bigint "consultation_id", null: false
+    t.bigint "user_id", null: false
+    t.decimal "previous_payment", default: "0.0", null: false
+    t.decimal "updated_payment", default: "0.0", null: false
+    t.text "reason", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["consultation_id"], name: "index_payment_changes_on_consultation_id"
+    t.index ["user_id"], name: "index_payment_changes_on_user_id"
+  end
+
   create_table "prescriptions", id: :serial, force: :cascade do |t|
     t.integer "consultation_id"
     t.string "inscription", null: false
     t.string "subscription", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "price_changes", force: :cascade do |t|
-    t.bigint "consultation_id", null: false
-    t.bigint "user_id", null: false
-    t.decimal "previous_price", default: "0.0", null: false
-    t.decimal "updated_price", default: "0.0", null: false
-    t.text "reason", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["consultation_id"], name: "index_price_changes_on_consultation_id"
-    t.index ["user_id"], name: "index_price_changes_on_user_id"
   end
 
   create_table "settings", id: :serial, force: :cascade do |t|
@@ -246,7 +246,7 @@ ActiveRecord::Schema.define(version: 2022_10_04_033327) do
   add_foreign_key "diagnoses", "consultations"
   add_foreign_key "documents", "consultations", on_delete: :cascade
   add_foreign_key "patients", "branch_offices", on_delete: :nullify
+  add_foreign_key "payment_changes", "consultations", on_delete: :cascade
+  add_foreign_key "payment_changes", "users", on_delete: :cascade
   add_foreign_key "prescriptions", "consultations"
-  add_foreign_key "price_changes", "consultations", on_delete: :cascade
-  add_foreign_key "price_changes", "users", on_delete: :cascade
 end

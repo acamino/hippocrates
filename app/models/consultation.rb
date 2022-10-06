@@ -36,7 +36,7 @@ class Consultation < ApplicationRecord
     :weight,
     :user_id,
     :branch_office_id,
-    :price,
+    :payment,
     :created_at,
     patient: :special,
     diagnoses_attributes: [:id, :disease_code, :description, :type, :_destroy],
@@ -47,10 +47,10 @@ class Consultation < ApplicationRecord
   belongs_to :doctor, class_name: 'User', foreign_key: 'user_id'
   belongs_to :patient
 
-  has_many   :diagnoses,     dependent: :destroy
-  has_many   :documents,     dependent: :destroy
-  has_many   :prescriptions, dependent: :destroy
-  has_many   :price_changes, dependent: :destroy
+  has_many :diagnoses,       dependent: :destroy
+  has_many :documents,       dependent: :destroy
+  has_many :prescriptions,   dependent: :destroy
+  has_many :payment_changes, dependent: :destroy
 
   accepts_nested_attributes_for :diagnoses,
                                 reject_if: ->(attributes) { attributes[:description].blank? },

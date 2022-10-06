@@ -4,7 +4,7 @@ module Admin
 
     def index
       @consultations  = Charges::Searcher.call(uid, bid, date_range).page(page)
-      @total          = Charges::Searcher.call(uid, bid, date_range).sum(:price)
+      @total          = Charges::Searcher.call(uid, bid, date_range).sum(:payment)
       @users          = User.physician.order(:pretty_name)
       @branch_offices = BranchOffice.active.order(:active).order(:name)
     end

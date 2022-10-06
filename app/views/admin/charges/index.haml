@@ -35,14 +35,14 @@
               %td
                 = consultation.doctor.pretty_name.upcase
               %td
-                - unless consultation.price_changes.empty?
+                - unless consultation.payment_changes.empty?
                   %span.text-primary
-                    %a.show-price-changes{ href: '#', id: consultation.id, data: { turbolinks:  false } }
+                    %a.show-payment-changes{ href: '#', id: consultation.id, data: { turbolinks:  false } }
                       %i.fa.fa-link
               %td
                 = consultation.patient.full_name
               %td.text-right
-                = "$ #{consultation.pretty_price}"
+                = "$ #{consultation.pretty_payment}"
               %td
                 = consultation.created_at.strftime('%b %d, %Y %I:%M %p')
       %tfoot
@@ -53,7 +53,7 @@
           %td
           %td.text-right
             %b
-              = "$ #{format('%.2f', @consultations.pluck(:price).sum)}"
+              = "$ #{format('%.2f', @consultations.pluck(:payment).sum)}"
           %td
 .row
   .col-md-12

@@ -249,14 +249,14 @@
           .input-group
             %span.input-group-addon.input-lg $
             - if @consultation.new_record? || !@consultation.priced?
-              = f.text_field :price,
+              = f.text_field :payment,
                 class: "form-control input-lg"
             - else
-              %input#consultation_price.form-control.input-lg.colored{ disabled: 'disabled', value: format('%.2f', @consultation.price) }
+              %input#consultation_payment.form-control.input-lg.colored{ disabled: 'disabled', value: format('%.2f', @consultation.payment) }
       - unless @consultation.new_record? || !@consultation.priced?
         .row-fluid
           .col-md-12.text-right
-            %a#show-change-price(href="#")
+            %a#show-payment-change(href="#")
               = t('prescriptions.actions.edit')
 
   .row-fluid
@@ -264,7 +264,7 @@
     = f.submit "Guardar", class: "btn btn-success hippocrates--save"
 
 = render 'modal_consultation'
-= render 'modal_change_price'
+= render 'modal_payment_change'
 = render 'modal_certificates'
 = render 'modal_consents'
 = render 'modal_prescription'

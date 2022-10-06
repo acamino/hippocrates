@@ -40,7 +40,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: 'json' } do
     resources :consultations, only: [] do
-      resources :price_changes, only: [:index, :create]
+      resources :payment_changes, only: [:index, :create]
     end
     resources :patients,        only: [] do
       resources :consultations, only: [:index] do

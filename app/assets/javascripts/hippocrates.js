@@ -5,9 +5,9 @@ if(typeof Hippocrates === "undefined") {
   Hippocrates.ClinicalHistory = {};
   Hippocrates.Consultations = {};
   Hippocrates.Consents = {};
-  Hippocrates.ChangePrice = {};
   Hippocrates.Charges = {};
   Hippocrates.Hint = {};
+  Hippocrates.PaymentChanges = {};
   Hippocrates.Prescription = {};
   Hippocrates.Settings = {};
 }
@@ -16,11 +16,11 @@ $(document).on('turbolinks:load', function() {
     Hippocrates.Autocomplete.init();
     Hippocrates.Certificates.init();
     Hippocrates.Consents.init();
-    Hippocrates.ChangePrice.init();
     Hippocrates.Charges.init();
     Hippocrates.ClinicalHistory.init();
     Hippocrates.Consultations.init();
     Hippocrates.Hint.init();
+    Hippocrates.PaymentChanges.init();
     Hippocrates.Prescription.init();
     Hippocrates.Settings.init();
 

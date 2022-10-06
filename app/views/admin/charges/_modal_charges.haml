@@ -1,4 +1,4 @@
-.modal.fade#price-changes{ tabindex: "-1", role: "dialog" }
+.modal.fade#payment-changes{ tabindex: "-1", role: "dialog" }
   .modal-dialog.modal-lg
     .modal-content
       .modal-header
@@ -13,12 +13,12 @@
       .modal-body
         .row-fluid
           .form-group.col-md-12
-            #price-changes--content
+            #payment-changes--content
 
       .modal-footer
         %button.btn.btn-default{ "data-dismiss": "modal" } Cerrar
 
-%script#tmpl-price-changes{ type: "x-tmpl-mustache" }
+%script#tmpl-payment-changes{ type: "x-tmpl-mustache" }
   %table.table.table-striped.table-condensed
     %thead
       %tr
@@ -27,10 +27,10 @@
         %th.col-md-2 Cambio
         %th.col-md-3 Fecha
     %tbody
-      {{#priceChanges}}
+      {{#paymentChanges}}
       %tr
         %td {{userName}}
         %td {{reason}}
-        %td $ {{previousPrice}} → $ {{updatedPrice}}
+        %td $ {{previousPayment}} → $ {{updatedPayment}}
         %td {{date}}
-      {{/priceChanges}}
+      {{/paymentChanges}}

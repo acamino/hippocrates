@@ -1,4 +1,4 @@
-.modal.fade#change-price{ tabindex: "-1", role: "dialog" }
+.modal.fade#change-payment{ tabindex: "-1", role: "dialog" }
   .modal-dialog.modal-lg
     .modal-content
       .modal-header
@@ -16,28 +16,28 @@
       .modal-body
         .row-fluid
           .form-group.col-md-12
-            .text-danger#change-price__errors{ style: "display:none" }
+            .text-danger#change-payment__errors{ style: "display:none" }
               Por favor corrige los siguientes errores
-              #change-price__errors--body
+              #change-payment__errors--body
 
         .form-horizontal
           .form-group
-            %label.col-sm-2.control-label{ for: "changed_price" } Valor
+            %label.col-sm-2.control-label{ for: "changed_payment" } Valor
             .col-md-6
-              %input.form-control.input-lg#changed_price{ type: "text", value: @consultation.price }
+              %input.form-control.input-lg#changed_payment{ type: "text", value: @consultation.payment }
               %em.text-muted Valor de la consulta
           .form-group
-            %label.col-sm-2.control-label{ for: "change_price_reason" } Motivo de cambio
+            %label.col-sm-2.control-label{ for: "change_payment_reason" } Motivo de cambio
             .col-md-6
-              %textarea.form-control.input-sm#change_price_reason{ type: "text" }
+              %textarea.form-control.input-sm#change_payment_reason{ type: "text" }
               %em.text-muted Indique el motivo por el cual cambia el valor de la consulta.
 
       .modal-footer
         %button.btn.btn-default{ "data-dismiss": "modal" } Cerrar
-        %button.btn.btn-primary#save-price{ "data-dismiss": "modal" }
+        %button.btn.btn-primary#save-payment{ "data-dismiss": "modal" }
           Cambiar Valor de Consulta
 
-%script#tmpl-price-change-errors{ type: "x-tmpl-mustache" }
+%script#tmpl-payment-change-errors{ type: "x-tmpl-mustache" }
   {{#errors}}
   %li {{.}}
   {{/errors}}

@@ -17,8 +17,8 @@ class ConsultationPresenter < SimpleDelegator
     I18n.localize(created_at, format: '%d de %B de %Y')
   end
 
-  def pretty_price
-    format('%.2f', price)
+  def pretty_payment
+    format('%.2f', payment)
   end
 
   def pretty_diagnoses
