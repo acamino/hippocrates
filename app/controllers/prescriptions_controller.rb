@@ -1,7 +1,8 @@
 class PrescriptionsController < ApplicationController
   def download
-    consultation = Consultation.find(params[:consultation_id])
-    Prescriptions::Printer.new(consultation, params[:empty] || false).call
+    consultation     = Consultation.find(params[:consultation_id])
+    emergency_number = Setting.emergency_number.value
+    Prescriptions::Printer.new(consultation, emergency_number, params.fetch(:empty, false)).call
     send_file '/tmp/prescription.pdf', download_options
   end
 
@@ -9,10 +10,10 @@ class PrescriptionsController < ApplicationController
 
   def download_options
     {
-      type: 'application/pdf',
+      type:        'application/pdf',
       disposition: 'inline',
-      filename: 'receta.pdf',
-      status: :accepted
+      filename:    'receta.pdf',
+      status:      :accepted
     }
   end
 end

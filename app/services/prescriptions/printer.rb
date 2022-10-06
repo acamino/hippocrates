@@ -19,21 +19,39 @@ module Prescriptions
       style: :bold
     }.freeze
 
-    def self.call(consultation, empty)
-      new(consultation, empty).call
+    EMERGENCY_NUMBER_OPTIONS = {
+      font:  'Montserrat',
+      color: '1E3463',
+      style: :bold,
+      size:  8
+    }.freeze
+
+    FONT_FAMILIES = {
+      'Montserrat' => {
+        bold:   "#{Rails.root}/app/assets/fonts/Montserrat-Bold.ttf",
+        normal: "#{Rails.root}/app/assets/fonts/Montserrat-Regular.ttf"
+      }
+    }.freeze
+
+    def self.call(consultation, emergency_number, empty)
+      new(consultation, emergency_number, empty).call
     end
 
-    def initialize(consultation, empty)
-      @consultation = consultation
-      @empty        = empty
+    def initialize(consultation, emergency_number, empty)
+      @consultation     = consultation
+      @emergency_number = emergency_number
+      @empty            = empty
     end
 
     # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/MethodLength
     def call
       pdf = Prawn::Document.new(**DOCUMENT_OPTIONS)
+      pdf.font_families.update(**FONT_FAMILIES)
+
       # Inscriptions
-      Printers::Section.call(pdf, [-5, 474], 136, serial)
+      Printers::Section.call(pdf, [300, 515], 136, emergency_number, **EMERGENCY_NUMBER_OPTIONS)
+      Printers::Section.call(pdf, [-5,  474], 136, serial)
       Printers::Section.call(pdf, [244, 475], 136, location_and_date, align: :right)
       Printers::Section.call(pdf, [-26, 459], 405, patient_name)
       Printers::Section.call(pdf, [244, 442], 136, patient_age)
@@ -47,6 +65,7 @@ module Prescriptions
       Printers::Section.call(pdf, [80, 14], 200, doctor_phone, **DEFAULT_SIGNATURE_OPTIONS)
 
       # Prescriptions
+      Printers::Section.call(pdf, [718, 515], 136, emergency_number, **EMERGENCY_NUMBER_OPTIONS)
       Printers::Section.call(pdf, [415, 474], 136, serial)
       Printers::Section.call(pdf, [664, 475], 136, location_and_date, align: :right)
       Printers::Section.call(pdf, [395, 459], 405, patient_name)
@@ -66,7 +85,7 @@ module Prescriptions
 
     private
 
-    attr_reader :consultation
+    attr_reader :consultation, :emergency_number
 
     def empty?
       @empty

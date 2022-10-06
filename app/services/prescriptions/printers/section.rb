@@ -19,10 +19,11 @@ module Prescriptions
         @width,  = width
         @content = content
         @options = options
+        @font    = options.fetch(:font, 'Helvetica')
       end
 
       def call
-        pdf.font('Helvetica') do
+        pdf.font(@font) do
           pdf.fill_color @options.fetch(:color, '000000')
           pdf.text_box content,
                        at: at,
