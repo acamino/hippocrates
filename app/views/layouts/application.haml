@@ -50,7 +50,15 @@
           %ul.nav.navbar-nav.navbar-right
             - if user_signed_in?
               %li
-                = link_to current_user.pretty_name, edit_user_registration_path
+                = link_to edit_user_registration_path do
+                  %span
+                    - if current_user.doctor?
+                      %i.fa.fa-user-md
+                    - else
+                      %i.fa.fa-user
+
+                  = current_user.pretty_name
+
               %li
                 = link_to "Salir", destroy_user_session_path, method: :delete
             - else
