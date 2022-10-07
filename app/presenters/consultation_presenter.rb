@@ -25,6 +25,10 @@ class ConsultationPresenter < SimpleDelegator
     format('%.2f', pending_payment)
   end
 
+  def pretty_total_payment
+    format('%.2f', payment - pending_payment)
+  end
+
   def pretty_diagnoses
     diagnoses.map do |diagnosis|
       "#{diagnosis.description.strip} (#{diagnosis.disease_code.strip})"

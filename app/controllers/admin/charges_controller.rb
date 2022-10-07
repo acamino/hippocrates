@@ -1,9 +1,12 @@
+require 'axlsx'
+
 module Admin
   class ChargesController < ApplicationController
     before_action :authorize_admin
 
     def export
-      send_data(Charges::CSV::Serializer.collection(consultations), download_options)
+      spreadsheet = Charges::Excel::Builder.call(consultations)
+      send_data(spreadsheet.to_stream.read, download_options)
     end
 
     def index
@@ -31,9 +34,9 @@ module Admin
 
     def download_options
       {
-        type:        'text/csv',
+        type:        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         disposition: 'attachment',
-        filename:    "payments_#{Time.zone.now.strftime('%Y_%m_%d_%H_%M_%S')}.csv"
+        filename:    "payments_#{Time.zone.now.strftime('%Y_%m_%d_%H_%M_%S')}.xlsx"
       }
     end
   end

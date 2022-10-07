@@ -14,7 +14,7 @@
       .form-group.col-sm-3
         %button.btn-charges.btn.btn-md.btn-default.hidden-xs{ type: "submit", "data-action-path": admin_charges_path }
           = t('views.search')
-        %button.btn-charges.btn.btn-md.btn-primary.hidden-xs{ type: "submit", "data-action-path": export_admin_charges_path }
+        %button.btn-charges.btn.btn-md.btn-primary.hidden-xs{ type: "submit", "data-action-path": export_admin_charges_path(format: :xlsx) }
           Exportar cobros
 
 .row
@@ -61,29 +61,29 @@
           %td.text-center{ colspan: "8", style: "padding-top: 1.5em;" }
             = paginate @consultations
 
-.row
-  .col-md-3
-    %big
-      Total Pagado
-  .col-md-2.text-right
-    %big
-      = "$ #{format('%.2f', @total_paid)}"
-
-.row
-  .col-md-3
-    %big.text-danger
-      Total Adeudado
-  .col-md-2.text-right.text-danger
-    %big
-      = "$ #{format('%.2f', @total_pending)}"
-.row
-  .col-md-3
-    %big
-      <strong>Total</strong>
-    <small>(Total Pagado — <span class="text-danger">Total Adeudado<span>)</small>
-  .col-md-2.text-right
-    %big
-      %b
-        = "$ #{format('%.2f', @total_paid - @total_pending)}"
+.jumbotron
+  .row
+    .col-md-3
+      %big
+        Total Pagado
+    .col-md-2.text-right
+      %big
+        = "$ #{format('%.2f', @total_paid)}"
+  .row
+    .col-md-3
+      %big.text-danger
+        Total Adeudado
+    .col-md-2.text-right.text-danger
+      %big
+        = "$ #{format('%.2f', @total_pending)}"
+  .row
+    .col-md-3
+      %big
+        <strong>Total</strong>
+      <small>(Total Pagado — <span class="text-danger">Total Adeudado<span>)</small>
+    .col-md-2.text-right
+      %big
+        %b
+          = "$ #{format('%.2f', @total_paid - @total_pending)}"
 
 = render 'modal_charges'
