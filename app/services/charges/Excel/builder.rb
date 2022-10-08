@@ -11,13 +11,14 @@ module Charges
         'Fecha'
       ].freeze
 
-      def self.call(consultations)
-        new(consultations).call
+      def self.call(consultations, date_range)
+        new(consultations, date_range).call
       end
 
-      def initialize(consultations)
+      def initialize(consultations, date_range)
         @consultations = consultations
         @count         = consultations.count.next
+        @date_range    = date_range
       end
 
       # rubocop:disable Metrics/MethodLength
@@ -28,7 +29,7 @@ module Charges
         styles   = workbook.styles
         currency = styles.add_style num_fmt: 7, alignment: { horizontal: :right }
 
-        workbook.add_worksheet(name: 'Cobros') do |sheet|
+        workbook.add_worksheet(name: sheet_name) do |sheet|
           sheet.add_row HEADERS
           consultations.map(&present >> serialize).each do |consultation|
             sheet.add_row consultation
@@ -44,6 +45,15 @@ module Charges
           sheet.column_widths nil, nil, nil, 25, 25, 25, nil
         end
         package
+      end
+
+      private
+
+      attr_reader :consultations, :count, :date_range
+
+      def sheet_name
+        dates = [date_range.first, date_range.last].map { |date| date.strftime('%Y-%m-%d') }
+        "Cobros #{dates.join(' - ')}"
       end
 
       def present
@@ -63,10 +73,6 @@ module Charges
           ]
         }
       end
-
-      private
-
-      attr_reader :consultations, :count
     end
   end
 end

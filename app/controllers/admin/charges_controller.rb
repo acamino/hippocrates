@@ -1,11 +1,9 @@
-require 'axlsx'
-
 module Admin
   class ChargesController < ApplicationController
     before_action :authorize_admin
 
     def export
-      spreadsheet = Charges::Excel::Builder.call(consultations)
+      spreadsheet = Charges::Excel::Builder.call(consultations, date_range)
       send_data(spreadsheet.to_stream.read, download_options)
     end
 
