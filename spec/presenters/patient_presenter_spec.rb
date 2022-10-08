@@ -1,6 +1,9 @@
+require 'active_support/core_ext/object'
+require 'delegate'
 require 'timecop'
-require_relative '../../app/presenters/patient_presenter'
+
 require_relative '../../app/presenters/consultation_presenter'
+require_relative '../../app/presenters/patient_presenter'
 require_relative '../../app/services/age_calculator'
 
 describe PatientPresenter do
@@ -19,6 +22,46 @@ describe PatientPresenter do
                                    birthdate: Date.new(2017, 7, 12))
         presenter = described_class.new(patient)
         expect(presenter.formatted_birthdate).to eq('2017-07-12')
+      end
+    end
+  end
+
+  describe '#medical_history' do
+    it 'returns the formatted medical history' do
+      patient = double(:patient)
+      allow(patient).to receive(:[]).with(:medical_history).and_return('6723')
+
+      presenter = described_class.new(patient)
+      expect(presenter.medical_history).to eq('006723')
+    end
+  end
+
+  describe '#identity_card_number' do
+    it 'returns the formatted identity card number' do
+      patient = double(:patient)
+      allow(patient).to receive(:[]).with(:identity_card_number).and_return('6723')
+
+      presenter = described_class.new(patient)
+      expect(presenter.identity_card_number).to eq('0000006723')
+    end
+  end
+
+  describe '#hearing_aids_es' do
+    context 'when there hearing ads is true' do
+      it 'returns *SI*' do
+        patient = double(:patient, anamnesis: double(:anamnesis, hearing_aids: true))
+
+        presenter = described_class.new(patient)
+        expect(presenter.hearing_aids_es).to eq('SI')
+      end
+    end
+
+    context 'when there hearing ads is false' do
+      it 'returns *NO*' do
+        patient = double(:patient, anamnesis: double(:anamnesis, hearing_aids: false))
+
+        presenter = described_class.new(patient)
+        expect(presenter.hearing_aids_es).to eq('NO')
       end
     end
   end

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'byebug'
 
 class PatientPresenter < SimpleDelegator
   attr_writer :consultation_date
@@ -17,6 +18,14 @@ class PatientPresenter < SimpleDelegator
     else
       birthdate.strftime('%F')
     end
+  end
+
+  def medical_history
+    self[:medical_history].to_s.rjust(6, '0')
+  end
+
+  def identity_card_number
+    self[:identity_card_number].to_s.rjust(10, '0')
   end
 
   def name
@@ -46,6 +55,14 @@ class PatientPresenter < SimpleDelegator
       'newspaper'         => 'Periódico',
       'patient_reference' => 'Otro paciente'
     }[source]
+  end
+
+  def hearing_aids_es
+    if anamnesis&.hearing_aids
+      'SI'
+    else
+      'NO'
+    end
   end
 
   def anamnesis?
