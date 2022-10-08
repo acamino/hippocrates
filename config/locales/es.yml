@@ -23,7 +23,7 @@ es:
       new: Nuevo Paciente
       export: Exportar Pacientes
     table-header:
-      history: Historia
+      history: Historia Clínica
       last-name: Apellidos
       first-name: Nombres
       birthdate: Fecha de Nacimiento
@@ -35,7 +35,7 @@ es:
       anamnesis: Anamnesis
       anamnesis-star: Anamnesis*
       consultation: Consulta
-      clinical-history: Historia clínica
+      clinical-history: Historia Clínica
       edit: Editar
       destroy: Eliminar
     destroy:
