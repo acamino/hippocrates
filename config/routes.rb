@@ -44,7 +44,7 @@ Rails.application.routes.draw do
     resources :consultations, only: [] do
       resources :payment_changes, only: [:index, :create]
     end
-    resources :patients,        only: [] do
+    resources :patients,        only: [:index] do
       resources :consultations, only: [:index] do
         collection do
           post   'previous'

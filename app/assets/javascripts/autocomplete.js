@@ -24,5 +24,32 @@ Hippocrates.Autocomplete = {
         });
       });
     }
+
+    if (this.patientSearchEnabled()) {
+      $("#query").autocomplete({
+        minChars: 3,
+        serviceUrl: "api/patients",
+        onSelect: function (patient) {
+          window.location.href = patient.path;
+        }
+      });
+    }
+  },
+
+  patientSearchEnabled: function() {
+    var hasQuery = $('#query').length > 0
+    return hasQuery && (this.isPatientsPath() || this.isRootPath());
+  },
+
+  isPatientsPath: function() {
+    return this.pathname() == '/patients'
+  },
+
+  isRootPath: function() {
+    return this.pathname() == '/'
+  },
+
+  pathname: function() {
+    return window.location.pathname;
   }
 };
