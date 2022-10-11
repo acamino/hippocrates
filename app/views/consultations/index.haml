@@ -67,7 +67,7 @@
 
 .row
   .col-md-12
-    %table.table.table-striped
+    %table.table.table-striped.table-hover
       %thead
         %tr
           %th.col-sm-1
@@ -83,7 +83,7 @@
             %tr
               %td.checkbox-container
                 %input.check-consultation{ type: "checkbox", id: consultation.id }
-              %td
+              %td.select-consultation{ "data-path": edit_patient_consultation_path(@patient, consultation) }
                 .row
                   .col-md-10.col-md-offset-2
                     %strong

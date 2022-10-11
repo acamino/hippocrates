@@ -116,6 +116,10 @@ input[type="email"] {
   padding-left: 8px;
 }
 
+.select-consultation {
+  cursor: pointer;
+}
+
 .hint {
   display: block;
   position: fixed;
