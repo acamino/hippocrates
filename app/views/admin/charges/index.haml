@@ -58,7 +58,7 @@
                 = consultation.created_at.strftime('%b %d, %Y %I:%M %p')
       %tfoot
         %tr
-          %td.text-center{ colspan: "8", style: "padding-top: 1.5em;" }
+          %td.text-center.charges-paginate{ colspan: "8" }
             = paginate @consultations
 
 .jumbotron
@@ -70,12 +70,12 @@
       %big
         = "$ #{format('%.2f', @total_paid)}"
   .row
-    .col-md-3
+    .col-md-3.charges-totals-sep
       %big.text-danger
         Total Adeudado
-    .col-md-2.text-right.text-danger
-      %big
-        = "$ #{format('%.2f', @total_pending)}"
+    .col-md-2.text-right.charges-totals-sep
+      %big.text-danger
+        = "- $ #{format('%.2f', @total_pending)}"
   .row
     .col-md-3
       %big

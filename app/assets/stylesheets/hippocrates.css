@@ -120,6 +120,14 @@ input[type="email"] {
   cursor: pointer;
 }
 
+.charges-totals-sep {
+  border-bottom: 1px solid #ccc;
+}
+
+.charges-paginate {
+  padding-top: 1.5em !important;
+}
+
 .hint {
   display: block;
   position: fixed;
