@@ -207,9 +207,9 @@
             = f.fields_for :prescriptions do |ff|
               %tr
                 %td
-                  = ff.text_field :inscription, class: "form-control input-sm inscription", autocomplete: "off"
+                  = ff.text_area :inscription, class: "form-control input-sm inscription", autocomplete: "off"
                 %td
-                  = ff.text_field :subscription, class: "form-control input-sm subscription"
+                  = ff.text_area :subscription, class: "form-control input-sm subscription"
                 %td.text-center
                   %input{ type: "checkbox", class: 'input-sm locked' }
                 %td.text-center

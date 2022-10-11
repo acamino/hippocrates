@@ -19,7 +19,7 @@ class Medicine < ApplicationRecord
     ignoring: :accents
 
   def self.search(query)
-    (query.present? ? lookup(query) : all).order(:name)
+    (query.present? ? lookup(query) : all).order(Arel.sql('TRIM(name)'))
   end
 
   private

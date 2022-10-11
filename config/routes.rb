@@ -57,5 +57,6 @@ Rails.application.routes.draw do
     resources :diseases,  only: [:index]
     resources :medicines, only: [:index]
     resources :settings,  only: [:index, :update]
+    resources :users,     only: [:index]
   end
 end

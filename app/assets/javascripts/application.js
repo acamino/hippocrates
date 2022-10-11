@@ -27,3 +27,4 @@
 //= require payment_changes
 //= require prescription
 //= require settings
+//= require templates

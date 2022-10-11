@@ -12,12 +12,12 @@ class Disease < ApplicationRecord
   before_save :normalize
 
   pg_search_scope :lookup,
-    against:  :name,
+    against:  [:name, :code],
     using:    { tsearch: { prefix: true } },
     ignoring: :accents
 
   def self.search(query)
-    (query.present? ? lookup(query) : all).order(:name)
+    (query.present? ? lookup(query) : all).order(Arel.sql('TRIM(name)'))
   end
 
   private

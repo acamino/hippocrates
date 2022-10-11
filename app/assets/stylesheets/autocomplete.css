@@ -5,6 +5,8 @@
   border: 1px solid rgba(0,0,0,.15);
   border-radius: 0.45rem;
   overflow: auto;
+  -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 40%);
 }
 
 .autocomplete-suggestion {
@@ -20,6 +22,10 @@
   color: #fff;
   text-decoration: none;
   background-color: #007bff;
+}
+
+.autocomplete-selected small{
+  color: #fff;
 }
 
 .autocomplete-selected strong {

@@ -10,6 +10,7 @@ if(typeof Hippocrates === "undefined") {
   Hippocrates.PaymentChanges = {};
   Hippocrates.Prescription = {};
   Hippocrates.Settings = {};
+  Hippocrates.Templates = {};
 }
 
 $(document).on('turbolinks:load', function() {

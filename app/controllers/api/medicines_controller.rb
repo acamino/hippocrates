@@ -1,7 +1,14 @@
 module API
   class MedicinesController < ApplicationController
     def index
-      render json: Medicine.all
+      medicines = Medicine.search(params[:query])
+      render json: { suggestions: medicines.map(&serialize) }
+    end
+
+    private
+
+    def serialize
+      ->(medicine) { MedicineSerializer.new(medicine) }
     end
   end
 end
