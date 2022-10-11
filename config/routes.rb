@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     resources :charges,        only: [:index] do
       get :export, on: :collection
     end
+    resources :charts, only: [:index]
     resources :users
   end
 
