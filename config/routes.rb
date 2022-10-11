@@ -23,7 +23,8 @@ Rails.application.routes.draw do
     resources :charges,        only: [:index] do
       get :export, on: :collection
     end
-    resources :charts, only: [:index]
+    resources :charts,   only: [:index]
+    resources :settings, only: [:index]
     resources :users
   end
 
@@ -39,7 +40,6 @@ Rails.application.routes.draw do
     get :special,           on: :collection, to: 'special_patients#index'
     delete :remove_special, on: :member,     to: 'special_patients#remove'
   end
-  resources :settings, only: [:index]
 
   namespace :api, defaults: { format: 'json' } do
     resources :consultations, only: [] do

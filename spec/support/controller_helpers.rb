@@ -1,6 +1,6 @@
 module ControllerHelpers
-  def sign_in_user_mock
-    user = mock_model(User, doctor?: true)
+  def sign_in_user_mock(options = {})
+    user = mock_model(User, **options)
     authenticate_user_mock user
   end
 

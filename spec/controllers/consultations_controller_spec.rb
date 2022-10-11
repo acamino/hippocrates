@@ -7,7 +7,7 @@ describe ConsultationsController do
     create(:setting, :maximum_diagnoses)
     create(:setting, :maximum_prescriptions)
 
-    sign_in_user_mock
+    sign_in_user_mock(doctor?: true)
   end
 
   describe '#index' do

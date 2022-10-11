@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe SettingsController do
-  before { sign_in_user_mock }
+describe Admin::SettingsController do
+  before { sign_in_user_mock(admin_or_super_admin?: true) }
 
   describe '#index' do
     let!(:maximum_diagnoses)        { create(:setting, :maximum_diagnoses) }
