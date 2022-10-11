@@ -1,3 +1,6 @@
+= content_for :nav_option do
+  = active_nav_to('Cobros', admin_charges_path)
+
 .row
   .col-md-12
     = form_tag(admin_charges_path, method: 'GET', class: 'form') do

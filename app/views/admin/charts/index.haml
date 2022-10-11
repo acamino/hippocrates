@@ -1,0 +1,28 @@
+.row
+  .col-md-12
+    = form_tag(admin_charts_path, method: 'GET', class: 'form') do
+      .form-group.col-sm-3
+        = text_field_tag :date_range, params[:date_range], placeholder: '', class: 'form-control input-md'
+      .form-group.col-sm-3
+        = select_tag :uid,
+          options_from_collection_for_select(@users, 'id', 'pretty_name',
+          params[:uid]), include_blank: 'Usuarios', class: 'form-control input-md'
+      .form-group.col-sm-3
+        = select_tag :bid,
+          options_from_collection_for_select(@branch_offices, 'id', 'name',
+          params[:bid]), include_blank: 'Lugares de atención', class: 'form-control input-md'
+      .form-group.col-sm-3
+        %button.btn.btn-md.btn-default.hidden-xs{ type: "submit" }
+          = t('views.search')
+
+.row
+  .col-md-6
+    %h3
+      %i.fa-solid.fa-money-check-dollar
+      Cobros
+    = line_chart @payments_chart, download: true
+  .col-md-6
+    %h3
+      %i.fa-solid.fa-person-walking
+      Consultas
+    = line_chart @consultations_chart, download: true

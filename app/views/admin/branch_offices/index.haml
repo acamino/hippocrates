@@ -1,3 +1,6 @@
+= content_for :nav_option do
+  = active_nav_to('Sucrusales', admin_branch_offices_path)
+
 = render partial: 'search', locals: { path: admin_branch_offices_path, placeholder: 'Nombre' }
 
 .row

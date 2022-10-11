@@ -1,3 +1,6 @@
+= content_for :nav_option do
+  = active_nav_to('Usuarios', admin_users_path)
+
 = render partial: 'search', locals: { path: admin_users_path, placeholder: 'Nombre' }
 
 .row
