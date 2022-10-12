@@ -57,3 +57,16 @@
                                 "data-type":  "text",
                                 "data-url":   "#{api_setting_path(@emergency_number)}",
                                 "href": "#"}= @emergency_number.value
+
+        %tr
+          %td
+            %b Website
+            %br
+            %span.text-muted
+              Website para recetas, certificados y consentimientos
+          %td
+            %a#website{"data-pk":    @website.id,
+                       "data-value": @website.value,
+                       "data-type":  "text",
+                       "data-url":   "#{api_setting_path(@website)}",
+                       "href": "#"}= @website.value

@@ -27,25 +27,18 @@ describe Setting do
   end
 
   [
+    Setting::EMERGENCY_NUMBER,
     Setting::MAXIMUM_DIAGNOSES,
     Setting::MAXIMUM_PRESCRIPTIONS,
     Setting::MEDICAL_HISTORY_SEQUENCE,
-    Setting::EMERGENCY_NUMBER
+    Setting::WEBSITE
   ].each do |setting_name|
     describe ".#{setting_name}" do
       subject { described_class.public_send(setting_name.to_sym) }
 
-      context 'when the setting is present' do
-        it 'returns the setting' do
-          setting = described_class.create(name: setting_name, value: '2')
-          expect(subject).to eq(setting)
-        end
-      end
-
-      context 'when setting is not present' do
-        it 'raises an error' do
-          expect { subject }.to raise_error(SettingNotFoundError)
-        end
+      it 'returns the setting' do
+        setting = described_class.create(name: setting_name, value: '2')
+        expect(subject).to eq(setting)
       end
     end
   end

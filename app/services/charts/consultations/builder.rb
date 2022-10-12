@@ -12,7 +12,7 @@ module Charts
           {
             name: 'Consultas',
             data: consultations
-          },
+          }
         ]
       end
 

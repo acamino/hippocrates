@@ -241,7 +241,11 @@ input[type="email"] {
 }
 
 .editableform .form-control {
-  width: 110px;
+  width: 75px;
+}
+
+.editableform .user-input {
+  width: 200px;
 }
 
 #printable-prescription {

@@ -11,6 +11,12 @@ Hippocrates.Settings = {
 
     $('#sequence').editable({});
 
-    $('#emergency-number').editable({});
+    $('#emergency-number').editable({
+      inputclass: 'form-control input-sm user-input'
+    });
+
+    $('#website').editable({
+      inputclass: 'form-control input-sm user-input'
+    });
   }
 };

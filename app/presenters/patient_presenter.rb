@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require 'byebug'
 
 class PatientPresenter < SimpleDelegator
   attr_writer :consultation_date

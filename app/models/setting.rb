@@ -1,33 +1,36 @@
 class Setting < ApplicationRecord
+  EMERGENCY_NUMBER         = 'emergency_number'.freeze
   MAXIMUM_DIAGNOSES        = 'maximum_diagnoses'.freeze
   MAXIMUM_PRESCRIPTIONS    = 'maximum_prescriptions'.freeze
   MEDICAL_HISTORY_SEQUENCE = 'medical_history_sequence'.freeze
-  EMERGENCY_NUMBER         = 'emergency_number'.freeze
+  WEBSITE                  = 'website'.freeze
 
   validates_presence_of :name, :value
   validates_uniqueness_of :name
   validates_numericality_of :value, only_integer: true, if: :require_numeric_value?
 
+  def self.emergency_number
+    fetch(EMERGENCY_NUMBER) { |setting| setting.value = 'EMERGENCY NUMBER' }
+  end
+
   def self.maximum_diagnoses
-    find_or_fail!(MAXIMUM_DIAGNOSES)
+    fetch(MAXIMUM_DIAGNOSES) { |setting| setting.value = 5 }
   end
 
   def self.maximum_prescriptions
-    find_or_fail!(MAXIMUM_PRESCRIPTIONS)
+    fetch(MAXIMUM_PRESCRIPTIONS) { |setting| setting.value = 5 }
   end
 
   def self.medical_history_sequence
-    find_or_fail!(MEDICAL_HISTORY_SEQUENCE)
+    fetch(MEDICAL_HISTORY_SEQUENCE) { |setting| setting.value = 0 }
   end
 
-  def self.emergency_number
-    find_or_fail!(EMERGENCY_NUMBER)
+  def self.website
+    fetch(WEBSITE) { |setting| setting.value = 'WEBSITE' }
   end
 
-  def self.find_or_fail!(setting_name)
-    find_by!(name: setting_name)
-  rescue ActiveRecord::RecordNotFound
-    raise SettingNotFoundError, "#{setting_name} is not available"
+  def self.fetch(setting_name, &block)
+    find_or_create_by(name: setting_name, &block)
   end
 
   class MedicalHistorySequence
@@ -52,5 +55,3 @@ class Setting < ApplicationRecord
     ].include?(name)
   end
 end
-
-class SettingNotFoundError < RuntimeError; end
