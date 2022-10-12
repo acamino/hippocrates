@@ -10,7 +10,7 @@ module API
       @payment_change = @consultation.payment_changes.build(payment_change_params)
 
       if @payment_change.save
-        send_notification
+        send_notification if paid?
 
         render json: { success: true, errors: [] }
       else
