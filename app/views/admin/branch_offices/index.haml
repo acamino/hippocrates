@@ -1,3 +1,6 @@
+= content_for :nav_option do
+  = active_nav_to('Sucrusales', admin_branch_offices_path)
+
 = render partial: 'search', locals: { path: admin_branch_offices_path, placeholder: 'Nombre' }
 
 .row
@@ -7,14 +10,18 @@
 %table.table.table-striped
   %thead
     %tr
-      %th.col-md-6= t('branch_offices.fields.name')
-      %th.text-center.col-md-2= t('branch_offices.fields.main')
-      %th.text-center.col-md-2= t('branch_offices.fields.active')
-      %th.col-md-2
+      %th.col-md-2= t('branch_offices.fields.name')
+      %th.col-md-4= t('branch_offices.fields.address')
+      %th.col-md-3= t('branch_offices.fields.phone_numbers')
+      %th.text-center.col-md-1= t('branch_offices.fields.main')
+      %th.text-center.col-md-1= t('branch_offices.fields.active')
+      %th.col-md-1
   %tbody
   - @branch_offices.each do |branch_office|
     %tr
       %td= branch_office.name
+      %td= branch_office.address
+      %td= branch_office.phone_numbers
       %td.text-center
         - if branch_office.main?
           %span.text-success

@@ -1,3 +1,6 @@
+= content_for :nav_option do
+  = active_nav_to('Preferencias', admin_settings_path)
+
 .row
   .col-md-12
     %table.table.table-striped
@@ -41,3 +44,29 @@
                              "data-type":  "select",
                              "data-url":   "#{api_setting_path(@maximum_prescriptions)}",
                              "href": "#"}= @maximum_prescriptions.value
+
+        %tr
+          %td
+            %b Número de emergencia
+            %br
+            %span.text-muted
+              Número de emergencia para recetas, certificados y consentimientos
+          %td
+            %a#emergency-number{"data-pk":    @emergency_number.id,
+                                "data-value": @emergency_number.value,
+                                "data-type":  "text",
+                                "data-url":   "#{api_setting_path(@emergency_number)}",
+                                "href": "#"}= @emergency_number.value
+
+        %tr
+          %td
+            %b Website
+            %br
+            %span.text-muted
+              Website para recetas, certificados y consentimientos
+          %td
+            %a#website{"data-pk":    @website.id,
+                       "data-value": @website.value,
+                       "data-type":  "text",
+                       "data-url":   "#{api_setting_path(@website)}",
+                       "href": "#"}= @website.value

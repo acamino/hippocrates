@@ -4,8 +4,9 @@ class PatientsController < ApplicationController
   before_action :authorize_admin, only: [:export]
 
   def export
-    @csv = Patient.to_csv
-    send_data(@csv, download_options)
+    patients    = Patient.includes(:anamnesis).kept.order(:last_name, :first_name)
+    spreadsheet = Patients::Excel::Builder.call(patients, Time.zone.now)
+    send_data(spreadsheet.to_stream.read, download_options)
   end
 
   def index
@@ -80,9 +81,9 @@ class PatientsController < ApplicationController
 
   def download_options
     {
-      type: 'text/csv',
+      type:        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
       disposition: 'attachment',
-      filename: "#{Date.today}-patients.csv"
+      filename:    "patients_#{Time.zone.now.strftime('%Y_%m_%d_%H_%M_%S')}.xlsx"
     }
   end
 end

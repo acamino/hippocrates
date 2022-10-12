@@ -1,0 +1,33 @@
+/* https://github.com/devbridge/jQuery-Autocomplete#styling */
+.autocomplete-suggestions {
+  margin: 0.125rem 0 0;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: 0.45rem;
+  overflow: auto;
+  -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 40%);
+}
+
+.autocomplete-suggestion {
+  padding: 0.25rem 1.5rem;
+  overflow: hidden;
+}
+
+.autocomplete-suggestion strong {
+  color: #2196f3;
+}
+
+.autocomplete-selected {
+  color: #fff;
+  text-decoration: none;
+  background-color: #007bff;
+}
+
+.autocomplete-selected small{
+  color: #fff;
+}
+
+.autocomplete-selected strong {
+  color: #fff;
+}

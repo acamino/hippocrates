@@ -20,7 +20,11 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :activities,     only: [:index]
     resources :branch_offices, only: [:index, :new, :create, :edit, :update, :destroy]
-    resources :charges,        only: [:index]
+    resources :charges,        only: [:index] do
+      get :export, on: :collection
+    end
+    resources :charts,   only: [:index]
+    resources :settings, only: [:index]
     resources :users
   end
 
@@ -36,13 +40,12 @@ Rails.application.routes.draw do
     get :special,           on: :collection, to: 'special_patients#index'
     delete :remove_special, on: :member,     to: 'special_patients#remove'
   end
-  resources :settings, only: [:index]
 
   namespace :api, defaults: { format: 'json' } do
     resources :consultations, only: [] do
-      resources :price_changes, only: [:index, :create]
+      resources :payment_changes, only: [:index, :create]
     end
-    resources :patients,        only: [] do
+    resources :patients,        only: [:index] do
       resources :consultations, only: [:index] do
         collection do
           post   'previous'
@@ -55,5 +58,6 @@ Rails.application.routes.draw do
     resources :diseases,  only: [:index]
     resources :medicines, only: [:index]
     resources :settings,  only: [:index, :update]
+    resources :users,     only: [:index]
   end
 end

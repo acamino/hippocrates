@@ -23,7 +23,7 @@ es:
       new: Nuevo Paciente
       export: Exportar Pacientes
     table-header:
-      history: Historia
+      history: Historia Clínica
       last-name: Apellidos
       first-name: Nombres
       birthdate: Fecha de Nacimiento
@@ -35,7 +35,7 @@ es:
       anamnesis: Anamnesis
       anamnesis-star: Anamnesis*
       consultation: Consulta
-      clinical-history: Historia clínica
+      clinical-history: Historia Clínica
       edit: Editar
       destroy: Eliminar
     destroy:
@@ -68,8 +68,13 @@ es:
       new: Nuevo lugar de atención
     fields:
       name: Nombre
+      city: Ciudad
+      address: Dirección
+      phone_numbers: Teléfonos
       active: Activo
       main: Principal
+    form:
+      note: Ciudad, Dirección y Teléfonos requeridos para la impresión de certificados y consentimientos
     actions:
       edit: Editar
       destroy: Eliminar
@@ -106,6 +111,9 @@ es:
     ongoing_issue: Enfermedad
     doctor: Médico
     branch_office: Lugar de consulta
+    actions:
+      edit: Editar
+      destroy: Eliminar
     success:
       creation: Consulta creada correctamente
       update: Consulta actualizada correctamente

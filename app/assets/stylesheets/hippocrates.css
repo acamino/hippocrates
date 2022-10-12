@@ -116,34 +116,16 @@ input[type="email"] {
   padding-left: 8px;
 }
 
-.autocomplete-suggestions {
-  border: 1px solid #999;
-  background: #FFF;
-  overflow: auto;
+.select-consultation {
+  cursor: pointer;
 }
 
-.autocomplete-suggestion {
-  padding: 2px 5px;
-  white-space: nowrap;
-  overflow: hidden;
+.charges-totals-sep {
+  border-bottom: 1px solid #ccc;
 }
 
-.autocomplete-selected {
-  background: #F0F0F0;
-}
-
-.autocomplete-suggestions strong {
-  font-weight: normal;
-  color: #3399FF;
-}
-
-.autocomplete-group {
-  padding: 2px 5px;
-}
-
-.autocomplete-group strong {
-  display: block;
-  border-bottom: 1px solid #000;
+.charges-paginate {
+  padding-top: 1.5em !important;
 }
 
 .hint {
@@ -260,6 +242,10 @@ input[type="email"] {
 
 .editableform .form-control {
   width: 75px;
+}
+
+.editableform .user-input {
+  width: 200px;
 }
 
 #printable-prescription {

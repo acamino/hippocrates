@@ -418,5 +418,6 @@ Disease.create([
 Setting.create([
   { name: 'maximum_diagnoses', value: '5' },
   { name: 'maximum_prescriptions', value: '5' },
-  { name: 'medical_history_sequence', value: '0' }
+  { name: 'medical_history_sequence', value: '0' },
+  { name: 'emergency_phone_number', value: '098 352 0452' }
 ])

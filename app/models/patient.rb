@@ -1,5 +1,3 @@
-require 'csv'
-
 class Patient < ApplicationRecord
   include Discard::Model
   include PgSearch::Model
@@ -20,17 +18,6 @@ class Patient < ApplicationRecord
     :email,
     :health_insurance,
     :branch_office_id
-  ].freeze
-
-  CSV_ATTRIBUTES = %w[
-    medical_history
-    last_name
-    first_name
-    identity_card_number
-    birthdate
-    gender
-    civil_status
-    source
   ].freeze
 
   enum gender: [:male, :female]
@@ -58,7 +45,6 @@ class Patient < ApplicationRecord
 
   validates :medical_history,
             :identity_card_number, uniqueness: true
-  validates :email, uniqueness: true, allow_nil: true, allow_blank: true
 
   before_save :normalize
 
@@ -70,16 +56,6 @@ class Patient < ApplicationRecord
     against:  [:first_name, :last_name, :identity_card_number],
     using:    { tsearch: { prefix: true } },
     ignoring: :accents
-
-  def self.to_csv
-    CSV.generate(headers: true) do |csv|
-      csv << (CSV_ATTRIBUTES + ['hearing_aids'])
-      all.includes(:anamnesis).each do |user|
-        hearing_aids = user.anamnesis&.hearing_aids || false
-        csv << (user.attributes.values_at(*CSV_ATTRIBUTES) + [hearing_aids])
-      end
-    end
-  end
 
   def self.search(query)
     (query.present? ? lookup(query) : all).order_by_name

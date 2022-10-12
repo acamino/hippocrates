@@ -1,12 +1,13 @@
 require 'rails_helper'
 
-describe SettingsController do
-  before { sign_in_user_mock }
+describe Admin::SettingsController do
+  before { sign_in_user_mock(admin_or_super_admin?: true) }
 
   describe '#index' do
     let!(:maximum_diagnoses)        { create(:setting, :maximum_diagnoses) }
     let!(:maximum_prescriptions)    { create(:setting, :maximum_prescriptions) }
     let!(:medical_history_sequence) { create(:setting, :medical_history_sequence) }
+    let!(:emergency_number)         { create(:setting, :emergency_number) }
 
     before { get :index }
 
@@ -20,6 +21,10 @@ describe SettingsController do
 
     it 'assigns @medical_history_sequence' do
       expect(assigns(:medical_history_sequence)).to eq(medical_history_sequence)
+    end
+
+    it 'assigns @emergency_number' do
+      expect(assigns(:emergency_number)).to eq(emergency_number)
     end
 
     it { is_expected.to render_template :index }

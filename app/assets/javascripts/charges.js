@@ -2,17 +2,25 @@ Hippocrates.Charges = {
   init: function() {
     var self = this;
 
-    $(".show-price-changes").on("click", function(e) {
-      var consultationId = $(this).attr("id");
-      self.getPriceChanges(consultationId);
-
+    $(".show-payment-changes").on("click", function(e) {
       e.preventDefault();
+
+      var consultationId = $(this).attr("id");
+      var type = $(this).data('type');
+
+      self.getPaymentChanges(consultationId, type);
+      self.setModalTitle(type);
       self.openModal();
+    });
+
+    $(".btn-charges").on("click", function(e) {
+      var action = $(this).data("action-path");
+      $('form').attr('action', action);
     });
   },
 
   openModal: function() {
-    $("#price-changes").modal({ backdrop: "static" });
+    $("#payment-changes").modal({ backdrop: "static" });
   },
 
   renderTemplate: function(target, data) {
@@ -21,13 +29,18 @@ Hippocrates.Charges = {
     return Mustache.render(template, data);
   },
 
-  getPriceChanges: function(consultationId) {
+  getPaymentChanges: function(consultationId, type) {
     var self = this;
 
-    var path = "/api/consultations/" + consultationId + "/price_changes";
+    var path = "/api/consultations/" + consultationId + "/payment_changes?type=" + type;
     $.get(path, function(data) {
-      var content = self.renderTemplate("#tmpl-price-changes", { priceChanges: data });
-      $("#price-changes--content").html(content);
+      var content = self.renderTemplate("#tmpl-payment-changes", { paymentChanges: data });
+      $("#payment-changes--content").html(content);
     });
+  },
+
+  setModalTitle: function(type) {
+    var modalTitle = type == 'paid' ? 'Valores Pagados' : 'Valores Pendientes'
+    $("#payment-changes-title").html(modalTitle);
   }
 }

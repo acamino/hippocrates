@@ -19,21 +19,58 @@ module Prescriptions
       style: :bold
     }.freeze
 
+    PHONE_NUMBERS_OPTIONS = {
+      font:  'Montserrat',
+      color: '1E3463',
+      style: :bold,
+      size:  7
+    }.freeze
+
+    EMERGENCY_NUMBER_OPTIONS = {
+      font:  'Montserrat',
+      color: '1E3463',
+      style: :bold,
+      size:  8
+    }.freeze
+
+    WEBSITE_OPTIONS = {
+      font:  'Montserrat',
+      color: '1E3463',
+      style: :bold,
+      size:  10
+    }.freeze
+
+    FONT_FAMILIES = {
+      'Montserrat' => {
+        bold:   "#{Rails.root}/app/assets/fonts/Montserrat-Bold.ttf",
+        normal: "#{Rails.root}/app/assets/fonts/Montserrat-Regular.ttf"
+      }
+    }.freeze
+
     def self.call(consultation, empty)
-      new(consultation, empty).call
+      emergency_number = Setting.emergency_number.value
+      website          = Setting.website.value
+      new(consultation, empty, emergency_number, website).call
     end
 
-    def initialize(consultation, empty)
-      @consultation = consultation
-      @empty        = empty
+    def initialize(consultation, empty, emergency_number, website)
+      @consultation     = consultation
+      @empty            = empty
+      @emergency_number = emergency_number
+      @website          = website
     end
 
     # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/MethodLength
     def call
       pdf = Prawn::Document.new(**DOCUMENT_OPTIONS)
+      pdf.font_families.update(**FONT_FAMILIES)
+
       # Inscriptions
-      Printers::Section.call(pdf, [-5, 474], 136, serial)
+      Printers::Section.call(pdf, [233, 524], 136, phone_numbers, **PHONE_NUMBERS_OPTIONS)
+      Printers::Section.call(pdf, [222, 505], 160, website, **WEBSITE_OPTIONS)
+      Printers::Section.call(pdf, [300, 515], 136, emergency_number, **EMERGENCY_NUMBER_OPTIONS)
+      Printers::Section.call(pdf, [-5,  474], 136, serial)
       Printers::Section.call(pdf, [244, 475], 136, location_and_date, align: :right)
       Printers::Section.call(pdf, [-26, 459], 405, patient_name)
       Printers::Section.call(pdf, [244, 442], 136, patient_age)
@@ -47,6 +84,9 @@ module Prescriptions
       Printers::Section.call(pdf, [80, 14], 200, doctor_phone, **DEFAULT_SIGNATURE_OPTIONS)
 
       # Prescriptions
+      Printers::Section.call(pdf, [651, 524], 136, phone_numbers, **PHONE_NUMBERS_OPTIONS)
+      Printers::Section.call(pdf, [640, 505], 160, website, **WEBSITE_OPTIONS)
+      Printers::Section.call(pdf, [718, 515], 136, emergency_number, **EMERGENCY_NUMBER_OPTIONS)
       Printers::Section.call(pdf, [415, 474], 136, serial)
       Printers::Section.call(pdf, [664, 475], 136, location_and_date, align: :right)
       Printers::Section.call(pdf, [395, 459], 405, patient_name)
@@ -66,7 +106,7 @@ module Prescriptions
 
     private
 
-    attr_reader :consultation
+    attr_reader :consultation, :emergency_number, :website
 
     def empty?
       @empty
@@ -86,6 +126,10 @@ module Prescriptions
 
     def serial
       consultation.serial || DEFAULT_SERIAL
+    end
+
+    def phone_numbers
+      consultation.branch_office.phone_numbers
     end
 
     # Move to a presenter

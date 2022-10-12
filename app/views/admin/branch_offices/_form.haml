@@ -5,6 +5,20 @@
     .col-md-10
       = f.text_field :name, class: "form-control input-sm"
   .form-group
+    = f.label :city, t('branch_offices.fields.city'), class: "col-md-2 control-label"
+    .col-md-10
+      = f.text_field :city, class: "form-control input-sm user-input"
+  .form-group
+    = f.label :address, t('branch_offices.fields.address'), class: "col-md-2 control-label"
+    .col-md-10
+      = f.text_field :address, class: "form-control input-sm user-input"
+  .form-group
+    = f.label :phone_numbers, t('branch_offices.fields.phone_numbers'), class: "col-md-2 control-label"
+    .col-md-10
+      = f.text_field :phone_numbers, class: "form-control input-sm"
+      %span.text-muted
+        = t('branch_offices.form.note')
+  .form-group
     = f.label :main, t('branch_offices.fields.main'), class: "col-md-2 control-label"
     .col-md-10
       = f.check_box :main

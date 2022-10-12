@@ -1,11 +1,11 @@
 class DiseaseSerializer < ActiveModel::Serializer
-  attributes :value, :data
+  include Rails.application.routes.url_helpers
 
-  def value
-    object.name
-  end
+  attribute :code, key: :data
+  attribute :name, key: :value
+  attribute :path
 
-  def data
-    object.code
+  def path
+    edit_disease_path(object.id)
   end
 end

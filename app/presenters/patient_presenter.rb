@@ -19,6 +19,14 @@ class PatientPresenter < SimpleDelegator
     end
   end
 
+  def medical_history
+    self[:medical_history].to_s.rjust(6, '0')
+  end
+
+  def identity_card_number
+    self[:identity_card_number].to_s.rjust(10, '0')
+  end
+
   def name
     "#{last_name} #{first_name}"
   end
@@ -46,6 +54,14 @@ class PatientPresenter < SimpleDelegator
       'newspaper'         => 'Periódico',
       'patient_reference' => 'Otro paciente'
     }[source]
+  end
+
+  def hearing_aids_es
+    if anamnesis&.hearing_aids
+      'SI'
+    else
+      'NO'
+    end
   end
 
   def anamnesis?

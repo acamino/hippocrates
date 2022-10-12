@@ -1,3 +1,6 @@
+= content_for :nav_option do
+  = active_nav_to('Cobros', admin_charges_path)
+
 .row
   .col-md-12
     = form_tag(admin_charges_path, method: 'GET', class: 'form') do
@@ -6,14 +9,16 @@
       .form-group.col-sm-3
         = select_tag :uid,
           options_from_collection_for_select(@users, 'id', 'pretty_name',
-          params[:uid]), include_blank: 'Todos', class: 'form-control input-md'
+          params[:uid]), include_blank: 'Usuarios', class: 'form-control input-md'
       .form-group.col-sm-3
         = select_tag :bid,
           options_from_collection_for_select(@branch_offices, 'id', 'name',
-          params[:bid]), include_blank: 'Todos', class: 'form-control input-md'
+          params[:bid]), include_blank: 'Lugares de atención', class: 'form-control input-md'
       .form-group.col-sm-3
-        %button.btn.btn-md.btn-primary.hidden-xs{ type: "submit" }
+        %button.btn-charges.btn.btn-md.btn-default.hidden-xs{ type: "submit", "data-action-path": admin_charges_path }
           = t('views.search')
+        %button.btn-charges.btn.btn-md.btn-primary.hidden-xs{ type: "submit", "data-action-path": export_admin_charges_path(format: :xlsx) }
+          Exportar cobros
 
 .row
   .col-md-12
@@ -21,10 +26,12 @@
       %thead
         %tr
           %th.col-md-2 Sucrusal
-          %th.col-md-4 Usuario
-          %th
+          %th.col-md-3 Usuario
           %th.col-md-3 Paciente
-          %th.col-md-1.text-right Cobro
+          %th.col-md-1.text-right Pagado
+          %th
+          %th.col-md-1.text-right Pendiente
+          %th
           %th.col-md-2 Fecha
       %tbody
         - @consultations.each do |_consultation|
@@ -35,35 +42,51 @@
               %td
                 = consultation.doctor.pretty_name.upcase
               %td
-                - unless consultation.price_changes.empty?
-                  %span.text-primary
-                    %a.show-price-changes{ href: '#', id: consultation.id, data: { turbolinks:  false } }
-                      %i.fa.fa-link
-              %td
                 = consultation.patient.full_name
               %td.text-right
-                = "$ #{consultation.pretty_price}"
+                = "$ #{consultation.pretty_payment}"
+              %td
+                - if consultation.payment_changes.paid.present?
+                  %span.text-primary
+                    %a.show-payment-changes{ href: '#', id: consultation.id, data: { turbolinks:  false, type: 'paid' } }
+                      %i.fa.fa-link
+              %td.text-right.text-danger
+                = "$ #{consultation.pretty_pending_payment}"
+              %td
+                - if consultation.payment_changes.pending.present?
+                  %span.text-primary
+                    %a.show-payment-changes{ href: '#', id: consultation.id, data: { turbolinks:  false, type: 'pending' } }
+                      %i.fa.fa-link
               %td
                 = consultation.created_at.strftime('%b %d, %Y %I:%M %p')
       %tfoot
         %tr
-          %td
-          %td
-          %td
-          %td
-          %td.text-right
-            %b
-              = "$ #{format('%.2f', @consultations.pluck(:price).sum)}"
-          %td
-.row
-  .col-md-12
-    %big
-      %b
-        Total:
-        = "$ #{format('%.2f', @total)}"
+          %td.text-center.charges-paginate{ colspan: "8" }
+            = paginate @consultations
 
-.row
-  .col-md-12.text-center
-    = paginate @consultations
+.jumbotron
+  .row
+    .col-md-3
+      %big
+        Total Pagado
+    .col-md-2.text-right
+      %big
+        = "$ #{format('%.2f', @total_paid)}"
+  .row
+    .col-md-3.charges-totals-sep
+      %big.text-danger
+        Total Adeudado
+    .col-md-2.text-right.charges-totals-sep
+      %big.text-danger
+        = "- $ #{format('%.2f', @total_pending)}"
+  .row
+    .col-md-3
+      %big
+        <strong>Total</strong>
+      <small>(Total Pagado — <span class="text-danger">Total Adeudado<span>)</small>
+    .col-md-2.text-right
+      %big
+        %b
+          = "$ #{format('%.2f', @total_paid - @total_pending)}"
 
 = render 'modal_charges'

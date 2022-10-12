@@ -18,4 +18,14 @@ FactoryBot.define do
     name  { Setting::MEDICAL_HISTORY_SEQUENCE }
     value { '4' }
   end
+
+  trait :emergency_number do
+    name  { Setting::EMERGENCY_NUMBER }
+    value { '099 555 5555' }
+  end
+
+  trait :website do
+    name  { Setting::WEBSITE }
+    value { 'www.example.com' }
+  end
 end

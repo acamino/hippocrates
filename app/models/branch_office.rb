@@ -4,7 +4,10 @@ class BranchOffice < ApplicationRecord
   ATTRIBUTE_WHITELIST = [
     :name,
     :main,
-    :active
+    :active,
+    :city,
+    :address,
+    :phone_numbers
   ].freeze
 
   has_many :patients

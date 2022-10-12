@@ -9,6 +9,8 @@ describe Consultations::Document do
     let(:surgery_tentative_date) { '' }
     let(:surgery_cost)           { '' }
     let(:consultations)          { [] }
+    let!(:emergency_number)      { create(:setting, :emergency_number) }
+    let!(:website)               { create(:setting, :website) }
     let(:consultation) do
       create(:consultation, :with_diagnoses, created_at: '2016-01-01', patient: patient)
     end
@@ -36,7 +38,9 @@ describe Consultations::Document do
         surgery_tentative_date: surgery_tentative_date,
         surgery_cost: surgery_cost,
         consultations: consultations,
-        doctor: consultation.doctor
+        doctor: consultation.doctor,
+        emergency_number: '099 555 5555',
+        website: 'www.example.com'
       }
     end
 

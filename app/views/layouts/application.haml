@@ -7,7 +7,7 @@
     = javascript_include_tag 'application'
     = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.3/pdfobject.min.js'
     = stylesheet_link_tag '//maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css'
-    = stylesheet_link_tag '//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'
+    = stylesheet_link_tag '//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css'
     = stylesheet_link_tag '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.min.css'
     = stylesheet_link_tag '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css'
     = stylesheet_link_tag '//cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.min.css'
@@ -42,15 +42,24 @@
                   %ul.dropdown-menu{ role: "menu" }
                     = nav_to 'Actividades', admin_activities_path
                     = nav_to 'Cobros', admin_charges_path
-                    = nav_to 'Preferencias', settings_path
+                    = nav_to 'Preferencias', admin_settings_path
                     = nav_to 'Sucrusales', admin_branch_offices_path
                     = nav_to 'Usuarios', admin_users_path
+                    = nav_to 'Productividad', admin_charts_path
               = yield :nav_option
 
           %ul.nav.navbar-nav.navbar-right
             - if user_signed_in?
               %li
-                = link_to current_user.pretty_name, edit_user_registration_path
+                = link_to edit_user_registration_path do
+                  %span
+                    - if current_user.doctor?
+                      %i.fa.fa-user-md
+                    - else
+                      %i.fa.fa-user
+
+                  = current_user.pretty_name
+
               %li
                 = link_to "Salir", destroy_user_session_path, method: :delete
             - else
@@ -68,9 +77,9 @@
     = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js'
     = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/locales/bootstrap-datepicker.es.min.js'
     = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.min.js'
-    = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.1/jquery.autocomplete.min.js'
+    = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.11/jquery.autocomplete.min.js'
     = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'
-    = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js'
+    = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/mustache.js/4.1.0/mustache.min.js'
     = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/jQuery.print/1.5.1/jQuery.print.min.js'
     = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.js'
     = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js'

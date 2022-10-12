@@ -1,4 +1,4 @@
-= render partial: 'search', locals: { path: diseases_path, placeholder: 'Nombre' }
+= render partial: 'search', locals: { path: diseases_path, placeholder: 'Nombre o Código CIE-10' }
 
 .row
   .col-md-12.text-right
@@ -23,3 +23,5 @@
 .row
   .col-md-12.text-center
     = paginate @diseases
+
+= render 'diseases/suggestion'
