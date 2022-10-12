@@ -1,3 +1,6 @@
+= content_for :nav_option do
+  = active_nav_to('Productividad', admin_charts_path)
+
 .row
   .col-md-12
     = form_tag(admin_charts_path, method: 'GET', class: 'form') do
@@ -16,13 +19,14 @@
           = t('views.search')
 
 .row
-  .col-md-6
-    %h3
+  .col-md-12
+    %h4
       %i.fa-solid.fa-money-check-dollar
       Cobros
-    = line_chart @payments_chart, download: true
-  .col-md-6
-    %h3
+    = line_chart @payments_chart, download: true, prefix: '$', round: 2, zeros: true
+.row
+  .col-md-12
+    %h4
       %i.fa-solid.fa-person-walking
       Consultas
     = line_chart @consultations_chart, download: true
