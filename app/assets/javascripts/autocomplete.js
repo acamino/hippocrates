@@ -15,7 +15,9 @@ Hippocrates.Autocomplete = {
     this.register(this.usersSearchEnabled(), paths.USERS);
   },
 
-  register: function(isEnabled, serviceUrl, opts = {}) {
+  register: function(isEnabled, serviceUrl, opts) {
+    opts = opts || {};
+
     if (!isEnabled) {
       return;
     }
