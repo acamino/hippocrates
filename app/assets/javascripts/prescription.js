@@ -1,17 +1,6 @@
 Hippocrates.Prescription = {
-  config: {
-    prescriptionTmpl: "#prescription-tmpl",
-    printablePrescription: "#printable-prescription",
-    printLink: "#print"
-  },
-
   init: function() {
     var self = this;
-
-    $(self.config.printLink).on("click", function(e) {
-      e.preventDefault();
-      self.print();
-    });
 
     $(".show-prescription").on("click", function(e) {
       e.preventDefault();
@@ -22,20 +11,6 @@ Hippocrates.Prescription = {
       e.preventDefault();
       self.openEmptyPrescriptionModal();
     });
-  },
-
-  print: function() {
-    var prescription = this.renderTemplate(
-      this.config.prescriptionTmpl, this.getPrescription());
-
-    $(this.config.printablePrescription).html(prescription);
-    $(this.config.printablePrescription).print();
-  },
-
-  renderTemplate: function (target, data) {
-    var template = $(target).html();
-    Mustache.parse(template);
-    return Mustache.render(template, data);
   },
 
   getPrescription: function() {

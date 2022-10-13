@@ -248,10 +248,6 @@ input[type="email"] {
   width: 200px;
 }
 
-#printable-prescription {
-  display: none;
-}
-
 .destroyable {
   background-color: khaki !important;
 }
@@ -280,46 +276,4 @@ input[type="email"] {
   border-radius: 17px;
   height: 30px;
   width: 30px;
-}
-
-@media print {
-  #printable-prescription {
-    margin-top: 0;
-    font-size: 12px;
-    display: block;
-  }
-
-  #printable-prescription .header {
-    position: absolute;
-    top: 5.3cm;
-    width: 98%;
-  }
-
-  #printable-prescription .header tr {
-    line-height: 20px;
-  }
-
-  #printable-prescription .body {
-    position: absolute;
-    top: 7.5cm;
-    width: 98%;
-  }
-
-  #printable-prescription .body td {
-    vertical-align: top;
-    padding-bottom: 7px;
-  }
-
-  #printable-prescription .footer {
-    position: absolute;
-    top: 18.3cm;
-    font-weight: 600;
-    text-align: right;
-    font-size: 18px;
-    width: 98%;
-  }
-
-  #printable-prescription .footer > .col-md-12 {
-    padding-right: 3.2cm;
-  }
 }
