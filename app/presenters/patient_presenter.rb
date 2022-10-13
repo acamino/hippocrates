@@ -4,11 +4,11 @@ class PatientPresenter < SimpleDelegator
   attr_writer :consultation_date
 
   def age
-    @age ||= AgeCalculator.calculate(birthdate)
+    @age ||= Patients::Age.from(birthdate)
   end
 
   def relative_age
-    AgeCalculator.calculate(birthdate, @consultation_date)
+    Patients::Age.from(birthdate, @consultation_date)
   end
 
   def formatted_birthdate
