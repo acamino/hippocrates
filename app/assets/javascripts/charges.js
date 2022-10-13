@@ -10,17 +10,13 @@ Hippocrates.Charges = {
 
       self.getPaymentChanges(consultationId, type);
       self.setModalTitle(type);
-      self.openModal();
+      Hippocrates.Utils.openModal("#payment-changes");
     });
 
     $(".btn-charges").on("click", function(e) {
       var action = $(this).data("action-path");
       $('form').attr('action', action);
     });
-  },
-
-  openModal: function() {
-    $("#payment-changes").modal({ backdrop: "static" });
   },
 
   getPaymentChanges: function(consultationId, type) {

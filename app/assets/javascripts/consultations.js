@@ -13,7 +13,7 @@ Hippocrates.Consultations = {
 
     $("#show").on("click", function(e) {
       e.preventDefault();
-      self.openModal();
+      Hippocrates.Utils.openModal("#consultation");
     });
 
     $("#consultation").on("show.bs.modal", function (e) {
@@ -41,10 +41,6 @@ Hippocrates.Consultations = {
         }
       }
     });
-  },
-
-  openModal: function() {
-    $("#consultation").modal({ backdrop: "static" });
   },
 
   renderConsultation: function(consultation) {

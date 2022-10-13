@@ -11,6 +11,7 @@ if(typeof Hippocrates === "undefined") {
   Hippocrates.Prescription = {};
   Hippocrates.Settings = {};
   Hippocrates.Templates = {};
+  Hippocrates.Utils = {};
 }
 
 $(document).on('turbolinks:load', function() {

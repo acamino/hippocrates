@@ -4,7 +4,7 @@ Hippocrates.Certificates = {
 
     $(".show-certificate").on("click", function(e) {
       e.preventDefault();
-      self.openModal();
+      Hippocrates.Utils.openModal("#certificates");
     });
 
     $("#certificate").on("change", function() {
@@ -28,10 +28,6 @@ Hippocrates.Certificates = {
     });
 
     self.updateUrlAndToggleControls();
-  },
-
-  openModal: function() {
-    $("#certificates").modal({ backdrop: "static" });
   },
 
   updateUrl: function(certificateType) {

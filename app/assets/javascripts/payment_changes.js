@@ -4,7 +4,9 @@ Hippocrates.PaymentChanges = {
     $(".show-payment-change").on("click", function(e) {
       $('#payment_change_type').val($(this).data('type'));
       e.preventDefault();
-      self.openModal();
+
+      self.initControls();
+      Hippocrates.Utils.openModal("#change-payment");
     });
 
     if ($("#updated-payment").length) {
@@ -20,11 +22,6 @@ Hippocrates.PaymentChanges = {
     });
 
     self.initControls();
-  },
-
-  openModal: function() {
-    this.initControls();
-    $("#change-payment").modal({ backdrop: "static" });
   },
 
   savePayment: function() {

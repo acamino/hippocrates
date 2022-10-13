@@ -30,3 +30,4 @@
 //= require prescription
 //= require settings
 //= require templates
+//= require utils
