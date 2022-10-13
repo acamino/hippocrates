@@ -27,12 +27,6 @@ Hippocrates.PaymentChanges = {
     $("#change-payment").modal({ backdrop: "static" });
   },
 
-  renderTemplate: function(target, data) {
-    var template = $(target).html();
-    Mustache.parse(template);
-    return Mustache.render(template, data);
-  },
-
   savePayment: function() {
     var self = this;
 
@@ -57,7 +51,7 @@ Hippocrates.PaymentChanges = {
       })
       .fail(function(result) {
         $("#change-payment__errors").show();
-        var errors = self.renderTemplate("#tmpl-payment-change-errors", { errors: result.responseJSON.errors });
+        var errors = Hippocrates.Templates.render("#tmpl-payment-change-errors", { errors: result.responseJSON.errors });
         $("#change-payment__errors--body").html(errors);
       });
   },

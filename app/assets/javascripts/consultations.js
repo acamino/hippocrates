@@ -47,16 +47,10 @@ Hippocrates.Consultations = {
     $("#consultation").modal({ backdrop: "static" });
   },
 
-  renderTemplate: function(target, data) {
-    var template = $(target).html();
-    Mustache.parse(template);
-    return Mustache.render(template, data);
-  },
-
   renderConsultation: function(consultation) {
     if (consultation) {
-      var consultationHeader = this.renderTemplate("#consultation-header", consultation);
-      var consultationBody = this.renderTemplate("#consultation-body", consultation);
+      var consultationHeader = Hippocrates.Templates.render("#consultation-header", consultation);
+      var consultationBody = Hippocrates.Templates.render("#consultation-body", consultation);
 
       $("#consultation").find(".modal-title").html(consultationHeader);
       $("#consultation").find(".modal-body").html(consultationBody);

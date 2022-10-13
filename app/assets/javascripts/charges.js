@@ -23,18 +23,12 @@ Hippocrates.Charges = {
     $("#payment-changes").modal({ backdrop: "static" });
   },
 
-  renderTemplate: function(target, data) {
-    var template = $(target).html();
-    Mustache.parse(template);
-    return Mustache.render(template, data);
-  },
-
   getPaymentChanges: function(consultationId, type) {
     var self = this;
 
     var path = "/api/consultations/" + consultationId + "/payment_changes?type=" + type;
     $.get(path, function(data) {
-      var content = self.renderTemplate("#tmpl-payment-changes", { paymentChanges: data });
+      var content = Hippocrates.Templates.render("#tmpl-payment-changes", { paymentChanges: data });
       $("#payment-changes--content").html(content);
     });
   },
