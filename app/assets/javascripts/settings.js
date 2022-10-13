@@ -1,22 +1,30 @@
-Hippocrates.Settings = {
-  init: function() {
+Hippocrates.Settings = (function() {
+  var setup = function() {
     $.fn.editable.defaults.mode = "inline";
     $.fn.editable.defaults.ajaxOptions = { type: "PATCH" };
+  };
 
-    $('#diagnoses, #prescriptions').editable({
-      source: _.map(_.range(1, 11), function (option) {
-        return { value: option, text: option };
-      })
-    });
+  var toOption = function(option) {
+    return { value: option, text: option };
+  };
+
+  var textInputClass = 'form-control input-sm user-input';
+
+  var init = function() {
+    setup();
 
     $('#sequence').editable({});
 
-    $('#emergency-number').editable({
-      inputclass: 'form-control input-sm user-input'
+    $('#diagnoses, #prescriptions').editable({
+      source: _(_.range(1, 11)).map(toOption)
     });
 
-    $('#website').editable({
-      inputclass: 'form-control input-sm user-input'
+    $('#emergency-number, #website').editable({
+      inputclass: textInputClass
     });
+  };
+
+  return {
+    init: init
   }
-};
+})();
