@@ -1,4 +1,6 @@
-- if content.present?
+- has_pending_payment ||= false
+
+- if content.present? || has_pending_payment
   .row
     .col-md-2.text-right.hidden-xs
       %span.semi-strong.text-muted
@@ -7,5 +9,10 @@
       %span.semi-strong.text-muted
         = label
     .col-md-10
-      %span.semi-strong
-      = content
+      - if has_pending_payment
+        %span.semi-strong.text-danger
+          = "$ #{payment}"
+          %i.fa-solid.fa-sack-dollar
+      - else
+        %span
+          = content

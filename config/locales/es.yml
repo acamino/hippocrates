@@ -111,6 +111,7 @@ es:
     ongoing_issue: Enfermedad
     doctor: Médico
     branch_office: Lugar de consulta
+    pending_payment: Valores pendientes
     actions:
       edit: Editar
       destroy: Eliminar

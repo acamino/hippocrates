@@ -110,6 +110,7 @@ en:
     ongoing_issue: Ongoing Issue
     doctor: Doctor
     branch_office: Branch Office
+    pending_payment: Pending payment
     actions:
       edit: Edit
       destroy: Delete

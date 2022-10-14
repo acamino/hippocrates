@@ -25,6 +25,10 @@ class ConsultationPresenter < SimpleDelegator
     format('%.2f', pending_payment)
   end
 
+  def pending_payment?
+    pending_payment.positive?
+  end
+
   def pretty_total_payment
     format('%.2f', payment - pending_payment)
   end
