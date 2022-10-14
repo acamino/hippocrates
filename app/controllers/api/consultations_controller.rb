@@ -1,56 +1,48 @@
 module API
   class ConsultationsController < BaseController
-    def last
-      consultation = patient.most_recent_consultation
-      render json: consultation
-    end
+    before_action :fetch_patient
+    before_action :fetch_consultation, only: [:show]
 
-    def previous
-      consultation = Consultation.find(previous_consultation_id)
-      render json: consultation
-    end
-
-    def next
-      consultation = Consultation.find(next_consultation_id)
-      render json: consultation
+    def show
+      render json: { consultation: ConsultationSerializer.new(@consultation), meta: meta }
     end
 
     def destroy
-      Consultation.where(id: consultations_ids).discard_all
+      @patient.consultations.where(id: consultations_ids).discard_all
       render json: {}
     end
 
     private
 
-    def patient
-      Patient.find(params[:patient_id])
+    def fetch_patient
+      @patient = Patient.find(params[:patient_id])
     end
 
-    def patient_consultations
-      @patient_consultations ||= patient.consultations.pluck(:id)
-    end
-
-    def previous_consultation_id
-      patient_consultations[current_consultation_index.succ]
-    end
-
-    def next_consultation_id
-      consultation_index = current_consultation_index.pred
-      return nil if consultation_index.negative?
-
-      patient_consultations[consultation_index]
-    end
-
-    def current_consultation_index
-      patient_consultations.index(current_consultation)
-    end
-
-    def current_consultation
-      params[:current_consultation].to_i
+    def fetch_consultation
+      @consultation = @patient.consultations.includes(:diagnoses, :prescriptions).find(params[:id])
     end
 
     def consultations_ids
       params.fetch(:consultations, '').split('_').map(&:to_i)
+    end
+
+    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/AbcSize
+    def meta
+      ids      =  @patient.consultations.kept.order(created_at: :desc).pluck(:id)
+      pages    =  ids.zip((ids.count..1).step(-1)).map do |id, position|
+        { id: id, position: position }
+      end
+      current  =  pages.find { |page| page[:id] == @consultation.id }
+      previous =  pages.find { |page| page[:position] == current[:position].pred }
+      succ     =  pages.find { |page| page[:position] == current[:position].succ }
+
+      {
+        total: @patient.consultations.kept.count,
+        current: current,
+        previous: previous,
+        next: succ
+      }
     end
   end
 end

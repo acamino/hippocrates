@@ -10,25 +10,32 @@
       .modal-body
       .modal-footer
         %button.btn.btn-default{ "data-dismiss": "modal" } Cerrar
-        %button.btn.btn-primary#prev{ "data-dismiss": "modal" }
+        %button.btn.btn-primary#prev{ "data-dismiss": "modal", "data-consultation-id": "" }
           %i.fa.fa-chevron-left{ "aria-hidden": "true" }
           Anterior
-        %button.btn.btn-primary#next{ "data-dismiss": "modal" }
+        %button.btn.btn-primary#next{ "data-dismiss": "modal", "data-consultation-id": "" }
           Siguiente
           %i.fa.fa-chevron-right{ "aria-hidden": "true" }
 
 %script#consultation-header{ type: "x-tmpl-mustache" }
-  {{patient.name}}
-  %small
-    {{patient.age.years}} años
+  .row
+    .col-md-8
+      {{patient.name}}
+      %small
+        {{patient.age.years}} años
 
-    {{#patient.isMale}}
-    %i.fa.fa-male
-    {{/patient.isMale}}
+        {{#patient.isMale}}
+        %i.fa.fa-male
+        {{/patient.isMale}}
 
-    {{^patient.isMale}}
-    %i.fa.fa-female
-    {{/patient.isMale}}
+        {{^patient.isMale}}
+        %i.fa.fa-female
+        {{/patient.isMale}}
+    .col-md-3.text-right
+      %small
+        {{current}} de {{total}}
+    .col-md-1
+
 
 
 %script#consultation-body{ type: "x-tmpl-mustache" }
@@ -52,28 +59,36 @@
       {{ongoing_issue}}
   %br
 
-  {{#hasDiagnoses}}
   %table.table.table-striped.table-condensed
     %thead
       %tr.tr-caution
         %th.col-md-12 Diagnóstico
     %tbody
+      {{#hasDiagnoses}}
       {{#diagnoses}}
       %tr
         %td {{disease_code}} {{description}}
       {{/diagnoses}}
-  {{/hasDiagnoses}}
+      {{/hasDiagnoses}}
+      {{^hasDiagnoses}}
+      %tr
+        %td NO HAY DIAGNÓSTICO.
+      {{/hasDiagnoses}}
 
-  {{#hasPrescriptions}}
   %table.table.table-striped.table-condensed
     %thead
       %tr.tr-advice
         %th.col-md-6 Receta
         %th.col-md-6 &nbsp;
     %tbody
+      {{#hasPrescriptions}}
       {{#prescriptions}}
       %tr
         %td {{inscription}}
         %td {{subscription}}
       {{/prescriptions}}
-  {{/hasPrescriptions}}
+      {{/hasPrescriptions}}
+      {{^hasPrescriptions}}
+      %tr
+        %td{ colspan: 2 } NO HAY RECETA.
+      {{/hasPrescriptions}}

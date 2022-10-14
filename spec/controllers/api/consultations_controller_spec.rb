@@ -7,43 +7,18 @@ describe API::ConsultationsController do
   let!(:c1)  { create(:consultation, reason: 'bob-c1', patient: bob) }
   let!(:c2)  { create(:consultation, reason: 'bob-c2', patient: bob, next_appointment: nil) }
 
-  describe '#last' do
-    it 'returns the last consultation' do
-      post :last, params: { patient_id: bob.id }
-      consultation = ::JSON.parse(response.body)
-      expect(consultation['reason']).to eq(c2.reason)
-    end
-  end
-
-  describe '#previous' do
-    context 'when there is a previous consultation' do
-      it 'returns the previous consultation' do
-        post :previous, params: { patient_id: bob.id, current_consultation: c2.id }
-        consultation = ::JSON.parse(response.body)
-        expect(consultation['reason']).to eq(c1.reason)
-      end
-    end
-
-    context 'when there is a previous consultation' do
-      before do
-        post :previous, params: { patient_id: bob.id, current_consultation: c1.id }
-      end
-
-      it 'responds with not found' do
-        expect(response).to be_not_found
-      end
-
-      it 'responds with json' do
-        expect(response).to be_json
-      end
-    end
-  end
-
-  describe '#next' do
-    it 'returns the next consultation' do
-      post :next, params: { patient_id: bob.id, current_consultation: c1.id }
-      consultation = ::JSON.parse(response.body)
-      expect(consultation['reason']).to eq(c2.reason)
+  describe '#show' do
+    it 'returns the consultation' do
+      post :show, params: { patient_id: bob.id, id: c1.id }
+      json_response = ::JSON.parse(response.body)
+      expect(json_response).to include(
+        'consultation' => hash_including(
+          'reason' => c1.reason
+        ),
+        'meta' => hash_including(
+          'total' => 2
+        )
+      )
     end
   end
 

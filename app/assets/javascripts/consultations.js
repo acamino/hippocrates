@@ -1,6 +1,18 @@
-Hippocrates.Consultations = {
-  init: function() {
-    var self = this;
+Hippocrates.Consultations = (function() {
+  var shared = {};
+
+  var buttons = {
+    NEXT: "#next",
+    PREV: "#prev"
+  };
+
+  var init = function() {
+    shared.patientId = $("#patient_id").val();
+    shared.consultationId = $("#consultation_id").val();
+
+    keyboardJS.bind('ctrl + c', function(e) {
+      openClinicalHistoryModal();
+    });
 
     $(".destroy").on("change", function () {
       $(this).closest("tr").toggleClass("destroyable");
@@ -13,20 +25,17 @@ Hippocrates.Consultations = {
 
     $("#show").on("click", function(e) {
       e.preventDefault();
-      Hippocrates.Utils.openModal("#consultation");
-    });
 
-    $("#consultation").on("show.bs.modal", function (e) {
-      self.getLastConsultation(this);
+      openClinicalHistoryModal();
     });
 
     $("#prev").on("click", function(e) {
-      self.getPreviousConsultation();
+      getConsultation(buttons.PREV);
       return false;
     });
 
     $("#next").on("click", function(e) {
-      self.getNextConsultation();
+      getConsultation(buttons.NEXT);
       return false;
     });
 
@@ -34,16 +43,58 @@ Hippocrates.Consultations = {
       if (($(".modal").data("bs.modal") || {}).isShown) {
         var LEFT_ARROW = 37, RIGHT_ARROW = 39;
         if(e.keyCode === LEFT_ARROW) {
-          self.getPreviousConsultation();
+          getConsultation(buttons.PREV);
         }
         else if(e.keyCode === RIGHT_ARROW) {
-          self.getNextConsultation();
+          getConsultation(buttons.NEXT);
         }
       }
     });
-  },
+  }
 
-  renderConsultation: function(consultation) {
+  var openClinicalHistoryModal = function() {
+    Hippocrates.Utils.openModal("#consultation");
+    getConsultation();
+  };
+
+  var getConsultation = function(selector) {
+    if (isActionDisabled(selector)) {
+      return;
+    }
+
+    var path = buildPath(getConsultationId(selector));
+    $.get(path, function(data) {
+      toggleNavButton(buttons.PREV, data.meta.previous);
+      toggleNavButton(buttons.NEXT, data.meta.next);
+
+      var paginationOptions = { current: data.meta.current.position, total: data.meta.total };
+      var consultation = $.extend(data.consultation, paginationOptions);
+      renderConsultation(consultation);
+    });
+  };
+
+  var isActionDisabled = function(selector) {
+    return $(selector).is(":disabled");
+  }
+
+  var toggleNavButton = function(selector, page) {
+    if (page) {
+      $(selector).data("consultation-id", page.id);
+      $(selector).removeAttr('disabled');
+    } else {
+      $(selector).attr('disabled', 'disabled');
+    }
+  };
+
+  var getConsultationId = function(selector) {
+    if (_.isUndefined(selector)) {
+      return shared.consultationId;
+    } else {
+      return $(selector).data("consultation-id");
+    }
+  };
+
+  var renderConsultation = function(consultation) {
     if (consultation) {
       var consultationHeader = Hippocrates.Templates.render("#consultation-header", consultation);
       var consultationBody = Hippocrates.Templates.render("#consultation-body", consultation);
@@ -51,33 +102,15 @@ Hippocrates.Consultations = {
       $("#consultation").find(".modal-title").html(consultationHeader);
       $("#consultation").find(".modal-body").html(consultationBody);
     }
-  },
+  };
 
-  consultationType: { LAST: "last", PREV: "previous", NEXT: "next" },
+  var buildPath = function(consultationId) {
+    return [
+      "/api", "patients", shared.patientId, "consultations", consultationId
+    ].join("/");
+  };
 
-  getConsultation: function(type) {
-    var self = this;
-    var data = {};
-
-    if (type !== this.consultationType.LAST) {
-      data = { current_consultation: $("#current-consultation").val() };
-    }
-
-    var path = "/api" + $(".container > form").attr("action").replace(/\/\d+$/, "") + "/" + type;
-    $.post(path, data, function(consultation) {
-      self.renderConsultation(consultation);
-    });
-  },
-
-  getLastConsultation: function() {
-    this.getConsultation(this.consultationType.LAST);
-  },
-
-  getPreviousConsultation: function() {
-    this.getConsultation(this.consultationType.PREV);
-  },
-
-  getNextConsultation: function() {
-    this.getConsultation(this.consultationType.NEXT);
-  }
-};
+  return {
+    init: init
+  };
+})();
