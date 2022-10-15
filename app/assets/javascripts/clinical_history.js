@@ -26,7 +26,7 @@ Hippocrates.ClinicalHistory = {
       var patientId = $("#patient_id").val();
 
       $.ajax({
-        url: "/api/patients/" + patientId + "/consultations/destroy",
+        url: "/api/patients/" + patientId + "/consultations",
         type: "DELETE",
         data: { consultations: consultations },
         dataType: "script",

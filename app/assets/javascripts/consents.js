@@ -4,7 +4,7 @@ Hippocrates.Consents = {
 
     $(".show-consent").on("click", function(e) {
       e.preventDefault();
-      self.openModal();
+      Hippocrates.Utils.openModal("#consents");
     });
 
     $("#consent").on("change", function() {
@@ -12,10 +12,6 @@ Hippocrates.Consents = {
     });
 
     self.updateUrlAndToggleControls();
-  },
-
-  openModal: function() {
-    $("#consents").modal({ backdrop: "static" });
   },
 
   updateUrl: function(certificateType) {

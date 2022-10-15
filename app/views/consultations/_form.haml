@@ -3,6 +3,7 @@
 
 = error_messages_for @consultation
 %input{ type: "hidden", value: @consultation.id, id: "consultation_id" }
+%input{ type: "hidden", value: @consultation&.patient&.id, id: "patient_id" }
 
 = form_for [@patient, @consultation], html: { class: "form" } do |f|
   - if current_user.editor?
@@ -284,7 +285,6 @@
 = render 'modal_certificates'
 = render 'modal_consents'
 = render 'modal_prescription'
-= render 'prescription'
 = render 'hint'
 
 - unless @consultation.new_record?

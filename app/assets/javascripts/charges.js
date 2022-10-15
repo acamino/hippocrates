@@ -1,46 +1,52 @@
-Hippocrates.Charges = {
-  init: function() {
-    var self = this;
+Hippocrates.Charges = (function() {
+  var that = this;
 
+  that.consultationId = null;
+  that.type = null;
+  that.isPaid = false;
+
+  var init = function() {
     $(".show-payment-changes").on("click", function(e) {
       e.preventDefault();
 
-      var consultationId = $(this).attr("id");
-      var type = $(this).data('type');
+      that.consultationId = $(this).attr("id");
+      that.type = $(this).data("type");
+      that.isPaid = that.type == "paid";
 
-      self.getPaymentChanges(consultationId, type);
-      self.setModalTitle(type);
-      self.openModal();
+      fetchPayments(renderControls);
     });
 
     $(".btn-charges").on("click", function(e) {
       var action = $(this).data("action-path");
       $('form').attr('action', action);
     });
-  },
+  };
 
-  openModal: function() {
-    $("#payment-changes").modal({ backdrop: "static" });
-  },
-
-  renderTemplate: function(target, data) {
-    var template = $(target).html();
-    Mustache.parse(template);
-    return Mustache.render(template, data);
-  },
-
-  getPaymentChanges: function(consultationId, type) {
-    var self = this;
-
-    var path = "/api/consultations/" + consultationId + "/payment_changes?type=" + type;
-    $.get(path, function(data) {
-      var content = self.renderTemplate("#tmpl-payment-changes", { paymentChanges: data });
-      $("#payment-changes--content").html(content);
+  var fetchPayments = function(renderControls) {
+    var path = "/api/consultations/" + that.consultationId + "/payment_changes?type=" + that.type;
+    $.get(path, function(paymentChanges) {
+      renderControls.call(this, paymentChanges);
     });
-  },
-
-  setModalTitle: function(type) {
-    var modalTitle = type == 'paid' ? 'Valores Pagados' : 'Valores Pendientes'
-    $("#payment-changes-title").html(modalTitle);
   }
-}
+
+  var renderControls = function(paymentChanges) {
+    renderPaymentsChanges(paymentChanges);
+    renderModalTitle();
+
+    Hippocrates.Utils.openModal("#payment-changes");
+  };
+
+  var renderPaymentsChanges = function(paymentChanges) {
+    var content = Hippocrates.Templates.render("#tmpl-payment-changes", { paymentChanges });
+    $("#payment-changes--content").html(content);
+  };
+
+  var renderModalTitle = function() {
+    var modalTitle = that.isPaid ? 'Valores Pagados' : 'Valores Pendientes'
+    $("#payment-changes-title").html(modalTitle);
+  };
+
+  return {
+    init: init
+  }
+})();

@@ -46,13 +46,8 @@ Rails.application.routes.draw do
       resources :payment_changes, only: [:index, :create]
     end
     resources :patients,        only: [:index] do
-      resources :consultations, only: [:index] do
-        collection do
-          post   'previous'
-          post   'next'
-          post   'last'
-          delete 'destroy'
-        end
+      resources :consultations, only: [:index, :show] do
+        delete :destroy, on: :collection
       end
     end
     resources :diseases,  only: [:index]

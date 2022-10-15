@@ -1,6 +1,6 @@
 Hippocrates.Hint = {
   init: function() {
-    keyboardJS.bind('ctrl + h', function(e) {
+    keyboardJS.bind('ctrl + s', function(e) {
       $(".hint-box").toggleClass("hint-box-show");
     });
 

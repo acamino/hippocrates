@@ -146,7 +146,7 @@ module Prescriptions
     end
 
     def patient_age
-      computed_age = AgeCalculator.calculate(patient.birthdate)
+      computed_age = Patients::Age.from(patient.birthdate)
       "#{Prawn::Text::NBSP * 15}#{computed_age.years} AÑOS #{computed_age.months} MESES"
     end
 
