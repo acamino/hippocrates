@@ -33,6 +33,7 @@ Hippocrates.Autocomplete = {
 
     $(options.selector).autocomplete({
       minChars: 2,
+      triggerSelectOnValidInput: false,
       serviceUrl: serviceUrl,
       formatResult: options.formatResult,
       onSelect: options.onSelect
