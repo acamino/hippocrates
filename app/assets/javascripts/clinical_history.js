@@ -1,6 +1,11 @@
 Hippocrates.ClinicalHistory = {
   init: function() {
     var self = this;
+
+    $('.btn-copy').copyOnClick({
+      confirmShow: false
+    });
+
     $(".check-all").change(function () {
       $("input:checkbox").prop('checked', $(this).prop("checked"));
       self.updateUrl();
@@ -16,9 +21,17 @@ Hippocrates.ClinicalHistory = {
       self.updateUrl();
     });
 
-    $('.select-consultation').click(function(e) {
+    $('.select-consultation:not(.bnt-copy)').click(function(e) {
       var path = $(this).data('path');
       window.location.href = path;
+    });
+
+    $(".btn-copy").mouseenter(function(e) {
+      $(this).closest(".row").find(".content").addClass("selected-content")
+    });
+
+    $(".btn-copy").mouseleave(function(e) {
+      $(this).closest(".row").find(".content").removeClass("selected-content")
     });
 
     $(".delete-consultations").click(function() {
