@@ -16,6 +16,7 @@
 //= require turbolinks
 //= require vendor/moment.min
 //= require vendor/bootstrap-datetimepicker.min
+//= require vendor/copy-on-click
 //= require vendor/chartkick
 //= require vendor/highcharts
 //= require hippocrates

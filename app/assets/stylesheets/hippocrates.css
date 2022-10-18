@@ -19,6 +19,17 @@ input[type="email"] {
   text-transform: none;
 }
 
+.btn-copy {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+.selected-content {
+  border-bottom: dotted 1px #999;
+}
+
 .tr-caution {
   background-color: #E55934;
   border-color: #E55934;
