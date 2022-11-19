@@ -134,7 +134,7 @@ module Prescriptions
 
     # Move to a presenter
     def location_and_date
-      "Latacunga, #{consultation.created_at.strftime('%d/%m/%Y')}"
+      "#{consultation.branch_office.city}, #{consultation.created_at.strftime('%d/%m/%Y')}"
     end
 
     def patient
