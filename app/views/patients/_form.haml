@@ -44,8 +44,7 @@
         .form-group.col-md-3
           .input-group
             %span.input-group-addon.input-sm Fuente
-            / XXX: Keep in sync the model with the UI.
-            = f.select :source, options_for_select([['Televisión', 'television'], ['Radio', 'radio'], ['Periódico', 'newspaper'], ['Otro paciente', 'patient_reference']], @patient.source), {}, class: "form-control input-sm"
+            = f.select :source, options_for_select(Patient::source_options, @patient.source), {}, class: "form-control input-sm"
 
       .row-fluid
         .form-group.col-md-6

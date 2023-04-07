@@ -22,7 +22,16 @@ class Patient < ApplicationRecord
 
   enum gender: [:male, :female]
   enum civil_status: [:single, :married, :civil_union, :divorced, :widowed]
-  enum source: [:television, :radio, :newspaper, :patient_reference]
+  enum source: [
+    :television,
+    :radio,
+    :newspaper,
+    :patient_reference,
+    :instagram,
+    :facebook,
+    :tiktok,
+    :health_professional
+  ]
 
   belongs_to :branch_office, optional: true
 
@@ -59,6 +68,19 @@ class Patient < ApplicationRecord
 
   def self.search(query)
     (query.present? ? lookup(query) : all).order_by_name
+  end
+
+  def self.source_options
+    [
+      ['Instagram', 'instagram'],
+      ['Facebook', 'facebook'],
+      ['Tiktok', 'tiktok'],
+      ['Televisión', 'television'],
+      ['Radio', 'radio'],
+      ['Otro paciente', 'patient_reference'],
+      ['Personal de salud', 'health_professional'],
+      ['Periódico', 'newspaper'],
+    ].freeze
   end
 
   def archive
