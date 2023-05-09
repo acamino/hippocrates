@@ -22,42 +22,41 @@ jobs:
           --health-timeout 5s
           --health-retries 5
 
-
     runs-on: ubuntu-latest
-
-    env:
-      RAILS_ENV: test
-      DATABASE_URL: "postgres://postgres:postgres@localhost:5432/hippocrates_test"
 
     steps:
       - uses: actions/checkout@v2
-
-      - name: Setup Ruby 2.7.4
-        uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.7.4
-
-      - name: Install dependencies
-        run: |
-          gem install bundler
-          bundle install --jobs 4 --retry 3
+          bundler-cache: true
 
       - name: Run Rubocop
         run: bundle exec rubocop
 
       - name: Prepare database
         run: bundle exec rails db:create db:schema:load --trace
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/hippocrates_test"
 
       - name: Run RSpec
         run: bundle exec rspec
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/hippocrates_test"
 
       - name: Run Cucumber
         run: bundle exec cucumber
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/hippocrates_test"
 
       - name: Deploy to Heroku
-        uses: akhileshns/heroku-deploy@v3.12.12
+        uses: akhileshns/heroku-deploy@v3.12.13
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: hippocrates
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
           run: rake db:migrate
         if: github.ref == 'refs/heads/main'
