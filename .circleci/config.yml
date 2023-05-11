@@ -1,0 +1,56 @@
+---
+version: 2.1
+orbs:
+  heroku: circleci/heroku@1.0.1
+workflows:
+  heroku_deploy:
+    jobs:
+      - build
+      - heroku/deploy-via-git:
+          requires:
+            - build
+          filters:
+            branches:
+              only: main
+jobs:
+  build:
+    parallelism: 1
+    docker:
+      - image: circleci/ruby:2.7.4
+        environment:
+          BUNDLE_JOBS: 3
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
+          PGHOST: 127.0.0.1
+          PGUSER: postgres
+          RAILS_ENV: test
+      - image: circleci/postgres:9.5
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: hippocrates_test
+          POSTGRES_PASSWORD: postgres
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - hippocrates-bundle-v2-{{ checksum "Gemfile.lock" }}
+            - hippocrates-bundle-v2
+      - run:
+          name: Bundle Install
+          command: bundle check --path vendor/bundle || bundle install
+      - save_cache:
+          key: hippocrates-bundle-v2-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database setup
+          command: bin/rails db:schema:load --trace
+      - run:
+          name: Run rspec in parallel
+          command: |
+            bundle exec rspec
+      - store_test_results:
+          path: test_results
