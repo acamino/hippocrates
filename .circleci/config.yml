@@ -2,6 +2,7 @@
 version: 2.1
 orbs:
   heroku: circleci/heroku@1.0.1
+
 workflows:
   heroku_deploy:
     jobs:
@@ -16,7 +17,7 @@ jobs:
   build:
     parallelism: 1
     docker:
-      - image: cimg/2.7.4-node
+      - image: cimg/ruby:2.7.4-node
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
