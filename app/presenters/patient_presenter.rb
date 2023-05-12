@@ -49,10 +49,14 @@ class PatientPresenter < SimpleDelegator
 
   def source_es
     {
-      'television'        => 'Televisión',
-      'radio'             => 'Radio',
-      'newspaper'         => 'Periódico',
-      'patient_reference' => 'Otro paciente'
+      'instagram'           => 'Instagram',
+      'facebook'            => 'Facebook',
+      'tiktok'              => 'Tiktok',
+      'television'          => 'Televisión',
+      'radio'               => 'Radio',
+      'newspaper'           => 'Periódico',
+      'patient_reference'   => 'Otro paciente',
+      'health_professional' => 'Profesional de salud'
     }[source]
   end
 
