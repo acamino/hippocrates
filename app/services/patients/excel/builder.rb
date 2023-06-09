@@ -9,6 +9,9 @@ module Patients
         'Fecha de nacimiento',
         'Sexo',
         'Estado Civil',
+        'Dirección',
+        'Teléfono',
+        'Correo electrónico',
         'Referencia',
         'Audioprótesis',
         'Fecha de registro'
@@ -35,7 +38,7 @@ module Patients
             sheet.add_row patient
           end
 
-          sheet.column_widths 20, 30, 30, 20, 20, 20, 20, 20, 20, 20
+          sheet.column_widths 20, 30, 30, 20, 20, 20, 20, 30, 30, 30, 20, 20, 20
         end
         package
       end
@@ -62,6 +65,9 @@ module Patients
             patient.birthdate.strftime('%Y/%m/%d'),
             patient.gender_es.upcase,
             patient.civil_status_es,
+            patient.address,
+            patient.phone_number,
+            patient.email,
             patient.source_es.upcase,
             patient.hearing_aids_es,
             patient.created_at.strftime('%Y/%m/%d')
