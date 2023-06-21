@@ -61,13 +61,17 @@ class Consultation < ApplicationRecord
                                 reject_if: ->(attributes) { attributes[:inscription].blank? },
                                 allow_destroy: true
 
+  validates :payment,
+    numericality: { greater_than: 0, message: :greater_than_zero },
+    if: :user_is_doctor?
+
   before_save :normalize
 
   after_create :update_serial!
 
   default_scope { order(created_at: :desc) }
 
-  attr_accessor :head
+  attr_accessor :head, :current_user
 
   scope :most_recent_by_patient, lambda {
     from(
@@ -112,6 +116,10 @@ class Consultation < ApplicationRecord
   end
 
   private
+
+  def user_is_doctor?
+    current_user&.doctor?
+  end
 
   # rubocop:disable Metrics/MethodLength
   def normalize

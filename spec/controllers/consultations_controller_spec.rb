@@ -55,7 +55,8 @@ describe ConsultationsController do
       attributes_for(:consultation)
         .merge(
           patient: { special: 'true' },
-          user_id: doctor.id
+          user_id: doctor.id,
+          payment: 10.0
         )
     end
 
@@ -160,7 +161,8 @@ describe ConsultationsController do
                                  reason: 'updated reason',
                                  hearing_aids: 'updated hearing aids',
                                  created_at: '2020-10-14',
-                                 patient: { special: false }
+                                 patient: { special: false },
+                                 payment: 10.0
                                } }
     end
 

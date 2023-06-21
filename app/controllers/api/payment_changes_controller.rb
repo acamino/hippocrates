@@ -28,6 +28,7 @@ module API
 
     def fetch_consultation
       @consultation = Consultation.find(params[:consultation_id])
+      @consultation.current_user = current_user
     end
 
     def send_notification
