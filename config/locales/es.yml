@@ -1,3 +1,4 @@
+---
 es:
   helpers:
     page_entries_info:
@@ -144,12 +145,25 @@ es:
         registration_acess: Registro
       consultation:
         doctor: Médico
+        payment: Valor de la consulta
+      payment_change:
+        updated_payment: Valor
     errors:
       messages:
         record_invalid: "La validación falló: %{errors}"
         restrict_dependent_destroy:
           has_one: No se puede eliminar el registro porque existe un %{record} dependiente
           has_many: No se puede eliminar el registro porque existen %{record} dependientes
+      models:
+        consultation:
+          attributes:
+            payment:
+              greater_than_zero: El pago debe ser mayor a cero.
+        payment_change:
+          attributes:
+            updated_payment:
+              greater_than_zero: El pago debe ser mayor a cero.
+
   date:
     abbr_day_names:
     - dom

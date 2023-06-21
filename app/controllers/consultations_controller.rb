@@ -22,7 +22,8 @@ class ConsultationsController < ApplicationController
 
   # rubocop:disable Metrics/MethodLength
   def create
-    @consultation = Consultation.new(consultation_params.merge(**create_price_params))
+    @consultation              = Consultation.new(consultation_params.merge(**create_price_params))
+    @consultation.current_user = current_user
     if @consultation.save
       track_activity(@consultation, :created)
 
@@ -49,6 +50,7 @@ class ConsultationsController < ApplicationController
   end
 
   def update
+    @consultation.current_user = current_user
     if @consultation.update(consultation_params.merge(**update_price_params))
       track_activity(@consultation, :updated)
 
@@ -59,6 +61,8 @@ class ConsultationsController < ApplicationController
         @patient, @consultation
       ), notice: t('consultations.success.update')
     else
+      @branch_offices = BranchOffice.active.order(:active).order(:name)
+
       flash[:error] = t('consultations.error.update')
       render :edit
     end

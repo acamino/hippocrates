@@ -22,10 +22,18 @@ class PaymentChange < ApplicationRecord
                         :updated_payment,
                         :reason
 
+  validates :updated_payment,
+    numericality: { greater_than: 0, message: :greater_than_zero },
+    if: :user_is_doctor?
+
   before_save :normalize
   after_save  :update_consultation
 
   private
+
+  def user_is_doctor?
+    consultation.current_user.doctor?
+  end
 
   def normalize
     normalize_fields :reason
