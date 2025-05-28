@@ -81,6 +81,13 @@
           .input-group
             %span.input-group-addon.input-sm Lugar de afiliación
             = f.select :branch_office_id, options_from_collection_for_select(@branch_offices, 'id', 'name', @patient.branch_office_id), {}, class: "form-control input-sm"
+        .form-group.col-md-6
+          .checkbox
+            %label
+              = f.check_box :data_management_consent, class: "input-sm"
+              %strong Manejo de datos
+              %br
+              %small Acepto el manejo de mis datos personales para fines médicos
 
   .row-fluid
     = link_to "Cancelar", @referer_location || patients_path, class: "btn btn-default"

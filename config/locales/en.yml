@@ -20,6 +20,8 @@ en:
     search: Buscar
 
   patients:
+    data_management_consent: "Data Management"
+    data_management_consent_description: "I accept the management of my personal data for medical purposes"
     button:
       new: New Patient
       export: Export Patients
@@ -105,6 +107,8 @@ en:
       update: Anamnesis updated successfully
   consultations:
     diagnosis: Diagnosis
+    errors:
+      data_management_consent_required: "Consultation cannot be saved without patient's data management consent"
     next_appointment: Next Appointment
     miscellaneous: Miscellaneous
     reason: Reason

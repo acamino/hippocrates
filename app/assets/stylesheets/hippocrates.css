@@ -288,3 +288,16 @@ input[type="email"] {
   height: 30px;
   width: 30px;
 }
+
+.pulse-warning {
+  animation: pulse-warning 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-warning {
+  from {
+    box-shadow: 0 0 10px rgba(217, 83, 79, 0.8);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(217, 83, 79, 1);
+  }
+}

@@ -33,6 +33,11 @@ class ConsultationsController < ApplicationController
         @patient, @consultation
       ), notice: t('consultations.success.creation')
     else
+      @branch_offices = BranchOffice.active.order(:active).order(:name)
+
+      remaining_diagnoses.times     { @consultation.diagnoses.build }
+      remaining_prescriptions.times { @consultation.prescriptions.build }
+
       flash[:error] = t('consultations.error.creation')
       render :new
     end
