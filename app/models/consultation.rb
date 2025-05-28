@@ -65,6 +65,8 @@ class Consultation < ApplicationRecord
     numericality: { greater_than: 0, message: :greater_than_zero },
     if: :user_is_doctor?
 
+  validate :patient_must_have_data_management_consent
+
   before_save :normalize
 
   after_create :update_serial!
@@ -152,5 +154,13 @@ class Consultation < ApplicationRecord
     self.serial = serial.to_s.rjust(5, '0')
 
     save!
+  end
+
+  def patient_must_have_data_management_consent
+    return unless patient
+
+    unless patient.data_management_consent == true
+      errors.add(:base, 'No se puede guardar la consulta sin el consentimiento de manejo de datos del paciente')
+    end
   end
 end

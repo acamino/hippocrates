@@ -26,6 +26,7 @@
 //= require charges
 //= require clinical_history
 //= require consultations
+//= require data_consent
 //= require hint
 //= require payment_changes
 //= require prescription

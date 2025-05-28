@@ -17,7 +17,8 @@ class Patient < ApplicationRecord
     :profession,
     :email,
     :health_insurance,
-    :branch_office_id
+    :branch_office_id,
+    :data_management_consent
   ].freeze
 
   enum gender: [:male, :female]
@@ -95,6 +96,10 @@ class Patient < ApplicationRecord
 
   def full_name
     [last_name, first_name].join(' ')
+  end
+
+  def data_management_consent_required_for_consultation?
+    data_management_consent != true
   end
 
   private
