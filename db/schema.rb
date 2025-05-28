@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_06_185934) do
+ActiveRecord::Schema.define(version: 2025_05_28_022721) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -171,6 +171,7 @@ ActiveRecord::Schema.define(version: 2022_10_06_185934) do
     t.text "health_insurance"
     t.bigint "branch_office_id"
     t.datetime "discarded_at"
+    t.boolean "data_management_consent", default: false, null: false
     t.index ["branch_office_id"], name: "index_patients_on_branch_office_id"
     t.index ["civil_status"], name: "index_patients_on_civil_status"
     t.index ["discarded_at"], name: "index_patients_on_discarded_at"

@@ -25,6 +25,21 @@
 
   = render partial: 'patient', locals: { form: f }
 
+  = panel(:info, 'Consentimiento de Datos') do
+    .row-fluid
+      .form-group.col-md-12
+        - if @patient.data_management_consent == true
+          .alert.alert-success
+            %i.fa.fa-check-circle
+            %strong Consentimiento otorgado:
+            El paciente ha autorizado el manejo de sus datos personales.
+        - else
+          .alert.alert-danger#data-consent-warning
+            %i.fa.fa-exclamation-triangle
+            %strong Consentimiento requerido:
+            El paciente debe autorizar el manejo de datos antes de guardar la consulta.
+            = link_to "Editar paciente", edit_patient_path(@patient), class: "btn btn-warning btn-sm", target: "_blank"
+
   = panel(:info, 'Motivo de Consulta') do
     .row-fluid
       .form-group.col-md-12

@@ -20,6 +20,8 @@ es:
     search: Buscar
 
   patients:
+    data_management_consent: "Manejo de datos"
+    data_management_consent_description: "Acepto el manejo de mis datos personales para fines médicos"
     button:
       new: Nuevo Paciente
       export: Exportar Pacientes
@@ -106,6 +108,8 @@ es:
       update: Anamnesis actualizada correctamente
   consultations:
     diagnosis: Diagnóstico
+    errors:
+      data_management_consent_required: "No se puede guardar la consulta sin el consentimiento de manejo de datos del paciente"
     next_appointment: Próxima cita
     miscellaneous: Misceláneos
     reason: Motivo
