@@ -53,6 +53,7 @@ group :test do
   gem 'rails-controller-testing'
   gem 'rspec-activemodel-mocks'
   gem 'rspec-rails'
+  gem 'rspec_junit_formatter'
   gem 'shoulda-matchers', require: false
   gem 'timecop'
 end
