@@ -102,19 +102,11 @@ class ConsultationsController < ApplicationController
   end
 
   def create_price_params
-    if current_user.doctor? && @consultation.nil?
-      { priced: true }
-    else
-      {}
-    end
+    { priced: current_user.doctor? }
   end
 
   def update_price_params
-    if current_user.doctor? && !@consultation.priced?
-      { priced: true }
-    else
-      {}
-    end
+    { priced: current_user.doctor? && !@consultation.priced? }
   end
 
   def patient_params
