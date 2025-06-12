@@ -18,6 +18,8 @@ gem 'dotenv-rails'
 gem 'groupdate'
 gem 'haml'
 gem 'kaminari'
+gem 'matrix'
+gem 'net-smtp', require: false
 gem 'pg_search'
 gem 'prawn'
 gem 'public_activity'

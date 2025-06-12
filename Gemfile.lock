@@ -244,6 +244,10 @@ GEM
     mini_portile2 (2.8.0)
     minitest (5.16.3)
     multi_test (0.1.2)
+    net-protocol (0.2.2)
+      timeout
+    net-smtp (0.5.1)
+      net-protocol
     nio4r (2.7.4)
     nokogiri (1.13.8)
       mini_portile2 (~> 2.8.0)
@@ -413,6 +417,7 @@ GEM
     thor (1.2.1)
     tilt (2.0.11)
     timecop (0.9.5)
+    timeout (0.4.3)
     tins (1.31.1)
       sync
     ttfunk (1.7.0)
@@ -460,6 +465,8 @@ DEPENDENCIES
   jquery-turbolinks
   kaminari
   listen
+  matrix
+  net-smtp
   pg
   pg_search
   prawn
