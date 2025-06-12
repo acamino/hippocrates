@@ -1,11 +1,10 @@
 source 'https://rubygems.org'
-ruby '2.7.4'
+ruby '3.1.5'
 
 gem 'pg'
 gem 'rails', '~> 6.0'
 
 gem 'puma'
-gem 'rails_12factor', group: :production
 
 gem 'devise'
 

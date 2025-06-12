@@ -244,7 +244,7 @@ GEM
     mini_portile2 (2.8.0)
     minitest (5.16.3)
     multi_test (0.1.2)
-    nio4r (2.5.8)
+    nio4r (2.7.4)
     nokogiri (1.13.8)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
@@ -296,11 +296,6 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.4.3)
       loofah (~> 2.3)
-    rails_12factor (0.0.3)
-      rails_serve_static_assets
-      rails_stdout_logging
-    rails_serve_static_assets (0.0.5)
-    rails_stdout_logging (0.0.5)
     railties (6.1.7)
       actionpack (= 6.1.7)
       activesupport (= 6.1.7)
@@ -472,7 +467,6 @@ DEPENDENCIES
   puma
   rails (~> 6.0)
   rails-controller-testing
-  rails_12factor
   redis-rails
   rspec-activemodel-mocks
   rspec-rails
@@ -490,7 +484,7 @@ DEPENDENCIES
   unicode_utils
 
 RUBY VERSION
-   ruby 2.7.4p191
+   ruby 3.1.5p252
 
 BUNDLED WITH
    2.1.4
