@@ -244,6 +244,8 @@ GEM
     mini_portile2 (2.8.0)
     minitest (5.16.3)
     multi_test (0.1.2)
+    net-pop (0.1.2)
+      net-protocol
     net-protocol (0.2.2)
       timeout
     net-smtp (0.5.1)
@@ -466,6 +468,7 @@ DEPENDENCIES
   kaminari
   listen
   matrix
+  net-pop
   net-smtp
   pg
   pg_search
