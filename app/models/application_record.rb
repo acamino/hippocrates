@@ -4,7 +4,7 @@ class ApplicationRecord < ActiveRecord::Base
   def normalize_fields(*fields)
     fields.map(&:to_s).each do |field|
       value = attributes[field]
-      public_send("#{field}=", UnicodeUtils.upcase(value.strip)) if value.present?
+      public_send("#{field}=", value.strip.upcase) if value.present?
     end
   end
 end
