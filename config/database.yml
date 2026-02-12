@@ -2,6 +2,7 @@ default: &default
   adapter: postgresql
   pool: 5
   timeout: 5000
+  port: <%= ENV.fetch('DATABASE_PORT', 5432) %>
 
 development:
   <<: *default
