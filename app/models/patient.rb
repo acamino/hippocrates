@@ -58,7 +58,7 @@ class Patient < ApplicationRecord
 
   before_save :normalize
 
-  scope :special, -> { includes(:consultations).where(special: true) }
+  scope :special, -> { where(special: true) }
   scope :order_by_name, -> { empty_names_to_end.order(:last_name, :first_name) }
   scope :empty_names_to_end, -> { order(Arel.sql("first_name = '', last_name = ''")) }
 

@@ -204,7 +204,7 @@ describe PatientPresenter do
   describe '#consultations?' do
     context 'when consultations is present' do
       it 'returns true' do
-        patient = double(:patient, consultations: 'extra notes')
+        patient = double(:patient, most_recent_consultation: double(:consultation))
         presenter = described_class.new(patient)
         expect(presenter.consultations?).to be_truthy
       end
@@ -212,7 +212,7 @@ describe PatientPresenter do
 
     context 'when consultations is not present' do
       it 'returns false' do
-        patient = double(:patient, consultations: nil)
+        patient = double(:patient, most_recent_consultation: nil)
         presenter = described_class.new(patient)
         expect(presenter.consultations?).to be_falsey
       end
