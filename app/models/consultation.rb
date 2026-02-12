@@ -151,9 +151,7 @@ class Consultation < ApplicationRecord
 
   def update_serial!
     serial = doctor.next_serial!
-    self.serial = serial.to_s.rjust(5, '0')
-
-    save!
+    update_column(:serial, serial.to_s.rjust(5, '0'))
   end
 
   def patient_must_have_data_management_consent
