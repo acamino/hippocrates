@@ -71,8 +71,6 @@ class Consultation < ApplicationRecord
 
   after_create :update_serial!
 
-  default_scope { order(created_at: :desc) }
-
   attr_accessor :head, :current_user
 
   scope :most_recent_by_patient, lambda {
@@ -96,7 +94,7 @@ class Consultation < ApplicationRecord
     most_recent_by_patient
       .joins(:patient)
       .where(patients: { special: true })
-      .order('consultations.created_at')
+      .order('consultations.created_at DESC')
   }
 
   scope :by_date,          ->(date)    { where(created_at: date) if date.present? }

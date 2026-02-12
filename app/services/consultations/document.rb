@@ -54,7 +54,7 @@ module Consultations
     end
 
     def consultations
-      patient_consultations = patient.consultations.reverse.map do |c|
+      patient_consultations = patient.consultations.order(created_at: :asc).map do |c|
         ConsultationPresenter.new(c)
       end
       selected_consultations = patient_consultations.select do |c|

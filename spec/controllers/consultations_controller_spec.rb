@@ -22,7 +22,7 @@ describe ConsultationsController do
     end
 
     it 'assigns @consultations' do
-      expect(assigns(:consultations)).to eq(patient.consultations)
+      expect(assigns(:consultations)).to eq(patient.consultations.order(created_at: :desc))
     end
 
     it { is_expected.to render_template :index }

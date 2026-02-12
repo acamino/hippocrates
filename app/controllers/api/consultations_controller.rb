@@ -32,9 +32,9 @@ module API
       position = scope.where('created_at <= ?', @consultation.created_at).count
 
       prev_id = scope.where('created_at < ?', @consultation.created_at)
-                     .reorder(created_at: :desc).limit(1).pluck(:id).first
+                     .order(created_at: :desc).limit(1).pluck(:id).first
       next_id = scope.where('created_at > ?', @consultation.created_at)
-                     .reorder(created_at: :asc).limit(1).pluck(:id).first
+                     .order(created_at: :asc).limit(1).pluck(:id).first
 
       {
         total: total,
