@@ -1,5 +1,7 @@
 module API
-  class SettingsController < ApplicationController
+  class SettingsController < BaseController
+    before_action :authorize_admin, only: [:update]
+
     def index
       render json: Setting.all
     end

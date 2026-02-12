@@ -21,6 +21,7 @@ describe API::SettingsController do
     let(:value)    { '2' }
 
     before do
+      sign_in_user_mock(admin_or_super_admin?: true)
       patch :update, params: { id: setting.id, value: value }
     end
 

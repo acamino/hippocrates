@@ -1,5 +1,6 @@
 module API
   class PaymentChangesController < BaseController
+    before_action :authorize_doctor_or_admin, only: [:create]
     before_action :fetch_consultation
 
     def index
