@@ -106,6 +106,9 @@ es:
     success:
       creation: Anamnesis creada correctamente
       update: Anamnesis actualizada correctamente
+    error:
+      creation: Error al crear la anamnesis
+      update: Error al actualizar la anamnesis
   consultations:
     diagnosis: Diagnóstico
     errors:

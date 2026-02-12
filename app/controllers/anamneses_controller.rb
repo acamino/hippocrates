@@ -8,14 +8,20 @@ class AnamnesesController < ApplicationController
   end
 
   def create
-    @anamnesis = Anamnesis.create(anamnesis_params)
+    @anamnesis = Anamnesis.new(anamnesis_params)
 
-    track_activity(@anamnesis, :created)
+    if @anamnesis.save
+      track_activity(@anamnesis, :created)
 
-    redirect_to(
-      new_patient_consultation_path(params[:patient_id]),
-      notice: t('anamneses.success.creation')
-    )
+      redirect_to(
+        new_patient_consultation_path(params[:patient_id]),
+        notice: t('anamneses.success.creation')
+      )
+    else
+      fetch_patient
+      flash[:error] = t('anamneses.error.creation')
+      render :new
+    end
   end
 
   def edit
@@ -28,14 +34,19 @@ class AnamnesesController < ApplicationController
 
   def update
     @anamnesis = Anamnesis.find(params[:id])
-    @anamnesis.update(anamnesis_params)
 
-    track_activity(@anamnesis, :updated)
+    if @anamnesis.update(anamnesis_params)
+      track_activity(@anamnesis, :updated)
 
-    if referer_location
-      redirect_to referer_location
+      if referer_location
+        redirect_to referer_location
+      else
+        redirect_to patients_path, notice: t('anamneses.success.update')
+      end
     else
-      redirect_to patients_path, notice: t('anamneses.success.update')
+      fetch_patient
+      flash[:error] = t('anamneses.error.update')
+      render :edit
     end
   end
 
