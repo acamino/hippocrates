@@ -55,8 +55,10 @@ class ConsultationsController < ApplicationController
   end
 
   def update
+    attrs = consultation_params.merge(**update_price_params)
+    attrs[:created_at] = @adjusted_created_at if @adjusted_created_at
     @consultation.current_user = current_user
-    if @consultation.update(consultation_params.merge(**update_price_params))
+    if @consultation.update(attrs)
       track_activity(@consultation, :updated)
 
       @patient.update(patient_params)
@@ -116,9 +118,10 @@ class ConsultationsController < ApplicationController
   end
 
   def adjust_time!
-    _, time_with_timezone = @consultation.created_at.iso8601.split('T')
-    time, = time_with_timezone.split('-')
     date = consultation_params[:created_at]
-    params[:consultation][:created_at] = "#{date} #{time}"
+    return if date.blank?
+
+    time = @consultation.created_at.strftime('%H:%M:%S')
+    @adjusted_created_at = "#{date} #{time}"
   end
 end
