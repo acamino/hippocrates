@@ -38,10 +38,13 @@ class Setting < ApplicationRecord
       Setting.medical_history_sequence.value.to_i.succ
     end
 
-    def save
+    def self.next!
       setting = Setting.medical_history_sequence
-      setting.value = setting.value.to_i.succ.to_s
-      setting.save
+      setting.with_lock do
+        setting.value = setting.value.to_i.succ.to_s
+        setting.save!
+      end
+      setting.value.to_i
     end
   end
 
