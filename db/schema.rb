@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_05_28_022721) do
+ActiveRecord::Schema.define(version: 2026_02_12_180747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2025_05_28_022721) do
     t.boolean "hearing_aids", default: false, null: false
     t.datetime "discarded_at"
     t.index ["discarded_at"], name: "index_anamneses_on_discarded_at"
+    t.index ["patient_id"], name: "index_anamneses_on_patient_id"
   end
 
   create_table "attachments", force: :cascade do |t|
@@ -115,6 +116,7 @@ ActiveRecord::Schema.define(version: 2025_05_28_022721) do
     t.decimal "pending_payment", default: "0.0", null: false
     t.index ["branch_office_id"], name: "index_consultations_on_branch_office_id"
     t.index ["discarded_at"], name: "index_consultations_on_discarded_at"
+    t.index ["patient_id"], name: "index_consultations_on_patient_id"
     t.index ["special_patient"], name: "index_consultations_on_special_patient"
     t.index ["user_id"], name: "index_consultations_on_user_id"
   end
@@ -126,6 +128,7 @@ ActiveRecord::Schema.define(version: 2025_05_28_022721) do
     t.integer "type", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["consultation_id"], name: "index_diagnoses_on_consultation_id"
   end
 
   create_table "diseases", force: :cascade do |t|
@@ -202,6 +205,7 @@ ActiveRecord::Schema.define(version: 2025_05_28_022721) do
     t.string "subscription", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["consultation_id"], name: "index_prescriptions_on_consultation_id"
   end
 
   create_table "settings", id: :serial, force: :cascade do |t|
