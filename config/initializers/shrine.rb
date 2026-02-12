@@ -9,15 +9,13 @@ Shrine.storages = if Rails.env.test?
     store: Shrine::Storage::Memory.new
   }
 else
-  aws_secrets = Rails.application.secrets.aws
-
   {
     cache: Shrine::Storage::FileSystem.new('tmp', prefix: 'uploads/cache'),
     store: Shrine::Storage::S3.new(
       prefix:            Rails.env,
-      bucket:            aws_secrets[:bucket],
-      access_key_id:     aws_secrets[:access_key_id],
-      secret_access_key: aws_secrets[:secret_access_key],
+      bucket:            ENV.fetch('AWS_BUCKET'),
+      access_key_id:     ENV.fetch('AWS_ACCESS_KEY_ID'),
+      secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY'),
       region:            'us-east-1'
     )
   }

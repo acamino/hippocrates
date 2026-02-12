@@ -13,7 +13,7 @@ class PaymentChange < ApplicationRecord
     pending: 1
   }.freeze
 
-  enum type: TYPES
+  enum :type, TYPES
 
   belongs_to :user
   belongs_to :consultation

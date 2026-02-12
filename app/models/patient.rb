@@ -21,9 +21,9 @@ class Patient < ApplicationRecord
     :data_management_consent
   ].freeze
 
-  enum gender: [:male, :female]
-  enum civil_status: [:single, :married, :civil_union, :divorced, :widowed]
-  enum source: [
+  enum :gender, [:male, :female]
+  enum :civil_status, [:single, :married, :civil_union, :divorced, :widowed]
+  enum :source, [
     :television,
     :radio,
     :newspaper,

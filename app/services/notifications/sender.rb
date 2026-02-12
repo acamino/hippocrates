@@ -18,7 +18,7 @@ module Notifications
 
     def sendgrid
       SendGrid::API.new(
-        api_key: Rails.application.secrets.sendgrid.fetch(:api_key)
+        api_key: ENV.fetch('SENDGRID_API_KEY')
       )
     end
 
@@ -28,14 +28,14 @@ module Notifications
 
     def from
       SendGrid::Email.new(
-        email: Rails.application.secrets.sendgrid.fetch(:email_from),
+        email: ENV.fetch('SENDGRID_EMAIL_FROM'),
         name: 'Hippocrates'
       )
     end
 
     def to
       SendGrid::Email.new(
-        email: Rails.application.secrets.sendgrid.fetch(:email_to)
+        email: ENV.fetch('SENDGRID_EMAIL_TO')
       )
     end
 
