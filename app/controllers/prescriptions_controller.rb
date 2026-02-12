@@ -9,7 +9,9 @@ class PrescriptionsController < ApplicationController
   private
 
   def fetch_consultation
-    @consultation = @patient.consultations.find(params[:consultation_id])
+    @consultation = @patient.consultations
+                            .includes(:doctor, :branch_office, :diagnoses, :prescriptions, patient: :anamnesis)
+                            .find(params[:consultation_id])
   end
 
   def filename
