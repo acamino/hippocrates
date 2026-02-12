@@ -159,7 +159,7 @@ module Prescriptions
     end
 
     def allergies
-      "#{Prawn::Text::NBSP * 21}<b>#{patient.anamnesis.allergies}</b>"
+      "#{Prawn::Text::NBSP * 21}<b>#{patient.anamnesis&.allergies}</b>"
     end
 
     def prescriptions
