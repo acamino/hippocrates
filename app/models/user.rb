@@ -21,7 +21,8 @@ class User < ApplicationRecord
          :recoverable,
          :rememberable,
          :trackable,
-         :validatable
+         :validatable,
+         :lockable
 
   validates_uniqueness_of :registration_acess
 

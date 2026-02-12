@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_02_12_180747) do
+ActiveRecord::Schema.define(version: 2026_02_12_200259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -241,9 +241,13 @@ ActiveRecord::Schema.define(version: 2026_02_12_180747) do
     t.integer "serial", default: 0, null: false
     t.boolean "doctor", default: true, null: false
     t.boolean "editor", default: false, null: false
+    t.integer "failed_attempts", default: 0, null: false
+    t.string "unlock_token"
+    t.datetime "locked_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["registration_acess"], name: "index_users_on_registration_acess", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
   add_foreign_key "anamneses", "patients"
