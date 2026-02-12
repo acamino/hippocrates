@@ -2,8 +2,8 @@ class PrescriptionsController < ApplicationController
   before_action :fetch_consultation
 
   def download
-    Prescriptions::Printer.call(@consultation, params.fetch(:empty, false))
-    send_file '/tmp/prescription.pdf', download_options
+    pdf_data = Prescriptions::Printer.call(@consultation, params.fetch(:empty, false))
+    send_data pdf_data, download_options
   end
 
   private
