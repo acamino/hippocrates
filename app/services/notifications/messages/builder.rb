@@ -1,6 +1,8 @@
 module Notifications
   module Messages
     class Builder
+      include ERB::Util
+
       def initialize(price_change)
         @price_change = price_change
       end
@@ -20,10 +22,10 @@ module Notifications
       def content
         [
           '<html><body>',
-          "<p>El usuario #{user_name} cambió el precio de la consulta ",
-          "del paciente #{patient_name} del #{date} de #{previous_price} a ",
-          "#{updated_price}.</p>",
-          "<p>El motivo del cambio fue #{price_change.reason}.</p>",
+          "<p>El usuario #{h(user_name)} cambió el precio de la consulta ",
+          "del paciente #{h(patient_name)} del #{h(date)} de #{h(previous_price)} a ",
+          "#{h(updated_price)}.</p>",
+          "<p>El motivo del cambio fue #{h(price_change.reason)}.</p>",
           '</body></html>'
         ].join
       end
