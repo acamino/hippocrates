@@ -60,10 +60,10 @@ class DocumentsController < ApplicationController
   end
 
   def fetch_consultation
-    @consultation = Consultation.find(params[:consultation_id])
+    @consultation = @patient.consultations.find(params[:consultation_id])
   end
 
   def fetch_document
-    @document = Document.find(params[:id])
+    @document = @consultation.documents.find(params[:id])
   end
 end

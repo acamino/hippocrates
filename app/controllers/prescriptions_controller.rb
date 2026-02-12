@@ -1,5 +1,5 @@
 class PrescriptionsController < ApplicationController
-  before_action :fetch_consultation
+  before_action :fetch_patient, :fetch_consultation
 
   def download
     pdf_data = Prescriptions::Printer.call(@consultation, params.fetch(:empty, false))
@@ -9,7 +9,7 @@ class PrescriptionsController < ApplicationController
   private
 
   def fetch_consultation
-    @consultation = Consultation.find(params[:consultation_id])
+    @consultation = @patient.consultations.find(params[:consultation_id])
   end
 
   def filename

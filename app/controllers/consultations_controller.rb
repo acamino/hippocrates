@@ -1,8 +1,8 @@
 class ConsultationsController < ApplicationController
   include Trackable
 
-  before_action :fetch_consultation, only: [:edit, :update]
   before_action :fetch_patient
+  before_action :fetch_consultation, only: [:edit, :update]
   before_action :adjust_time!, only: [:update]
 
   def index
@@ -76,7 +76,9 @@ class ConsultationsController < ApplicationController
   private
 
   def fetch_consultation
-    @consultation = ConsultationPresenter.new(Consultation.find(params[:id]))
+    @consultation = ConsultationPresenter.new(
+      @patient.consultations.find(params[:id])
+    )
   end
 
   def remaining_diagnoses
