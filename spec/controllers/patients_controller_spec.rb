@@ -83,7 +83,7 @@ describe PatientsController do
   end
 
   describe '#edit' do
-    let(:patient) { double(:patient) }
+    let(:patient) { double(:patient, create_activity: true) }
 
     before do
       allow(Patient).to receive(:find).with('1') { patient }

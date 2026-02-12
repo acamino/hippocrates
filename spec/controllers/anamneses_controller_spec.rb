@@ -49,7 +49,7 @@ describe AnamnesesController do
 
   describe '#edit' do
     let(:patient) { double(:patient) }
-    let(:anamnesis) { double(:anamnesis) }
+    let(:anamnesis) { double(:anamnesis, create_activity: true) }
 
     before do
       allow(Patient).to receive(:find).with('1') { patient }
