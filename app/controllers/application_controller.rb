@@ -43,5 +43,7 @@ class ApplicationController < ActionController::Base
     else
       Date.today.beginning_of_day..Date.today.end_of_day
     end
+  rescue Date::Error
+    Date.today.beginning_of_day..Date.today.end_of_day
   end
 end
