@@ -14,6 +14,4 @@ Rails.application.config.content_security_policy do |policy|
   policy.connect_src :self
 end
 
-# Start in report-only mode to detect violations without blocking resources.
-# Monitor logs/reports, then switch to enforcing once no violations are seen.
-Rails.application.config.content_security_policy_report_only = true
+Rails.application.config.content_security_policy_report_only = false
