@@ -101,7 +101,7 @@ module Prescriptions
       Printers::Section.call(pdf, [600, 14], 200, doctor_phone, **DEFAULT_SIGNATURE_OPTIONS)
 
       # pdf.stroke_axis
-      pdf.render_file('/tmp/prescription.pdf')
+      pdf.render
     end
 
     private
@@ -159,7 +159,7 @@ module Prescriptions
     end
 
     def allergies
-      "#{Prawn::Text::NBSP * 21}<b>#{patient.anamnesis.allergies}</b>"
+      "#{Prawn::Text::NBSP * 21}<b>#{patient.anamnesis&.allergies}</b>"
     end
 
     def prescriptions

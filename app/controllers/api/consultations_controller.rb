@@ -26,22 +26,21 @@ module API
       params.fetch(:consultations, '').split('_').map(&:to_i)
     end
 
-    # rubocop:disable Metrics/MethodLength
-    # rubocop:disable Metrics/AbcSize
-    def meta
-      ids      =  @patient.consultations.kept.order(created_at: :desc).pluck(:id)
-      pages    =  ids.zip((ids.count..1).step(-1)).map do |id, position|
-        { id: id, position: position }
-      end
-      current  =  pages.find { |page| page[:id] == @consultation.id }
-      previous =  pages.find { |page| page[:position] == current[:position].pred }
-      succ     =  pages.find { |page| page[:position] == current[:position].succ }
+    def meta # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+      scope = @patient.consultations.kept
+      total = scope.count
+      position = scope.where('created_at <= ?', @consultation.created_at).count
+
+      prev_id = scope.where('created_at < ?', @consultation.created_at)
+                     .order(created_at: :desc).limit(1).pluck(:id).first
+      next_id = scope.where('created_at > ?', @consultation.created_at)
+                     .order(created_at: :asc).limit(1).pluck(:id).first
 
       {
-        total: @patient.consultations.kept.count,
-        current: current,
-        previous: previous,
-        next: succ
+        total: total,
+        current: { id: @consultation.id, position: position },
+        previous: prev_id ? { id: prev_id, position: position - 1 } : nil,
+        next: next_id ? { id: next_id, position: position + 1 } : nil
       }
     end
   end

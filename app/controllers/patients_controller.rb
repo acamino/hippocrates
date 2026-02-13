@@ -1,9 +1,8 @@
 class PatientsController < ApplicationController
   include Trackable
 
-  before_action :authorize_admin, only: [:export]
-
   def export
+    authorize :admin, :export?
     patients    = Patient.includes(:anamnesis).kept.order(:last_name, :first_name)
     spreadsheet = Patients::Excel::Builder.call(patients, Time.zone.now)
     send_data(spreadsheet.to_stream.read, download_options)
@@ -11,7 +10,8 @@ class PatientsController < ApplicationController
 
   def index
     delete_referer_location
-    @patients = Patient.kept.includes(:consultations, :anamnesis).search(params[:query]).page(page)
+    @patients = Patient.kept.includes(:most_recent_consultation,
+:anamnesis).search(params[:query]).page(page)
   end
 
   def new
@@ -24,18 +24,19 @@ class PatientsController < ApplicationController
   def create
     @patient = Patient.new(patient_params)
 
-    if @patient.save
-      track_activity(@patient, :created)
-
-      Setting::MedicalHistorySequence.new.save
-
-      redirect_to new_patient_anamnesis_path(
-        @patient
-      ), notice: t('patients.success.creation')
-    else
-      @branch_offices = BranchOffice.active.order(:active).order(:name)
-      render :new
+    ActiveRecord::Base.transaction do
+      @patient.medical_history = Setting::MedicalHistorySequence.next!
+      @patient.save!
     end
+
+    track_activity(@patient, :created)
+
+    redirect_to new_patient_anamnesis_path(
+      @patient
+    ), notice: t('patients.success.creation')
+  rescue ActiveRecord::RecordInvalid
+    @branch_offices = BranchOffice.active.order(:active).order(:name)
+    render :new
   end
 
   def edit

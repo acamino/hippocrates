@@ -1,16 +1,15 @@
 class ApplicationController < ActionController::Base
+  include Pundit::Authorization
+
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
   before_action :authenticate_user!
 
-  protected
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-  def authorize_admin
-    return if current_user.admin_or_super_admin?
-    redirect_to root_path, notice: 'Reservado para administradores'
-  end
+  protected
 
   def fetch_patient
     @patient = PatientPresenter.new(Patient.find(params[:patient_id]))
@@ -36,12 +35,20 @@ class ApplicationController < ActionController::Base
     session.delete(:referer_location) if session[:referer_location]
   end
 
-  def date_range
+  def date_range # rubocop:disable Metrics/AbcSize
     if params[:date_range].present?
       start_date, end_date = params[:date_range].split(' - ').map { |date| Date.parse(date) }
       start_date.beginning_of_day..end_date.end_of_day
     else
       Date.today.beginning_of_day..Date.today.end_of_day
     end
+  rescue Date::Error
+    Date.today.beginning_of_day..Date.today.end_of_day
+  end
+
+  private
+
+  def user_not_authorized
+    redirect_to root_path, notice: t('admin.not_authorized')
   end
 end

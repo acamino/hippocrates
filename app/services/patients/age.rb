@@ -15,17 +15,27 @@ module Patients
       age = Struct.new(:years, :months)
 
       return age.new(0, 0) unless birthday
-      age.new(years, (age_in_days % 365) / 30)
+      age.new(years, months)
     end
 
     private
 
-    def age_in_days
-      (@date - Date.new(birthday.year, birthday.month, birthday.day)).to_i
+    def years
+      y = @date.year - birthday.year
+      y -= 1 if before_birthday_in_year?
+      y
     end
 
-    def years
-      age_in_days / 365
+    def months
+      m = @date.month - birthday.month
+      m -= 1 if @date.day < birthday.day
+      m += 12 if m.negative?
+      m
+    end
+
+    def before_birthday_in_year?
+      @date.month < birthday.month ||
+        (@date.month == birthday.month && @date.day < birthday.day)
     end
   end
 end

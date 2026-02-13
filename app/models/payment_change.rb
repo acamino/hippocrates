@@ -13,14 +13,12 @@ class PaymentChange < ApplicationRecord
     pending: 1
   }.freeze
 
-  enum type: TYPES
+  enum :type, TYPES
 
   belongs_to :user
   belongs_to :consultation
 
-  validates_presence_of :previous_payment,
-                        :updated_payment,
-                        :reason
+  validates :previous_payment, :updated_payment, :reason, presence: true
 
   validates :updated_payment,
     numericality: { greater_than: 0, message: :greater_than_zero },

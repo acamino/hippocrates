@@ -21,7 +21,8 @@ class User < ApplicationRecord
          :recoverable,
          :rememberable,
          :trackable,
-         :validatable
+         :validatable,
+         :lockable
 
   validates_uniqueness_of :registration_acess
 
@@ -43,9 +44,9 @@ class User < ApplicationRecord
   end
 
   def next_serial!
-    self.serial = serial.succ
-    save!
-
+    with_lock do
+      increment!(:serial)
+    end
     serial
   end
 

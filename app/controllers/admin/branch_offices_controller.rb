@@ -1,6 +1,6 @@
 module Admin
   class BranchOfficesController < ApplicationController
-    before_action :authorize_admin
+    before_action :authorize_admin_access
     before_action :fetch_branch_office, only: [:edit, :update, :destroy]
 
     def index
@@ -36,6 +36,10 @@ module Admin
     end
 
     private
+
+    def authorize_admin_access
+      authorize :admin
+    end
 
     def fetch_branch_office
       @branch_office = BranchOffice.find(params[:id])

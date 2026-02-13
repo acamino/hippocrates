@@ -1,17 +1,19 @@
 class ConsultationsController < ApplicationController
   include Trackable
 
-  before_action :fetch_consultation, only: [:edit, :update]
   before_action :fetch_patient
+  before_action :fetch_consultation, only: [:edit, :update]
   before_action :adjust_time!, only: [:update]
 
   def index
     delete_referer_location
-    @consultations = @patient.consultations.kept.page(params.fetch(:page, 1))
+    @consultations = @patient.consultations.kept.order(created_at: :desc).page(params.fetch(:page,
+1))
   end
 
   def new
     @consultation = Consultation.new
+    @doctors = User.active_doctor.pluck(:pretty_name, :id)
     @branch_offices = BranchOffice.active.order(:active).order(:name)
 
     maximum_diagnoses.times     { @consultation.diagnoses.build }
@@ -20,7 +22,7 @@ class ConsultationsController < ApplicationController
     store_referer_location
   end
 
-  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
   def create
     @consultation              = Consultation.new(consultation_params.merge(**create_price_params))
     @consultation.current_user = current_user
@@ -33,6 +35,7 @@ class ConsultationsController < ApplicationController
         @patient, @consultation
       ), notice: t('consultations.success.creation')
     else
+      @doctors = User.active_doctor.pluck(:pretty_name, :id)
       @branch_offices = BranchOffice.active.order(:active).order(:name)
 
       remaining_diagnoses.times     { @consultation.diagnoses.build }
@@ -46,6 +49,7 @@ class ConsultationsController < ApplicationController
   def edit
     track_activity(@consultation, :viewed)
 
+    @doctors = User.active_doctor.pluck(:pretty_name, :id)
     @branch_offices = BranchOffice.active.order(:active).order(:name)
 
     remaining_diagnoses.times     { @consultation.diagnoses.build }
@@ -54,9 +58,11 @@ class ConsultationsController < ApplicationController
     store_referer_location
   end
 
-  def update
+  def update # rubocop:disable Metrics/AbcSize
+    attrs = consultation_params.merge(**update_price_params)
+    attrs[:created_at] = @adjusted_created_at if @adjusted_created_at
     @consultation.current_user = current_user
-    if @consultation.update(consultation_params.merge(**update_price_params))
+    if @consultation.update(attrs)
       track_activity(@consultation, :updated)
 
       @patient.update(patient_params)
@@ -66,6 +72,7 @@ class ConsultationsController < ApplicationController
         @patient, @consultation
       ), notice: t('consultations.success.update')
     else
+      @doctors = User.active_doctor.pluck(:pretty_name, :id)
       @branch_offices = BranchOffice.active.order(:active).order(:name)
 
       flash[:error] = t('consultations.error.update')
@@ -76,7 +83,9 @@ class ConsultationsController < ApplicationController
   private
 
   def fetch_consultation
-    @consultation = ConsultationPresenter.new(Consultation.find(params[:id]))
+    @consultation = ConsultationPresenter.new(
+      @patient.consultations.find(params[:id])
+    )
   end
 
   def remaining_diagnoses
@@ -114,9 +123,10 @@ class ConsultationsController < ApplicationController
   end
 
   def adjust_time!
-    _, time_with_timezone = @consultation.created_at.iso8601.split('T')
-    time, = time_with_timezone.split('-')
     date = consultation_params[:created_at]
-    params[:consultation][:created_at] = "#{date} #{time}"
+    return if date.blank?
+
+    time = @consultation.created_at.strftime('%H:%M:%S')
+    @adjusted_created_at = "#{date} #{time}"
   end
 end

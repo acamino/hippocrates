@@ -10,24 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_05_28_022721) do
-
+ActiveRecord::Schema[8.1].define(version: 2026_02_13_031414) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
-  enable_extension "plpgsql"
+  enable_extension "pg_catalog.plpgsql"
   enable_extension "unaccent"
 
   create_table "activities", id: :serial, force: :cascade do |t|
-    t.string "trackable_type"
-    t.integer "trackable_id"
-    t.string "owner_type"
-    t.integer "owner_id"
+    t.datetime "created_at", precision: nil, null: false
     t.string "key"
+    t.integer "owner_id"
+    t.string "owner_type"
     t.text "parameters"
-    t.string "recipient_type"
     t.integer "recipient_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "recipient_type"
+    t.integer "trackable_id"
+    t.string "trackable_type"
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type"
     t.index ["owner_type", "owner_id"], name: "index_activities_on_owner_type_and_owner_id"
     t.index ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type"
@@ -37,141 +36,146 @@ ActiveRecord::Schema.define(version: 2025_05_28_022721) do
   end
 
   create_table "anamneses", id: :serial, force: :cascade do |t|
-    t.integer "patient_id"
-    t.string "medical_history"
-    t.string "surgical_history"
     t.string "allergies"
-    t.string "observations"
-    t.string "habits"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "discarded_at", precision: nil
     t.string "family_history"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "habits"
     t.boolean "hearing_aids", default: false, null: false
-    t.datetime "discarded_at"
+    t.string "medical_history"
+    t.string "observations"
+    t.integer "patient_id"
+    t.string "surgical_history"
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["discarded_at"], name: "index_anamneses_on_discarded_at"
+    t.index ["patient_id"], name: "index_anamneses_on_patient_id"
   end
 
   create_table "attachments", force: :cascade do |t|
-    t.bigint "document_id"
     t.jsonb "content_data"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.bigint "document_id"
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["document_id"], name: "index_attachments_on_document_id"
   end
 
   create_table "branch_offices", force: :cascade do |t|
-    t.text "name", null: false
-    t.boolean "main", default: false, null: false
     t.boolean "active", default: true, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.text "address"
-    t.text "phone_numbers"
     t.text "city"
+    t.datetime "created_at", precision: nil, null: false
+    t.boolean "main", default: false, null: false
+    t.text "name", null: false
+    t.text "phone_numbers"
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["name"], name: "index_branch_offices_on_name", unique: true
   end
 
   create_table "consultations", id: :serial, force: :cascade do |t|
-    t.integer "patient_id"
-    t.string "reason", default: ""
-    t.string "ongoing_issue", default: ""
-    t.string "organs_examination", default: ""
-    t.decimal "temperature", default: "0.0"
-    t.integer "heart_rate", default: 0
     t.string "blood_pressure", default: ""
-    t.integer "respiratory_rate", default: 0
-    t.decimal "weight", default: "0.0"
+    t.bigint "branch_office_id"
+    t.datetime "created_at", precision: nil, null: false
+    t.string "diagnostic_plan"
+    t.datetime "discarded_at", precision: nil
+    t.string "hearing_aids", default: ""
+    t.integer "heart_rate", default: 0
     t.decimal "height", default: "0.0"
-    t.string "physical_examination", default: ""
-    t.string "right_ear", default: ""
-    t.string "left_ear", default: ""
-    t.string "right_nostril", default: ""
-    t.string "left_nostril", default: ""
-    t.string "nasopharynx", default: ""
-    t.string "nose_others", default: ""
-    t.string "oral_cavity", default: ""
-    t.string "oropharynx", default: ""
     t.string "hypopharynx", default: ""
     t.string "larynx", default: ""
-    t.string "neck", default: ""
-    t.string "others", default: ""
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "left_ear", default: ""
+    t.string "left_nostril", default: ""
     t.string "miscellaneous"
-    t.string "diagnostic_plan"
-    t.string "treatment_plan"
-    t.string "warning_signs"
-    t.datetime "next_appointment"
-    t.boolean "special_patient", default: false, null: false
-    t.string "hearing_aids", default: ""
+    t.string "nasopharynx", default: ""
+    t.string "neck", default: ""
+    t.datetime "next_appointment", precision: nil
+    t.string "nose_others", default: ""
+    t.string "ongoing_issue", default: ""
+    t.string "oral_cavity", default: ""
+    t.string "organs_examination", default: ""
+    t.string "oropharynx", default: ""
+    t.string "others", default: ""
     t.integer "oxygen_saturation", default: 0
-    t.text "recommendations"
-    t.bigint "user_id"
-    t.string "serial"
-    t.bigint "branch_office_id"
+    t.integer "patient_id"
     t.decimal "payment", default: "0.0", null: false
-    t.datetime "discarded_at"
-    t.boolean "priced", default: false, null: false
     t.decimal "pending_payment", default: "0.0", null: false
+    t.string "physical_examination", default: ""
+    t.boolean "priced", default: false, null: false
+    t.string "reason", default: ""
+    t.text "recommendations"
+    t.integer "respiratory_rate", default: 0
+    t.string "right_ear", default: ""
+    t.string "right_nostril", default: ""
+    t.string "serial"
+    t.boolean "special_patient", default: false, null: false
+    t.decimal "temperature", default: "0.0"
+    t.string "treatment_plan"
+    t.datetime "updated_at", precision: nil, null: false
+    t.bigint "user_id"
+    t.string "warning_signs"
+    t.decimal "weight", default: "0.0"
     t.index ["branch_office_id"], name: "index_consultations_on_branch_office_id"
     t.index ["discarded_at"], name: "index_consultations_on_discarded_at"
+    t.index ["patient_id", "created_at", "id"], name: "idx_consultations_patient_created_id", order: { created_at: :desc, id: :desc }
+    t.index ["patient_id"], name: "index_consultations_on_patient_id"
     t.index ["special_patient"], name: "index_consultations_on_special_patient"
+    t.index ["user_id", "created_at"], name: "idx_consultations_user_created", order: { created_at: :desc }
     t.index ["user_id"], name: "index_consultations_on_user_id"
   end
 
   create_table "diagnoses", id: :serial, force: :cascade do |t|
     t.integer "consultation_id"
-    t.string "disease_code"
+    t.datetime "created_at", precision: nil, null: false
     t.string "description", null: false
+    t.string "disease_code"
     t.integer "type", default: 0, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.index ["consultation_id"], name: "index_diagnoses_on_consultation_id"
   end
 
   create_table "diseases", force: :cascade do |t|
     t.string "code", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["code"], name: "index_diseases_on_code", unique: true
   end
 
   create_table "documents", force: :cascade do |t|
     t.bigint "consultation_id"
+    t.datetime "created_at", precision: nil, null: false
     t.text "description", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["consultation_id"], name: "index_documents_on_consultation_id"
   end
 
   create_table "medicines", id: :serial, force: :cascade do |t|
-    t.string "name", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.string "instructions", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "name", null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["name"], name: "index_medicines_on_name", unique: true
   end
 
   create_table "patients", id: :serial, force: :cascade do |t|
-    t.integer "medical_history", null: false
-    t.string "last_name", null: false
-    t.string "first_name", null: false
-    t.string "identity_card_number", null: false
-    t.datetime "birthdate", null: false
-    t.integer "gender", default: 0, null: false
-    t.integer "civil_status", default: 0, null: false
     t.string "address"
-    t.string "profession"
-    t.string "phone_number"
-    t.string "email"
-    t.integer "source", default: 0, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "special", default: false, null: false
-    t.text "health_insurance"
+    t.datetime "birthdate", precision: nil, null: false
     t.bigint "branch_office_id"
-    t.datetime "discarded_at"
+    t.integer "civil_status", default: 0, null: false
+    t.datetime "created_at", precision: nil, null: false
     t.boolean "data_management_consent", default: false, null: false
+    t.datetime "discarded_at", precision: nil
+    t.string "email"
+    t.string "first_name", null: false
+    t.integer "gender", default: 0, null: false
+    t.text "health_insurance"
+    t.string "identity_card_number", null: false
+    t.string "last_name", null: false
+    t.integer "medical_history", null: false
+    t.string "phone_number"
+    t.string "profession"
+    t.integer "source", default: 0, null: false
+    t.boolean "special", default: false, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["branch_office_id"], name: "index_patients_on_branch_office_id"
     t.index ["civil_status"], name: "index_patients_on_civil_status"
     t.index ["discarded_at"], name: "index_patients_on_discarded_at"
@@ -185,61 +189,66 @@ ActiveRecord::Schema.define(version: 2025_05_28_022721) do
 
   create_table "payment_changes", force: :cascade do |t|
     t.bigint "consultation_id", null: false
-    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.decimal "previous_payment", default: "0.0", null: false
-    t.decimal "updated_payment", default: "0.0", null: false
     t.text "reason", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.integer "type", default: 0, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.decimal "updated_payment", default: "0.0", null: false
+    t.bigint "user_id", null: false
     t.index ["consultation_id"], name: "index_payment_changes_on_consultation_id"
     t.index ["user_id"], name: "index_payment_changes_on_user_id"
   end
 
   create_table "prescriptions", id: :serial, force: :cascade do |t|
     t.integer "consultation_id"
+    t.datetime "created_at", precision: nil, null: false
     t.string "inscription", null: false
     t.string "subscription", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.index ["consultation_id"], name: "index_prescriptions_on_consultation_id"
   end
 
   create_table "settings", id: :serial, force: :cascade do |t|
+    t.datetime "created_at", precision: nil, null: false
     t.string "name", null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "value", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.index ["name"], name: "index_settings_on_name", unique: true
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.inet "current_sign_in_ip"
-    t.inet "last_sign_in_ip"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "admin", default: false, null: false
-    t.boolean "super_admin", default: false, null: false
     t.boolean "active", default: true, null: false
-    t.string "first_name"
-    t.string "last_name"
-    t.string "pretty_name"
-    t.string "phone_number"
-    t.string "registration_acess"
-    t.string "speciality"
-    t.integer "serial", default: 0, null: false
+    t.boolean "admin", default: false, null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "current_sign_in_at", precision: nil
+    t.inet "current_sign_in_ip"
     t.boolean "doctor", default: true, null: false
     t.boolean "editor", default: false, null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.integer "failed_attempts", default: 0, null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.datetime "last_sign_in_at", precision: nil
+    t.inet "last_sign_in_ip"
+    t.datetime "locked_at", precision: nil
+    t.string "phone_number"
+    t.string "pretty_name"
+    t.string "registration_acess"
+    t.datetime "remember_created_at", precision: nil
+    t.datetime "reset_password_sent_at", precision: nil
+    t.string "reset_password_token"
+    t.integer "serial", default: 0, null: false
+    t.integer "sign_in_count", default: 0, null: false
+    t.string "speciality"
+    t.boolean "super_admin", default: false, null: false
+    t.string "unlock_token"
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["registration_acess"], name: "index_users_on_registration_acess", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
   add_foreign_key "anamneses", "patients"

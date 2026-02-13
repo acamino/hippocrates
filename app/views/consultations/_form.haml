@@ -11,7 +11,7 @@
       .row-fluid
         .form-group.col-md-5
           = f.select :user_id,
-            options_for_select(ConsultationPresenter.new(@consultation).doctors, @consultation.doctor&.id),
+            options_for_select(@doctors, @consultation.doctor&.id),
             {},
             class: "form-control input-sm"
 

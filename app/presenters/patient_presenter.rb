@@ -73,7 +73,7 @@ class PatientPresenter < SimpleDelegator
   end
 
   def consultations?
-    consultations.present?
+    most_recent_consultation.present?
   end
 
   private

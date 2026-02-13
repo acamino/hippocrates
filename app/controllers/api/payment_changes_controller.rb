@@ -3,10 +3,11 @@ module API
     before_action :fetch_consultation
 
     def index
-      render json: payment_changes.order(created_at: :desc)
+      render json: payment_changes.includes(:user).order(created_at: :desc)
     end
 
     def create
+      authorize PaymentChange
       @payment_change = @consultation.payment_changes.build(payment_change_params)
 
       if @payment_change.save
@@ -32,10 +33,7 @@ module API
     end
 
     def send_notification
-      subject, message = Notifications::Messages::Builder.new(@payment_change).call
-      Notifications::Sender.new(subject, message).call
-    rescue StandardError => e
-      Rails.logger.error(e.message)
+      SendPaymentNotificationJob.perform_later(@payment_change.id)
     end
 
     def payment_changes

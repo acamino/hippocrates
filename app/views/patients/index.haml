@@ -2,7 +2,7 @@
 
 .row
   .col-md-12.text-right
-    - if current_user.admin_or_super_admin?
+    - if policy(:admin).export?
       = link_to t('patients.button.export'),
         export_patients_path,
         class: "btn btn-primary",

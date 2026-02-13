@@ -8,7 +8,8 @@ FactoryBot.define do
     birthdate      { 30.years.ago }
     gender         { 'male' }
     civil_status   { 'married' }
-    source         { 'patient_reference' }
+    source                  { 'patient_reference' }
+    data_management_consent { true }
     branch_office
   end
 

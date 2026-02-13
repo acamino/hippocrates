@@ -106,6 +106,9 @@ es:
     success:
       creation: Anamnesis creada correctamente
       update: Anamnesis actualizada correctamente
+    error:
+      creation: Error al crear la anamnesis
+      update: Error al actualizar la anamnesis
   consultations:
     diagnosis: Diagnóstico
     errors:
@@ -128,6 +131,15 @@ es:
       update: No se puede actualizar la consulta
     button:
       download: Descargar consulta
+  documents:
+    success:
+      creation: Documento creado correctamente
+      update: Documento actualizado correctamente
+      destroy: Documento eliminado correctamente
+    error:
+      creation: Problema al crear el documento
+  admin:
+    not_authorized: Reservado para administradores
   certificates:
     button:
       download: Descargar certificado

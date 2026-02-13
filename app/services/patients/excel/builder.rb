@@ -55,7 +55,7 @@ module Patients
         ->(patient) { PatientPresenter.new(patient) }
       end
 
-      def serialize
+      def serialize # rubocop:disable Metrics/AbcSize
         lambda { |patient|
           [
             patient.medical_history,

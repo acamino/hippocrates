@@ -5,11 +5,12 @@ require File.expand_path('../config/environment', __dir__)
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
+require 'capybara/rails'
 require 'shoulda/matchers'
 
 require_relative 'matchers/be_json_matcher'
 
-Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -41,7 +42,7 @@ end
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  config.fixture_paths = ["#{Rails.root}/spec/fixtures"]
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -69,5 +70,11 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.include FactoryBot::Syntax::Methods
-  config.include ControllerHelpers, type: :controller
+  config.include Warden::Test::Helpers, type: :request
+  config.include Warden::Test::Helpers, type: :system
+
+  config.after(type: :request) { Warden.test_reset! }
+  config.after(type: :system) { Warden.test_reset! }
+
+  config.before(type: :system) { driven_by :rack_test }
 end

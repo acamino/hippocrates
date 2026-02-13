@@ -1,10 +1,15 @@
-if ENV['TRAVIS']
-  require 'simplecov'
-  require 'coveralls'
-  Coveralls.wear!('rails')
-
-  SimpleCov.formatter = Coveralls::SimpleCov::Formatter
-  SimpleCov.start
+require 'simplecov'
+require 'simplecov-cobertura'
+SimpleCov.start 'rails' do
+  add_filter '/spec/'
+  add_filter '/config/'
+  add_filter '/vendor/'
+  if ENV['CI']
+    formatter SimpleCov::Formatter::MultiFormatter.new([
+                                                         SimpleCov::Formatter::HTMLFormatter,
+                                                         SimpleCov::Formatter::CoberturaFormatter
+                                                       ])
+  end
 end
 
 RSpec.configure do |config|

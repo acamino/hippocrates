@@ -28,9 +28,9 @@ When(/^I open create consultation page$/) do
 end
 
 When(/^I input consultation info$/) do
-  # TODO: Add additional fields
   fill_in :consultation_reason, with: 'consultation reason'
   fill_in :consultation_ongoing_issue, with: 'consultation ongoing issue'
+  fill_in :consultation_payment, with: '25.00'
   click_on 'Guardar'
 end
 

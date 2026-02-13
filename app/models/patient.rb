@@ -21,9 +21,9 @@ class Patient < ApplicationRecord
     :data_management_consent
   ].freeze
 
-  enum gender: [:male, :female]
-  enum civil_status: [:single, :married, :civil_union, :divorced, :widowed]
-  enum source: [
+  enum :gender, [:male, :female]
+  enum :civil_status, [:single, :married, :civil_union, :divorced, :widowed]
+  enum :source, [
     :television,
     :radio,
     :newspaper,
@@ -58,7 +58,7 @@ class Patient < ApplicationRecord
 
   before_save :normalize
 
-  scope :special, -> { includes(:consultations).where(special: true) }
+  scope :special, -> { where(special: true) }
   scope :order_by_name, -> { empty_names_to_end.order(:last_name, :first_name) }
   scope :empty_names_to_end, -> { order(Arel.sql("first_name = '', last_name = ''")) }
 
@@ -80,7 +80,7 @@ class Patient < ApplicationRecord
       ['Radio', 'radio'],
       ['Otro paciente', 'patient_reference'],
       ['Personal de salud', 'health_professional'],
-      ['Periódico', 'newspaper'],
+      ['Periódico', 'newspaper']
     ].freeze
   end
 

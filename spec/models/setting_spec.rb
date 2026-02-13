@@ -51,11 +51,10 @@ describe Setting do
       end
     end
 
-    describe '#save' do
-      it 'computes the next value in the sequence and save it' do
+    describe '.next!' do
+      it 'atomically increments and returns the next value' do
         setting = create(:setting, :medical_history_sequence, value: '4')
-        Setting::MedicalHistorySequence.new.save
-
+        expect(Setting::MedicalHistorySequence.next!).to eq(5)
         expect(setting.reload.value).to eq('5')
       end
     end

@@ -71,22 +71,17 @@ class Consultation < ApplicationRecord
 
   after_create :update_serial!
 
-  default_scope { order(created_at: :desc) }
-
   attr_accessor :head, :current_user
 
   scope :most_recent_by_patient, lambda {
     from(
       <<~SQL
         (
-          SELECT consultations.*
-          FROM consultations JOIN (
-             SELECT patient_id, max(created_at) AS created_at
-             FROM consultations
-             GROUP BY patient_id
-          ) latest_by_patient
-          ON consultations.created_at = latest_by_patient.created_at
-          AND consultations.patient_id = latest_by_patient.patient_id
+          SELECT DISTINCT ON (consultations.patient_id) consultations.*
+          FROM consultations
+          ORDER BY consultations.patient_id,
+                   consultations.created_at DESC,
+                   consultations.id DESC
         ) consultations
       SQL
     )
@@ -96,7 +91,7 @@ class Consultation < ApplicationRecord
     most_recent_by_patient
       .joins(:patient)
       .where(patients: { special: true })
-      .order('consultations.created_at')
+      .order('consultations.created_at DESC')
   }
 
   scope :by_date,          ->(date)    { where(created_at: date) if date.present? }
@@ -151,16 +146,14 @@ class Consultation < ApplicationRecord
 
   def update_serial!
     serial = doctor.next_serial!
-    self.serial = serial.to_s.rjust(5, '0')
-
-    save!
+    update_column(:serial, serial.to_s.rjust(5, '0'))
   end
 
   def patient_must_have_data_management_consent
     return unless patient
 
-    unless patient.data_management_consent == true
-      errors.add(:base, 'No se puede guardar la consulta sin el consentimiento de manejo de datos del paciente')
-    end
+    return if patient.data_management_consent == true
+    errors.add(:base,
+'No se puede guardar la consulta sin el consentimiento de manejo de datos del paciente')
   end
 end

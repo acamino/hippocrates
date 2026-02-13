@@ -3,7 +3,7 @@ Style/Documentation:
 
 Metrics/BlockLength:
   Max: 40
-  IgnoredMethods: ['describe', 'context', 'namespace', 'task']
+  AllowedMethods: ['describe', 'context', 'namespace', 'task']
 
 Style/FrozenStringLiteralComment:
   Enabled: false
@@ -34,6 +34,7 @@ Lint/MissingCopEnableDirective:
 
 AllCops:
   NewCops: enable
+  SuggestExtensions: false
   Exclude:
     - bin/*
     - config/**/*

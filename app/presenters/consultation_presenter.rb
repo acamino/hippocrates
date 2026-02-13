@@ -52,11 +52,11 @@ class ConsultationPresenter < SimpleDelegator
   end
 
   def diagnoses?
-    diagnoses.count.positive?
+    diagnoses.size.positive?
   end
 
   def prescriptions?
-    prescriptions.count.positive?
+    prescriptions.size.positive?
   end
 
   def miscellaneous?
@@ -65,9 +65,5 @@ class ConsultationPresenter < SimpleDelegator
 
   def user_id
     doctor&.id || current_user.id
-  end
-
-  def doctors
-    User.active_doctor.pluck(:pretty_name, :id)
   end
 end
