@@ -1,15 +1,15 @@
 require 'rails_helper'
 
-describe API::MedicinesController do
-  before { sign_in_user_mock }
+RSpec.describe 'API::Medicines', type: :request do
+  before { login_as create(:user), scope: :user }
 
-  describe '#index' do
+  describe 'GET /api/medicines' do
     let!(:medicines) { create_list(:medicine, 2) }
 
-    before { get :index, format: :json }
+    before { get api_medicines_path(format: :json) }
 
-    it 'formats the reponse as JSON' do
-      json_response = ::JSON.parse(response.body)
+    it 'formats the response as JSON' do
+      json_response = JSON.parse(response.body)
       expect(json_response).to include(
         'suggestions' => [
           hash_including(
@@ -24,6 +24,6 @@ describe API::MedicinesController do
       )
     end
 
-    it { is_expected.to respond_with :ok }
+    it { expect(response).to have_http_status(:ok) }
   end
 end

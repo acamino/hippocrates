@@ -51,8 +51,6 @@ group :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'factory_bot_rails'
-  gem 'rails-controller-testing'
-  gem 'rspec-activemodel-mocks'
   gem 'rspec-rails'
   gem 'pdf-inspector', require: false
   gem 'pundit-matchers', '~> 3.1'
