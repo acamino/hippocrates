@@ -1,6 +1,6 @@
 module Admin
   class ChartsController < ApplicationController
-    before_action :authorize_admin
+    before_action :authorize_admin_access
 
     def index
       @users               = User.physician.order(:pretty_name)
@@ -10,6 +10,10 @@ module Admin
     end
 
     private
+
+    def authorize_admin_access
+      authorize :admin
+    end
 
     def uid
       params[:uid]

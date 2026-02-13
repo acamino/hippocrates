@@ -1,6 +1,7 @@
 module API
   class BaseController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+    rescue_from Pundit::NotAuthorizedError, with: :render_forbidden
 
     protected
 
@@ -8,15 +9,7 @@ module API
       render json: '', status: :not_found
     end
 
-    def authorize_admin
-      return if current_user.admin_or_super_admin?
-
-      render json: '', status: :forbidden
-    end
-
-    def authorize_doctor_or_admin
-      return if current_user.doctor? || current_user.admin_or_super_admin?
-
+    def render_forbidden
       render json: '', status: :forbidden
     end
   end

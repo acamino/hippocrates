@@ -1,12 +1,11 @@
 module API
   class SettingsController < BaseController
-    before_action :authorize_admin, only: [:update]
-
     def index
       render json: Setting.all
     end
 
     def update
+      authorize :admin, :update?
       setting = Setting.find(params[:id])
 
       if setting.update(value: params[:value])

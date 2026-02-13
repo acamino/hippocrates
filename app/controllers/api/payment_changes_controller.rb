@@ -1,6 +1,5 @@
 module API
   class PaymentChangesController < BaseController
-    before_action :authorize_doctor_or_admin, only: [:create]
     before_action :fetch_consultation
 
     def index
@@ -8,6 +7,7 @@ module API
     end
 
     def create
+      authorize PaymentChange
       @payment_change = @consultation.payment_changes.build(payment_change_params)
 
       if @payment_change.save

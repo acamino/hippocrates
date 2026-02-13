@@ -1,9 +1,8 @@
 class PatientsController < ApplicationController
   include Trackable
 
-  before_action :authorize_admin, only: [:export]
-
   def export
+    authorize :admin, :export?
     patients    = Patient.includes(:anamnesis).kept.order(:last_name, :first_name)
     spreadsheet = Patients::Excel::Builder.call(patients, Time.zone.now)
     send_data(spreadsheet.to_stream.read, download_options)

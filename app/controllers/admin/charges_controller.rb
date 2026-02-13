@@ -1,6 +1,6 @@
 module Admin
   class ChargesController < ApplicationController
-    before_action :authorize_admin
+    before_action :authorize_admin_access
 
     def export
       spreadsheet = Charges::Excel::Builder.call(consultations, date_range)
@@ -17,6 +17,10 @@ module Admin
     end
 
     private
+
+    def authorize_admin_access
+      authorize :admin
+    end
 
     def consultations
       Charges::Searcher.call(uid, bid, date_range)

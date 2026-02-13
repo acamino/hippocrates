@@ -7,6 +7,7 @@ gem 'rails', '~> 8.0'
 gem 'puma'
 
 gem 'devise'
+gem 'pundit'
 
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'aws-sdk-s3'
@@ -54,6 +55,7 @@ group :test do
   gem 'rspec-activemodel-mocks'
   gem 'rspec-rails'
   gem 'pdf-inspector', require: false
+  gem 'pundit-matchers', '~> 3.1'
   gem 'shoulda-matchers', require: false
   gem 'timecop'
 end

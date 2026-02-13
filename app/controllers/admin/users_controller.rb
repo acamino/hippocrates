@@ -1,6 +1,6 @@
 module Admin
   class UsersController < ApplicationController
-    before_action :authorize_admin
+    before_action :authorize_admin_access
     before_action :fetch_user, only: [:edit, :update, :destroy]
 
     def index
@@ -31,6 +31,10 @@ module Admin
     end
 
     private
+
+    def authorize_admin_access
+      authorize :admin
+    end
 
     def fetch_user
       @user = User.find(params[:id])
