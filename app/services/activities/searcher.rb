@@ -10,7 +10,8 @@ module Activities
     end
 
     def call
-      Activity.by_date(date_range)
+      Activity.includes(:trackable, :owner)
+              .by_date(date_range)
               .by_owner(uid)
               .order_by_date
     end

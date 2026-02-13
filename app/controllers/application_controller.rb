@@ -49,6 +49,6 @@ class ApplicationController < ActionController::Base
   private
 
   def user_not_authorized
-    redirect_to root_path, notice: 'Reservado para administradores'
+    redirect_to root_path, notice: t('admin.not_authorized')
   end
 end

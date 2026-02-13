@@ -5,9 +5,9 @@ class Setting < ApplicationRecord
   MEDICAL_HISTORY_SEQUENCE = 'medical_history_sequence'.freeze
   WEBSITE                  = 'website'.freeze
 
-  validates_presence_of :name, :value
-  validates_uniqueness_of :name
-  validates_numericality_of :value, only_integer: true, if: :require_numeric_value?
+  validates :name, presence: true, uniqueness: true
+  validates :value, presence: true
+  validates :value, numericality: { only_integer: true }, if: :require_numeric_value?
 
   def self.emergency_number
     fetch(EMERGENCY_NUMBER) { |setting| setting.value = 'EMERGENCY NUMBER' }

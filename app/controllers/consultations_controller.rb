@@ -12,6 +12,7 @@ class ConsultationsController < ApplicationController
 
   def new
     @consultation = Consultation.new
+    @doctors = User.active_doctor.pluck(:pretty_name, :id)
     @branch_offices = BranchOffice.active.order(:active).order(:name)
 
     maximum_diagnoses.times     { @consultation.diagnoses.build }
@@ -33,6 +34,7 @@ class ConsultationsController < ApplicationController
         @patient, @consultation
       ), notice: t('consultations.success.creation')
     else
+      @doctors = User.active_doctor.pluck(:pretty_name, :id)
       @branch_offices = BranchOffice.active.order(:active).order(:name)
 
       remaining_diagnoses.times     { @consultation.diagnoses.build }
@@ -46,6 +48,7 @@ class ConsultationsController < ApplicationController
   def edit
     track_activity(@consultation, :viewed)
 
+    @doctors = User.active_doctor.pluck(:pretty_name, :id)
     @branch_offices = BranchOffice.active.order(:active).order(:name)
 
     remaining_diagnoses.times     { @consultation.diagnoses.build }
@@ -68,6 +71,7 @@ class ConsultationsController < ApplicationController
         @patient, @consultation
       ), notice: t('consultations.success.update')
     else
+      @doctors = User.active_doctor.pluck(:pretty_name, :id)
       @branch_offices = BranchOffice.active.order(:active).order(:name)
 
       flash[:error] = t('consultations.error.update')

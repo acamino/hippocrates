@@ -6,8 +6,8 @@ class Disease < ApplicationRecord
     :name
   ].freeze
 
-  validates_presence_of :code, :name
-  validates_uniqueness_of :code
+  validates :code, presence: true, uniqueness: true
+  validates :name, presence: true
 
   before_save :normalize
 

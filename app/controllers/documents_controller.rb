@@ -14,9 +14,9 @@ class DocumentsController < ApplicationController
     @document = @consultation.documents.new(document_params)
     if @document.save
       redirect_to patient_consultation_documents_path(@patient, @consultation),
-                  notice: 'Documento creado correctamente'
+                  notice: t('documents.success.creation')
     else
-      flash[:error] = 'Problema al crear el documento'
+      flash[:error] = t('documents.error.creation')
       render :new
     end
   end
@@ -26,7 +26,7 @@ class DocumentsController < ApplicationController
   def update
     if @document.update(document_params)
       redirect_to patient_consultation_documents_path(@patient, @consultation),
-                  notice: 'Documento actualizado correctamente'
+                  notice: t('documents.success.update')
     else
       render :edit
     end
@@ -35,7 +35,7 @@ class DocumentsController < ApplicationController
   def destroy
     @document.destroy
     redirect_to patient_consultation_documents_path(@patient, @consultation),
-                notice: 'Documento eliminado correctamente'
+                notice: t('documents.success.destroy')
   end
 
   private
@@ -54,8 +54,8 @@ class DocumentsController < ApplicationController
   def new_attachments_attributes
     return {} unless params[:files].present?
 
-    params[:files].inject({}) do |acc, file|
-      acc.merge!(SecureRandom.hex => { content: file })
+    params[:files].each_with_object({}) do |file, acc|
+      acc[SecureRandom.hex] = { content: file }
     end
   end
 

@@ -6,8 +6,6 @@ class Prescription < ApplicationRecord
 
   before_save :normalize
 
-  default_scope { order(id: :asc) }
-
   def normalize
     normalize_fields :inscription,
                      :subscription
