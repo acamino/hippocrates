@@ -31,6 +31,64 @@ describe Consultation do
       expect(most_recent_consultations.count).to eq(1)
       expect(most_recent_consultations.first).to eq(recent_consultation)
     end
+
+    context 'when two consultations share the same created_at timestamp' do
+      let(:collision_time) { 1.minute.ago }
+      let(:collision_patient) { create(:patient) }
+      let!(:first_consultation) do
+        create(:consultation, patient: collision_patient, created_at: collision_time)
+      end
+      let!(:second_consultation) do
+        create(:consultation, patient: collision_patient, created_at: collision_time)
+      end
+
+      it 'returns exactly one consultation (the one with the higher id)' do
+        results = described_class.most_recent_by_patient
+                                 .where(patient_id: collision_patient.id)
+        expect(results.count).to eq(1)
+        expect(results.first).to eq(second_consultation)
+      end
+    end
+
+    context 'with multiple patients having multiple consultations' do
+      let(:patient_b) { create(:patient) }
+      let!(:patient_b_old) { create(:consultation, patient: patient_b, created_at: 2.hours.ago) }
+      let!(:patient_b_new) { create(:consultation, patient: patient_b, created_at: 30.minutes.ago) }
+
+      it 'returns exactly one consultation per patient' do
+        results = described_class.most_recent_by_patient
+        patient_ids = results.map(&:patient_id)
+        expect(patient_ids).to match_array([patient.id, patient_b.id])
+        expect(results.find { |c| c.patient_id == patient_b.id }).to eq(patient_b_new)
+      end
+    end
+
+    context 'with a single consultation for a patient' do
+      let(:solo_patient) { create(:patient) }
+      let!(:solo_consultation) { create(:consultation, patient: solo_patient) }
+
+      it 'returns that consultation' do
+        results = described_class.most_recent_by_patient
+                                 .where(patient_id: solo_patient.id)
+        expect(results.to_a).to eq([solo_consultation])
+      end
+    end
+
+    context 'when merged with .kept' do
+      let(:discard_patient) { create(:patient) }
+      let!(:discarded_consultation) do
+        create(:consultation, patient: discard_patient, created_at: 2.hours.ago).tap(&:discard)
+      end
+      let!(:kept_consultation) do
+        create(:consultation, patient: discard_patient, created_at: 1.minute.ago)
+      end
+
+      it 'returns the most recent kept consultation' do
+        results = described_class.most_recent_by_patient.kept
+                                 .where(patient_id: discard_patient.id)
+        expect(results.to_a).to eq([kept_consultation])
+      end
+    end
   end
 
   describe '.most_recent_for_special_patients' do
@@ -53,6 +111,23 @@ describe Consultation do
           tom_recent_consultation
         ]
       )
+    end
+
+    context 'when special patients have timestamp collisions' do
+      let(:collision_time) { 30.minutes.ago }
+      let!(:bob_collision_1) do
+        create(:consultation, patient: bob, created_at: collision_time)
+      end
+      let!(:bob_collision_2) do
+        create(:consultation, patient: bob, created_at: collision_time)
+      end
+
+      it 'returns exactly one consultation per special patient' do
+        results = described_class.most_recent_for_special_patients
+        bob_results = results.select { |c| c.patient_id == bob.id }
+        expect(bob_results.size).to eq(1)
+        expect(bob_results.first).to eq(bob_collision_2)
+      end
     end
   end
 

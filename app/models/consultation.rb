@@ -77,14 +77,11 @@ class Consultation < ApplicationRecord
     from(
       <<~SQL
         (
-          SELECT consultations.*
-          FROM consultations JOIN (
-             SELECT patient_id, max(created_at) AS created_at
-             FROM consultations
-             GROUP BY patient_id
-          ) latest_by_patient
-          ON consultations.created_at = latest_by_patient.created_at
-          AND consultations.patient_id = latest_by_patient.patient_id
+          SELECT DISTINCT ON (consultations.patient_id) consultations.*
+          FROM consultations
+          ORDER BY consultations.patient_id,
+                   consultations.created_at DESC,
+                   consultations.id DESC
         ) consultations
       SQL
     )
