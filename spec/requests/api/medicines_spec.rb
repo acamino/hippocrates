@@ -10,17 +10,10 @@ RSpec.describe 'API::Medicines', type: :request do
 
     it 'formats the response as JSON' do
       json_response = JSON.parse(response.body)
-      expect(json_response).to include(
-        'suggestions' => [
-          hash_including(
-            'value' => medicines.first.name,
-            'data'  => medicines.first.instructions
-          ),
-          hash_including(
-            'value' => medicines.last.name,
-            'data'  => medicines.last.instructions
-          )
-        ]
+      expect(json_response['suggestions']).to match_array(
+        medicines.map do |m|
+          hash_including('value' => m.name, 'data' => m.instructions)
+        end
       )
     end
 
