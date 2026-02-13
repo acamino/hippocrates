@@ -55,5 +55,6 @@ group :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers', require: false
   gem 'simplecov', require: false
+  gem 'simplecov-cobertura', require: false
   gem 'timecop'
 end
