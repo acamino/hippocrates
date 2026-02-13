@@ -2,8 +2,8 @@
 
 # Hippocrates
 
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/acamino/hippocrates/tree/main.svg?style=shield)](https://dl.circleci.com/status-badge/redirect/gh/acamino/hippocrates/tree/main)
-[![Coverage Status](https://coveralls.io/repos/github/acamino/hippocrates/badge.svg?branch=main)](https://coveralls.io/github/acamino/hippocrates?branch=main)
+[![CI](https://github.com/acamino/hippocrates/actions/workflows/ci.yml/badge.svg)](https://github.com/acamino/hippocrates/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/acamino/hippocrates/branch/main/graph/badge.svg)](https://codecov.io/gh/acamino/hippocrates)
 
 Hippocrates is a demo application for managing patients' medical history. It
 provides some basic functionality out of the box:
