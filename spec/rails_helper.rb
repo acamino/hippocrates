@@ -70,4 +70,7 @@ RSpec.configure do |config|
 
   config.include FactoryBot::Syntax::Methods
   config.include ControllerHelpers, type: :controller
+  config.include Warden::Test::Helpers, type: :request
+
+  config.after(type: :request) { Warden.test_reset! }
 end
