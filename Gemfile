@@ -53,6 +53,7 @@ group :test do
   gem 'rails-controller-testing'
   gem 'rspec-activemodel-mocks'
   gem 'rspec-rails'
+  gem 'pdf-inspector', require: false
   gem 'shoulda-matchers', require: false
   gem 'timecop'
 end
