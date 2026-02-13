@@ -5,6 +5,7 @@ require File.expand_path('../config/environment', __dir__)
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
+require 'capybara/rails'
 require 'shoulda/matchers'
 
 require_relative 'matchers/be_json_matcher'
@@ -71,6 +72,10 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include ControllerHelpers, type: :controller
   config.include Warden::Test::Helpers, type: :request
+  config.include Warden::Test::Helpers, type: :system
 
   config.after(type: :request) { Warden.test_reset! }
+  config.after(type: :system) { Warden.test_reset! }
+
+  config.before(type: :system) { driven_by :rack_test }
 end
