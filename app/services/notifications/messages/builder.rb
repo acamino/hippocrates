@@ -43,11 +43,11 @@ module Notifications
       end
 
       def previous_price
-        format('$%.2f', price_change.previous_price)
+        format('$%.2f', price_change.previous_payment)
       end
 
       def updated_price
-        format('$%.2f', price_change.updated_price)
+        format('$%.2f', price_change.updated_payment)
       end
     end
   end

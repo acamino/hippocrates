@@ -54,9 +54,8 @@ Rails.application.configure do
   # Use a different cache store in production.
   # config.cache_store = :redis_store, Rails.application.secrets.redis_url, { expires_in: 1.day }
 
-  # Use a real queuing backend for Active Job (and separate queues per environment)
-  # config.active_job.queue_adapter     = :resque
-  # config.active_job.queue_name_prefix = "hippocrates_#{Rails.env}"
+  # Run background jobs in-process (no separate worker dyno needed).
+  config.active_job.queue_adapter = :async
   config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.

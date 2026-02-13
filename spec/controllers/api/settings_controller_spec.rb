@@ -40,7 +40,7 @@ describe API::SettingsController do
         expect(setting.reload.value).to eq('1')
       end
 
-      it { is_expected.to respond_with :unprocessable_entity }
+      it { is_expected.to respond_with :unprocessable_content }
     end
   end
 end

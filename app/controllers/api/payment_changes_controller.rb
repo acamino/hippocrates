@@ -33,10 +33,7 @@ module API
     end
 
     def send_notification
-      subject, message = Notifications::Messages::Builder.new(@payment_change).call
-      Notifications::Sender.new(subject, message).call
-    rescue StandardError => e
-      Rails.logger.error(e.message)
+      SendPaymentNotificationJob.perform_later(@payment_change.id)
     end
 
     def payment_changes
