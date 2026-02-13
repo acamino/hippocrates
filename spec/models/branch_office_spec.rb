@@ -23,7 +23,7 @@ RSpec.describe BranchOffice do
 
   describe '.active' do
     it 'returns only active offices' do
-      active   = create(:branch_office, active: true)
+      active = create(:branch_office, active: true)
       _inactive = create(:branch_office, active: false)
 
       expect(described_class.active).to eq([active])

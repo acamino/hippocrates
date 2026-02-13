@@ -11,15 +11,15 @@ gem 'pundit'
 
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'aws-sdk-s3'
+gem 'benchmark'
 gem 'caxlsx'
 gem 'chartkick'
 gem 'discard', '~> 1.2'
 gem 'dotenv-rails'
+gem 'drb'
 gem 'groupdate'
 gem 'haml'
 gem 'kaminari'
-gem 'benchmark'
-gem 'drb'
 gem 'matrix'
 gem 'mutex_m'
 gem 'net-imap'
@@ -47,13 +47,13 @@ group :development, :test do
 end
 
 group :test do
-  gem 'simplecov', require: false
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'factory_bot_rails'
-  gem 'rspec-rails'
   gem 'pdf-inspector', require: false
   gem 'pundit-matchers', '~> 3.1'
+  gem 'rspec-rails'
   gem 'shoulda-matchers', require: false
+  gem 'simplecov', require: false
   gem 'timecop'
 end

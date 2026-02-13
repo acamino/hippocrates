@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
     session.delete(:referer_location) if session[:referer_location]
   end
 
-  def date_range
+  def date_range # rubocop:disable Metrics/AbcSize
     if params[:date_range].present?
       start_date, end_date = params[:date_range].split(' - ').map { |date| Date.parse(date) }
       start_date.beginning_of_day..end_date.end_of_day

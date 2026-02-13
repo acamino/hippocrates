@@ -7,7 +7,8 @@ class ConsultationsController < ApplicationController
 
   def index
     delete_referer_location
-    @consultations = @patient.consultations.kept.order(created_at: :desc).page(params.fetch(:page, 1))
+    @consultations = @patient.consultations.kept.order(created_at: :desc).page(params.fetch(:page,
+1))
   end
 
   def new
@@ -21,7 +22,7 @@ class ConsultationsController < ApplicationController
     store_referer_location
   end
 
-  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
   def create
     @consultation              = Consultation.new(consultation_params.merge(**create_price_params))
     @consultation.current_user = current_user
@@ -57,7 +58,7 @@ class ConsultationsController < ApplicationController
     store_referer_location
   end
 
-  def update
+  def update # rubocop:disable Metrics/AbcSize
     attrs = consultation_params.merge(**update_price_params)
     attrs[:created_at] = @adjusted_created_at if @adjusted_created_at
     @consultation.current_user = current_user

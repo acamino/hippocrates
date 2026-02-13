@@ -29,8 +29,8 @@ class Setting < ApplicationRecord
     fetch(WEBSITE) { |setting| setting.value = 'WEBSITE' }
   end
 
-  def self.fetch(setting_name, &block)
-    find_or_create_by(name: setting_name, &block)
+  def self.fetch(setting_name, &)
+    find_or_create_by(name: setting_name, &)
   end
 
   class MedicalHistorySequence

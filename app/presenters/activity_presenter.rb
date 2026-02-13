@@ -15,7 +15,7 @@ class ActivityPresenter < SimpleDelegator
   }.freeze
 
   def initialize(activity)
-    super(activity)
+    super
     @action = activity.key.split('.').last
   end
 

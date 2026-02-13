@@ -24,8 +24,8 @@ module Admin
 
     def consultations
       Charges::Searcher.call(uid, bid, date_range)
-                        .includes(:branch_office, :doctor, :patient)
-                        .order(created_at: :desc)
+                       .includes(:branch_office, :doctor, :patient)
+                       .order(created_at: :desc)
     end
 
     def uid

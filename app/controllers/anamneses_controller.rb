@@ -7,7 +7,7 @@ class AnamnesesController < ApplicationController
     @anamnesis = Anamnesis.new
   end
 
-  def create
+  def create # rubocop:disable Metrics/MethodLength
     @anamnesis = Anamnesis.new(anamnesis_params)
 
     if @anamnesis.save
@@ -32,7 +32,7 @@ class AnamnesesController < ApplicationController
     @referer_location = referer_location
   end
 
-  def update
+  def update # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     @anamnesis = Anamnesis.find(params[:id])
 
     if @anamnesis.update(anamnesis_params)

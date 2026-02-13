@@ -29,7 +29,7 @@ class ConsultationSerializer < ActiveModel::Serializer
   end
 
   def next_appointment
-    return consultation_presenter.next_appointment_date if consultation_presenter.next_appointment?
+    consultation_presenter.next_appointment_date if consultation_presenter.next_appointment?
   end
 
   class PatientSerializer < ActiveModel::Serializer

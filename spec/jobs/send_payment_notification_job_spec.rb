@@ -42,9 +42,9 @@ RSpec.describe SendPaymentNotificationJob, type: :job do
 
   describe 'enqueuing' do
     it 'enqueues the job' do
-      expect {
+      expect do
         described_class.perform_later(payment_change.id)
-      }.to have_enqueued_job(described_class).with(payment_change.id)
+      end.to have_enqueued_job(described_class).with(payment_change.id)
     end
   end
 end

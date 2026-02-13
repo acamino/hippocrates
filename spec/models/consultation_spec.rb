@@ -115,10 +115,10 @@ describe Consultation do
 
     context 'when special patients have timestamp collisions' do
       let(:collision_time) { 30.minutes.ago }
-      let!(:bob_collision_1) do
+      let!(:bob_first_collision) do
         create(:consultation, patient: bob, created_at: collision_time)
       end
-      let!(:bob_collision_2) do
+      let!(:bob_second_collision) do
         create(:consultation, patient: bob, created_at: collision_time)
       end
 
@@ -126,7 +126,7 @@ describe Consultation do
         results = described_class.most_recent_for_special_patients
         bob_results = results.select { |c| c.patient_id == bob.id }
         expect(bob_results.size).to eq(1)
-        expect(bob_results.first).to eq(bob_collision_2)
+        expect(bob_results.first).to eq(bob_second_collision)
       end
     end
   end

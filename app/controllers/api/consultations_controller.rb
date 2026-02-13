@@ -26,7 +26,7 @@ module API
       params.fetch(:consultations, '').split('_').map(&:to_i)
     end
 
-    def meta
+    def meta # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
       scope = @patient.consultations.kept
       total = scope.count
       position = scope.where('created_at <= ?', @consultation.created_at).count

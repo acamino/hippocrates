@@ -47,7 +47,7 @@ module Consultations
 
     def consultation_ids
       consultations = params[:consultations]
-      return consultations.split('_').first if consultations.present?
+      consultations.split('_').first if consultations.present?
     end
 
     def certificate_type

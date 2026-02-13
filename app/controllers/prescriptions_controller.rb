@@ -10,7 +10,8 @@ class PrescriptionsController < ApplicationController
 
   def fetch_consultation
     @consultation = @patient.consultations
-                            .includes(:doctor, :branch_office, :diagnoses, :prescriptions, patient: :anamnesis)
+                            .includes(:doctor, :branch_office, :diagnoses,
+                                      :prescriptions, patient: :anamnesis)
                             .find(params[:consultation_id])
   end
 

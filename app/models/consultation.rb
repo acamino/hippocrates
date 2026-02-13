@@ -152,8 +152,8 @@ class Consultation < ApplicationRecord
   def patient_must_have_data_management_consent
     return unless patient
 
-    unless patient.data_management_consent == true
-      errors.add(:base, 'No se puede guardar la consulta sin el consentimiento de manejo de datos del paciente')
-    end
+    return if patient.data_management_consent == true
+    errors.add(:base,
+'No se puede guardar la consulta sin el consentimiento de manejo de datos del paciente')
   end
 end

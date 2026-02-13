@@ -80,7 +80,7 @@ class Patient < ApplicationRecord
       ['Radio', 'radio'],
       ['Otro paciente', 'patient_reference'],
       ['Personal de salud', 'health_professional'],
-      ['Periódico', 'newspaper'],
+      ['Periódico', 'newspaper']
     ].freeze
   end
 
