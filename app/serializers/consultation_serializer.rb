@@ -47,7 +47,7 @@ class ConsultationSerializer < ActiveModel::Serializer
     private
 
     def patient_presenter
-      PatientPresenter.new(object)
+      @patient_presenter ||= PatientPresenter.new(object)
     end
   end
 
@@ -63,6 +63,6 @@ class ConsultationSerializer < ActiveModel::Serializer
   private
 
   def consultation_presenter
-    ConsultationPresenter.new(object)
+    @consultation_presenter ||= ConsultationPresenter.new(object)
   end
 end

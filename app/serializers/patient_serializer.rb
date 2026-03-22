@@ -23,6 +23,6 @@ class PatientSerializer < ActiveModel::Serializer
   private
 
   def patient
-    PatientPresenter.new(object)
+    @patient ||= PatientPresenter.new(object)
   end
 end
