@@ -6,11 +6,11 @@
 
 Rails.application.config.content_security_policy do |policy|
   policy.default_src :self
-  policy.font_src    :self, 'cdnjs.cloudflare.com'
+  policy.font_src    :self, 'cdnjs.cloudflare.com', 'fonts.gstatic.com', 'maxcdn.bootstrapcdn.com'
   policy.img_src     :self, :data
-  policy.object_src  :none
+  policy.object_src  :self
   policy.script_src  :self, :unsafe_inline, 'cdnjs.cloudflare.com', 'maxcdn.bootstrapcdn.com'
-  policy.style_src   :self, :unsafe_inline, 'cdnjs.cloudflare.com', 'maxcdn.bootstrapcdn.com'
+  policy.style_src   :self, :unsafe_inline, 'cdnjs.cloudflare.com', 'maxcdn.bootstrapcdn.com', 'fonts.googleapis.com'
   policy.connect_src :self
 end
 
