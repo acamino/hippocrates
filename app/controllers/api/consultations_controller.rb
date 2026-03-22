@@ -26,21 +26,29 @@ module API
       params.fetch(:consultations, '').split('_').map(&:to_i)
     end
 
-    def meta # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-      scope = @patient.consultations.kept
-      total = scope.count
-      position = scope.where('created_at <= ?', @consultation.created_at).count
+    def meta
+      sql = <<~SQL.squish
+        SELECT id, position, total, next_id, prev_id FROM (
+          SELECT id,
+            ROW_NUMBER() OVER (ORDER BY created_at DESC) as position,
+            COUNT(*) OVER () as total,
+            LAG(id) OVER (ORDER BY created_at DESC) as next_id,
+            LEAD(id) OVER (ORDER BY created_at DESC) as prev_id
+          FROM consultations
+          WHERE patient_id = :patient_id AND discarded_at IS NULL
+        ) windowed
+        WHERE id = :consultation_id
+      SQL
 
-      prev_id = scope.where('created_at < ?', @consultation.created_at)
-                     .order(created_at: :desc).limit(1).pluck(:id).first
-      next_id = scope.where('created_at > ?', @consultation.created_at)
-                     .order(created_at: :asc).limit(1).pluck(:id).first
+      row = ActiveRecord::Base.connection.select_one(
+        ActiveRecord::Base.sanitize_sql([sql, patient_id: @patient.id, consultation_id: @consultation.id])
+      )
 
       {
-        total: total,
-        current: { id: @consultation.id, position: position },
-        previous: prev_id ? { id: prev_id, position: position - 1 } : nil,
-        next: next_id ? { id: next_id, position: position + 1 } : nil
+        total: row["total"].to_i,
+        current: { id: row["id"], position: row["position"].to_i },
+        previous: row["prev_id"] ? { id: row["prev_id"], position: row["position"].to_i + 1 } : nil,
+        next: row["next_id"] ? { id: row["next_id"], position: row["position"].to_i - 1 } : nil
       }
     end
   end
