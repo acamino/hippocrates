@@ -3,6 +3,7 @@ class ConsultationsController < ApplicationController
 
   before_action :fetch_patient
   before_action :fetch_consultation, only: [:edit, :update]
+  before_action :load_branch_offices, only: [:new, :create, :edit, :update]
   before_action :adjust_time!, only: [:update]
 
   def index
@@ -16,7 +17,6 @@ class ConsultationsController < ApplicationController
   def new
     @consultation = Consultation.new
     @doctors = User.active_doctor.pluck(:pretty_name, :id)
-    @branch_offices = BranchOffice.active.order(:active).order(:name)
 
     maximum_diagnoses.times     { @consultation.diagnoses.build }
     maximum_prescriptions.times { @consultation.prescriptions.build }
@@ -38,7 +38,6 @@ class ConsultationsController < ApplicationController
       ), notice: t('consultations.success.creation')
     else
       @doctors = User.active_doctor.pluck(:pretty_name, :id)
-      @branch_offices = BranchOffice.active.order(:active).order(:name)
 
       remaining_diagnoses.times     { @consultation.diagnoses.build }
       remaining_prescriptions.times { @consultation.prescriptions.build }
@@ -52,7 +51,6 @@ class ConsultationsController < ApplicationController
     track_activity(@consultation, :viewed)
 
     @doctors = User.active_doctor.pluck(:pretty_name, :id)
-    @branch_offices = BranchOffice.active.order(:active).order(:name)
 
     remaining_diagnoses.times     { @consultation.diagnoses.build }
     remaining_prescriptions.times { @consultation.prescriptions.build }
@@ -75,7 +73,6 @@ class ConsultationsController < ApplicationController
       ), notice: t('consultations.success.update')
     else
       @doctors = User.active_doctor.pluck(:pretty_name, :id)
-      @branch_offices = BranchOffice.active.order(:active).order(:name)
 
       flash[:error] = t('consultations.error.update')
       render :edit
@@ -83,6 +80,10 @@ class ConsultationsController < ApplicationController
   end
 
   private
+
+  def load_branch_offices
+    @branch_offices = BranchOffice.active.order(:active).order(:name)
+  end
 
   def fetch_consultation
     @consultation = ConsultationPresenter.new(
