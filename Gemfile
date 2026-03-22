@@ -9,7 +9,7 @@ gem 'puma'
 gem 'devise'
 gem 'pundit'
 
-gem 'active_model_serializers', '~> 0.10.0'
+gem 'alba'
 gem 'aws-sdk-s3'
 gem 'benchmark'
 gem 'caxlsx'

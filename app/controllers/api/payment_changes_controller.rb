@@ -3,7 +3,8 @@ module API
     before_action :fetch_consultation
 
     def index
-      render json: payment_changes.includes(:user).order(created_at: :desc)
+      changes = payment_changes.includes(:user).order(created_at: :desc)
+      render json: changes.map { |c| PaymentChangeResource.new(c).to_h }
     end
 
     def create

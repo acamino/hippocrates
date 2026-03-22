@@ -4,7 +4,7 @@ module API
     before_action :fetch_consultation, only: [:show]
 
     def show
-      render json: { consultation: ConsultationSerializer.new(@consultation), meta: meta }
+      render json: { consultation: ConsultationResource.new(@consultation).to_h, meta: meta }
     end
 
     def destroy
