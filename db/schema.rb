@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_22_125424) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_22_130907) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "pg_catalog.plpgsql"
+  enable_extension "pg_stat_statements"
   enable_extension "unaccent"
 
   create_table "activities", id: :serial, force: :cascade do |t|
@@ -170,6 +171,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_22_125424) do
     t.integer "medical_history", null: false
     t.string "phone_number"
     t.string "profession"
+    t.virtual "search_vector", type: :tsvector, as: "to_tsvector('simple'::regconfig, immutable_unaccent((((((COALESCE(first_name, ''::character varying))::text || ' '::text) || (COALESCE(last_name, ''::character varying))::text) || ' '::text) || (COALESCE(identity_card_number, ''::character varying))::text)))", stored: true
     t.integer "source", default: 0, null: false
     t.boolean "special", default: false, null: false
     t.datetime "updated_at", precision: nil, null: false
@@ -180,6 +182,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_22_125424) do
     t.index ["gender"], name: "index_patients_on_gender"
     t.index ["identity_card_number"], name: "index_patients_on_identity_card_number", unique: true
     t.index ["medical_history"], name: "index_patients_on_medical_history", unique: true
+    t.index ["search_vector"], name: "idx_patients_search", using: :gin
     t.index ["source"], name: "index_patients_on_source"
     t.index ["special"], name: "index_patients_on_special"
   end

@@ -64,7 +64,7 @@ class Patient < ApplicationRecord
 
   pg_search_scope :lookup,
     against:  [:first_name, :last_name, :identity_card_number],
-    using:    { tsearch: { prefix: true } },
+    using:    { tsearch: { prefix: true, tsvector_column: 'search_vector' } },
     ignoring: :accents
 
   def self.search(query)
