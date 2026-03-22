@@ -3,18 +3,20 @@ class ConsultationsController < ApplicationController
 
   before_action :fetch_patient
   before_action :fetch_consultation, only: [:edit, :update]
+  before_action :load_branch_offices, only: [:new, :create, :edit, :update]
   before_action :adjust_time!, only: [:update]
 
   def index
     delete_referer_location
-    @consultations = @patient.consultations.kept.order(created_at: :desc).page(params.fetch(:page,
-1))
+    @consultations = @patient.consultations.kept
+                             .includes(:doctor, :branch_office, :documents)
+                             .order(created_at: :desc)
+                             .page(params.fetch(:page, 1))
   end
 
   def new
     @consultation = Consultation.new
     @doctors = User.active_doctor.pluck(:pretty_name, :id)
-    @branch_offices = BranchOffice.active.order(:active).order(:name)
 
     maximum_diagnoses.times     { @consultation.diagnoses.build }
     maximum_prescriptions.times { @consultation.prescriptions.build }
@@ -36,7 +38,6 @@ class ConsultationsController < ApplicationController
       ), notice: t('consultations.success.creation')
     else
       @doctors = User.active_doctor.pluck(:pretty_name, :id)
-      @branch_offices = BranchOffice.active.order(:active).order(:name)
 
       remaining_diagnoses.times     { @consultation.diagnoses.build }
       remaining_prescriptions.times { @consultation.prescriptions.build }
@@ -50,7 +51,6 @@ class ConsultationsController < ApplicationController
     track_activity(@consultation, :viewed)
 
     @doctors = User.active_doctor.pluck(:pretty_name, :id)
-    @branch_offices = BranchOffice.active.order(:active).order(:name)
 
     remaining_diagnoses.times     { @consultation.diagnoses.build }
     remaining_prescriptions.times { @consultation.prescriptions.build }
@@ -73,7 +73,6 @@ class ConsultationsController < ApplicationController
       ), notice: t('consultations.success.update')
     else
       @doctors = User.active_doctor.pluck(:pretty_name, :id)
-      @branch_offices = BranchOffice.active.order(:active).order(:name)
 
       flash[:error] = t('consultations.error.update')
       render :edit
@@ -82,27 +81,23 @@ class ConsultationsController < ApplicationController
 
   private
 
+  def load_branch_offices
+    @branch_offices = BranchOffice.active.order(:active).order(:name)
+  end
+
   def fetch_consultation
     @consultation = ConsultationPresenter.new(
       @patient.consultations.find(params[:id])
     )
   end
 
-  def remaining_diagnoses
-    maximum_diagnoses - @consultation.diagnoses.count
-  end
+  def remaining_diagnoses = maximum_diagnoses - @consultation.diagnoses.count
 
-  def remaining_prescriptions
-    maximum_prescriptions - @consultation.prescriptions.count
-  end
+  def remaining_prescriptions = maximum_prescriptions - @consultation.prescriptions.count
 
-  def maximum_diagnoses
-    Setting.maximum_diagnoses.value.to_i
-  end
+  def maximum_diagnoses = Setting.maximum_diagnoses.value.to_i
 
-  def maximum_prescriptions
-    Setting.maximum_prescriptions.value.to_i
-  end
+  def maximum_prescriptions = Setting.maximum_prescriptions.value.to_i
 
   def consultation_params
     params.require(:consultation).permit(*Consultation::ATTRIBUTE_WHITELIST).merge(

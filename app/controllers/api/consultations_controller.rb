@@ -4,7 +4,7 @@ module API
     before_action :fetch_consultation, only: [:show]
 
     def show
-      render json: { consultation: ConsultationSerializer.new(@consultation), meta: meta }
+      render json: { consultation: ConsultationResource.new(@consultation).to_h, meta: meta }
     end
 
     def destroy
@@ -26,22 +26,40 @@ module API
       params.fetch(:consultations, '').split('_').map(&:to_i)
     end
 
-    def meta # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-      scope = @patient.consultations.kept
-      total = scope.count
-      position = scope.where('created_at <= ?', @consultation.created_at).count
-
-      prev_id = scope.where('created_at < ?', @consultation.created_at)
-                     .order(created_at: :desc).limit(1).pluck(:id).first
-      next_id = scope.where('created_at > ?', @consultation.created_at)
-                     .order(created_at: :asc).limit(1).pluck(:id).first
+    def meta
+      row = fetch_meta_row
 
       {
-        total: total,
-        current: { id: @consultation.id, position: position },
-        previous: prev_id ? { id: prev_id, position: position - 1 } : nil,
-        next: next_id ? { id: next_id, position: position + 1 } : nil
+        total: row['total'].to_i,
+        current: { id: row['id'], position: row['position'].to_i },
+        previous: meta_entry(row, 'prev_id', row['position'].to_i + 1),
+        next: meta_entry(row, 'next_id', row['position'].to_i - 1)
       }
+    end
+
+    def meta_entry(row, key, position)
+      row[key] ? { id: row[key], position: position } : nil
+    end
+
+    def fetch_meta_row # rubocop:disable Metrics/MethodLength
+      sql = <<~SQL.squish
+        SELECT id, position, total, next_id, prev_id FROM (
+          SELECT id,
+            ROW_NUMBER() OVER (ORDER BY created_at DESC) as position,
+            COUNT(*) OVER () as total,
+            LAG(id) OVER (ORDER BY created_at DESC) as next_id,
+            LEAD(id) OVER (ORDER BY created_at DESC) as prev_id
+          FROM consultations
+          WHERE patient_id = :patient_id AND discarded_at IS NULL
+        ) windowed
+        WHERE id = :consultation_id
+      SQL
+
+      params = { patient_id: @patient.id,
+                 consultation_id: @consultation.id }
+      ActiveRecord::Base.connection.select_one(
+        ActiveRecord::Base.sanitize_sql([sql, params])
+      )
     end
   end
 end

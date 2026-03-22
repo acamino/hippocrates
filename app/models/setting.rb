@@ -30,7 +30,15 @@ class Setting < ApplicationRecord
   end
 
   def self.fetch(setting_name, &)
-    find_or_create_by(name: setting_name, &)
+    Rails.cache.fetch("settings/#{setting_name}", expires_in: 1.hour) do
+      find_or_create_by(name: setting_name, &)
+    end
+  end
+
+  after_save :invalidate_cache
+
+  def invalidate_cache
+    Rails.cache.delete("settings/#{name}")
   end
 
   class MedicalHistorySequence

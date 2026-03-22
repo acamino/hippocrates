@@ -34,7 +34,7 @@ class ConsultationPresenter < SimpleDelegator
   end
 
   def pretty_diagnoses
-    diagnoses.map do |diagnosis|
+    @pretty_diagnoses ||= diagnoses.map do |diagnosis|
       "#{diagnosis.description.strip} (#{diagnosis.disease_code.strip})"
     end.join(', ')
   end

@@ -32,6 +32,14 @@ Layout/LineLength:
 Lint/MissingCopEnableDirective:
   Enabled: false
 
+Naming/MethodName:
+  Exclude:
+    - app/resources/**/*
+
+Naming/PredicateMethod:
+  Exclude:
+    - app/resources/**/*
+
 AllCops:
   NewCops: enable
   SuggestExtensions: false
