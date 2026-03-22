@@ -1,6 +1,7 @@
 class SpecialPatientsController < ApplicationController
   def index
-    @consultations = Consultation.includes(:patient, :doctor, :branch_office).kept.most_recent_for_special_patients
+    @consultations = Consultation.includes(:patient, :doctor,
+:branch_office).kept.most_recent_for_special_patients
   end
 
   def remove

@@ -27,6 +27,21 @@ module API
     end
 
     def meta
+      row = fetch_meta_row
+
+      {
+        total: row['total'].to_i,
+        current: { id: row['id'], position: row['position'].to_i },
+        previous: meta_entry(row, 'prev_id', row['position'].to_i + 1),
+        next: meta_entry(row, 'next_id', row['position'].to_i - 1)
+      }
+    end
+
+    def meta_entry(row, key, position)
+      row[key] ? { id: row[key], position: position } : nil
+    end
+
+    def fetch_meta_row # rubocop:disable Metrics/MethodLength
       sql = <<~SQL.squish
         SELECT id, position, total, next_id, prev_id FROM (
           SELECT id,
@@ -40,16 +55,11 @@ module API
         WHERE id = :consultation_id
       SQL
 
-      row = ActiveRecord::Base.connection.select_one(
-        ActiveRecord::Base.sanitize_sql([sql, patient_id: @patient.id, consultation_id: @consultation.id])
+      params = { patient_id: @patient.id,
+                 consultation_id: @consultation.id }
+      ActiveRecord::Base.connection.select_one(
+        ActiveRecord::Base.sanitize_sql([sql, params])
       )
-
-      {
-        total: row["total"].to_i,
-        current: { id: row["id"], position: row["position"].to_i },
-        previous: row["prev_id"] ? { id: row["prev_id"], position: row["position"].to_i + 1 } : nil,
-        next: row["next_id"] ? { id: row["next_id"], position: row["position"].to_i - 1 } : nil
-      }
     end
   end
 end

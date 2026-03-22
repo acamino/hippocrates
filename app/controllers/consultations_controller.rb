@@ -9,9 +9,9 @@ class ConsultationsController < ApplicationController
   def index
     delete_referer_location
     @consultations = @patient.consultations.kept
-                                       .includes(:doctor, :branch_office, :documents)
-                                       .order(created_at: :desc)
-                                       .page(params.fetch(:page, 1))
+                             .includes(:doctor, :branch_office, :documents)
+                             .order(created_at: :desc)
+                             .page(params.fetch(:page, 1))
   end
 
   def new
@@ -91,21 +91,13 @@ class ConsultationsController < ApplicationController
     )
   end
 
-  def remaining_diagnoses
-    maximum_diagnoses - @consultation.diagnoses.count
-  end
+  def remaining_diagnoses = maximum_diagnoses - @consultation.diagnoses.count
 
-  def remaining_prescriptions
-    maximum_prescriptions - @consultation.prescriptions.count
-  end
+  def remaining_prescriptions = maximum_prescriptions - @consultation.prescriptions.count
 
-  def maximum_diagnoses
-    Setting.maximum_diagnoses.value.to_i
-  end
+  def maximum_diagnoses = Setting.maximum_diagnoses.value.to_i
 
-  def maximum_prescriptions
-    Setting.maximum_prescriptions.value.to_i
-  end
+  def maximum_prescriptions = Setting.maximum_prescriptions.value.to_i
 
   def consultation_params
     params.require(:consultation).permit(*Consultation::ATTRIBUTE_WHITELIST).merge(
