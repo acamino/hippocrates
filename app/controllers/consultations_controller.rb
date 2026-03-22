@@ -7,8 +7,10 @@ class ConsultationsController < ApplicationController
 
   def index
     delete_referer_location
-    @consultations = @patient.consultations.kept.order(created_at: :desc).page(params.fetch(:page,
-1))
+    @consultations = @patient.consultations.kept
+                                       .includes(:doctor, :branch_office, :documents)
+                                       .order(created_at: :desc)
+                                       .page(params.fetch(:page, 1))
   end
 
   def new
