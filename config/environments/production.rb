@@ -54,8 +54,8 @@ Rails.application.configure do
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
 
-  # Use a different cache store in production.
-  # config.cache_store = :redis_store, Rails.application.secrets.redis_url, { expires_in: 1.day }
+  # Use in-process memory cache (no Redis needed for single-container deploy).
+  config.cache_store = :memory_store, { size: 64.megabytes }
 
   # Run background jobs in-process (no separate worker dyno needed).
   config.active_job.queue_adapter = :async
