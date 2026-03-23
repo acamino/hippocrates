@@ -1,0 +1,9 @@
+[build]
+dockerfilePath = "Dockerfile"
+
+[deploy]
+preDeployCommand = "bundle exec rake db:migrate"
+
+[deploy.healthcheck]
+path = "/up"
+timeout = 300

@@ -1,0 +1,15 @@
+.git
+.github
+.bundle
+.env*
+log/*
+tmp/*
+storage/*
+node_modules
+vendor/bundle
+coverage
+spec
+features
+build-logs.log
+*.md
+!README.md

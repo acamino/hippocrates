@@ -1,0 +1,50 @@
+version: "3"
+
+dotenv: [".env"]
+
+vars:
+  DC: docker compose
+
+tasks:
+  # --- Docker ---
+  docker:build:
+    desc: Build the Docker image
+    cmd: "{{.DC}} build {{.CLI_ARGS}}"
+
+  docker:up:
+    desc: Start all services
+    cmd: "{{.DC}} up -d"
+
+  docker:down:
+    desc: Stop all services
+    cmd: "{{.DC}} down"
+
+  docker:restart:
+    desc: Restart all services
+    cmd: "{{.DC}} restart"
+
+  docker:ps:
+    desc: Show running services
+    cmd: "{{.DC}} ps"
+
+  docker:clean:
+    desc: Stop services and remove volumes
+    cmd: "{{.DC}} down -v"
+
+  # --- App ---
+  app:logs:
+    desc: Tail logs from all services
+    cmd: "{{.DC}} logs -f {{.CLI_ARGS}}"
+
+  app:shell:
+    desc: Open a shell in the app container
+    cmd: "{{.DC}} exec app bash"
+
+  app:health:
+    desc: Check the health endpoint
+    cmd: curl -sf http://localhost:3000/up && echo " OK" || echo " FAIL"
+
+  # --- Database ---
+  db:shell:
+    desc: Open a psql shell
+    cmd: "{{.DC}} exec postgres psql -U hippocrates -d hippocrates_development"
