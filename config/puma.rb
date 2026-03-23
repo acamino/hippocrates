@@ -5,9 +5,9 @@ threads threads_count, threads_count
 preload_app!
 
 port        ENV['PORT']     || 3000
-environment ENV['RACK_ENV'] || 'development'
+environment ENV['RACK_ENV'] || ENV['RAILS_ENV'] || 'development'
 
-on_worker_boot do
+before_worker_boot do
   ActiveRecord::Base.establish_connection
 end
 

@@ -42,10 +42,11 @@ Rails.application.configure do
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
+  config.force_ssl = ENV.fetch("RAILS_FORCE_SSL", "true") == "true"
 
   # Allow Railway host
   config.hosts << "hippocrates-production.up.railway.app"
+  config.hosts += ENV.fetch("RAILS_ALLOWED_HOSTS", "").split(",").map(&:strip)
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
