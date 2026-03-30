@@ -434,7 +434,7 @@ CREATE TABLE public.patients (
     last_name character varying NOT NULL,
     first_name character varying NOT NULL,
     identity_card_number character varying NOT NULL,
-    birthdate timestamp without time zone NOT NULL,
+    birthdate date NOT NULL,
     gender integer DEFAULT 0 NOT NULL,
     civil_status integer DEFAULT 0 NOT NULL,
     address character varying,
@@ -1209,6 +1209,7 @@ ALTER TABLE ONLY public.consultations
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20260330120112'),
 ('20260322130907'),
 ('20260322125424'),
 ('20260213031414'),
