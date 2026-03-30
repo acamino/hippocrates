@@ -44,7 +44,21 @@ tasks:
     desc: Check the health endpoint
     cmd: curl -sf http://localhost:3000/up && echo " OK" || echo " FAIL"
 
+  app:console:
+    desc: Open a Rails console
+    cmd: "{{.DC}} exec app bin/rails console"
+
   # --- Database ---
+  db:up:
+    desc: Start only the postgres container
+    cmd: "{{.DC}} up -d postgres"
+
   db:shell:
     desc: Open a psql shell
     cmd: "{{.DC}} exec postgres psql -U hippocrates -d hippocrates_development"
+
+  db:exec:
+    desc: 'Execute a SQL query against the development database'
+    silent: true
+    cmds:
+      - '{{.DC}} exec postgres psql -U hippocrates -d hippocrates_development -c {{.CLI_ARGS}}'
