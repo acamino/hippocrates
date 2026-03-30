@@ -67,6 +67,7 @@ class PatientsController < ApplicationController
 
   def destroy
     @patient = Patient.find(params[:id])
+    authorize @patient
     @patient.archive
 
     track_activity(@patient, :deleted)

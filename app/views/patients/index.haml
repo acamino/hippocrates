@@ -71,10 +71,11 @@
                     %li.divider{ role: "separator" }
                     %li
                       = link_to t('patients.actions.edit'), edit_patient_path(patient)
-                    %li
-                      = link_to t('patients.actions.destroy'), patient,
-                        data: { confirm: t("patients.destroy.confirm", name: patient.full_name) },
-                        method: :delete
+                    - if policy(patient).destroy?
+                      %li
+                        = link_to t('patients.actions.destroy'), patient,
+                          data: { confirm: t("patients.destroy.confirm", name: patient.full_name) },
+                          method: :delete
 
 .row
   .col-md-12.text-center

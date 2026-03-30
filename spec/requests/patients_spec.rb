@@ -110,20 +110,70 @@ RSpec.describe 'Patients', type: :request do
       create(:activity, owner: patient)
     end
 
-    it 'discards the patient and related models' do
-      expect do
+    context 'when the user is a doctor' do
+      before do
+        login_as create(:user, doctor: true), scope: :user
+      end
+
+      it 'discards the patient and related models' do
+        expect do
+          delete patient_path(patient)
+          patient.reload
+          anamnesis.reload
+        end.to(
+          change(patient, :discarded?).from(false).to(true)
+          .and(change(anamnesis, :discarded?).from(false).to(true))
+        )
+      end
+
+      it 'redirects to patients index' do
         delete patient_path(patient)
-        patient.reload
-        anamnesis.reload
-      end.to(
-        change(patient, :discarded?).from(false).to(true)
-        .and(change(anamnesis, :discarded?).from(false).to(true))
-      )
+        expect(response).to redirect_to(patients_path)
+      end
     end
 
-    it 'redirects to patients index' do
-      delete patient_path(patient)
-      expect(response).to redirect_to(patients_path)
+    context 'when the user is an admin' do
+      before do
+        login_as create(:user, admin: true), scope: :user
+      end
+
+      it 'discards the patient' do
+        expect do
+          delete patient_path(patient)
+          patient.reload
+        end.to change(patient, :discarded?).from(false).to(true)
+      end
+    end
+
+    context 'when the user is a super_admin' do
+      before do
+        login_as create(:user, super_admin: true), scope: :user
+      end
+
+      it 'discards the patient' do
+        expect do
+          delete patient_path(patient)
+          patient.reload
+        end.to change(patient, :discarded?).from(false).to(true)
+      end
+    end
+
+    context 'when the user is not authorized' do
+      before do
+        login_as create(:user, doctor: false, admin: false, super_admin: false), scope: :user
+      end
+
+      it 'does not discard the patient' do
+        expect do
+          delete patient_path(patient)
+          patient.reload
+        end.not_to change(patient, :discarded?)
+      end
+
+      it 'redirects to root path' do
+        delete patient_path(patient)
+        expect(response).to redirect_to(root_path)
+      end
     end
   end
 end
