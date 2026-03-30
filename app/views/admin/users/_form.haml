@@ -34,21 +34,27 @@
       .col-md-10
         = f.text_field :password, class: "form-control input-sm user-input"
     .form-group
-      = f.label :active, "Activo", class: "col-md-2 control-label"
+      = f.label :active, "Activo", class: "col-md-2 control-label checkbox-label"
       .col-md-10
         = f.check_box :active
     .form-group
-      = f.label :admin, "Administrador", class: "col-md-2 control-label"
+      = f.label :admin, "Administrador", class: "col-md-2 control-label checkbox-label"
       .col-md-10
         = f.check_box :admin
     .form-group
-      = f.label :doctor, "Médico", class: "col-md-2 control-label"
+      = f.label :doctor, "Médico", class: "col-md-2 control-label checkbox-label"
       .col-md-10
         = f.check_box :doctor
     .form-group
-      = f.label :editor, "Editor (Puede asignar médico en una consulta)", class: "col-md-2 control-label"
+      = f.label :editor, "Editor", class: "col-md-2 control-label checkbox-label"
       .col-md-10
         = f.check_box :editor
+        %p.help-block Puede asignar médico en una consulta.
+    .form-group
+      = f.label :can_delete_patients, "Eliminar pacientes", class: "col-md-2 control-label checkbox-label"
+      .col-md-10
+        = f.check_box :can_delete_patients
+        %p.help-block Médicos y administradores ya tienen este permiso.
   .form-group
     .col-md-10.col-md-offset-2
       = link_to "Cancelar", admin_users_path, class: "btn btn-default"

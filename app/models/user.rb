@@ -13,7 +13,8 @@ class User < ApplicationRecord
     :active,
     :admin,
     :doctor,
-    :editor
+    :editor,
+    :can_delete_patients
   ].freeze
 
   devise :database_authenticatable,

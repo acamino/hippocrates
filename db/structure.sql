@@ -614,7 +614,8 @@ CREATE TABLE public.users (
     editor boolean DEFAULT false NOT NULL,
     failed_attempts integer DEFAULT 0 NOT NULL,
     unlock_token character varying,
-    locked_at timestamp without time zone
+    locked_at timestamp without time zone,
+    can_delete_patients boolean DEFAULT false NOT NULL
 );
 
 
@@ -1209,6 +1210,7 @@ ALTER TABLE ONLY public.consultations
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20260330120822'),
 ('20260330120112'),
 ('20260322130907'),
 ('20260322125424'),

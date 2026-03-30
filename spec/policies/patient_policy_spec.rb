@@ -32,4 +32,12 @@ RSpec.describe PatientPolicy do
 
     it { is_expected.to permit_action(:destroy) }
   end
+
+  context 'when the user has can_delete_patients override' do
+    let(:user) do
+      build(:user, admin: false, super_admin: false, doctor: false, can_delete_patients: true)
+    end
+
+    it { is_expected.to permit_action(:destroy) }
+  end
 end

@@ -19,6 +19,10 @@ input[type="email"] {
   text-transform: none;
 }
 
+.form-group .checkbox-label {
+  padding-top: 3px;
+}
+
 .btn-copy {
   -webkit-box-shadow: none;
   box-shadow: none;
