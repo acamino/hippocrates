@@ -47,6 +47,14 @@ describe ActivityPresenter do
     it_behaves_like 'tracked model', :anamnesis,    'ANAMNESIS'
     it_behaves_like 'tracked model', :consultation, 'CONSULTA'
     it_behaves_like 'tracked model', :patient,      'PACIENTE'
+
+    context 'when the tracked entity is unknown' do
+      let(:activity) { build(:activity, trackable_type: 'Document', trackable_id: 1) }
+
+      subject(:presenter_model) { described_class.new(activity).model }
+
+      it { is_expected.to eq('DOCUMENT') }
+    end
   end
 
   describe '#action' do
@@ -72,5 +80,6 @@ describe ActivityPresenter do
     it_behaves_like 'tracked action', 'patient.created',      'CREAR'
     it_behaves_like 'tracked action', 'patient.updated',      'EDITAR'
     it_behaves_like 'tracked action', 'patient.deleted',      'ELIMINAR'
+    it_behaves_like 'tracked action', 'patient.archived',     'ARCHIVED'
   end
 end

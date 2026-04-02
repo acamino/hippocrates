@@ -29,10 +29,10 @@ class ActivityPresenter < SimpleDelegator
   end
 
   def model
-    MODELS.fetch(trackable_type)
+    MODELS.fetch(trackable_type, trackable_type.upcase)
   end
 
   def action
-    ACTIONS.fetch(@action)
+    ACTIONS.fetch(@action, @action.upcase)
   end
 end
