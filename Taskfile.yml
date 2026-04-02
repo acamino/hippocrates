@@ -19,6 +19,11 @@ tasks:
     desc: Stop all services
     cmd: "{{.DC}} down"
 
+  docker:stop:
+    desc: Stop Docker services (without removing containers)
+    cmds:
+      - "{{.DC}} stop"
+
   docker:restart:
     desc: Restart all services
     cmd: "{{.DC}} restart"
