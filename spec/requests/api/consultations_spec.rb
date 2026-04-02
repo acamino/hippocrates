@@ -29,7 +29,44 @@ RSpec.describe 'API::Consultations', type: :request do
   describe 'DELETE /api/patients/:patient_id/consultations' do
     let(:consultations) { "#{c1.id}_#{c2.id}" }
 
-    context 'when consultations are given' do
+    context 'when the user is a doctor' do
+      before { login_as create(:user, doctor: true), scope: :user }
+
+      context 'when consultations are given' do
+        it 'destroys consultations' do
+          expect do
+            delete api_patient_consultations_path(bob, format: :json),
+                   params: { consultations: consultations }
+            c1.reload
+            c2.reload
+          end.to(
+            change(c1, :discarded?).from(false).to(true)
+            .and(change(c2, :discarded?).from(false).to(true))
+          )
+        end
+      end
+
+      context 'when no consultations are given' do
+        it 'does not destroy consultations' do
+          expect do
+            delete api_patient_consultations_path(bob, format: :json),
+                   params: { consultations: '' }
+          end.not_to change(Consultation, :count)
+        end
+      end
+
+      it 'responds with json' do
+        delete api_patient_consultations_path(bob, format: :json),
+               params: { consultations: consultations }
+
+        expect(response).to have_http_status(:ok)
+        expect(response).to be_json
+      end
+    end
+
+    context 'when the user is an admin' do
+      before { login_as create(:user, admin: true), scope: :user }
+
       it 'destroys consultations' do
         expect do
           delete api_patient_consultations_path(bob, format: :json),
@@ -43,21 +80,56 @@ RSpec.describe 'API::Consultations', type: :request do
       end
     end
 
-    context 'when no consultations are given' do
-      it 'does not destroy consultations' do
+    context 'when the user is a super_admin' do
+      before { login_as create(:user, super_admin: true), scope: :user }
+
+      it 'destroys consultations' do
         expect do
           delete api_patient_consultations_path(bob, format: :json),
-                 params: { consultations: '' }
-        end.not_to change(Consultation, :count)
+                 params: { consultations: consultations }
+          c1.reload
+          c2.reload
+        end.to(
+          change(c1, :discarded?).from(false).to(true)
+          .and(change(c2, :discarded?).from(false).to(true))
+        )
       end
     end
 
-    it 'responds with json' do
-      delete api_patient_consultations_path(bob, format: :json),
-             params: { consultations: consultations }
+    context 'when the user is a regular user' do
+      before { login_as create(:user, doctor: false), scope: :user }
 
-      expect(response).to have_http_status(:ok)
-      expect(response).to be_json
+      it 'returns forbidden' do
+        delete api_patient_consultations_path(bob, format: :json),
+               params: { consultations: consultations }
+
+        expect(response).to have_http_status(:forbidden)
+      end
+
+      it 'does not destroy consultations' do
+        expect do
+          delete api_patient_consultations_path(bob, format: :json),
+                 params: { consultations: consultations }
+        end.not_to change { c1.reload.discarded? }
+      end
+    end
+
+    context 'when the user is an editor' do
+      before { login_as create(:user, doctor: false, editor: true), scope: :user }
+
+      it 'returns forbidden' do
+        delete api_patient_consultations_path(bob, format: :json),
+               params: { consultations: consultations }
+
+        expect(response).to have_http_status(:forbidden)
+      end
+
+      it 'does not destroy consultations' do
+        expect do
+          delete api_patient_consultations_path(bob, format: :json),
+                 params: { consultations: consultations }
+        end.not_to change { c1.reload.discarded? }
+      end
     end
   end
 end

@@ -8,6 +8,7 @@ module API
     end
 
     def destroy
+      authorize Consultation
       @patient.consultations.where(id: consultations_ids).discard_all
       render json: {}
     end
