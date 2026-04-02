@@ -8,5 +8,13 @@ Rails.application.config.filter_parameters += [
   :surgical_history,
   :family_history,
   :identity_card_number,
-  :health_insurance
+  :health_insurance,
+  :email,
+  :phone_number,
+  :address,
+  :registration_acess,
+  :reset_password_token,
+  :unlock_token,
+  :current_sign_in_ip,
+  :last_sign_in_ip
 ]
