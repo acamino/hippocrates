@@ -20,11 +20,11 @@ class PatientPresenter < SimpleDelegator
   end
 
   def medical_history
-    self[:medical_history].to_s.rjust(6, '0')
+    @medical_history ||= self[:medical_history].to_s.rjust(6, '0')
   end
 
   def identity_card_number
-    self[:identity_card_number].to_s.rjust(10, '0')
+    @identity_card_number ||= self[:identity_card_number].to_s.rjust(10, '0')
   end
 
   def name
