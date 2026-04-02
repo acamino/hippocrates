@@ -140,6 +140,18 @@ describe Consultations::Document do
           expect(certificate[:consultations]).to eq([consultation, other_consultation])
         end
 
+        it 'only loads selected consultations from the database' do
+          unselected = create(:consultation, :with_diagnoses,
+                              created_at: '2016-01-03', patient: patient)
+          options = { consultations: consultation.id.to_s }
+          result = described_class.build(consultation, options)
+
+          returned_ids = result[:consultations].map(&:id)
+          expect(returned_ids).to include(consultation.id)
+          expect(returned_ids).not_to include(other_consultation.id)
+          expect(returned_ids).not_to include(unselected.id)
+        end
+
         context 'when the first consultation was selected' do
           it 'the first consultation is marked as head' do
             expect(certificate[:consultations].first.head).to be_truthy

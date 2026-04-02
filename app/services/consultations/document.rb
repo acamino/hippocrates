@@ -54,15 +54,13 @@ module Consultations
     end
 
     def consultations
-      patient_consultations = patient.consultations.order(created_at: :asc).map do |c|
-        ConsultationPresenter.new(c)
-      end
-      selected_consultations = patient_consultations.select do |c|
-        selected_consultations_ids.include? c.id
-      end
+      ids = selected_consultations_ids
+      return [] if ids.empty?
 
-      first_consultation_id = patient_consultations.first.id
-      selected_consultations.each { |c| c.head = c.id == first_consultation_id }
+      first_consultation_id = patient.consultations.order(created_at: :asc).pick(:id)
+      patient.consultations.where(id: ids).order(created_at: :asc).map do |c|
+        ConsultationPresenter.new(c).tap { |p| p.head = c.id == first_consultation_id }
+      end
     end
 
     def selected_consultations_ids
