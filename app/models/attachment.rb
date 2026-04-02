@@ -5,9 +5,10 @@ class Attachment < ApplicationRecord
     :content
   ].freeze
 
-  IMAGE_MIME_TYPES = [
-    'image/jpeg',
-    'image/png'
+  IMAGE_MIME_TYPES = %w[
+    image/jpeg
+    image/png
+    image/bmp
   ].freeze
 
   belongs_to :document
