@@ -65,6 +65,36 @@ RSpec.describe 'Patients', type: :request do
     end
   end
 
+  describe 'GET /patients/export' do
+    before { create_list(:patient, 2) }
+
+    context 'when the user is an admin' do
+      before { login_as create(:user, admin: true), scope: :user }
+
+      it 'returns a spreadsheet' do
+        get export_patients_path
+        expect(response).to have_http_status(:ok)
+        expect(response.content_type).to include('spreadsheetml')
+      end
+    end
+
+    context 'when the user is a super_admin' do
+      before { login_as create(:user, super_admin: true), scope: :user }
+
+      it 'returns a spreadsheet' do
+        get export_patients_path
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context 'when the user is not an admin' do
+      it 'redirects to root path' do
+        get export_patients_path
+        expect(response).to redirect_to(root_path)
+      end
+    end
+  end
+
   describe 'GET /patients/:id/edit' do
     let(:patient) { create(:patient) }
 
