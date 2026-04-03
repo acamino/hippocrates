@@ -110,7 +110,7 @@ RSpec.describe 'API::Consultations', type: :request do
         expect do
           delete api_patient_consultations_path(bob, format: :json),
                  params: { consultations: consultations }
-        end.not_to change { c1.reload.discarded? }
+        end.not_to(change { c1.reload.discarded? })
       end
     end
 
@@ -128,7 +128,7 @@ RSpec.describe 'API::Consultations', type: :request do
         expect do
           delete api_patient_consultations_path(bob, format: :json),
                  params: { consultations: consultations }
-        end.not_to change { c1.reload.discarded? }
+        end.not_to(change { c1.reload.discarded? })
       end
     end
   end
