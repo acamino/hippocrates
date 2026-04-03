@@ -1,6 +1,8 @@
 Given(/^Ada is a patient with consultations$/) do
-  log_in(create(:user))
-  @ada = create(:patient, first_name: 'Ada', last_name: 'Lovelace')
+  log_in(create(:user, doctor: true, active: true, editor: true))
+  @ada = create(:patient_with_anamnesis, first_name: 'Ada', last_name: 'Lovelace')
+  create(:setting, :maximum_diagnoses)
+  create(:setting, :maximum_prescriptions)
   create(:consultation, patient: @ada, next_appointment: '2017-09-01')
 end
 
@@ -36,4 +38,15 @@ end
 
 Then(/^I see a success message$/) do
   expect(page).to have_content('correctamente')
+end
+
+When(/^I open edit consultation page$/) do
+  @consultation = @ada.consultations.first
+  visit edit_patient_consultation_path(@ada, @consultation)
+end
+
+When(/^I update consultation info$/) do
+  fill_in :consultation_reason, with: 'updated reason'
+  fill_in :consultation_payment, with: '25.00'
+  click_on 'Guardar'
 end

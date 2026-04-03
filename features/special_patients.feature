@@ -8,3 +8,10 @@ Feature: User can manage special patients
     When I open special patients page
     Then I see "Ada"
     And I see "Charles"
+
+  Scenario: Removing a special patient
+    Given Ada is a special patient
+    When I open special patients page
+    And I remove Ada from special patients
+    Then I see "removido correctamente"
+    But I don't see "Ada"

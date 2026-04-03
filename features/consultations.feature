@@ -10,3 +10,9 @@ Feature: User can manage patient's consultations
     When I open create consultation page
     And I input consultation info
     Then I see a success message
+
+  Scenario: Updating a consultation
+    Given Ada is a patient with consultations
+    When I open edit consultation page
+    And I update consultation info
+    Then I see "Consulta actualizada correctamente"

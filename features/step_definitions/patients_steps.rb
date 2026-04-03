@@ -60,3 +60,8 @@ end
 But(/^I don't see "(.+)"$/) do |content|
   expect(page).to have_no_content(/#{content}/i)
 end
+
+When(/^I delete Ada$/) do
+  visit patients_path
+  click_link 'Eliminar'
+end

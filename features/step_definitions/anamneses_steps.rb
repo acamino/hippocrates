@@ -23,3 +23,17 @@ end
 Then(/^I see a confirmation message$/) do
   expect(page).to have_content('Anamnesis creada correctamente')
 end
+
+Given(/^Ada is a patient with anamnesis$/) do
+  log_in(create(:user))
+  @ada = create(:patient_with_anamnesis, first_name: 'Ada', last_name: 'Lovelace')
+end
+
+When(/^I open edit anamnesis page$/) do
+  visit edit_patient_anamnesis_path(@ada, @ada.anamnesis)
+end
+
+When(/^I update Ada's anamnesis$/) do
+  fill_in :anamnesis_allergies, with: 'penicillin'
+  click_on 'Guardar'
+end

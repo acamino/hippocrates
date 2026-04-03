@@ -30,3 +30,9 @@ Feature: User can manage patients
     And I search for Ada
     Then I see "Ada"
     But I don't see "Charles"
+
+  Scenario: Deleting a patient
+    Given Ada is a patient
+    When I open patients page
+    And I delete Ada
+    Then I see "eliminado correctamente"
