@@ -4,7 +4,7 @@
       Editar Usuario
 
 = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "form-horizontal" }) do |f|
-  = devise_error_messages!
+  = render 'devise/shared/error_messages', resource: resource
   .form-group
     = f.label :email, class: "col-md-2 control-label email"
     .col-md-10
