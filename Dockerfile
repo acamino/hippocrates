@@ -46,6 +46,7 @@ FROM ruby:${RUBY_VERSION}-slim-bookworm
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y \
       curl \
+      file \
       libatomic1 \
       libjemalloc2 \
       libpq5 \
