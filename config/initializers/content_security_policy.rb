@@ -7,7 +7,7 @@
 Rails.application.config.content_security_policy do |policy|
   policy.default_src :self
   policy.font_src    :self, 'cdnjs.cloudflare.com', 'fonts.gstatic.com', 'maxcdn.bootstrapcdn.com'
-  policy.img_src     :self, :data
+  policy.img_src     :self, :data, 'https://*.s3.amazonaws.com', 'https://*.s3.us-east-1.amazonaws.com'
   policy.object_src  :self
   policy.script_src  :self, :unsafe_inline, 'cdnjs.cloudflare.com', 'maxcdn.bootstrapcdn.com'
   policy.style_src   :self, :unsafe_inline, 'cdnjs.cloudflare.com', 'maxcdn.bootstrapcdn.com', 'fonts.googleapis.com'
