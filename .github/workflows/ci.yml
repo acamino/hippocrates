@@ -28,9 +28,9 @@ jobs:
 
     env:
       RAILS_ENV: test
-      PGHOST: localhost
-      PGUSER: postgres
-      PGPASSWORD: postgres
+      DATABASE_HOST: localhost
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
       TZ: America/Guayaquil
 
     steps:
