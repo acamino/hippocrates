@@ -93,11 +93,9 @@ Hippocrates.PrescriptionSortable = {
 
       if ($checkbox.is(':checked')) {
         $checkbox.prop('checked', false);
-        $icon.removeClass('fa-lock').addClass('fa-unlock');
         $(this).removeClass('prescription-locked');
       } else {
         $checkbox.prop('checked', true);
-        $icon.removeClass('fa-unlock').addClass('fa-lock');
         $(this).addClass('prescription-locked');
       }
     });

@@ -177,7 +177,7 @@
               %th.col-md-1.text-center Presuntivo
               %th.col-md-1.text-center Definitivo
               %th.col-md-1.text-center
-                %i.fa.fa-trash.clue
+                %i.fa.fa-trash-can.clue
           %tbody
             = f.fields_for :diagnoses do |ff|
               %tr
@@ -229,13 +229,13 @@
                   .prescription-subscription-wrapper
                     = ff.text_area :subscription, class: "form-control input-sm subscription"
                     %input{ type: "checkbox", class: 'input-sm locked', style: "display:none" }
-                    %a.prescription-lock-btn{ href: "#", title: "Bloquear indicaciones" }
-                      %i.fa.fa-unlock
+                    %a.prescription-lock-btn{ href: "#", title: "Proteger indicaciones" }
+                      %i.fa.fa-pen
                 %td.text-center.prescription-delete-cell
                   %span{ style: "display:none" }
                     = ff.check_box "_destroy", class: "input-sm destroy prescription-destroy-checkbox"
                   %a.prescription-delete-btn{ href: "#", title: "Eliminar" }
-                    %i.fa.fa-trash
+                    %i.fa.fa-trash-can
                   %a.prescription-undo-btn{ href: "#", title: "Deshacer", style: "display:none" }
                     %i.fa.fa-undo
     .row-fluid
