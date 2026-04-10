@@ -98,6 +98,25 @@ RSpec.describe Prescriptions::Printer do
       end
     end
 
+    context 'with prescriptions in custom order' do
+      before do
+        consultation.prescriptions.create!(
+          inscription: 'Ibuprofen 400mg', subscription: 'Ibuprofen: Take 1', position: 1
+        )
+        consultation.prescriptions.create!(
+          inscription: 'Amoxicillin 500mg', subscription: 'Amoxicillin: Take 2', position: 0
+        )
+      end
+
+      it 'prints inscriptions in position order' do
+        text = extract_pdf_text(pdf_data)
+        amox_pos = text.index('AMOXICILLIN 500MG')
+        ibu_pos = text.index('IBUPROFEN 400MG')
+
+        expect(amox_pos).to be < ibu_pos
+      end
+    end
+
     context 'when empty is true' do
       let(:empty) { true }
 

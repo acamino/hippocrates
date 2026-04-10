@@ -81,6 +81,21 @@ RSpec.describe 'Consultations', type: :request do
       expect(patient.consultations.last.prescriptions.count).to eq(2)
     end
 
+    it 'persists prescription positions' do
+      post patient_consultations_path(patient),
+           params: {
+             consultation: attributes_for_consultation.merge(
+               prescriptions_attributes: {
+                 '0' => { inscription: 'i1', subscription: 's1', position: 1 },
+                 '1' => { inscription: 'i2', subscription: 's2', position: 0 }
+               }
+             )
+           }
+
+      prescriptions = patient.consultations.last.prescriptions
+      expect(prescriptions.map(&:inscription)).to eq(%w[I2 I1])
+    end
+
     it "updates patient's special field" do
       expect do
         post patient_consultations_path(patient),

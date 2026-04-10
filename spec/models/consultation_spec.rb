@@ -7,6 +7,21 @@ describe Consultation do
     it { is_expected.to have_many(:prescriptions) }
   end
 
+  describe 'prescription ordering' do
+    let(:consultation) { create(:consultation) }
+
+    it 'returns prescriptions ordered by position' do
+      second = consultation.prescriptions.create!(
+        inscription: 'Second', subscription: 'S2', position: 1
+      )
+      first = consultation.prescriptions.create!(
+        inscription: 'First', subscription: 'S1', position: 0
+      )
+
+      expect(consultation.prescriptions.reload).to eq([first, second])
+    end
+  end
+
   describe 'nested attributes' do
     it { is_expected.to accept_nested_attributes_for(:diagnoses).allow_destroy(true) }
     it { is_expected.to accept_nested_attributes_for(:prescriptions).allow_destroy(true) }

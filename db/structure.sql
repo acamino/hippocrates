@@ -518,7 +518,8 @@ CREATE TABLE public.prescriptions (
     inscription character varying NOT NULL,
     subscription character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    "position" integer DEFAULT 0 NOT NULL
 );
 
 
@@ -1210,6 +1211,7 @@ ALTER TABLE ONLY public.consultations
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20260410120000'),
 ('20260330120822'),
 ('20260330120112'),
 ('20260322130907'),

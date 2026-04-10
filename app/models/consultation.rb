@@ -41,7 +41,7 @@ class Consultation < ApplicationRecord
     :created_at,
     patient: :special,
     diagnoses_attributes: [:id, :disease_code, :description, :type, :_destroy],
-    prescriptions_attributes: [:id, :inscription, :subscription, :_destroy]
+    prescriptions_attributes: [:id, :inscription, :subscription, :position, :_destroy]
   ].freeze
 
   belongs_to :branch_office, optional: true
@@ -50,7 +50,7 @@ class Consultation < ApplicationRecord
 
   has_many :diagnoses,       dependent: :destroy
   has_many :documents,       dependent: :destroy
-  has_many :prescriptions,   dependent: :destroy
+  has_many :prescriptions,   -> { order(:position) }, dependent: :destroy
   has_many :payment_changes, dependent: :destroy
 
   accepts_nested_attributes_for :diagnoses,
