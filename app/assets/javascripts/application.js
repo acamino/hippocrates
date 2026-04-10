@@ -16,6 +16,7 @@
 //= require vendor/moment.min
 //= require vendor/bootstrap-datetimepicker.min
 //= require vendor/copy-on-click
+//= require sortable.min
 //= require vendor/chartkick
 //= require vendor/highcharts
 //= require hippocrates
@@ -29,6 +30,7 @@
 //= require hint
 //= require payment_changes
 //= require prescription
+//= require prescription_sortable
 //= require settings
 //= require templates
 //= require utils

@@ -1,0 +1,102 @@
+.prescription-drag-handle,
+.table-striped > tbody > tr > td.prescription-drag-handle,
+.table-striped > tbody > tr:nth-of-type(odd) > td.prescription-drag-handle {
+  cursor: grab;
+  width: 30px;
+  text-align: center;
+  color: #ccc;
+  user-select: none;
+  border: none !important;
+  background: #fff !important;
+}
+
+.prescription-drag-handle:active {
+  cursor: grabbing;
+}
+
+.prescription-drag-handle:hover {
+  color: #666;
+}
+
+.drag-dots {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.prescription-drag-header {
+  width: 30px;
+  border: none !important;
+  background: none !important;
+}
+
+.prescription-ghost {
+  opacity: 0.4;
+  background: #e8f0fe !important;
+}
+
+.prescription-chosen {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.prescription-drag {
+  opacity: 0.9;
+}
+
+.prescription-deleted td {
+  opacity: 0.4;
+  text-decoration: line-through;
+}
+
+.prescription-deleted .prescription-delete-cell {
+  opacity: 1;
+  text-decoration: none;
+}
+
+.prescription-deleted textarea {
+  pointer-events: none;
+}
+
+.prescription-delete-btn {
+  color: #999;
+  font-size: 16px;
+}
+
+.prescription-delete-btn:hover {
+  color: #d9534f;
+}
+
+.prescription-undo-btn {
+  color: #337ab7;
+}
+
+.prescription-undo-btn:hover {
+  color: #286090;
+}
+
+.prescription-subscription-wrapper {
+  position: relative;
+}
+
+.prescription-subscription-wrapper textarea {
+  padding-right: 28px;
+}
+
+.prescription-lock-btn {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  color: #ccc;
+  font-size: 14px;
+}
+
+.prescription-lock-btn:hover {
+  color: #666;
+}
+
+.prescription-lock-btn.prescription-locked {
+  color: #f0ad4e;
+}
+
+.prescription-action-header {
+  width: 40px;
+}

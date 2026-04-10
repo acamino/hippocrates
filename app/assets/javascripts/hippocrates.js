@@ -10,6 +10,7 @@ if(typeof Hippocrates === "undefined") {
   Hippocrates.Hint = {};
   Hippocrates.PaymentChanges = {};
   Hippocrates.Prescription = {};
+  Hippocrates.PrescriptionSortable = {};
   Hippocrates.Settings = {};
   Hippocrates.Templates = {};
   Hippocrates.Utils = {};
@@ -26,6 +27,7 @@ $(document).on('turbolinks:load', function() {
     Hippocrates.Hint.init();
     Hippocrates.PaymentChanges.init();
     Hippocrates.Prescription.init();
+    Hippocrates.PrescriptionSortable.init();
     Hippocrates.Settings.init();
 
     var date = new Date();
