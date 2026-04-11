@@ -377,6 +377,24 @@ select.editable-input-field {
   transform: translateX(20px);
 }
 
+.search-input-wrapper {
+  position: relative;
+}
+
+.search-input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+  font-size: 16px;
+  pointer-events: none;
+}
+
+.search-input {
+  padding-left: 36px !important;
+}
+
 .data-consent-toggle {
   display: block;
   margin-top: 8px;

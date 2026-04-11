@@ -2,6 +2,8 @@
   .col-md-12
     = form_tag(path, method: 'GET', class: 'form form-horizontal') do
       .form-group.col-sm-5
-        = text_field_tag :query, params[:query], placeholder: placeholder, class: 'form-control input-lg', autofocus: true
+        .search-input-wrapper
+          %i.fa.fa-search.search-input-icon
+          = text_field_tag :query, params[:query], placeholder: placeholder, class: 'form-control input-lg search-input', autofocus: true
       %button.btn.btn-lg.btn-default.hidden-xs{ type: "submit" }
         = t('views.search')
