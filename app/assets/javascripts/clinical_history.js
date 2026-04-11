@@ -21,10 +21,6 @@ Hippocrates.ClinicalHistory = {
       self.updateUrl();
     });
 
-    $('.select-consultation:not(.bnt-copy)').click(function(e) {
-      var path = $(this).data('path');
-      window.location.href = path;
-    });
 
     $(".btn-copy").mouseenter(function(e) {
       $(this).closest(".row").find(".content").addClass("selected-content")

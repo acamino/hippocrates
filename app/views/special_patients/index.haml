@@ -6,7 +6,7 @@
   - @consultations.each do |_consultation|
     - present_for(_consultation) do |consultation|
       - present_for(consultation.patient) do |patient|
-        %tr
+        %tr.clickable-row{ data: { href: patient_consultations_path(patient) } }
           %td.col-md-1.hidden-xs
             %big
               = patient.medical_history

@@ -7,3 +7,8 @@ Hippocrates.Utils = (function () {
     openModal: openModal
   };
 })();
+
+$(document).on('click', '.clickable-row', function(e) {
+  if ($(e.target).closest('a, button, input').length) return;
+  window.location = $(this).data('href');
+});

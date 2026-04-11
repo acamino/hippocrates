@@ -131,9 +131,6 @@ input[type="email"] {
   padding-left: 8px;
 }
 
-.select-consultation {
-  cursor: pointer;
-}
 
 .charges-totals-sep {
   border-bottom: 1px solid #ccc;
@@ -427,6 +424,10 @@ select.editable-input-field {
   font-size: 12px;
   margin-right: 10px;
   white-space: nowrap;
+}
+
+.clickable-row {
+  cursor: pointer;
 }
 
 .flash-toast {

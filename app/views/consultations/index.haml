@@ -80,10 +80,10 @@
       %tbody
         - @consultations.each do |_consultation|
           - present_for(_consultation) do |consultation|
-            %tr
+            %tr.clickable-row{ data: { href: edit_patient_consultation_path(@patient, consultation) } }
               %td.checkbox-container
                 %input.check-consultation{ type: "checkbox", id: consultation.id }
-              %td.select-consultation{ "data-path": edit_patient_consultation_path(@patient, consultation) }
+              %td
                 .row
                   .col-md-10.col-md-offset-2
                     %strong
