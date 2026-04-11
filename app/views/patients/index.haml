@@ -12,24 +12,25 @@
       new_patient_path,
       class: "btn btn-success"
 
-.row{ style: "padding-top: 20px;" }
+.row
   .col-md-12
-    %table.table.table-striped
+    %table.table.table-striped.table-spaced
       %thead
         %tr
           %th.col-md-2.hidden-xs= t('patients.table-header.history')
-          %th.col-md-3= t('patients.table-header.last-name')
-          %th.col-md-3= t('patients.table-header.first-name')
-          %th.col-md-2.hidden-xs= t('patients.table-header.birthdate')
-          %th.col-md-1= t('patients.table-header.gender')
+          %th.col-md-6= t('patients.table-header.name')
+          %th.col-md-3.hidden-xs= t('patients.table-header.birthdate')
+          %th{ style: "width: 50px;" }= t('patients.table-header.gender')
           %th.col-md-1
       %tbody
         - @patients.each do |_patient|
           - present_for(_patient) do |patient|
             %tr
               %td.hidden-xs= patient.medical_history
-              %td= patient.last_name
-              %td= patient.first_name
+              %td
+                %span{ style: "display: inline-block; width: 180px;" }
+                  = patient.last_name
+                = patient.first_name
               %td.hidden-xs
                 = patient.formatted_birthdate
                 %span.text-muted{ style: "margin-left: 8px;" }

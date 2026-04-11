@@ -29,6 +29,7 @@ es:
       history: Historia Clínica
       last-name: Apellidos
       first-name: Nombres
+      name: Nombres
       birthdate: Fecha de Nacimiento
       gender: Sexo
     label:

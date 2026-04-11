@@ -29,6 +29,7 @@ en:
       history: Clininal History
       last-name: Last Name
       first-name: First Name
+      name: Name
       birthdate: Birthdate
       gender: Gender
     label:
