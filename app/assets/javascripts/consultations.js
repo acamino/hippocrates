@@ -18,6 +18,11 @@ Hippocrates.Consultations = (function() {
       $(this).closest("tr").toggleClass("destroyable");
     });
 
+    $('.toggle-switch-input').on('change', function() {
+      var value = $(this).is(':checked');
+      $(this).closest('.input-group').find('input[id$="_special"]').val(value);
+    });
+
     $("#consultation_reason").on("keyup", function () {
       var reason = $(this).val();
       $("#consultation_ongoing_issue").val(reason);

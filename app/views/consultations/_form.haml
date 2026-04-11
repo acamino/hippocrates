@@ -258,9 +258,11 @@
       .form-group.col-md-3
         .input-group
           %span.input-group-addon.input-sm Paciente Especial
-          / XXX: Keep in sync the model with the UI.
           = f.fields_for :patient do |ff|
-            = ff.select :special, options_for_select([['No', 'false'], ['Si', 'true']], @patient.special), {}, class: "form-control input-sm"
+            = ff.hidden_field :special, value: @patient.special
+          %label.toggle-switch
+            %input.toggle-switch-input{ type: "checkbox", checked: @patient.special == true }
+            %span.toggle-switch-slider
       .form-group.col-md-3
         .input-group
           %span.input-group-addon.input-sm Próxima cita
