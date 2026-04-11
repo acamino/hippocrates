@@ -10,12 +10,24 @@
 }
 
 .autocomplete-suggestion {
-  padding: 0.25rem 1.5rem;
+  padding: 8px 12px;
   overflow: hidden;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.autocomplete-suggestion:last-child {
+  border-bottom: none;
 }
 
 .autocomplete-suggestion strong {
   color: #2196f3;
+}
+
+.autocomplete-suggestion .text-muted {
+  margin-top: 2px;
+  font-size: 12px;
+  line-height: 1.4;
 }
 
 .autocomplete-selected {
@@ -24,10 +36,24 @@
   background-color: #007bff;
 }
 
-.autocomplete-selected small{
+.autocomplete-selected .text-muted {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.autocomplete-selected small {
   color: #fff;
 }
 
 .autocomplete-selected strong {
   color: #fff;
+}
+
+.medicine-suggestion-name {
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.medicine-suggestion-instructions {
+  padding-left: 8px;
+  line-height: 1.3;
 }
