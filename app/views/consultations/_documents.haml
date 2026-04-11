@@ -1,9 +1,10 @@
-.row
-  .col-md-2.text-right.hidden-xs
-  .col-md-2.visible-xs
-  .col-md-10
-    %span.semi-strong{ style: "padding-top: 10px; display: inline-block;" }
-      = link_to patient_consultation_documents_path(patient, consultation),
-        data: { turbolinks: false } do
-        %i.fa.fa-file
-        Documentos
+- if documents.count > 0
+  .row
+    .col-md-2.text-right.hidden-xs
+    .col-md-2.visible-xs
+    .col-md-10
+      %span.semi-strong{ style: "padding-top: 10px; display: inline-block;" }
+        = link_to patient_consultation_documents_path(patient, consultation),
+          data: { turbolinks: false } do
+          %i.fa.fa-file
+          Documentos
