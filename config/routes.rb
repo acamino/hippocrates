@@ -53,6 +53,7 @@ Rails.application.routes.draw do
         delete :destroy, on: :collection
       end
     end
+    resources :anamneses, only: [:update]
     resources :diseases,  only: [:index]
     resources :medicines, only: [:index]
     resources :settings,  only: [:index, :update]

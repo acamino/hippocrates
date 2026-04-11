@@ -14,12 +14,12 @@
         .form-group.col-md-3
           .input-group
             %span.input-group-addon.input-sm Fecha Nacimiento
-            %a.editable-field{ href: "#", data: { name: "birthdate", type: "date" } }
+            %a.editable-field{ href: "javascript:void(0)", data: { name: "birthdate", type: "date" } }
               = @patient.formatted_birthdate
         .form-group.col-md-3
           .input-group
             %span.input-group-addon.input-sm # Cédula
-            %a.editable-field{ href: "#", data: { name: "identity_card_number", type: "text" } }
+            %a.editable-field{ href: "javascript:void(0)", data: { name: "identity_card_number", type: "text" } }
               = @patient.identity_card_number
         .form-group.col-md-3
           .input-group
@@ -30,48 +30,48 @@
         .form-group.col-md-6
           .input-group
             %span.input-group-addon.input-sm Apellidos
-            %a.editable-field#patient_last_name{ href: "#", data: { name: "last_name", type: "text" } }
+            %a.editable-field#patient_last_name{ href: "javascript:void(0)", data: { name: "last_name", type: "text" } }
               = @patient.last_name
         .form-group.col-md-6
           .input-group
             %span.input-group-addon.input-sm Nombres
-            %a.editable-field#patient_first_name{ href: "#", data: { name: "first_name", type: "text" } }
+            %a.editable-field#patient_first_name{ href: "javascript:void(0)", data: { name: "first_name", type: "text" } }
               = @patient.first_name
 
       .row-fluid
         .form-group.col-md-6
           .input-group
             %span.input-group-addon.input-sm Dirección
-            %a.editable-field{ href: "#", data: { name: "address", type: "text" } }
+            %a.editable-field{ href: "javascript:void(0)", data: { name: "address", type: "text" } }
               = @patient.address
         .form-group.col-md-3
           .input-group
             %span.input-group-addon.input-sm Teléfono
-            %a.editable-field{ href: "#", data: { name: "phone_number", type: "text" } }
+            %a.editable-field{ href: "javascript:void(0)", data: { name: "phone_number", type: "text" } }
               = @patient.phone_number
         .form-group.col-md-3
           .input-group
             %span.input-group-addon.input-sm Fuente
-            %a.editable-field{ href: "#", data: { name: "source", type: "select", value: @patient.source } }
+            %a.editable-field{ href: "javascript:void(0)", data: { name: "source", type: "select", value: @patient.source } }
               = @patient.source_es
 
       .row-fluid
         .form-group.col-md-6
           .input-group
             %span.input-group-addon.input-sm Email
-            %a.editable-field{ href: "#", data: { name: "email", type: "text" } }
+            %a.editable-field{ href: "javascript:void(0)", data: { name: "email", type: "text" } }
               = @patient.email
         .form-group.col-md-6
           .input-group
             %span.input-group-addon.input-sm Seguro médico
-            %a.editable-field{ href: "#", data: { name: "health_insurance", type: "text" } }
+            %a.editable-field{ href: "javascript:void(0)", data: { name: "health_insurance", type: "text" } }
               = @patient.health_insurance
 
       .row-fluid
         .form-group.col-md-2
           .input-group
             %span.input-group-addon.input-sm Sexo
-            %a.editable-field{ href: "#", data: { name: "gender", type: "select", value: @patient.gender } }
+            %a.editable-field{ href: "javascript:void(0)", data: { name: "gender", type: "select", value: @patient.gender } }
               = @patient.gender_es
         .form-group.col-md-2
           .input-group
@@ -80,12 +80,12 @@
         .form-group.col-md-4
           .input-group
             %span.input-group-addon.input-sm Estado civil
-            %a.editable-field{ href: "#", data: { name: "civil_status", type: "select", value: @patient.civil_status } }
+            %a.editable-field{ href: "javascript:void(0)", data: { name: "civil_status", type: "select", value: @patient.civil_status } }
               = @patient.civil_status_es
         .form-group.col-md-4
           .input-group
             %span.input-group-addon.input-sm Ocupación
-            %a.editable-field{ href: "#", data: { name: "profession", type: "text" } }
+            %a.editable-field{ href: "javascript:void(0)", data: { name: "profession", type: "text" } }
               = @patient.profession
       .row-fluid
         .form-group.col-md-6

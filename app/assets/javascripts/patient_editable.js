@@ -23,16 +23,34 @@ Hippocrates.PatientEditable = {
     ]
   },
 
+  containers: ['#patient-editable', '#anamnesis-editable'],
+
   init: function() {
     var self = this;
-    var $container = $('#patient-editable');
-    if (!$container.length) return;
 
-    $container.on('click', '.editable-field', function(e) {
-      e.preventDefault();
-      var $el = $(this);
-      if ($el.hasClass('editing')) return;
-      self.startEdit($el);
+    self.containers.forEach(function(selector) {
+      var $container = $(selector);
+      if (!$container.length) return;
+
+      $container.on('click', '.editable-field', function(e) {
+        e.preventDefault();
+        var $el = $(this);
+        if ($el.hasClass('editing')) return;
+        self.startEdit($el);
+      });
+
+      $container.on('change', '.anamnesis-toggle', function() {
+        var $toggle = $(this);
+        var name = $toggle.data('name');
+        var value = $toggle.is(':checked');
+        var url = $container.data('url');
+
+        $.ajax({
+          url: url,
+          method: 'PATCH',
+          data: { name: name, value: value }
+        });
+      });
     });
   },
 
@@ -105,8 +123,7 @@ Hippocrates.PatientEditable = {
 
   save: function($el, $input, name, type) {
     var self = this;
-    var $container = $('#patient-editable');
-    var patientId = $container.data('pk');
+    var $container = $el.closest('[data-pk]');
     var url = $container.data('url');
 
     var value = $input.val();

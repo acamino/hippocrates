@@ -1,38 +1,44 @@
-.form
+- anamnesis = @patient.anamnesis
+#anamnesis-editable.form{ data: { pk: anamnesis.id, url: api_anamnesis_path(anamnesis) } }
   .panel.panel-success
     .panel-heading
       %b Antecedentes Personales
     .panel-body
       .row-fluid
         .form-group.col-md-12
-          %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.anamnesis.medical_history }
+          %a.editable-field{ href: "javascript:void(0)", data: { name: "medical_history", type: "text" } }
+            = anamnesis.medical_history
         .form-group.col-md-12
           .input-group
             %span.input-group-addon.input-sm Antecedentes Quirúrgicos
-            %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.anamnesis.surgical_history }
+            %a.editable-field{ href: "javascript:void(0)", data: { name: "surgical_history", type: "text" } }
+              = anamnesis.surgical_history
         .form-group.col-md-4
           .input-group
             %span.input-group-addon.input-sm Alergias
-            %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.anamnesis.allergies }
+            %a.editable-field{ href: "javascript:void(0)", data: { name: "allergies", type: "text" } }
+              = anamnesis.allergies
         .form-group.col-md-4
           .input-group
             %span.input-group-addon.input-sm Observación
-            %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.anamnesis.observations }
+            %a.editable-field{ href: "javascript:void(0)", data: { name: "observations", type: "text" } }
+              = anamnesis.observations
         .form-group.col-md-4
           .input-group
             %span.input-group-addon.input-sm Hábitos
-            %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.anamnesis.habits }
+            %a.editable-field{ href: "javascript:void(0)", data: { name: "habits", type: "text" } }
+              = anamnesis.habits
         .form-group.col-md-12
           .input-group
             %span.input-group-addon.input-sm Audioprótesis
-            %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.anamnesis.hearing_aids ? "SI" : "NO" }
+            %label.toggle-switch
+              %input.toggle-switch-input.anamnesis-toggle{ type: "checkbox", checked: anamnesis.hearing_aids, data: { name: "hearing_aids" } }
+              %span.toggle-switch-slider
   .panel.panel-success
     .panel-heading
       %b Antecedentes Familiares
     .panel-body
       .row-fluid
         .form-group.col-md-12
-          %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.anamnesis.family_history }
-        .col-md-12.text-right
-          = link_to 'Editar', edit_patient_anamnesis_path(@patient, @patient.anamnesis)
-
+          %a.editable-field{ href: "javascript:void(0)", data: { name: "family_history", type: "text" } }
+            = anamnesis.family_history
