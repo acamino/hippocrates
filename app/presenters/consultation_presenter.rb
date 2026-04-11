@@ -2,7 +2,7 @@
 
 class ConsultationPresenter < SimpleDelegator
   def date
-    created_at.strftime('%F')
+    created_at.strftime('%Y/%m/%d')
   end
 
   def long_date
@@ -40,7 +40,7 @@ class ConsultationPresenter < SimpleDelegator
   end
 
   def next_appointment_date
-    next_appointment&.strftime('%F')
+    next_appointment&.strftime('%Y/%m/%d')
   end
 
   def next_appointment_long_date

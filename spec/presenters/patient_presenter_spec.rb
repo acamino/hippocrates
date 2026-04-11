@@ -21,7 +21,7 @@ describe PatientPresenter do
         patient = double(:patient, new_record?: false,
                                    birthdate: Date.new(2017, 7, 12))
         presenter = described_class.new(patient)
-        expect(presenter.formatted_birthdate).to eq('2017-07-12')
+        expect(presenter.formatted_birthdate).to eq('2017/07/12')
       end
     end
   end

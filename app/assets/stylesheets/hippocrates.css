@@ -382,6 +382,26 @@ select.editable-input-field {
   color: #9c27b0;
 }
 
+.date-field {
+  position: relative;
+  display: table-cell;
+  width: 100%;
+}
+
+.date-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+  font-size: 12px;
+  pointer-events: none;
+}
+
+.date-input {
+  padding-right: 28px !important;
+}
+
 .search-input-wrapper {
   position: relative;
 }

@@ -42,7 +42,7 @@ $(document).on('turbolinks:load', function() {
     $("#consultation_next_appointment").datepicker({
         startDate: date,
         todayHighlight: true,
-        format: "yyyy-mm-dd",
+        format: "yyyy/mm/dd",
         language: "es",
         calendarWeeks: true,
         autoclose: true
@@ -50,7 +50,7 @@ $(document).on('turbolinks:load', function() {
 
     $("#consultation_created_at").datepicker({
         todayHighlight: true,
-        format: "yyyy-mm-dd",
+        format: "yyyy/mm/dd",
         language: "es",
         calendarWeeks: true,
         autoclose: true
@@ -58,7 +58,7 @@ $(document).on('turbolinks:load', function() {
 
     $("#patient_birthdate").datepicker({
         startView: 3,
-        format: "yyyy-mm-dd",
+        format: "yyyy/mm/dd",
         language: "es",
         calendarWeeks: true,
         autoclose: true

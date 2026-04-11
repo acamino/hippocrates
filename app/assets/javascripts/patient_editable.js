@@ -90,7 +90,7 @@ Hippocrates.PatientEditable = {
 
     if (type === 'date') {
       $input.datepicker({
-        format: 'yyyy-mm-dd',
+        format: 'yyyy/mm/dd',
         language: 'es',
         calendarWeeks: true,
         autoclose: true

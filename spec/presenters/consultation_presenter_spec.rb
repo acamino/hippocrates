@@ -6,7 +6,7 @@ describe ConsultationPresenter do
     it 'returns the consultation date' do
       consultation = double(:consultation, created_at: DateTime.new(2016, 1, 15))
       presenter = described_class.new(consultation)
-      expect(presenter.date).to eq('2016-01-15')
+      expect(presenter.date).to eq('2016/01/15')
     end
   end
 
@@ -41,7 +41,7 @@ describe ConsultationPresenter do
     it "returns the consultation's next appointment date" do
       consultation = double(:consultation, next_appointment: DateTime.new(2016, 1, 15))
       presenter = described_class.new(consultation)
-      expect(presenter.next_appointment_date).to eq('2016-01-15')
+      expect(presenter.next_appointment_date).to eq('2016/01/15')
     end
   end
 

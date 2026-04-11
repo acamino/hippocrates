@@ -15,7 +15,7 @@ class PatientPresenter < SimpleDelegator
     if new_record?
       ''
     else
-      birthdate.strftime('%F')
+      birthdate.strftime('%Y/%m/%d')
     end
   end
 
