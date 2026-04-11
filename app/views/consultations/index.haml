@@ -110,13 +110,11 @@
                 = render partial: "documents", locals: { patient: @patient, consultation: consultation, documents: consultation.documents }
               %td.text-right
                 .btn-group
-                  %button.btn.btn-default.btn-xs.dropdown-toggle{ "aria-expanded": "false",
-                                                                  "aria-haspopup": "true",
-                                                                  "data-toggle": "dropdown",
-                                                                  "type": "button" }
-                    .span.text-primary
-                      %i.fa.fa-cog
-                      %span.caret
+                  %button.row-actions-toggle.dropdown-toggle{ "aria-expanded": "false",
+                                                               "aria-haspopup": "true",
+                                                               "data-toggle": "dropdown",
+                                                               "type": "button" }
+                    %i.fa.fa-ellipsis-v
                   %ul.dropdown-menu.pull-right
                     %li
                       = link_to "Editar",

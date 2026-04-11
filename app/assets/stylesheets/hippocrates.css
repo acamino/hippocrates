@@ -109,6 +109,25 @@ input[type="email"] {
   font-weight: 500;
 }
 
+.row-actions-toggle {
+  background: transparent;
+  border: none;
+  color: #9aa0a6;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border-radius: 6px;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.row-actions-toggle:hover,
+.row-actions-toggle:focus,
+.row-actions-toggle[aria-expanded="true"] {
+  background-color: rgba(0, 0, 0, 0.06);
+  color: #1CA8DD;
+  outline: none;
+}
+
 .panel > .panel-heading {
   cursor: pointer; cursor: hand;
 }

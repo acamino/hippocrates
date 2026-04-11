@@ -38,18 +38,11 @@
                   %span.label.label-info= t('patients.label.female')
               %td.text-right
                 .btn-group
-                  %button.btn.btn-default.btn-xs.dropdown-toggle{ "aria-expanded": "false",
-                                                                  "aria-haspopup": "true",
-                                                                  "data-toggle": "dropdown",
-                                                                  type: "button" }
-                    -if patient.anamnesis?
-                      .span.text-primary
-                        %i.fa.fa-cog
-                        %span.caret
-                    -else
-                      .span.text-warning
-                        %i.fa.fa-cog
-                        %span.caret
+                  %button.row-actions-toggle.dropdown-toggle{ "aria-expanded": "false",
+                                                               "aria-haspopup": "true",
+                                                               "data-toggle": "dropdown",
+                                                               type: "button" }
+                    %i.fa.fa-ellipsis-v{ class: patient.anamnesis? ? "" : "text-warning" }
                   %ul.dropdown-menu.pull-right
                     %li
                       - if patient.anamnesis?
