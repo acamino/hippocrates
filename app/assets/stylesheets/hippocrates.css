@@ -377,6 +377,14 @@ select.editable-input-field {
   transform: translateX(20px);
 }
 
+.gender-icon-male {
+  color: #5b9bd5;
+}
+
+.gender-icon-female {
+  color: #9c27b0;
+}
+
 .search-input-wrapper {
   position: relative;
 }

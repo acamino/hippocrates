@@ -34,9 +34,9 @@ module ApplicationHelper
 
   def gender_tag(patient)
     if patient.male?
-      content_tag(:i, nil, class: 'fa fa-male')
+      content_tag(:i, nil, class: 'fa fa-male gender-icon-male')
     else
-      content_tag(:i, nil, class: 'fa fa-female')
+      content_tag(:i, nil, class: 'fa fa-female gender-icon-female')
     end
   end
 
