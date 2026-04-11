@@ -8,7 +8,7 @@ Hippocrates.Autocomplete = {
     };
 
     this.register(this.hasDiagnoses(), paths.DISEASES, { selector: '.disease', formatResult: this.formatDiseaseResult, onSelect: this.onSelectDiseases });
-    this.register(this.hasPrescriptions(), paths.MEDICINES, { selector: '.inscription', formatResult: this.formatMedicineResult, onSelect: this.onSelectMedicines });
+    this.register(this.hasPrescriptions(), paths.MEDICINES, { selector: '.inscription', formatResult: this.formatMedicineResult, onSelect: this.onSelectMedicines, width: 800 });
     this.register(this.patientsSearchEnabled(), paths.PATIENTS, { formatResult: this.formatPatientResult });
     this.register(this.medicinesSearchEnabled(), paths.MEDICINES, { formatResult: this.formatMedicineResult });
     this.register(this.diseasesSearchEnabled(), paths.DISEASES, { formatResult: this.formatDiseaseResult });
@@ -31,14 +31,20 @@ Hippocrates.Autocomplete = {
 
     var options = $.extend({}, defaults, opts)
 
-    $(options.selector).autocomplete({
+    var autocompleteOpts = {
       minChars: 2,
       deferRequestBy: 100,
       triggerSelectOnValidInput: false,
       serviceUrl: serviceUrl,
       formatResult: options.formatResult,
       onSelect: options.onSelect
-    });
+    };
+
+    if (options.width) {
+      autocompleteOpts.width = options.width;
+    }
+
+    $(options.selector).autocomplete(autocompleteOpts);
   },
 
   onSelectMedicines: function (medicine) {

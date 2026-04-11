@@ -30,10 +30,6 @@
   color: #6c7a8d;
 }
 
-.prescriptions .autocomplete-suggestions {
-  min-width: 600px;
-}
-
 .patient-suggestion-name {
   font-size: 14px;
   line-height: 1.4;
