@@ -47,7 +47,8 @@ Rails.application.routes.draw do
     resources :consultations, only: [] do
       resources :payment_changes, only: [:index, :create]
     end
-    resources :patients,        only: [:index] do
+    resources :patients,        only: [:index, :update] do
+      patch :consent, on: :member
       resources :consultations, only: [:index, :show] do
         delete :destroy, on: :collection
       end

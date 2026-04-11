@@ -28,17 +28,20 @@
   = panel(:info, 'Consentimiento de Datos') do
     .row-fluid
       .form-group.col-md-12
-        - if @patient.data_management_consent == true
-          .alert.alert-success
-            %i.fa.fa-check-circle
-            %strong Consentimiento otorgado:
-            El paciente ha autorizado el manejo de sus datos personales.
-        - else
-          .alert.alert-danger#data-consent-warning
-            %i.fa.fa-exclamation-triangle
-            %strong Consentimiento requerido:
-            El paciente debe autorizar el manejo de datos antes de guardar la consulta.
-            = link_to "Editar paciente", edit_patient_path(@patient), class: "btn btn-warning btn-sm", target: "_blank"
+        #data-consent-container{ data: { patient_id: @patient.id, consent: @patient.data_management_consent.to_s } }
+          - if @patient.data_management_consent == true
+            .alert.alert-success#data-consent-status
+              %i.fa.fa-check-circle
+              %strong Consentimiento otorgado:
+              El paciente ha autorizado el manejo de sus datos personales.
+          - else
+            .alert.alert-danger#data-consent-status
+              %i.fa.fa-exclamation-triangle
+              %strong Consentimiento requerido:
+              El paciente debe autorizar el manejo de datos antes de guardar la consulta.
+          %label.data-consent-toggle
+            %input#data-consent-checkbox{ type: "checkbox", checked: @patient.data_management_consent == true }
+            Acepto el manejo de mis datos personales para fines médicos
 
   = panel(:info, 'Motivo de Consulta') do
     .row-fluid
