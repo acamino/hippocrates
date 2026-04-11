@@ -30,12 +30,11 @@
               %td.hidden-xs= patient.medical_history
               %td= patient.last_name
               %td= patient.first_name
-              %td.hidden-xs= patient.formatted_birthdate
-              %td
-                - if patient.male?
-                  %span.label.label-primary= t('patients.label.male')
-                - else
-                  %span.label.label-info= t('patients.label.female')
+              %td.hidden-xs
+                = patient.formatted_birthdate
+                %span.text-muted{ style: "margin-left: 8px;" }
+                  = "#{patient.age.years} años"
+              %td= gender_tag(patient)
               %td.text-right
                 .btn-group
                   %button.row-actions-toggle.dropdown-toggle{ "aria-expanded": "false",
