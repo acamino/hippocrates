@@ -429,6 +429,30 @@ select.editable-input-field {
   white-space: nowrap;
 }
 
+.flash-toast {
+  position: fixed;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  min-width: 400px;
+  max-width: 600px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  animation: flash-fade-in 0.3s ease;
+}
+
+@keyframes flash-fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
 .data-consent-description {
   display: block;
   margin-top: 4px;

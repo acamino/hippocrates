@@ -14,6 +14,24 @@ Hippocrates.Consultations = (function() {
       openClinicalHistoryModal();
     });
 
+    // Save scroll position before form submit, restore after reload
+    $('form').on('submit', function() {
+      sessionStorage.setItem('scrollPosition', $(window).scrollTop());
+    });
+
+    var savedScroll = sessionStorage.getItem('scrollPosition');
+    if (savedScroll) {
+      $(window).scrollTop(parseInt(savedScroll, 10));
+      sessionStorage.removeItem('scrollPosition');
+    }
+
+    $('.flash-toast').each(function() {
+      var $toast = $(this);
+      setTimeout(function() {
+        $toast.fadeOut(400, function() { $toast.remove(); });
+      }, 3000);
+    });
+
     $(".destroy").on("change", function () {
       $(this).closest("tr").toggleClass("destroyable");
     });
