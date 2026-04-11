@@ -404,14 +404,35 @@ select.editable-input-field {
 }
 
 .data-consent-toggle {
-  display: block;
+  display: flex;
+  align-items: center;
   margin-top: 8px;
   cursor: pointer;
   font-weight: normal;
 }
 
-.data-consent-toggle input {
-  margin-right: 6px;
+.data-consent-label {
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+.consent-field {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  padding-left: 12px;
+}
+
+.consent-field-label {
+  font-size: 12px;
+  margin-right: 10px;
+  white-space: nowrap;
+}
+
+.data-consent-description {
+  display: block;
+  margin-top: 4px;
+  padding-left: 12px;
 }
 
 .pulse-warning {

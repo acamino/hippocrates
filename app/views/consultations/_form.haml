@@ -40,8 +40,10 @@
               %strong Consentimiento requerido:
               El paciente debe autorizar el manejo de datos antes de guardar la consulta.
           %label.data-consent-toggle
-            %input#data-consent-checkbox{ type: "checkbox", checked: @patient.data_management_consent == true }
-            Acepto el manejo de mis datos personales para fines médicos
+            %label.toggle-switch
+              %input#data-consent-checkbox.toggle-switch-input{ type: "checkbox", checked: @patient.data_management_consent == true }
+              %span.toggle-switch-slider
+            %span.data-consent-label Acepto el manejo de mis datos personales para fines médicos
 
   = panel(:info, 'Motivo de Consulta') do
     .row-fluid

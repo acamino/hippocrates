@@ -82,13 +82,13 @@
             %span.input-group-addon.input-sm Lugar de afiliación
             = f.select :branch_office_id, options_from_collection_for_select(@branch_offices, 'id', 'name', @patient.branch_office_id), {}, class: "form-control input-sm"
         .form-group.col-md-6
-          .input-group
-            %span.input-group-addon.input-sm
-              = f.check_box :data_management_consent
-            %label.form-control.input-sm{ for: "patient_data_management_consent", style: "border: none; box-shadow: none; background: transparent;" }
-              = t('patients.data_management_consent')
-              \-
-              %small= t('patients.data_management_consent_description')
+          .consent-field
+            %span.consent-field-label= t('patients.data_management_consent')
+            %label.toggle-switch
+              = f.check_box :data_management_consent, class: "toggle-switch-input"
+              %span.toggle-switch-slider
+          %small.text-muted.data-consent-description
+            = t('patients.data_management_consent_description')
 
   .row-fluid
     = link_to "Cancelar", @referer_location || patients_path, class: "btn btn-default"
