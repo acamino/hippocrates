@@ -113,6 +113,61 @@ input[type="email"] {
   margin-top: 20px;
 }
 
+.btn-primary,
+.btn-success,
+.btn-info,
+.btn-warning,
+.btn-danger {
+  border: none;
+  font-weight: 500;
+  color: #fff;
+  transition: filter 0.15s ease;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active,
+.btn-success:hover, .btn-success:focus, .btn-success:active,
+.btn-info:hover, .btn-info:focus, .btn-info:active,
+.btn-warning:hover, .btn-warning:focus, .btn-warning:active,
+.btn-danger:hover, .btn-danger:focus, .btn-danger:active {
+  color: #fff;
+  filter: brightness(1.05);
+}
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background: linear-gradient(to right, #1f66a3, #478ecb);
+}
+
+.btn-success,
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active {
+  background: linear-gradient(to right, #48a448, #70cc70);
+}
+
+.btn-info,
+.btn-info:hover,
+.btn-info:focus,
+.btn-info:active {
+  background: linear-gradient(to right, #54498b, #7c71b3);
+}
+
+.btn-warning,
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-warning:active {
+  background: linear-gradient(to right, #dc993a, #ffc162);
+}
+
+.btn-danger,
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger:active {
+  background: linear-gradient(to right, #c53f3b, #ed6763);
+}
+
 .table thead th {
   text-transform: uppercase;
   font-size: 12px;
