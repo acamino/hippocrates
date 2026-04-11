@@ -18,24 +18,22 @@ Hippocrates.DataConsent = (function() {
       });
     });
 
-    $('form').on('submit', function(e) {
-      var isConsultationForm = $(this).attr('action') &&
-                               $(this).attr('action').includes('/consultations');
+    $('#consultation-form').on('submit', function(e) {
+      if (!$('#data-consent-container').length) return;
+      if ($('#data-consent-checkbox').is(':checked')) return;
 
-      if (isConsultationForm && !$('#data-consent-checkbox').is(':checked')) {
-        e.preventDefault();
+      e.preventDefault();
 
-        $('html, body').animate({
-          scrollTop: $('#data-consent-container').offset().top - 120
-        }, 300, function() {
-          $('#data-consent-status').addClass('pulse-warning');
-          setTimeout(function() {
-            $('#data-consent-status').removeClass('pulse-warning');
-          }, 3000);
-        });
+      $('html, body').animate({
+        scrollTop: $('#data-consent-container').offset().top - 120
+      }, 300, function() {
+        $('#data-consent-status').addClass('pulse-warning');
+        setTimeout(function() {
+          $('#data-consent-status').removeClass('pulse-warning');
+        }, 3000);
+      });
 
-        return false;
-      }
+      return false;
     });
   };
 

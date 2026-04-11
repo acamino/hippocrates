@@ -5,7 +5,7 @@
 %input{ type: "hidden", value: @consultation.id, id: "consultation_id" }
 %input{ type: "hidden", value: @consultation&.patient&.id, id: "patient_id" }
 
-= form_for [@patient, @consultation], html: { class: "form" } do |f|
+= form_for [@patient, @consultation], html: { class: "form", id: "consultation-form" } do |f|
   - if current_user.editor?
     = panel(:caution, 'Médico') do
       .row-fluid
