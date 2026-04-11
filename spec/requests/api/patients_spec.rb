@@ -63,7 +63,7 @@ RSpec.describe 'API::Patients', type: :request do
       patch api_patient_path(patient, format: :json),
             params: { name: 'medical_history', value: '999' }
 
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
     end
   end
 

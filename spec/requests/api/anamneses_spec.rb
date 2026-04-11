@@ -34,7 +34,7 @@ RSpec.describe 'API::Anamneses', type: :request do
       patch api_anamnesis_path(anamnesis, format: :json),
             params: { name: 'patient_id', value: '999' }
 
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
     end
 
     it 'returns the updated value' do

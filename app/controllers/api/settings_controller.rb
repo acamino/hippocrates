@@ -11,7 +11,7 @@ module API
       if setting.update(value: params[:value])
         render json: SettingResource.new(setting).to_h
       else
-        render json: setting.errors.messages[:value].first, status: :unprocessable_entity
+        render json: setting.errors.messages[:value].first, status: :unprocessable_content
       end
     end
   end

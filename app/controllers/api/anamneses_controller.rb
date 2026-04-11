@@ -9,7 +9,7 @@ module API
       anamnesis = Anamnesis.find(params[:id])
 
       unless EDITABLE_FIELDS.include?(params[:name])
-        return render json: { error: 'Field not editable' }, status: :unprocessable_entity
+        return render json: { error: 'Field not editable' }, status: :unprocessable_content
       end
 
       anamnesis.update!(params[:name] => params[:value])
