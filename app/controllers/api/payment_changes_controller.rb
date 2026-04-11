@@ -16,7 +16,8 @@ module API
 
         render json: { success: true, errors: [] }
       else
-        render json: { errors: @payment_change.errors.full_messages }, status: :unprocessable_content
+        render json: { errors: @payment_change.errors.full_messages },
+               status: :unprocessable_content
       end
     end
 
