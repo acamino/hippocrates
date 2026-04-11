@@ -2,7 +2,7 @@
   .panel.panel-primary
     .panel-heading
       %b Datos de Filiación
-    .panel-body
+    .panel-body#patient-editable{ data: { pk: @patient.id, url: api_patient_path(@patient) } }
       .row-fluid
         .form-group.col-md-3
           .input-group
@@ -14,11 +14,13 @@
         .form-group.col-md-3
           .input-group
             %span.input-group-addon.input-sm Fecha Nacimiento
-            %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.formatted_birthdate }
+            %a.editable-field{ href: "#", data: { name: "birthdate", type: "date" } }
+              = @patient.formatted_birthdate
         .form-group.col-md-3
           .input-group
             %span.input-group-addon.input-sm # Cédula
-            %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.identity_card_number }
+            %a.editable-field{ href: "#", data: { name: "identity_card_number", type: "text" } }
+              = @patient.identity_card_number
         .form-group.col-md-3
           .input-group
             %span.input-group-addon.input-sm Historia
@@ -28,41 +30,49 @@
         .form-group.col-md-6
           .input-group
             %span.input-group-addon.input-sm Apellidos
-            %input.form-control.input-sm.colored#patient_last_name{ disabled: 'disabled', value: @patient.last_name }
+            %a.editable-field#patient_last_name{ href: "#", data: { name: "last_name", type: "text" } }
+              = @patient.last_name
         .form-group.col-md-6
           .input-group
             %span.input-group-addon.input-sm Nombres
-            %input.form-control.input-sm.colored#patient_first_name{ disabled: 'disabled', value: @patient.first_name }
+            %a.editable-field#patient_first_name{ href: "#", data: { name: "first_name", type: "text" } }
+              = @patient.first_name
 
       .row-fluid
         .form-group.col-md-6
           .input-group
             %span.input-group-addon.input-sm Dirección
-            %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.address }
+            %a.editable-field{ href: "#", data: { name: "address", type: "text" } }
+              = @patient.address
         .form-group.col-md-3
           .input-group
             %span.input-group-addon.input-sm Teléfono
-            %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.phone_number }
+            %a.editable-field{ href: "#", data: { name: "phone_number", type: "text" } }
+              = @patient.phone_number
         .form-group.col-md-3
           .input-group
             %span.input-group-addon.input-sm Fuente
-            %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.source_es }
+            %a.editable-field{ href: "#", data: { name: "source", type: "select", value: @patient.source } }
+              = @patient.source_es
 
       .row-fluid
         .form-group.col-md-6
           .input-group
             %span.input-group-addon.input-sm Email
-            %input.form-control.input-sm.colored{ type: 'email', disabled: 'disabled', value: @patient.email }
+            %a.editable-field{ href: "#", data: { name: "email", type: "text" } }
+              = @patient.email
         .form-group.col-md-6
           .input-group
             %span.input-group-addon.input-sm Seguro médico
-            %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.health_insurance }
+            %a.editable-field{ href: "#", data: { name: "health_insurance", type: "text" } }
+              = @patient.health_insurance
 
       .row-fluid
         .form-group.col-md-2
           .input-group
             %span.input-group-addon.input-sm Sexo
-            %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.gender_es }
+            %a.editable-field{ href: "#", data: { name: "gender", type: "select", value: @patient.gender } }
+              = @patient.gender_es
         .form-group.col-md-2
           .input-group
             %span.input-group-addon.input-sm Edad
@@ -70,15 +80,15 @@
         .form-group.col-md-4
           .input-group
             %span.input-group-addon.input-sm Estado civil
-            %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.civil_status_es }
+            %a.editable-field{ href: "#", data: { name: "civil_status", type: "select", value: @patient.civil_status } }
+              = @patient.civil_status_es
         .form-group.col-md-4
           .input-group
             %span.input-group-addon.input-sm Ocupación
-            %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.profession }
+            %a.editable-field{ href: "#", data: { name: "profession", type: "text" } }
+              = @patient.profession
       .row-fluid
         .form-group.col-md-6
           .input-group
             %span.input-group-addon.input-sm Lugar de afiliación
             %input.form-control.input-sm.colored{ disabled: 'disabled', value: @patient.branch_office&.name }
-        .col-md-12.text-right
-          = link_to t('patients.actions.edit'), edit_patient_path(@patient)

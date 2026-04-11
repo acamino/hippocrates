@@ -41,6 +41,7 @@
 //= require consultations
 //= require data_consent
 //= require hint
+//= require patient_editable
 //= require payment_changes
 //= require prescription
 //= require prescription_sortable
