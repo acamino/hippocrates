@@ -348,6 +348,31 @@ input[type="email"] {
   margin-left: 10px !important;
 }
 
+.bulk-banner-row {
+  margin-top: 15px;
+}
+
+.bulk-banner {
+  background: linear-gradient(to right, #4d6663, #6f8987);
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 6px;
+}
+
+.bulk-banner-action {
+  color: #fff;
+  font-weight: 600;
+  text-decoration: underline;
+  margin-left: 6px;
+}
+
+.bulk-banner-action:hover,
+.bulk-banner-action:focus {
+  color: #fff;
+  text-decoration: underline;
+  filter: brightness(1.1);
+}
+
 .checkbox-container {
   vertical-align: middle !important;
 }

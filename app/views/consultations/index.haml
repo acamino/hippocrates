@@ -28,15 +28,25 @@
 
 .row.hidden-sm.hidden-xs
   .col-md-12.text-right
-    %a.delete-consultations.btn.btn-danger(href = "")
-      %i.fa.fa-trash-can
-      Eliminar
-    %a.download-medical-history.btn.btn-primary{ href: "#", "data-turbolinks": "false" }
-      %i.fa.fa-download
-      Descargar
-    = link_to new_patient_consultation_path(@patient), class: "btn btn-success" do
-      %i.fa.fa-plus
-      Nueva Consulta
+    .default-actions
+      = link_to new_patient_consultation_path(@patient), class: "btn btn-success" do
+        %i.fa.fa-plus
+        Nueva Consulta
+    .bulk-actions{ style: "display: none;", data: { total: @consultations_total } }
+      %span.bulk-count.semi-strong.text-muted{ style: "margin-right: 15px;" }
+      %a.delete-consultations.btn.btn-danger(href = "")
+        %i.fa.fa-trash-can
+        Eliminar
+      %a.download-medical-history.btn.btn-primary{ href: "#", "data-turbolinks": "false" }
+        %i.fa.fa-download
+        Descargar
+
+.row.hidden-sm.hidden-xs.bulk-banner-row{ style: "display: none;" }
+  .col-md-12
+    .bulk-banner
+      %span.bulk-banner-text
+      = " "
+      %a.bulk-banner-action(href = "#")
 
 
 .row.hidden-md.hidden-lg
