@@ -170,6 +170,41 @@ describe Consultations::Document do
           end
         end
       end
+
+      context 'when all=true is given' do
+        let!(:other) { other_consultation }
+        let!(:discarded) do
+          create(:consultation, :with_diagnoses,
+                 created_at: '2016-01-03', patient: patient).tap(&:discard)
+        end
+        let!(:other_patient_consultation) do
+          create(:consultation, :with_diagnoses, created_at: '2016-01-04')
+        end
+
+        it 'returns every kept consultation for the patient' do
+          result = described_class.build(consultation, all: true)
+          ids = result[:consultations].map(&:id)
+          expect(ids).to contain_exactly(consultation.id, other.id)
+        end
+
+        it 'excludes discarded consultations' do
+          result = described_class.build(consultation, all: true)
+          ids = result[:consultations].map(&:id)
+          expect(ids).not_to include(discarded.id)
+        end
+
+        it 'excludes other patients consultations' do
+          result = described_class.build(consultation, all: true)
+          ids = result[:consultations].map(&:id)
+          expect(ids).not_to include(other_patient_consultation.id)
+        end
+
+        it 'ignores the consultations id list' do
+          result = described_class.build(consultation, all: true, consultations: '')
+          ids = result[:consultations].map(&:id)
+          expect(ids).to contain_exactly(consultation.id, other.id)
+        end
+      end
     end
   end
 end

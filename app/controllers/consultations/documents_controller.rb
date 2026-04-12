@@ -62,7 +62,8 @@ module Consultations
         surgical_treatment:     params[:surgical_treatment],
         surgery_tentative_date: params[:surgery_tentative_date],
         surgery_cost:           params[:surgery_cost],
-        consultations:          params[:consultations]
+        consultations:          params[:consultations],
+        all:                    params[:all]
       }.compact
     end
   end

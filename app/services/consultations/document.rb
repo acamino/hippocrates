@@ -54,13 +54,26 @@ module Consultations
     end
 
     def consultations
-      ids = selected_consultations_ids
-      return [] if ids.empty?
+      scope = selected_consultations_scope
+      return [] if scope.nil?
 
       first_consultation_id = patient.consultations.order(created_at: :asc).pick(:id)
-      patient.consultations.where(id: ids).order(created_at: :asc).map do |c|
+      scope.order(created_at: :asc).map do |c|
         ConsultationPresenter.new(c).tap { |p| p.head = c.id == first_consultation_id }
       end
+    end
+
+    def selected_consultations_scope
+      return patient.consultations.kept if select_all?
+
+      ids = selected_consultations_ids
+      return nil if ids.empty?
+
+      patient.consultations.where(id: ids)
+    end
+
+    def select_all?
+      ActiveModel::Type::Boolean.new.cast(options[:all])
     end
 
     def selected_consultations_ids

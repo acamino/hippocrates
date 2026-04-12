@@ -9,7 +9,7 @@ module API
 
     def destroy
       authorize Consultation
-      @patient.consultations.where(id: consultations_ids).discard_all
+      destroy_scope.discard_all
       render json: {}
     end
 
@@ -21,6 +21,16 @@ module API
 
     def fetch_consultation
       @consultation = @patient.consultations.includes(:diagnoses, :prescriptions).find(params[:id])
+    end
+
+    def destroy_scope
+      return @patient.consultations.kept if select_all?
+
+      @patient.consultations.where(id: consultations_ids)
+    end
+
+    def select_all?
+      ActiveModel::Type::Boolean.new.cast(params[:all])
     end
 
     def consultations_ids

@@ -12,6 +12,7 @@ class ConsultationsController < ApplicationController
                              .includes(:doctor, :branch_office, :documents)
                              .order(created_at: :desc)
                              .page(params.fetch(:page, 1))
+    @consultations_total = @patient.consultations.kept.count
   end
 
   def new

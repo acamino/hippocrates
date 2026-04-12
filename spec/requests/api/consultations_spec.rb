@@ -55,6 +55,33 @@ RSpec.describe 'API::Consultations', type: :request do
         end
       end
 
+      context 'when all=true is given' do
+        let!(:other_patient_consultation) { create(:consultation) }
+
+        it 'destroys every kept consultation for the patient' do
+          delete api_patient_consultations_path(bob, format: :json),
+                 params: { all: 'true' }
+
+          expect(c1.reload.discarded?).to be true
+          expect(c2.reload.discarded?).to be true
+        end
+
+        it 'does not affect other patients' do
+          delete api_patient_consultations_path(bob, format: :json),
+                 params: { all: 'true' }
+
+          expect(other_patient_consultation.reload.discarded?).to be false
+        end
+
+        it 'ignores the consultations id list when all=true' do
+          delete api_patient_consultations_path(bob, format: :json),
+                 params: { all: 'true', consultations: '' }
+
+          expect(c1.reload.discarded?).to be true
+          expect(c2.reload.discarded?).to be true
+        end
+      end
+
       it 'responds with json' do
         delete api_patient_consultations_path(bob, format: :json),
                params: { consultations: consultations }
