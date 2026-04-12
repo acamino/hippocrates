@@ -348,6 +348,26 @@ input[type="email"] {
   margin-left: 10px !important;
 }
 
+.checkbox-container {
+  vertical-align: middle !important;
+}
+
+.check-consultation {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+tr:hover .check-consultation,
+.table:has(.check-consultation:checked) .check-consultation,
+.check-consultation:checked {
+  opacity: 1;
+}
+
+tr:has(> .checkbox-container > .check-consultation:checked) {
+  background-color: #e6f5fb !important;
+  box-shadow: inset 3px 0 0 #1CA8DD;
+}
+
 .editableform .form-control {
   width: 75px;
 }
