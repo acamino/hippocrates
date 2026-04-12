@@ -59,44 +59,44 @@ input[type="email"] {
 }
 
 .panel-primary > .panel-heading {
-  background-color: #5BC0DE;
+  background: linear-gradient(to right, #47acca, #6fd4f2);
   border-color: #5BC0DE;
 }
 
 .panel-success > .panel-heading {
-  background-color: #5CB85C;
+  background: linear-gradient(to right, #48a448, #70cc70);
   border-color: #5CB85C;
 }
 
 .panel-info > .panel-heading {
-  background-color: #685D9F;
+  background: linear-gradient(to right, #54498b, #7c71b3);
   border-color: #685D9F;
 }
 
 .panel-warning > .panel-heading {
-  background-color: #F0AD4E;
+  background: linear-gradient(to right, #dc993a, #ffc162);
   border-color: #F0AD4E;
 }
 
 .panel-danger > .panel-heading {
-  background-color: #F45B69;
+  background: linear-gradient(to right, #e04755, #ff6f7d);
   border-color: #F45B69;
 }
 
 .panel-caution > .panel-heading {
-  background-color: #E55934;
+  background: linear-gradient(to right, #d14520, #f96d48);
   border-color: #E55934;
   color: #FFF;
 }
 
 .panel-advice > .panel-heading {
-  background-color: #722340;
+  background: linear-gradient(to right, #5e0f2c, #863754);
   border-color: #722340;
   color: #FFF;
 }
 
 .panel-main > .panel-heading {
-  background-color: #1CA8DD;
+  background: linear-gradient(to right, #0894c9, #30bcf1);
   border-color: #1CA8DD;
   color: #FFF;
 }
