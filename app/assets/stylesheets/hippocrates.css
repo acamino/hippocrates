@@ -348,6 +348,11 @@ input[type="email"] {
   margin-left: 10px !important;
 }
 
+.table-hover > tbody > tr:hover,
+.table-hover > tbody > tr:hover > td {
+  background-color: #eaeef2 !important;
+}
+
 .bulk-banner-row {
   margin-top: 15px;
 }
