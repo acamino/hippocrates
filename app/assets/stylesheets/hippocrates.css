@@ -210,6 +210,17 @@ input[type="email"] {
   margin: 0;
 }
 
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  background: linear-gradient(to right, #1f66a3, #478ecb);
+  border-color: #1f66a3;
+  color: #fff;
+}
+
 .consultation-date,
 .consultation-next-appointment,
 .consultation-reason {
