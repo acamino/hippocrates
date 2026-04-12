@@ -34,13 +34,15 @@ input[type="email"] {
   border-bottom: dotted 1px #999;
 }
 
-.tr-caution {
+.tr-caution,
+.table thead .tr-caution > th {
   background-color: #E55934;
   border-color: #E55934;
   color: #FFF;
 }
 
-.tr-advice {
+.tr-advice,
+.table thead .tr-advice > th {
   background-color: #722340;
   border-color: #722340;
   color: #FFF;
