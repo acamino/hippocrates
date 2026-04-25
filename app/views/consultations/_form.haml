@@ -279,34 +279,28 @@
     = panel(:info, 'Valor de la Consulta') do
       .row-fluid
         .form-group.col-md-2
-          .input-group
-            %span.input-group-addon.input-lg $
-            - if @consultation.new_record? || !@consultation.priced?
+          - if @consultation.new_record? || !@consultation.priced?
+            .input-group
+              %span.input-group-addon.input-lg $
               = f.text_field :payment,
                 class: "form-control input-lg"
-            - else
+          - else
+            .input-group.show-payment-change{ data: { type: 'paid' } }
+              %span.input-group-addon.input-lg $
               %input#consultation_payment.form-control.input-lg.colored{ disabled: 'disabled', value: number_with_precision(@consultation.payment, precision: 2, delimiter: '.') }
-      - unless @consultation.new_record? || !@consultation.priced?
-        .row-fluid
-          .col-md-12.text-right
-            %a.show-payment-change(href="#"){ data: { type: 'paid' } }
-              = t('consultations.actions.edit')
   - if current_user.doctor?
     = panel(:info, 'Valor Pendiente de la Consulta') do
       .row-fluid
         .form-group.col-md-2
-          .input-group
-            %span.input-group-addon.input-lg $
-            - if @consultation.new_record? || !@consultation.priced?
+          - if @consultation.new_record? || !@consultation.priced?
+            .input-group
+              %span.input-group-addon.input-lg $
               = f.text_field :pending_payment,
                 class: "form-control input-lg"
-            - else
+          - else
+            .input-group.show-payment-change{ data: { type: 'pending' } }
+              %span.input-group-addon.input-lg $
               %input#consultation_pending_payment.form-control.input-lg.colored{ disabled: 'disabled', value: number_with_precision(@consultation.pending_payment, precision: 2, delimiter: '.') }
-      - unless @consultation.new_record? || !@consultation.priced?
-        .row-fluid
-          .col-md-12.text-right
-            %a.show-payment-change(href="#"){ data: { type: 'pending' } }
-              = t('consultations.actions.edit')
 
   .row-fluid
     = link_to "Consultas", patient_consultations_path(@patient), class: "btn btn-default"

@@ -107,6 +107,16 @@ input[type="email"] {
   color: #666666;
 }
 
+.input-group.show-payment-change,
+.input-group.show-payment-change .form-control,
+.input-group.show-payment-change .input-group-addon {
+  cursor: pointer;
+}
+
+.input-group.show-payment-change .form-control {
+  pointer-events: none;
+}
+
 .semi-strong {
   font-weight: 500;
 }
