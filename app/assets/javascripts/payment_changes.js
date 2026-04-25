@@ -12,7 +12,9 @@ Hippocrates.PaymentChanges = {
     if ($("#updated-payment").length) {
       new Cleave('#updated-payment', {
         numeral: true,
-        numeralThousandsGroupStyle: 'thousand'
+        numeralThousandsGroupStyle: 'thousand',
+        numeralDecimalMark: ',',
+        delimiter: '.'
       });
     }
 
@@ -28,12 +30,12 @@ Hippocrates.PaymentChanges = {
     var self = this;
 
     var path = "/api/consultations/" + self.consultationId() + "/payment_changes";
-    var updatedPayment = $("#updated-payment").val();
+    var updatedPayment = self.toCanonical($("#updated-payment").val());
     var reason = $("#updated-payment-reason").val();
 
     var data = {
       change_payment: {
-        previous_payment: this.previousPayment(),
+        previous_payment: self.toCanonical(this.previousPayment()),
         updated_payment: updatedPayment,
         reason: reason,
         type: self.changePaymentType()
@@ -84,6 +86,14 @@ Hippocrates.PaymentChanges = {
   },
 
   formatPayment: function(payment) {
-    return parseFloat(payment).toFixed(2);
+    var num = parseFloat(payment);
+    if (isNaN(num)) return payment;
+    var parts = num.toFixed(2).split('.');
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    return parts[0] + ',' + parts[1];
+  },
+
+  toCanonical: function(formatted) {
+    return formatted.replace(/\./g, '').replace(',', '.');
   }
 }

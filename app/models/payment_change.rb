@@ -21,11 +21,15 @@ class PaymentChange < ApplicationRecord
   validates :previous_payment, :updated_payment, :reason, presence: true
 
   validates :updated_payment,
-    numericality: { greater_than: 0, message: :greater_than_zero },
+    numericality: { greater_than: 0 },
     if: :user_is_doctor?
 
   before_save :normalize
   after_save  :update_consultation
+
+  def updated_payment=(value)
+    super(value.is_a?(String) ? value.tr(',', '') : value)
+  end
 
   private
 

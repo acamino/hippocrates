@@ -24,7 +24,7 @@
           .form-group
             %label.col-sm-2.control-label{ for: "updated-payment" } Valor
             .col-md-6
-              %input.form-control.input-lg#updated-payment{ type: "text", value: @consultation.payment }
+              %input.form-control.input-lg#updated-payment{ type: "text", value: number_with_precision(@consultation.payment, precision: 2, delimiter: '.') }
               %span#updated-payment-hint.text-muted Valor de la Consulta
           .form-group
             %label.col-sm-2.control-label{ for: "updated-payment-reason" } Motivo de cambio

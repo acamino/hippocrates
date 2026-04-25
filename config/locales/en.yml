@@ -142,10 +142,3 @@ en:
       print: Print prescription
       print_empty: Print empty prescription
 
-  activerecord:
-    errors:
-      models:
-        consultation:
-          attributes:
-            payment:
-              greater_than_zero: Payment must be greater than zero

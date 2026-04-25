@@ -101,13 +101,6 @@ $(document).on('turbolinks:load', function() {
         }
     });
 
-    if ($("#changed_price").length) {
-      new Cleave('#consultation_price', {
-        numeral: true,
-        numeralThousandsGroupStyle: 'thousand'
-      });
-    }
-
     $(".panel-heading").on("click", function(e) {
         var panelBody = $(this).siblings();
         panelBody.slideToggle("slow");

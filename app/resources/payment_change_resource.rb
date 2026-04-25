@@ -10,14 +10,20 @@ class PaymentChangeResource
   end
 
   def previousPayment(payment_change)
-    format('%.2f', payment_change.previous_payment)
+    format_amount(payment_change.previous_payment)
   end
 
   def updatedPayment(payment_change)
-    format('%.2f', payment_change.updated_payment)
+    format_amount(payment_change.updated_payment)
   end
 
   def userName(payment_change)
     payment_change.user.pretty_name.upcase
+  end
+
+  private
+
+  def format_amount(value)
+    ActiveSupport::NumberHelper.number_to_rounded(value, precision: 2, delimiter: '.')
   end
 end

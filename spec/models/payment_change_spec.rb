@@ -93,4 +93,34 @@ RSpec.describe PaymentChange do
       end
     end
   end
+
+  describe 'updated_payment with thousands separators' do
+    it 'normalizes a comma-formatted string to its numeric value' do
+      change = consultation.payment_changes.build(
+        previous_payment: 50, updated_payment: '1,600',
+        reason: 'test', type: :pending, user: doctor
+      )
+
+      expect(change).to be_valid
+      expect(change.updated_payment).to eq(1600)
+    end
+
+    it 'propagates the normalized value to consultation.pending_payment' do
+      consultation.payment_changes.create!(
+        previous_payment: 0, updated_payment: '1,600',
+        reason: 'test', type: :pending, user: doctor
+      )
+
+      expect(consultation.reload.pending_payment).to eq(1600)
+    end
+
+    it 'propagates the normalized value to consultation.payment' do
+      consultation.payment_changes.create!(
+        previous_payment: 50, updated_payment: '2,500',
+        reason: 'test', type: :paid, user: doctor
+      )
+
+      expect(consultation.reload.payment).to eq(2500)
+    end
+  end
 end

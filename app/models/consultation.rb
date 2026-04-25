@@ -62,7 +62,7 @@ class Consultation < ApplicationRecord
                                 allow_destroy: true
 
   validates :payment,
-    numericality: { greater_than: 0, message: :greater_than_zero },
+    numericality: { greater_than: 0 },
     if: :user_is_doctor?
 
   validate :patient_must_have_data_management_consent
@@ -72,6 +72,14 @@ class Consultation < ApplicationRecord
   after_create :update_serial!
 
   attr_accessor :head, :current_user
+
+  def payment=(value)
+    super(value.is_a?(String) ? value.tr(',', '') : value)
+  end
+
+  def pending_payment=(value)
+    super(value.is_a?(String) ? value.tr(',', '') : value)
+  end
 
   scope :most_recent_by_patient, lambda {
     from(

@@ -18,11 +18,11 @@ class ConsultationPresenter < SimpleDelegator
   end
 
   def pretty_payment
-    format('%.2f', payment)
+    format_amount(payment)
   end
 
   def pretty_pending_payment
-    format('%.2f', pending_payment)
+    format_amount(pending_payment)
   end
 
   def pending_payment?
@@ -30,7 +30,7 @@ class ConsultationPresenter < SimpleDelegator
   end
 
   def pretty_total_payment
-    format('%.2f', payment - pending_payment)
+    format_amount(payment - pending_payment)
   end
 
   def pretty_diagnoses
@@ -65,5 +65,11 @@ class ConsultationPresenter < SimpleDelegator
 
   def user_id
     doctor&.id || current_user.id
+  end
+
+  private
+
+  def format_amount(value)
+    ActiveSupport::NumberHelper.number_to_rounded(value, precision: 2, delimiter: '.')
   end
 end

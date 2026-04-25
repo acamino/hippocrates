@@ -34,6 +34,23 @@ describe Consultation do
     end
   end
 
+  describe 'payment fields with thousands separators' do
+    it 'normalizes a comma-formatted payment to its numeric value' do
+      consultation = build(:consultation, payment: '1,600')
+      expect(consultation.payment).to eq(1600)
+    end
+
+    it 'normalizes a comma-formatted pending_payment to its numeric value' do
+      consultation = build(:consultation, pending_payment: '2,500')
+      expect(consultation.pending_payment).to eq(2500)
+    end
+
+    it 'leaves numeric payment values untouched' do
+      consultation = build(:consultation, payment: 1600)
+      expect(consultation.payment).to eq(1600)
+    end
+  end
+
   describe '.most_recent_by_patient' do
     let(:patient)              { (create :patient) }
     let!(:old_consultation)    { (create :consultation, patient: patient, created_at: 1.hour.ago) }

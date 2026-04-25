@@ -285,7 +285,7 @@
               = f.text_field :payment,
                 class: "form-control input-lg"
             - else
-              %input#consultation_payment.form-control.input-lg.colored{ disabled: 'disabled', value: format('%.2f', @consultation.payment) }
+              %input#consultation_payment.form-control.input-lg.colored{ disabled: 'disabled', value: number_with_precision(@consultation.payment, precision: 2, delimiter: '.') }
       - unless @consultation.new_record? || !@consultation.priced?
         .row-fluid
           .col-md-12.text-right
@@ -301,7 +301,7 @@
               = f.text_field :pending_payment,
                 class: "form-control input-lg"
             - else
-              %input#consultation_pending_payment.form-control.input-lg.colored{ disabled: 'disabled', value: format('%.2f', @consultation.pending_payment) }
+              %input#consultation_pending_payment.form-control.input-lg.colored{ disabled: 'disabled', value: number_with_precision(@consultation.pending_payment, precision: 2, delimiter: '.') }
       - unless @consultation.new_record? || !@consultation.priced?
         .row-fluid
           .col-md-12.text-right
