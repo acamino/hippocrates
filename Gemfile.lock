@@ -250,7 +250,7 @@ GEM
       prism (~> 1.5)
     multi_test (1.1.0)
     mutex_m (0.3.0)
-    net-imap (0.6.2)
+    net-imap (0.6.4)
       date
       net-protocol
     net-pop (0.1.2)
