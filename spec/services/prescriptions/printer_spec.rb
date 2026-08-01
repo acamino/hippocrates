@@ -139,6 +139,33 @@ RSpec.describe Prescriptions::Printer do
     end
   end
 
+  describe '#call with characters outside Windows-1252' do
+    let(:empty) { false }
+
+    # Legacy rows written before the values were normalized on save.
+    before do
+      patient.update_column(:last_name, "TORRES#{invisible}RUBIO")
+    end
+
+    let(:invisible) do
+      [0x202A, 0x202C, 0x200E, 0xFEFF].map { |code| code.chr(Encoding::UTF_8) }.join
+    end
+
+    it 'renders instead of raising IncompatibleStringEncoding' do
+      expect { pdf_data }.not_to raise_error
+    end
+
+    it 'drops the unprintable characters from the patient name' do
+      expect(extract_pdf_text(pdf_data)).to include('TORRESRUBIO')
+    end
+
+    it 'keeps Spanish accents, which Windows-1252 supports' do
+      consultation.update_column(:recommendations, 'REPOSO POR 3 DÍAS. NIÑO CON GRIPE')
+
+      expect(extract_pdf_text(pdf_data)).to include('REPOSO POR 3 DÍAS. NIÑO CON GRIPE')
+    end
+  end
+
   describe '.call' do
     before do
       create(:setting, :emergency_number)

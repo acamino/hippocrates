@@ -28,6 +28,14 @@ describe Patient do
       expect(patient.reload.first_name).to eq('BOB')
       expect(patient.email).to eq('bob@example.com')
     end
+
+    # Pasting from phone contacts, WhatsApp or Excel drags these along unseen.
+    it 'strips invisible characters pasted into the name' do
+      invisible = [0x202A, 0x202C].map { |code| code.chr(Encoding::UTF_8) }.join
+      patient = create(:patient, last_name: "torres rubio #{invisible}")
+
+      expect(patient.reload.last_name).to eq('TORRES RUBIO')
+    end
   end
 
   describe '.search' do
