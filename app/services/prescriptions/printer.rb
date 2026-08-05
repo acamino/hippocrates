@@ -1,15 +1,11 @@
 module Prescriptions
   # rubocop:disable Metrics/ClassLength
   class Printer
-    BACKGROUND = "#{Rails.root}/public/templates/prescriptions/template.jpg".freeze
-
     DEFAULT_SERIAL = '00000'.freeze
 
     DOCUMENT_OPTIONS = {
       page_size: 'A4',
       page_layout: :landscape,
-      background: BACKGROUND,
-      background_scale: 0.12,
       bottom_margin: 20
     }.freeze
 
@@ -65,6 +61,8 @@ module Prescriptions
     def call
       pdf = Prawn::Document.new(**DOCUMENT_OPTIONS)
       pdf.font_families.update(**FONT_FAMILIES)
+
+      Printers::Letterhead.call(pdf)
 
       # Inscriptions
       Printers::Section.call(pdf, [233, 524], 136, phone_numbers, **PHONE_NUMBERS_OPTIONS)

@@ -166,6 +166,23 @@ RSpec.describe Prescriptions::Printer do
     end
   end
 
+  describe 'letterhead' do
+    let(:empty) { false }
+
+    it 'draws the clinic headings as selectable text, not artwork' do
+      text = extract_pdf_text(pdf_data)
+
+      expect(text).to include('OTORRINOLARINGOLOGÍA')
+      expect(text).to include('Diagnóstico CIE-10:')
+      expect(text).to include('Recomendaciones:')
+    end
+
+    # It used to embed a 795 KB scan of the letterhead behind every page.
+    it 'keeps the document small' do
+      expect(pdf_data.bytesize).to be < 100.kilobytes
+    end
+  end
+
   describe '.call' do
     before do
       create(:setting, :emergency_number)
